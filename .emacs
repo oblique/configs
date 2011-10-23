@@ -48,7 +48,7 @@
 (setq color-theme-is-global t)
 (color-theme-molokai-ob)
 
-; move to the previous window
+; move to previous window
 (defun other-window-backward (&optional n)
     "Select Nth previous window."
     (interactive "P")
