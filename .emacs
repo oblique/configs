@@ -1,16 +1,9 @@
-; ignore elisp compile warnings
-(setq byte-compile-warnings '(not nresolved free-vars callargs redefine
-obsolete noruntime cl-functions interactive-only))
-
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/emhacks")
 
-; auto-compile .el files
-(byte-recompile-directory "~/.emacs.d")
-
 ; load my rxvt.el
 (unless (or noninteractive initial-window-system)
-    (if (string= (getenv "TERM") "rxvt-unicode-256color")
+    (if (string-match "^rxvt.*" (getenv "TERM"))
         (progn 
             (setq term-file-prefix nil)
             (require 'rxvt)
