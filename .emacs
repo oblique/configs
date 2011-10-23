@@ -1,25 +1,39 @@
-; compile .el files if .elc does not exist
-(byte-recompile-directory "~/.emacs.d" 0)
+; ignore elisp compile warnings
+(setq byte-compile-warnings '(not nresolved free-vars callargs redefine
+obsolete noruntime cl-functions interactive-only))
+
+(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/emhacks")
+
+; auto-compile .el files
+(byte-recompile-directory "~/.emacs.d")
 
 ; load my rxvt.el
 (unless (or noninteractive initial-window-system)
     (if (string= (getenv "TERM") "rxvt-unicode-256color")
         (progn 
             (setq term-file-prefix nil)
-            (load "~/.emacs.d/rxvt.elc")
+            (require 'rxvt)
             (terminal-init-rxvt))))
-
-(add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/emhacks")
 
 ; various
 (menu-bar-mode nil)
 (tool-bar-mode nil)
 (toggle-scroll-bar nil)
-(setq inhibit-splash-screen t)
-(setq c-default-style "linux")
 (global-linum-mode 1)
+(column-number-mode 1)
+(global-auto-revert-mode 1)
+(setq inhibit-splash-screen t)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(setq explicit-shell-file-name "/bin/bash")
+
+; session manager
+(require 'desktop-menu)
+
+; coding
+(setq c-default-style "linux")
+(setq c-backspace-function 'backward-delete-char)
+(define-key global-map (kbd "RET") 'newline-and-indent) ; auto-indent
 
 ; Tabbing support options
 (require 'tabbar)
@@ -37,9 +51,8 @@
 
 ; theme
 (require 'color-theme)
-(color-theme-initialize)
+(require 'color-theme-molokai-ob)
 (setq color-theme-is-global t)
-(load "color-theme-molokai-ob")
 (color-theme-molokai-ob)
 
 ; key bindings
