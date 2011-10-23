@@ -101,6 +101,7 @@
      (woman-italic ((t (:foreground "#A6E22E"))))
      (woman-unknown ((t (:foreground "#66D9EF"))))
      (linum ((t (:background "#101010" :foreground "#F8F8F2" :underline nil :slant normal :weight normal))))
+     (linum-terminal-seperator ((t (:background "#252525" :underline nil))))
      (tabbar-default ((t (:background "#101010" :underline nil :weight normal))))
      (tabbar-unselected ((t (:background "#101010" :foreground "#465457" :underline nil :weight normal))))
      (tabbar-selected ((t (:background "#101010" :foreground "#D81860" :underline nil :weight bold))))

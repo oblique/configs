@@ -13,6 +13,7 @@
 (menu-bar-mode nil)
 (tool-bar-mode nil)
 (toggle-scroll-bar nil)
+(require 'linum-ex)
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
@@ -22,6 +23,11 @@
 
 ; session manager
 (require 'desktop-menu)
+
+; tree mode
+(require 'tree-mode)
+(require 'imenu-tree)
+(require 'tags-tree)
 
 ; coding
 (setq c-default-style "linux")
@@ -39,7 +45,7 @@
 (global-undo-tree-mode)
 
 ; fonts
-(if (or noninteractive initial-window-system)
+(if initial-window-system
     (setq default-frame-alist '((font . "Inconsolata-10"))))
 
 ; theme
