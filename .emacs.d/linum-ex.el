@@ -138,6 +138,8 @@ and you have to scroll or press C-l to update the numbers."
 (defvar linum--win nil
   "Window of the last scroll event. See also `linum-delay'")
 
+(defvar linum-disabled-modes-list nil
+  "Disable linum in certain major-modes")
 
 ;;;###autoload
 (define-minor-mode linum-mode
@@ -170,7 +172,7 @@ and you have to scroll or press C-l to update the numbers."
 (define-globalized-minor-mode global-linum-mode linum-mode linum-on)
 
 (defun linum-on ()
-  (unless (minibufferp)
+  (unless (or (minibufferp) (member major-mode linum-disabled-modes-list))
     (linum-mode 1)))
 
 (defun linum-delete-overlays ()

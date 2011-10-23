@@ -14,6 +14,9 @@
 (tool-bar-mode nil)
 (toggle-scroll-bar nil)
 (require 'linum-ex)
+(setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
+                                imenu-tree-mode fundamental-mode term-mode
+                                completion-list-mode tags-tree-mode help-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
