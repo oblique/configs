@@ -48,8 +48,15 @@
 (setq color-theme-is-global t)
 (color-theme-molokai-ob)
 
+; move to the previous window
+(defun other-window-backward (&optional n)
+    "Select Nth previous window."
+    (interactive "P")
+    (other-window (- (prefix-numeric-value n))))
+
 ; key bindings
 (global-set-key (kbd "M-9") 'kill-whole-line)
 (global-set-key (kbd "M-l") 'tabbar-forward)
 (global-set-key (kbd "M-j") 'tabbar-backward)
 (global-set-key (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
+(global-set-key (kbd "C-x p") 'other-window-backward)
