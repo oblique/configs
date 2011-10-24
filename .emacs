@@ -25,6 +25,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq explicit-shell-file-name "/bin/bash")
 
+; sticky windows
+(require 'sticky-windows)
+(global-set-key (kbd "C-x 0") 'sticky-window-delete-window)
+(global-set-key (kbd "C-x 1") 'sticky-window-delete-other-windows)
+(global-set-key (kbd "C-x 9") 'sticky-window-keep-window-visible)
+
 ; session manager
 (require 'desktop-menu)
 
@@ -89,8 +95,10 @@
     (setq newwin (split-window nil 30 t))
     (split-window-vertically nil)
     (switch-to-buffer imenu-tree-buffer)
+    (sticky-window-keep-window-visible)
     (other-window 1)
     (switch-to-buffer dirtree-buffer)
+    (sticky-window-keep-window-visible)
     (select-window (get-buffer-window buf))))
 
 ; key bindings
