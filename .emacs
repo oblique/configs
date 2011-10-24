@@ -17,7 +17,7 @@
 (setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
                                 imenu-tree-mode fundamental-mode term-mode
                                 completion-list-mode tags-tree-mode help-mode
-                                dired-mode dirtree-mode))
+                                dired-mode dirtree-mode desktop-menu-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
@@ -31,8 +31,11 @@
 ; tree widgets
 (require 'tree-mode)
 (require 'imenu-tree)
-(require 'tags-tree)
+(setq imenu-tree-auto-update t)
+(setq imenu-tree-update-interval 1)
+(setq imenu-tree-windata '(frame left 0.15 nil))
 (require 'dirtree)
+(setq dirtree-windata '(frame left 0.15 nil))
 
 ; coding
 (setq c-default-style "linux")
@@ -59,11 +62,36 @@
 (setq color-theme-is-global t)
 (color-theme-molokai-ob)
 
-; move to previous window
+; functions
 (defun other-window-backward (&optional n)
     "Select Nth previous window."
     (interactive "P")
     (other-window (- (prefix-numeric-value n))))
+
+(defun my-dirtree ()
+  (interactive)
+  (dirtree (expand-file-name default-directory) nil)
+  (select-window (get-buffer-window dirtree-buffer)))
+
+(defun my-imenu-tree ()
+  (interactive)
+  (imenu-tree nil)
+  (select-window (get-buffer-window imenu-tree-buffer)))
+
+(defun ob-tree ()
+  (interactive)
+  (let ((buf (current-buffer)))
+    (delete-other-windows)
+    (imenu-tree nil)
+    (delete-window (selected-window))
+    (dirtree (expand-file-name default-directory) nil)
+    (delete-window (selected-window))
+    (setq newwin (split-window nil 30 t))
+    (split-window-vertically nil)
+    (switch-to-buffer imenu-tree-buffer)
+    (other-window 1)
+    (switch-to-buffer dirtree-buffer)
+    (select-window (get-buffer-window buf))))
 
 ; key bindings
 (global-set-key (kbd "M-9") 'kill-whole-line)
@@ -71,3 +99,6 @@
 (global-set-key (kbd "M-j") 'tabbar-backward)
 (global-set-key (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
 (global-set-key (kbd "C-x p") 'other-window-backward)
+(global-set-key (kbd "C-c m") 'my-imenu-tree)
+(global-set-key (kbd "C-c d") 'my-dirtree)
+(global-set-key (kbd "C-c o") 'ob-tree)

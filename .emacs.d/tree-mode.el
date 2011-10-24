@@ -1,10 +1,12 @@
-;;; tree-mode.el --- A mode to create and manage tree widgets
+;;; tree-mode.el --- A mode to manage tree widgets
 ;; Copyright 2007 Ye Wenbin
 ;;
 ;; Author: wenbinye@163.com
-;; Version: $Id: tree-mode.el,v 1.3 2007/02/17 06:37:54 ywb Exp ywb $
-;; Keywords: 
-;; X-URL: not distributed yet
+;; Version: $Id: tree-mode.el,v 1.1.1.1 2007-03-13 13:16:10 ywb Exp $
+;; Keywords: help, convenience, widget
+;; 
+;; This file is part of PDE (Perl Development Environment).
+;; But it is useful for generic programming.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,25 +22,29 @@
 ;; along with this program; if not, write to the Free Software
 ;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;; Commentary:
+;;; Dependencies:
+;;  no extra libraries is required
 
-;; 
-
+;;; Installation:
 ;; Put this file into your load-path and the following into your ~/.emacs:
 ;;   (require 'tree-mode)
 
 ;;; Code:
 
-(provide 'tree-mode)
 (require 'tree-widget)
 (eval-when-compile
   (require 'cl))
+
+(defvar tree-mode-version "1.0")
 
 (defvar tree-mode-list nil)
 
 (defvar tree-mode-map
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map widget-keymap)
+    (define-key map " " 'scroll-up)
+    (define-key map "\C-?" 'scroll-down)
+    (define-key map "D" 'tree-mode-delete-tree)
     (define-key map "p" 'tree-mode-previous-node)
     (define-key map "n" 'tree-mode-next-node)
     (define-key map "j" 'tree-mode-next-sib)
@@ -46,11 +52,38 @@
     (define-key map "u" 'tree-mode-goto-parent)
     (define-key map "r" 'tree-mode-goto-root)
     (define-key map "g" 'tree-mode-reflesh)
-    (define-key map "e" 'tree-mode-expand-level)
+    (define-key map "E" 'tree-mode-expand-level)
+    (define-key map "e" 'tree-mode-toggle-expand)
+    (define-key map "s" 'tree-mode-sort-by-tag)
+    (define-key map "/" 'tree-mode-keep-match)
     (define-key map "!" 'tree-mode-collapse-other-except)
+    ;; (define-key map "\C-s" 'tree-mode-isearch-forward)
+    ;; (define-key map "\C-r" 'tree-mode-isearch-backward)
     (dotimes (i 10)
       (define-key map `[,(+ ?0 i)] 'digit-argument))
     map))
+
+(defvar tree-mode-menu nil)
+(unless tree-mode-menu
+  (easy-menu-define
+    tree-mode-menu tree-mode-map "Tree menu"
+    '("Tree"
+      ["Next tree node" tree-mode-next-node t]
+      ["Previous tree node" tree-mode-previous-node t]
+      ["Next sibling node" tree-mode-next-sib t]
+      ["Previous sibling node" tree-mode-previous-sib t]
+      ["Goto parent node" tree-mode-goto-parent t]
+      ["Goto root node" tree-mode-goto-root t]
+      "--"
+      ["Toggle Expand" tree-mode-toggle-expand t]
+      ["Expand to level 1" (lambda () (interactive)
+                             (tree-mode-expand-level 1)) t]
+      ["Expand to level 2" (lambda () (interactive)
+                             (tree-mode-expand-level 2)) t]
+      "--"
+      ["Collapse other tree" tree-mode-collapse-other-except t]
+      ["Sort by tag" tree-mode-sort-by-tag t]
+      ["Keep match" tree-mode-keep-match t])))
 
 (defvar tree-mode-insert-tree-hook nil
   "Hooks run after insert a tree into buffer. Each function is
@@ -60,16 +93,39 @@ passed the new tree created")
   "Hooks run after delete a tree in the buffer. Each function is
 passed the new tree created")
 
-(defun tree-mode-reflesh-tree (tree)
-  (if (widget-get tree :dynargs)
-      (widget-put tree :args nil)
-    (if (widget-get tree :old-args)
-        (widget-put tree :args (widget-get tree :old-args))))
-  (widget-value-set tree (widget-value tree)))
+(defun tree-mode-nearest-widget ()
+  "Return widget at point or next nearest widget."
+  (or (widget-at)
+      (ignore-errors
+        (let ((pos (point)))
+          (widget-forward 1)
+          (and (< pos (point))
+               (widget-at))))))
 
-(defun tree-mode-reflesh-parent (widget &rest ignore)
-  "Put this function to :notify property of tree-widget node."
-  (tree-mode-reflesh-tree (widget-get widget :parent)))
+(defun tree-mode-scan-tree ()
+  "Find all tree widget in current buffer."
+  (save-excursion
+    (goto-char (point-min))
+    (setq tree-mode-list nil)
+    (let ((widget (tree-mode-nearest-widget))
+          parent)
+      (while widget
+        (if (tree-widget-p (setq parent (widget-get widget :parent)))
+            (push parent tree-mode-list))
+        (goto-char (widget-get (or parent widget) :to))
+        (setq widget (tree-mode-nearest-widget)))
+      (setq tree-mode-list (nreverse tree-mode-list)))))
+
+;;;###autoload 
+(define-minor-mode tree-minor-mode
+  "More keybindings for tree-widget.
+
+\\{tree-mode-map}"
+  :lighter " Tree"
+  :keymap tree-mode-map
+  (when tree-minor-mode
+    (make-local-variable 'tree-mode-list)
+    (tree-mode-scan-tree)))
 
 (define-derived-mode tree-mode nil "Tree"
   "A mode to manage many tree widgets"
@@ -78,6 +134,7 @@ passed the new tree created")
   (make-local-variable 'tree-mode-delete-tree-hook)
   (widget-setup))
 
+;; put :button-icon in push-button to setup the node icon
 (add-hook 'tree-widget-before-create-icon-functions
           'tree-mode-icon-create)
 (defun tree-mode-icon-create (icon)
@@ -85,7 +142,10 @@ passed the new tree created")
     (if img (widget-put icon :glyph-name img))))
 
 (defun tree-mode-insert (tree &optional before)
-  (if before
+  "Insert tree to buffer.
+If BEFORE is non-nil and is a tree in current buffer, the new
+TREE will insert at position of BEFORE."
+  (if (and before (memq before tree-mode-list))
       (goto-char (widget-get before :from))
     (goto-char (point-max)))
   (setq tree (widget-create tree))
@@ -94,19 +154,23 @@ passed the new tree created")
   tree)
 
 (defun tree-mode-delete (tree)
+  "Delete tree in the buffer."
   (setq tree-mode-list (delq tree tree-mode-list))
   (widget-delete tree)
   (run-hook-with-args 'tree-mode-delete-tree-hook tree))
 
 (defun tree-mode-tree-buffer (tree)
+  "Return the buffer where the TREE is inserted"
   (marker-buffer (widget-get tree :from)))
 
 (defun tree-mode-kill-buffer (&rest ignore)
+  "If no tree in current buffer, kill this buffer."
   (if (= (length tree-mode-list) 0)
       (kill-buffer (current-buffer))))
 
 ;;{{{  Predicate and others
 (defun tree-mode-root-treep (tree)
+  "Test if the TREE is root"
   (and (tree-widget-p tree)
        (null (widget-get tree :parent))))
 
@@ -125,12 +189,18 @@ passed the new tree created")
   "Return the icon widget in current line"
   (save-excursion
     (forward-line 0)
-    (or (widget-at)
-        (progn (widget-forward 1)
-               (widget-at)))))
+    (tree-mode-nearest-widget)))
 
 (defun tree-mode-button-current-line ()
-  (widget-at (1- (line-end-position))))
+  "Return the push button in current line."
+  (save-excursion
+    (let ((pos (line-beginning-position))
+          but)
+      (goto-char (line-end-position))
+      (while (and (not but) (> (point) pos))
+        (setq but (get-char-property (point) 'button))
+        (backward-char 1))
+      but)))
 
 (defun tree-mode-parent-current-line ()
   "If current line is root line, return the root tree, otherwise
@@ -144,6 +214,7 @@ return the parent tree"
         (or parent (widget-get wid :parent))))))
 
 (defun tree-mode-widget-root (wid)
+  "Return tree root of the widget WID."
   (let (parent)
     (while (setq parent (widget-get wid :parent))
       (setq wid parent))
@@ -153,11 +224,55 @@ return the parent tree"
   "Return the root tree at point"
   (save-excursion
     (if pos (goto-char pos))
-    (tree-mode-widget-root (tree-mode-icon-current-line))))
+    (ignore-errors
+      (tree-mode-widget-root (tree-mode-icon-current-line)))))
 ;;}}}
+
+(defun tree-mode-opened-tree (tree)
+  "Find all opened tree.
+Return the tag list with the same depth."
+  (if (widget-get tree :open)
+      (cons (widget-get (tree-widget-node tree) :tag)
+            (delq nil
+                  (mapcar (lambda (child)
+                            (and (tree-widget-p child)
+                                 (tree-mode-opened-tree child)))
+                          (widget-get tree :children))))))
+
+(defun tree-mode-open-tree (tree path)
+  "Open tree using tag list given by `tree-mode-opened-tree'."
+  (when path
+    (if (not (widget-get tree :open))
+        (widget-apply-action tree))
+    (setq path (cdr path))
+    (and path
+         (mapc (lambda (child)
+                 (and (tree-widget-p child)
+                      (let* ((tag (widget-get (tree-widget-node child) :tag))
+                             (subpath (assoc tag path)))
+                        (if subpath
+                            (tree-mode-open-tree child subpath)))))
+               (widget-get tree :children)))))
+
+(defun tree-mode-reflesh-tree (tree)
+  "Redraw TREE.
+If tree has attribute :dynargs, generate new :args from that function.
+Otherwise use :old-args which saved by `tree-mode-backup-args'."
+  (let ((path (tree-mode-opened-tree tree)))
+    (if (widget-get tree :dynargs)
+        (widget-put tree :args nil)
+      (if (widget-get tree :old-args)
+          (widget-put tree :args (widget-get tree :old-args))))
+    (widget-value-set tree (widget-value tree))
+    (tree-mode-open-tree tree path)))
+
+(defun tree-mode-reflesh-parent (widget &rest ignore)
+  "Put this function to :notify property of tree-widget node."
+  (tree-mode-reflesh-tree (widget-get widget :parent)))
 
 ;;{{{  Movement commands
 (defun tree-mode-next-node (arg)
+  "Move to next node."
   (interactive "p")
   (widget-forward (* arg 2)))
 
@@ -166,6 +281,7 @@ return the parent tree"
   (tree-mode-next-node (- arg)))
 
 (defun tree-mode-next-sib (arg)
+  "Move to next sibling node."
   (interactive "p")
   (let (me siblings sib others out-range)
     (if (tree-mode-root-linep)
@@ -194,10 +310,12 @@ return the parent tree"
         (message "No %s sibling more!" (if (< arg 0) "previous" "next")))))
 
 (defun tree-mode-previous-sib (arg)
+  "Move to previous sibling node."
   (interactive "p")
   (tree-mode-next-sib (- arg)))
 
 (defun tree-mode-goto-root ()
+  "Move to root node"
   (interactive)
   (let ((root (tree-mode-tree-ap)))
     (if root
@@ -205,6 +323,7 @@ return the parent tree"
       (message "No Root!"))))
 
 (defun tree-mode-goto-parent (arg)
+  "Move to parent node."
   (interactive "p")
   (let ((parent (tree-mode-parent-current-line)))
     (setq arg (1- arg))
@@ -216,10 +335,40 @@ return the parent tree"
                       (goto-char (widget-get parent :from))
                       (setq arg (1- arg)))))
       (message "No parent!"))))
+
+(defun tree-mode-find-node (tree path)
+  "Find node by path.
+Return a cons cell (NODE . REST). Check the rest to find if the node
+is node of the full path. 
+PATH is a list of node tag to search from root.
+Note if the tree is not opened, It will open some node when need.
+`set-buffer' to tree buffer before call this function."
+  (when (and (tree-widget-p tree) path)
+    (let ((children (cdr (widget-get tree :children))) ; car is root node
+          ;; if last node, both push-button and tree-widget will check
+          (predicate (if (= (length path) 1) 
+                         'widget-type 'tree-widget-p))
+          node found)
+      (while (and (not found) children)
+        (setq node (car children))
+        (if (and (funcall predicate node)
+                 (string= (tree-mode-node-tag node) (car path)))
+            (progn
+              (when (cdr path)
+                ;; if tree is not open, open it
+                (if (and (tree-widget-p node)
+                         (not (widget-get node :open)))
+                    (widget-apply-action node))
+                (setq found (tree-mode-find-node (car children) (cdr path))))
+              (or found
+                  (setq found (cons (car children) (cdr path)))))
+          (setq children (cdr children))))
+      found)))
 ;;}}}
 
 ;;{{{  Expand or collapse
 (defun tree-mode-collapse-other-except ()
+  "Collapse other trees. If the tree at point is contract, expand it."
   (interactive)
   (let ((me (tree-mode-icon-current-line)))
     (if (tree-widget-leaf-node-icon-p me)
@@ -236,17 +385,37 @@ return the parent tree"
                                    :children)))))))
 
 (defun tree-mode-collapse-children (tree)
+  "Collapse child node"
   (mapc (lambda (child)
           (if (widget-get child :open)
               (widget-apply-action child)))
         (widget-get tree :children)))
 
 (defun tree-mode-expand-children (tree)
+  "Expand child node"
   (mapc (lambda (child)
           (if (and (tree-widget-p child)
                    (not (widget-get child :open)))
               (widget-apply-action child)))
         (widget-get tree :children)))
+
+(defun tree-mode-toggle-expand-node (&rest ignore)
+  "Put it to :notify of tree widget node."
+  (tree-mode-toggle-expand))
+
+(defun tree-mode-toggle-expand (&optional arg)
+  (interactive "P")
+  (let ((me (tree-mode-icon-current-line))
+        expandp open)
+    (if (tree-widget-leaf-node-icon-p me)
+        (message "Not a tree under point!")
+      (setq me (widget-get me :parent))
+      (setq expandp (widget-get me :open))
+      (setq open (if (null arg)
+                     (not expandp)
+                   (> (prefix-numeric-value arg) 0)))
+      (unless (eq open expandp)
+        (widget-apply-action me)))))
 
 (defun tree-mode-expand-level (level)
   "Expand tree to LEVEL. With prefix argument 0 or negative, will
@@ -270,11 +439,13 @@ expand all leaves of the tree."
 ;;}}}
 
 (defun tree-mode-node-tag (node)
+  "Return tag of push-button or tree-widget"
   (or (widget-get node :tag)
       (widget-get (widget-get node :node) :tag)))
 
 ;;{{{  Commands about tree nodes
 (defun tree-mode-backup-args (widget)
+  "Save :args of tree-widget if need."
   (unless (and (widget-get widget :dynargs)
                (null (widget-get widget :old-args)))
     ;; if widget don't have a dynamic args function
@@ -282,6 +453,7 @@ expand all leaves of the tree."
     (widget-put widget :old-args (copy-sequence (widget-get widget :args)))))
 
 (defun tree-mode-filter-children (widget filter)
+  "Remove children nodes when call FILTER with the node return true."
   (tree-mode-backup-args widget)
   (widget-put widget :args
               (delq nil (mapcar (lambda (child)
@@ -295,12 +467,14 @@ expand all leaves of the tree."
   (widget-get wid1 :children))
 
 (defun tree-mode-sort-children (widget sorter)
+  "Sort children nodes by SORTER."
   (tree-mode-backup-args widget)
   (widget-put widget :args
               (sort (copy-sequence (widget-get widget :args)) sorter))
   (widget-value-set widget (widget-value widget)))
 
 (defun tree-mode-sort-by-tag (arg)
+  "Sort children node by tag."
   (interactive "P")
   (let ((tree (tree-mode-parent-current-line)))
     (if tree
@@ -312,6 +486,7 @@ expand all leaves of the tree."
       (message "No tree at point!"))))
 
 (defun tree-mode-delete-match (regexp)
+  "Remove node which tag match REGEXP."
   (interactive "sDelete node match: ")
   (let ((tree (tree-mode-parent-current-line)))
     (if tree
@@ -321,6 +496,7 @@ expand all leaves of the tree."
       (message "No tree at point!"))))
 
 (defun tree-mode-keep-match (regexp)
+  "Keep node which tag match REGEXP"
   (interactive "sKeep node match: ")
   (let ((tree (tree-mode-parent-current-line)))
     (if tree
@@ -346,4 +522,5 @@ expand all leaves of the tree."
     (message "No tree at point!")))
 ;;}}}
 
+(provide 'tree-mode)
 ;;; tree-mode.el ends here
