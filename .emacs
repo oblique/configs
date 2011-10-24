@@ -16,7 +16,8 @@
 (require 'linum-ex)
 (setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
                                 imenu-tree-mode fundamental-mode term-mode
-                                completion-list-mode tags-tree-mode help-mode))
+                                completion-list-mode tags-tree-mode help-mode
+                                dired-mode dirtree-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
@@ -27,10 +28,11 @@
 ; session manager
 (require 'desktop-menu)
 
-; tree mode
+; tree widgets
 (require 'tree-mode)
 (require 'imenu-tree)
 (require 'tags-tree)
+(require 'dirtree)
 
 ; coding
 (setq c-default-style "linux")
