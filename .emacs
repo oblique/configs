@@ -30,14 +30,6 @@
 (global-rainbow-delimiters-mode)
 (show-paren-mode 1)
 
-(defvar aa nil)
-
-(defun aaa ()
-  (interactive)
-  (error "%d" (cond ((eq (syntax-class (syntax-after (point))) 5) -1))    ))
-
-(global-set-key (kbd "C-c l") 'aaa)
-
 ; sticky windows
 (require 'sticky-windows)
 (global-set-key (kbd "C-x 0") 'sticky-window-delete-window)
