@@ -22,6 +22,8 @@
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
+(unless initial-window-system
+  (xterm-mouse-mode 1))
 (setq inhibit-splash-screen t)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq explicit-shell-file-name "/bin/bash")
