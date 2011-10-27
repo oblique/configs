@@ -18,7 +18,7 @@
                                 imenu-tree-mode fundamental-mode term-mode
                                 completion-list-mode tags-tree-mode help-mode
                                 dired-mode dirtree-mode desktop-menu-mode
-                                Buffer-menu-mode man-mode))
+                                Buffer-menu-mode Man-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
@@ -29,6 +29,7 @@
 (require 'smooth-scrolling)
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
+(setq Man-width 90)
 
 ; sticky windows
 (require 'sticky-windows)
@@ -167,7 +168,7 @@
 (global-set-key (kbd "ESC <left>") 'windmove-left) ; M-left
 (global-set-key (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
 (global-set-key (kbd "C-x p") 'other-window-backward)
-(global-set-key (kbd "C-c m") 'my-imenu-tree)
+(global-set-key (kbd "C-c f") 'my-imenu-tree)
 (global-set-key (kbd "C-c d") 'my-dirtree)
 (global-set-key (kbd "C-c o") 'ob-tree)
 (global-set-key (kbd "C-c q") 'delete-other-windows)
@@ -177,3 +178,4 @@
 (global-set-key (kbd "C-c v") 'xclip-paste)
 (global-set-key (kbd "C-c c") 'xclip-copy)
 (global-set-key (kbd "C-c x") 'xclip-cut)
+(global-set-key (kbd "C-c m") 'man)
