@@ -137,7 +137,7 @@
 
 (defun xclip-paste ()
   (interactive)
-  (shell-command "xclip -o -selection clipboard" 0 (minibuffer-window)))
+  (shell-command "xclip -o -selection clipboard" 0 nil))
 
 (defun xclip-copy ()
   (interactive)
