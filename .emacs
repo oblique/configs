@@ -137,7 +137,7 @@
 
 (defun xclip-paste ()
   (interactive)
-  (shell-command "xclip -o -selection clipboard" 0 nil))
+  (shell-command "xclip -o -selection clipboard" 0 shell-command-default-error-buffer))
 
 (defun xclip-copy ()
   (interactive)
