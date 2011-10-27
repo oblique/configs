@@ -18,17 +18,17 @@
                                 imenu-tree-mode fundamental-mode term-mode
                                 completion-list-mode tags-tree-mode help-mode
                                 dired-mode dirtree-mode desktop-menu-mode
-                                Buffer-menu-mode))
+                                Buffer-menu-mode man-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
+(show-paren-mode 1)
 (setq inhibit-splash-screen t)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq explicit-shell-file-name "/bin/bash")
 (require 'smooth-scrolling)
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
-(show-paren-mode 1)
 
 ; sticky windows
 (require 'sticky-windows)
@@ -134,11 +134,37 @@
                                 (setq active-eshell-window window)))))
     (if active-eshell-window
       (delete-window active-eshell-window))))
- 
+
+(defun xclip-paste ()
+  (interactive)
+  (shell-command "xclip -o -selection clipboard" 0 (minibuffer-window)))
+
+(defun xclip-copy ()
+  (interactive)
+  (if (region-active-p)
+    (progn
+      (shell-command-on-region (region-beginning) (region-end) "xclip -i -selection clipboard")
+      (message "Copy region to clipboard!")
+      (deactivate-mark))
+    (message "No region active. Can't copy to clipboard!")))
+
+(defun xclip-cut ()
+  (interactive)
+  (if (region-active-p)
+    (progn
+      (shell-command-on-region (region-beginning) (region-end) "xclip -i -selection clipboard")
+      (message "Cut region to clipboard!")
+      (delete-region (region-beginning) (region-end)))
+    (message "No region active. Can't cut to clipboard!")))
+
 ; key bindings
 (global-set-key (kbd "M-9") 'kill-whole-line)
 (global-set-key (kbd "M-l") 'tabbar-forward)
 (global-set-key (kbd "M-j") 'tabbar-backward)
+(global-set-key (kbd "ESC <up>") 'windmove-up) ; M-up
+(global-set-key (kbd "ESC <down>") 'windmove-down) ; M-down
+(global-set-key (kbd "ESC <right>") 'windmove-right) ; M-right
+(global-set-key (kbd "ESC <left>") 'windmove-left) ; M-left
 (global-set-key (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
 (global-set-key (kbd "C-x p") 'other-window-backward)
 (global-set-key (kbd "C-c m") 'my-imenu-tree)
@@ -148,3 +174,6 @@
 (global-set-key (kbd "C-c z") 'my-eshell)
 (global-set-key (kbd "C-c Z") 'my-eshell-kill)
 (global-set-key (kbd "C-c s") 'desktop-menu)
+(global-set-key (kbd "C-c v") 'xclip-paste)
+(global-set-key (kbd "C-c c") 'xclip-copy)
+(global-set-key (kbd "C-c x") 'xclip-cut)
