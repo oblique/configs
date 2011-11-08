@@ -70,8 +70,7 @@
 
 ; theme
 (require 'color-theme)
-(require 'color-theme-molokai-ob)
-(setq color-theme-is-global t)
+(color-theme-initialize)
 (color-theme-molokai-ob)
 
 ; functions
