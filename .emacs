@@ -31,6 +31,11 @@
 (global-rainbow-delimiters-mode)
 (setq Man-width 90)
 
+; RFC
+; you download RFCs from ftp://ftp.rfc-editor.org/in-notes/tar/RFC-all.tar.gz
+(require 'rfc)
+(setq rfc-archive-alist (list (file-truename "~/rfc")))
+
 ; sticky windows
 (require 'sticky-windows)
 (global-set-key (kbd "C-x 0") 'sticky-window-delete-window)
@@ -178,3 +183,4 @@
 (global-set-key (kbd "C-c c") 'xclip-copy)
 (global-set-key (kbd "C-c x") 'xclip-cut)
 (global-set-key (kbd "C-c m") 'man)
+(global-set-key (kbd "C-c r") 'rfc-index)
