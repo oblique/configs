@@ -32,7 +32,7 @@
 (setq Man-width 90)
 
 ; RFC
-; you download RFCs from ftp://ftp.rfc-editor.org/in-notes/tar/RFC-all.tar.gz
+; you can download RFCs from http://www.rfc-editor.org/download.html
 (require 'rfc)
 (setq rfc-archive-alist (list (file-truename "~/rfc")))
 
