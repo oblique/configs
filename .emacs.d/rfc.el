@@ -112,7 +112,7 @@ If there is no such a node, it returns nil."
     (backward-word 2)
     (and (re-search-forward "RFC[- ]?\\([0-9][0-9][0-9][0-9]\\)"
 		       (min (point-max) (+ (point) 15)) t)
-	 (string-to-int (buffer-substring (match-beginning 1) (match-end 1))))))
+	 (string-to-number (buffer-substring (match-beginning 1) (match-end 1))))))
 
 ;; RFC index mode
 
@@ -192,7 +192,7 @@ If there is no such a node, it returns nil."
   (save-excursion
     (end-of-line)
     (re-search-backward rfc-start-tag-index nil t)
-    (string-to-int (buffer-substring (match-beginning 1) (match-end 1)))))
+    (string-to-number (buffer-substring (match-beginning 1) (match-end 1)))))
 
 (defun rfc-index-start-of-current ()
   (save-excursion
@@ -212,7 +212,7 @@ If there is no such a node, it returns nil."
      (re-search-forward
       (concat tag "[ \t]+by[ \t]+RFC\\([0-9][0-9][0-9][0-9]\\)")
       (rfc-index-end-of-current) t)
-     (string-to-int (buffer-substring (match-beginning 1) (match-end 1))))))
+     (string-to-number (buffer-substring (match-beginning 1) (match-end 1))))))
 
 ;; The user commands of RFC index mode
 
@@ -269,12 +269,12 @@ If there is no such a node, it returns nil."
   "Keymap for RFC Article mode")
 
 (defvar rfc-article-number 0
-  "Number of RFC article currently visited")
+  "Number of RFC article")
+(make-variable-buffer-local 'rfc-article-number)
 
 (if rfc-article-mode-map
     nil
   (setq rfc-article-mode-map (make-sparse-keymap))
-  (make-variable-buffer-local 'rfc-article-number)
   (suppress-keymap rfc-article-mode-map)
   (let ((map rfc-article-mode-map))
     (define-key map "\C-m" 'rfc-article-goto-nearest)

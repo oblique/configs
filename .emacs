@@ -1,4 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d")
+(setq byte-compile-warnings nil)
+(byte-recompile-directory "~/.emacs.d")
+(byte-recompile-directory "~/.emacs.d" 0)
+(setq byte-compile-warnings t)
 
 ; load my rxvt.el
 (unless (or noninteractive initial-window-system)
