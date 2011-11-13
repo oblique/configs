@@ -274,7 +274,7 @@ If there is no such a node, it returns nil."
 (if rfc-article-mode-map
     nil
   (setq rfc-article-mode-map (make-sparse-keymap))
-  (make-local-variable 'rfc-article-number)
+  (make-variable-buffer-local 'rfc-article-number)
   (suppress-keymap rfc-article-mode-map)
   (let ((map rfc-article-mode-map))
     (define-key map "\C-m" 'rfc-article-goto-nearest)

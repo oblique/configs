@@ -162,6 +162,44 @@
       (delete-region (region-beginning) (region-end)))
     (message "No region active. Can't cut to clipboard!")))
 
+(defun desktop-save-man ()
+  (insert "\n;; Man section\n")
+  (let* ((list (buffer-list))
+	 (buffer (car list))
+	 val)
+    (while buffer
+      (if (with-current-buffer buffer (boundp 'Man-arguments))
+	  (progn
+	    (with-current-buffer buffer (setq val Man-arguments))
+	    (if val
+		(progn
+		  (insert "(man \"")
+		  (insert val)
+		  (insert "\")\n")))))
+      (setq buffer (car list))
+      (setq list (cdr list)))))
+
+(defun desktop-save-rfc ()
+  (insert "\n;; RFC section\n")
+  (let* ((list (buffer-list))
+	 (buffer (car list))
+	 val)
+    (while buffer
+      (if (with-current-buffer buffer (boundp 'rfc-article-number))
+	  (progn
+	    (with-current-buffer buffer (setq val rfc-article-number))
+	    (if (> val 0)
+		(progn
+		  (insert "(rfc-goto-number ")
+		  (insert (number-to-string val))
+		  (insert ")\n")))))
+      (setq buffer (car list))
+      (setq list (cdr list)))))
+
+; hooks
+(add-hook 'desktop-save-hook 'desktop-save-man)
+(add-hook 'desktop-save-hook 'desktop-save-rfc)
+
 ; key bindings
 (global-set-key (kbd "M-9") 'kill-whole-line)
 (global-set-key (kbd "M-l") 'tabbar-forward)
