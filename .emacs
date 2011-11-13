@@ -34,6 +34,7 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 (setq Man-width 90)
+(setq initial-scratch-message nil)
 
 ; RFC
 ; you can download RFCs from http://www.rfc-editor.org/download.html
