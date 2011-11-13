@@ -6,7 +6,7 @@
 ;; Maintainer: David Ponce <david@dponce.com>
 ;; Created: 25 February 2003
 ;; Keywords: convenience
-;; Revision: $Id: tabbar.el,v 1.69 2006/06/08 08:27:39 ponced Exp $
+;; Revision: $Id: tabbar.el,v 1.7 2010/11/22 23:30 m00natic Exp $
 
 (defconst tabbar-version "2.0")
 
@@ -187,7 +187,7 @@
 ;;
 
 ;;; Code:
-
+
 ;;; Options
 ;;
 (defgroup tabbar nil
@@ -276,7 +276,7 @@ scroll right button.  It should scroll the current tab set.")
   "Function to obtain a help string for the scroll right button.
 The help string is displayed when the mouse is onto the button.
 The function is called with no arguments.")
-
+
 ;;; Misc.
 ;;
 (eval-and-compile
@@ -332,7 +332,7 @@ room."
               w (+ w (char-width (aref str n)))))
       (concat (substring str 0 i) el (substring str n)))
      )))
-
+
 ;;; Tab and tab set
 ;;
 (defsubst tabbar-make-tab (object tabset)
@@ -390,10 +390,11 @@ You should use this hook to reset dependent data.")
          "Apply FUNCTION to each tab set, and make a list of the results.
 The result is a list just as long as the number of existing tab sets."
          (let (,result)
-           (mapatoms
-            #'(lambda (,tabset)
-                (push (funcall ,function ,tabset) ,result))
-            tabbar-tabsets)
+           (if tabbar-tabsets
+	       (mapatoms
+		#'(lambda (,tabset)
+		    (push (funcall ,function ,tabset) ,result))
+		tabbar-tabsets))
            ,result)))))
 
 (defun tabbar-make-tabset (name &rest objects)
@@ -550,7 +551,7 @@ current cached copy."
   (tabbar-scroll tabbar-tabsets-tabset 0)
   (tabbar-set-template tabbar-tabsets-tabset nil)
   tabbar-tabsets-tabset)
-
+
 ;;; Faces
 ;;
 (defface tabbar-default
@@ -615,7 +616,6 @@ current cached copy."
 (defface tabbar-separator
   '((t
      :inherit tabbar-default
-     :height 0.1
      ))
   "Face used for separators between tabs."
   :group 'tabbar)
@@ -624,7 +624,6 @@ current cached copy."
   '((t
      :inherit tabbar-default
      :box (:line-width 1 :color "white" :style released-button)
-     :foreground "dark red"
      ))
   "Face used for tab bar buttons."
   :group 'tabbar)
@@ -655,7 +654,7 @@ background color of the `default' face otherwise."
               (setq face 'default))
           (setq color (face-background face)))
         color)))
-
+
 ;;; Buttons and separator look and feel
 ;;
 (defconst tabbar-button-widget
@@ -868,7 +867,7 @@ an extra margin around the image."
         (plist-put plist :margin margin))
     (setcdr image plist))
   image)
-
+
 ;;; Button keymaps and callbacks
 ;;
 (defun tabbar-make-mouse-keymap (callback)
@@ -1014,7 +1013,7 @@ Pass mouse click events on a tab to `tabbar-click-on-tab'."
           (interactive "@e")
           (and (tabbar-click-p ,event)
                (tabbar-click-on-tab ',tab ,event)))))))
-
+
 ;;; Tab bar construction
 ;;
 (defun tabbar-button-label (name)
@@ -1208,7 +1207,7 @@ That is dedicated windows, and `checkdoc' status windows."
                     (if (boundp 'ispell-choices-buffer)
                         ispell-choices-buffer
                       "*Choices*")))))
-
+
 ;;; Cyclic navigation through tabs
 ;;
 (defun tabbar-cycle (&optional backward type)
@@ -1308,7 +1307,7 @@ Depend on the setting of the option `tabbar-cycle-scope'."
   (interactive)
   (let ((tabbar-cycle-scope 'tabs))
     (tabbar-cycle)))
-
+
 ;;; Button press commands
 ;;
 (defsubst tabbar--mouse (number)
@@ -1345,7 +1344,7 @@ A numeric prefix ARG value of 2, or 3, respectively simulates a
 mouse-2, or mouse-3 click.  The default is a mouse-1 click."
   (interactive "p")
   (tabbar-click-on-button 'scroll-right (tabbar--mouse arg)))
-
+
 ;;; Mouse-wheel support
 ;;
 (require 'mwheel)
@@ -1451,7 +1450,7 @@ Mouse-enabled equivalent of the command `tabbar-forward-tab'."
   (if (tabbar--mwheel-up-p event)
       (tabbar-mwheel-forward-group event)
     (tabbar-mwheel-backward-group event)))
-
+
 ;;; Minor modes
 ;;
 (defsubst tabbar-mode-on-p ()
@@ -1499,7 +1498,7 @@ hidden, it is shown again.  Signal an error if Tabbar mode is off."
           (kill-local-variable 'tabbar--local-hlf))
       ;; The tab bar is locally hidden, show it again.
       (kill-local-variable 'header-line-format))))
-
+
 ;;; Tabbar mode
 ;;
 (defvar tabbar-prefix-key [(control ?c)]
@@ -1543,7 +1542,8 @@ Returns non-nil if the new state is enabled.
         ;; Save current default value of `header-line-format'.
         (setq tabbar--global-hlf (default-value 'header-line-format))
         (tabbar-init-tabsets-store)
-        (setq-default header-line-format tabbar-header-line-format))
+        (setq-default header-line-format tabbar-header-line-format)
+	(if (fboundp 'tabbar-define-access-keys) (tabbar-define-access-keys)))
 ;;; OFF
     (when (tabbar-mode-on-p)
       ;; Turn off Tabbar-Local mode globally.
@@ -1607,7 +1607,7 @@ Returns non-nil if the new state is enabled.
 
 (add-hook 'tabbar-mode-hook      'tabbar-mwheel-follow)
 (add-hook 'mouse-wheel-mode-hook 'tabbar-mwheel-follow)
-
+
 ;;; Buffer tabs
 ;;
 (defgroup tabbar-buffer nil
@@ -1712,6 +1712,8 @@ Return a list of one element based on major mode."
 Return the the first group where the current buffer is."
   (let ((bl (sort
              (mapcar
+	      ;; for each buffer, create list: buffer, buffer name, groups-list
+	      ;; sort on buffer name; store to bl (buffer list)
               #'(lambda (b)
                   (with-current-buffer b
                     (list (current-buffer)
@@ -1726,36 +1728,39 @@ Return the the first group where the current buffer is."
     ;; If the cache has changed, update the tab sets.
     (unless (equal bl tabbar--buffers)
       ;; Add new buffers, or update changed ones.
-      (dolist (e bl)
-        (dolist (g (nth 2 e))
-          (let ((tabset (tabbar-get-tabset g)))
-            (if tabset
-                (unless (equal e (assq (car e) tabbar--buffers))
+      (dolist (e bl) ;; loop through buffer list
+        (dolist (g (nth 2 e)) ;; for each member of groups-list for current buffer
+          (let ((tabset (tabbar-get-tabset g))) ;; get group from group name
+            (if tabset ;; if group exists
+		;; check if current buffer is same as any cached buffer
+		;; (search buffer list for matching buffer)
+                (unless (equal e (assq (car e) tabbar--buffers)) ;; if not,...
                   ;; This is a new buffer, or a previously existing
                   ;; buffer that has been renamed, or moved to another
                   ;; group.  Update the tab set, and the display.
-                  (tabbar-add-tab tabset (car e) t)
+                  (tabbar-add-tab tabset (car e) t) ;; add to end of tabset
                   (tabbar-set-template tabset nil))
+	      ;;if tabset doesn't exist, make a new tabset with this buffer
               (tabbar-make-tabset g (car e))))))
       ;; Remove tabs for buffers not found in cache or moved to other
       ;; groups, and remove empty tabsets.
-      (mapc 'tabbar-delete-tabset
-            (tabbar-map-tabsets
+      (mapc 'tabbar-delete-tabset ;; delete each tabset named in following list:
+            (tabbar-map-tabsets ;; apply following function to each tabset:
              #'(lambda (tabset)
-                 (dolist (tab (tabbar-tabs tabset))
-                   (let ((e (assq (tabbar-tab-value tab) bl)))
-                     (or (and e (memq tabset
+                 (dolist (tab (tabbar-tabs tabset)) ;; for each tab in tabset
+                   (let ((e (assq (tabbar-tab-value tab) bl))) ;; get buffer
+                     (or (and e (memq tabset ;; skip if buffer exists and tabset is a member of groups-list for this buffer
                                       (mapcar 'tabbar-get-tabset
                                               (nth 2 e))))
-                         (tabbar-delete-tab tab))))
+                         (tabbar-delete-tab tab)))) ;; else remove tab from this set
                  ;; Return empty tab sets
                  (unless (tabbar-tabs tabset)
-                   tabset))))
+                   tabset)))) ;; return list of tabsets, replacing non-empties with nil
       ;; The new cache becomes the current one.
       (setq tabbar--buffers bl)))
   ;; Return the first group the current buffer belongs to.
   (car (nth 2 (assq (current-buffer) tabbar--buffers))))
-
+
 ;;; Tab bar callbacks
 ;;
 (defvar tabbar--buffer-show-groups nil)
@@ -1889,7 +1894,7 @@ first."
            ;; Move sibling buffer in front of the buffer list.
            (save-current-buffer
              (switch-to-buffer sibling))))))
-
+
 ;;; Tab bar buffer setup
 ;;
 (defun tabbar-buffer-init ()
@@ -1928,5 +1933,5 @@ Run as `tabbar-quit-hook'."
 (provide 'tabbar)
 
 (run-hooks 'tabbar-load-hook)
-
+
 ;;; tabbar.el ends here

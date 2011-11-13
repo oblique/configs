@@ -1,5 +1,4 @@
 (add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/emhacks")
 
 ; load my rxvt.el
 (unless (or noninteractive initial-window-system)
@@ -23,6 +22,7 @@
 (column-number-mode 1)
 (global-auto-revert-mode 1)
 (show-paren-mode 1)
+(recentf-mode 1)
 (setq inhibit-splash-screen t)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq explicit-shell-file-name "/bin/bash")

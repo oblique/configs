@@ -118,6 +118,8 @@
      (hi-red-b ((t (:foreground "#D81860" :weight bold))))
      (hi-yellow ((t (:background "#f6fd3a" :foreground "#101010"))))
      (match ((t (:background "#935bfb" :foreground "#F8F8F2"))))
+     (rfc-node ((t (:bold t :foreground "#AE81FF"))))
+     (rfc-xref ((t (:bold t :foreground "#AE81FF"))))
      )))
 
 (provide 'color-theme-molokai-ob)
