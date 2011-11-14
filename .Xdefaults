@@ -1,0 +1,61 @@
+Xcursor.theme:  Vanilla-DMZ-AA
+
+Xft.antialias:  true
+!Xft.dpi:       130
+!Xft.rgba:      rgb
+!Xft.antialias: 1
+!Xft.hinting:   1
+!Xft.hintstyle: hintmedium
+!Xft.autohint:  0
+!Xft.lcdfilter: lcddefault
+
+! colors
+*foreground:    #66FF66
+*background:    #101010
+!black
+*color0:        #1C1C1C
+*color8:        #4d4d4d
+!red
+*color1:        #D81860
+*color9:        #F00060
+!green
+*color2:        #B7CE42
+*color10:       #BDE077
+!yellow
+*color3:        #d0d26b
+*color11:       #c8bc45
+!blue
+*color4:        #66AABB
+*color12:       #AACCBB
+!magenta
+*color5:        #B7416E
+*color13:       #BB4466
+!cyan
+*color6:        #4c8ea1
+*color14:       #6bc1d0
+!white
+*color7:        #DED7CF
+*color15:       #EEEEEC
+
+
+! urxvt
+URxvt*termName:             rxvt-unicode-256color
+URxvt*geometry:             90x25
+URxvt*reverseVideo:         false
+URxvt*font:                 xft:Inconsolata:size=10
+URxvt*letterSpace:          -1
+URxvt*scrollBar:            true
+URxvt*scrollBar_floating:   true
+URxvt*scrollBar_right:      false
+URxvt*scrollColor:          #202020
+URxvt*saveLines:            5500
+URxvt.perl-ext-common:      default,matcher
+URxvt.urlLauncher:          firefox
+URxvt.matcher.button:       1
+URxvt*cursorColor:          #00ff00
+URxvt*colorUL:              yellow
+!URxvt*transparent:          true
+!URxvt*shading:              15		!trans, 0=opaque
+!URxvt*fading:               10		!term unfocus
+!URxvt*inheritPixmap:        true
+!URxvt*tintColor:            #000000
