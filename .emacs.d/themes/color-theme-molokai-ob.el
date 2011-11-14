@@ -34,6 +34,7 @@
      (diff-header ((t (:foreground "#F8F8F2" :background "#232526"))))
      (diff-hunk-header ((t (:foreground "#AE81FF" :background "#232526"))))
      (diff-removed ((t (:foreground "#F92672"))))
+     (diff-refine-change ((t (:background "#404040"))))
      (escape-glyph ((t (:foreground "#E6DB74"))))
      (minibuffer-prompt ((t (:foreground "#66D9EF"))))
      (mode-line ((t (:foreground "#B7CE42" :background "#101010"))))

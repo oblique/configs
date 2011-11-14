@@ -21,7 +21,7 @@
                                 imenu-tree-mode fundamental-mode term-mode
                                 completion-list-mode tags-tree-mode help-mode
                                 dired-mode dirtree-mode desktop-menu-mode
-                                Buffer-menu-mode Man-mode))
+                                Buffer-menu-mode Man-mode Custom-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
