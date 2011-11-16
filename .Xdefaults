@@ -20,20 +20,20 @@ Xft.antialias:  true
 *color1:        #D81860
 *color9:        #F00060
 !green
-*color2:        #B7CE42
-*color10:       #BDE077
+*color2:        #60FF60
+*color10:       #70FF70
 !yellow
-*color3:        #d0d26b
-*color11:       #c8bc45
+*color3:        #f6fd3a
+*color11:       #f8fd71
 !blue
-*color4:        #66AABB
-*color12:       #AACCBB
+*color4:        #0089a2
+*color12:       #31b1c8
 !magenta
-*color5:        #B7416E
-*color13:       #BB4466
+*color5:        #9370DB
+*color13:       #a287db
 !cyan
-*color6:        #4c8ea1
-*color14:       #6bc1d0
+*color6:        #00b7eb
+*color14:       #2caace
 !white
 *color7:        #DED7CF
 *color15:       #EEEEEC
