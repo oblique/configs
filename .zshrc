@@ -10,6 +10,9 @@ export PATH="${PATH}:${HOME}/bin"
 source $HOME/.zsh.d/key-bindings.zsh
 source $HOME/.zsh.d/termsupport.zsh
 source $HOME/.zsh.d/git.zsh
+# battery status
+BATTERY=BAT0
+source $HOME/.zsh.d/battery.zsh
 
 
 # history options
@@ -122,7 +125,7 @@ export GREP_COLOR='1;31'
 setopt prompt_subst
 PROMPT='%{$fg[blue]%}[%D{%d/%m/%y} %T]%{$reset_color%} %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m%{$reset_color%} %{$fg[magenta]%}[%(!.%1~.%~)]%{$reset_color%} $(git_prompt_info)
 %{$fg[red]%}●%{$reset_color%} '
-RPROMPT='$($HOME/.zsh.d/battery.py)'
+RPROMPT='$(battery_status)'
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[magenta]%}●%{$reset_color%}"
