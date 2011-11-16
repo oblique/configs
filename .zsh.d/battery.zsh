@@ -19,6 +19,8 @@ function battery_status() {
     fi
 
     _BFSTATUS=$(cat $BATPATH/status)
+
+    _BPERCENT=$(( int(ceil(_BUR*100.0/_BFULL)) ))
     _BFILLED=$(( int(ceil(_BCUR*10.0/_BFULL)) ))
 
     if [[ $_BFSTATUS = "Charging" ]]; then
@@ -26,6 +28,11 @@ function battery_status() {
     elif [[ $_BFSTATUS = "Discharging" ]]; then
         _BRES="%{$fg[red]%}\u25be%{$reset_color%} "
     else
+        _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
+    fi
+
+    # fix for ThinkPad laptops
+    if [[ _BPERCENT -eq 100 ]]; then
         _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
     fi
 
