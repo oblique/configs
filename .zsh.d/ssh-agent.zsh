@@ -26,6 +26,7 @@ local _plugin__forwarding
 
 function _plugin__start_agent()
 {
+  [[ -e $HOME/.ssh ]] || mkdir -p $HOME/.ssh
   local -a identities
 
   # start ssh-agent and setup environment
