@@ -125,11 +125,11 @@ export GREP_COLOR='1;31'
 # theme
 setopt prompt_subst
 PROMPT='%{$fg[blue]%}[%D{%d/%m/%y} %T]%{$reset_color%} %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m%{$reset_color%} %{$fg[magenta]%}[%(!.%1~.%~)]%{$reset_color%} $(git_prompt_info)
-%{$fg[red]%}●%{$reset_color%} '
+%{$fg[red]%}$(echo -ne \\u25cf)%{$reset_color%} '
 RPROMPT='$(battery_status)'
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[magenta]%}●%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[magenta]%}$(echo -ne \\u25cf)%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 
