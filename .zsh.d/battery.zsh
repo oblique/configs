@@ -18,7 +18,7 @@ function battery_status() {
         _BFULL=$(cat $BATPATH/charge_full)
     fi
 
-    _BFSTATUS=$(cat /sys/class/power_supply/BAT0/status)
+    _BFSTATUS=$(cat $BATPATH/status)
     _BFILLED=$(( int(ceil(_BCUR*10.0/_BFULL)) ))
 
     if [[ $_BFSTATUS = "Charging" ]]; then
@@ -26,7 +26,7 @@ function battery_status() {
     elif [[ $_BFSTATUS = "Discharging" ]]; then
         _BRES="%{$fg[red]%}\u25be%{$reset_color%} "
     else
-        _BRES=""
+        _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
     fi
 
     if [[ $_BFILLED -gt 6 ]]; then
