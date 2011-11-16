@@ -22,7 +22,7 @@ function battery_status() {
     _BFILLED=$(( int(ceil(_BCUR*10.0/_BFULL)) ))
 
     if [[ $_BFSTATUS = "Charging" ]]; then
-        _BRES="%{$fg[green]%}\u25b4%{$reset_color%} "
+        _BRES="%{$fg[magenta]%}\u25b4%{$reset_color%} "
     elif [[ $_BFSTATUS = "Discharging" ]]; then
         _BRES="%{$fg[red]%}\u25be%{$reset_color%} "
     else
