@@ -23,19 +23,19 @@ Xft.antialias:  true
 *color2:        #60FF60
 *color10:       #70FF70
 !yellow
-*color3:        #f6fd3a
+*color3:        #f8fd61
 *color11:       #f8fd71
 !blue
-*color4:        #0089a2
-*color12:       #31b1c8
+*color4:        #318dc8
+*color12:       #3b91c8
 !magenta
-*color5:        #9370DB
+*color5:        #9a7bdb
 *color13:       #a287db
 !cyan
-*color6:        #00b7eb
+*color6:        #1ea7ce
 *color14:       #2caace
 !white
-*color7:        #DED7CF
+*color7:        #f3ebe2
 *color15:       #EEEEEC
 
 
