@@ -32,7 +32,7 @@ function battery_status() {
     fi
 
     # fix for ThinkPad laptops
-    if [[ _BPERCENT -eq 100 ]]; then
+    if [[ _BPERCENT -ge 99 ]]; then
         _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
     fi
 
