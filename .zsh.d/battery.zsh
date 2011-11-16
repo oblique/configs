@@ -25,14 +25,13 @@ function battery_status() {
 
     if [[ $_BFSTATUS = "Charging" ]]; then
         _BRES="%{$fg[magenta]%}\u25b4%{$reset_color%} "
+        # ThinkPad laptops does not go above 99%
+        if [[ _BPERCENT -ge 99 ]]; then
+            _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
+        fi
     elif [[ $_BFSTATUS = "Discharging" ]]; then
         _BRES="%{$fg[red]%}\u25be%{$reset_color%} "
     else
-        _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
-    fi
-
-    # fix for ThinkPad laptops
-    if [[ _BPERCENT -ge 99 ]]; then
         _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
     fi
 
