@@ -10,6 +10,7 @@ export PATH="${PATH}:${HOME}/bin"
 source $HOME/.zsh.d/key-bindings.zsh
 source $HOME/.zsh.d/termsupport.zsh
 source $HOME/.zsh.d/git.zsh
+source $HOME/.zsh.d/ssh-agent.zsh
 # battery status
 BATTERY=BAT0
 source $HOME/.zsh.d/battery.zsh
