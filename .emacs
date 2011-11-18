@@ -28,13 +28,15 @@
 (show-paren-mode 1)
 (recentf-mode 1)
 (setq inhibit-splash-screen t)
-(defalias 'yes-or-no-p 'y-or-n-p)
+(setq inhibit-startup-message t)
+(setq Man-width 90)
+(setq initial-scratch-message nil)
 (setq explicit-shell-file-name "/bin/bash")
+(setq-default show-trailing-whitespace t)
+(defalias 'yes-or-no-p 'y-or-n-p)
 (require 'smooth-scrolling)
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
-(setq Man-width 90)
-(setq initial-scratch-message nil)
 (require 'htmlize)
 
 ; RFC
@@ -207,7 +209,7 @@
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
 
 ; key bindings
-(global-set-key (kbd "M-9") 'kill-whole-line)
+(global-set-key (kbd "C-k") 'kill-whole-line)
 (global-set-key (kbd "M-l") 'tabbar-forward)
 (global-set-key (kbd "M-j") 'tabbar-backward)
 (global-set-key (kbd "ESC <up>") 'windmove-up) ; M-up
