@@ -11,8 +11,9 @@ Xft.antialias:  true
 
 
 ! colors
-*foreground:    #66FF66
 *background:    #101010
+*foreground:    #66FF66
+*cursorColor:   #66ff66
 !black
 *color0:        #1C1C1C
 *color8:        #4d4d4d
@@ -38,6 +39,27 @@ Xft.antialias:  true
 *color7:        #f3ebe2
 *color15:       #EEEEEC
 
+! darker
+!*background:    #101010
+!*foreground:    #66ff66
+!*cursorColor:   #66ff66
+!*color0:        #101010
+!*color1:        #960050
+!*color2:        #66aa11
+!*color3:        #cdd24a
+!*color4:        #30309b
+!*color5:        #7e40a5
+!*color6:        #3579a8
+!*color7:        #9999aa
+!*color8:        #303030
+!*color9:        #ff0090
+!*color10:       #80ff00
+!*color11:       #cdd24a
+!*color12:       #5f5fee
+!*color13:       #bb88dd
+!*color14:       #4eb4fa
+!*color15:       #d0d0d0
+
 
 ! urxvt
 URxvt*termName:             rxvt-unicode-256color
@@ -53,7 +75,6 @@ URxvt*saveLines:            5500
 URxvt.perl-ext-common:      default,matcher,-searchable-scrollback
 URxvt.urlLauncher:          firefox
 URxvt.matcher.button:       1
-URxvt*cursorColor:          #00ff00
 URxvt*colorUL:              yellow
 !URxvt*transparent:          true
 !URxvt*shading:              15		!trans, 0=opaque
