@@ -20,7 +20,7 @@ function battery_status() {
 
     _BFSTATUS=$(cat $BATPATH/status)
 
-    _BPERCENT=$(( int(ceil(_BUR*100.0/_BFULL)) ))
+    _BPERCENT=$(( int(ceil(_BCUR*100.0/_BFULL)) ))
     _BFILLED=$(( int(ceil(_BCUR*10.0/_BFULL)) ))
 
     if [[ $_BFSTATUS = "Charging" ]]; then
