@@ -33,6 +33,7 @@
 (setq initial-scratch-message nil)
 (setq explicit-shell-file-name "/bin/bash")
 (setq-default show-trailing-whitespace t)
+(push '("." . "~/.emacs-backups") backup-directory-alist)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (require 'smooth-scrolling)
 (require 'rainbow-delimiters)
