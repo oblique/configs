@@ -259,7 +259,7 @@
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
 
 ; key bindings
-(global-set-key (kbd "C-k") 'kill-whole-line)
+(global-set-key (kbd "M-9") 'kill-whole-line)
 (global-set-key (kbd "M-l") 'tabbar-forward)
 (global-set-key (kbd "M-j") 'tabbar-backward)
 (global-set-key (kbd "ESC <up>") 'windmove-up) ; M-up
