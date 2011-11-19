@@ -7,7 +7,7 @@
 ; load my rxvt.el
 (unless (or noninteractive initial-window-system)
     (if (string-match "^rxvt.*" (getenv "TERM"))
-        (progn 
+        (progn
             (setq term-file-prefix nil)
             (require 'rxvt)
             (terminal-init-rxvt))))
@@ -85,9 +85,41 @@
 ; theme
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-molokai-ob)
+(setq ct-theme 'color-theme-molokai-ob) ; set your theme here
+(funcall ct-theme)
+
+; cups pdf printer
+(setq ps-printer-name "Virtual_PDF_Printer")
+(setq ps-printer-name-option "-P")
+(setq ps-lpr-command "/usr/bin/lpr")
+(setq ps-paper-type 'a4)
+(setq ps-font-size 8.5)
+(setq ps-left-margin 60)
+(setq ps-right-margin 40)
+(setq ps-top-margin 70)
+(setq ps-bottom-margin 70)
+(setq ps-print-header nil)
 
 ; functions
+(require 'ps-print)
+(defun print-code (&optional filename)
+  (interactive (list (ps-print-preprint current-prefix-arg)))
+  (let ((old-ps-line-number ps-line-number)
+	 (old-ps-line-number-font ps-line-number-font)
+	 (old-ps-line-number-font-size ps-line-number-font-size)
+	 (old-ps-font-family ps-font-family))
+    (setq ps-line-number t)
+    (setq ps-font-family 'Courier)
+    (setq ps-line-number-font "Courier")
+    (setq ps-line-number-font-size ps-font-size)
+    (color-theme-print)
+    (ps-print-buffer-with-faces filename)
+    (funcall ct-theme)
+    (setq ps-line-number old-ps-line-number)
+    (setq ps-line-number-font old-ps-line-number-font)
+    (setq ps-line-number-font-size old-ps-line-number-font-size)
+    (setq ps-font-family old-ps-font-family)))
+
 (defun other-window-backward (&optional n)
     "Select Nth previous window."
     (interactive "P")
