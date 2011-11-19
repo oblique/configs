@@ -88,6 +88,23 @@
 (setq ct-theme 'color-theme-molokai-ob) ; set your theme here
 (funcall ct-theme)
 
+; special highlighting for numbers
+(make-face 'font-lock-number-face)
+(set-face-attribute 'font-lock-number-face nil :inherit font-lock-constant-face)
+(setq font-lock-number-face 'font-lock-number-face)
+(defvar font-lock-number "[0-9]+\\([eE][+-]?[0-9]*\\)?")
+(defvar font-lock-hexnumber "0[xX][0-9a-fA-F]+")
+(defun add-font-lock-numbers ()
+  (font-lock-add-keywords nil (list
+			       (list (concat "\\<\\(" font-lock-number "\\)\\>" )
+				     0 font-lock-number-face)
+			       (list (concat "\\<\\(" font-lock-hexnumber "\\)\\>" )
+				     0 font-lock-number-face)
+			       )))
+
+(add-hook 'c-mode-common-hook 'add-font-lock-numbers)
+
+
 ; cups pdf printer
 (setq ps-printer-name "Virtual_PDF_Printer")
 (setq ps-printer-name-option "-P")
