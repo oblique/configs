@@ -92,7 +92,7 @@
 (make-face 'font-lock-number-face)
 (set-face-attribute 'font-lock-number-face nil :inherit font-lock-constant-face)
 (setq font-lock-number-face 'font-lock-number-face)
-(defvar font-lock-number "[0-9]+\\([eE][+-]?[0-9]*\\)?")
+(defvar font-lock-number "[0-9]+\\([eE][+-]?[0-9]*\\)?\\([uU]?[lL]\\{0,2\\}\\|[lL]\\{0,2\\}[uU]?\\)")
 (defvar font-lock-hexnumber "0[xX][0-9a-fA-F]+")
 (defun add-font-lock-numbers ()
   (font-lock-add-keywords nil (list
