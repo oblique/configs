@@ -581,7 +581,7 @@ without modifying their meaning."
   (goto-char (point-min))
   (while (search-forward "Local Variables:" nil t)
     (replace-match "Local Variables&#58;" nil t)))
-  
+
 
 ;;; Color handling.
 
@@ -744,7 +744,7 @@ If no rgb.txt file is found, return nil."
 	  (t
 	   ;; We're getting the RGB components from Emacs.
 	   (let ((rgb
-		  ;; Here I cannot conditionalize on (fboundp ...) 
+		  ;; Here I cannot conditionalize on (fboundp ...)
 		  ;; because ps-print under some versions of GNU Emacs
 		  ;; defines its own dummy version of
 		  ;; `color-instance-rgb-components'.
@@ -1148,7 +1148,7 @@ property and by buffer overlays that specify `face'."
 ;; `insert-head', `body-tag', and `insert-text'.  Not all output types
 ;; define all methods.
 ;;
-;; Methods are called either with (htmlize-method METHOD ARGS...) 
+;; Methods are called either with (htmlize-method METHOD ARGS...)
 ;; special form, or by accessing the function with
 ;; (htmlize-method-function 'METHOD) and calling (funcall FUNCTION).
 ;; The latter form is useful in tight loops because `htmlize-method'
@@ -1303,7 +1303,7 @@ it's called with the same value of KEY.  All other times, the cached
     (format "<body text=\"%s\" bgcolor=\"%s\">"
 	    (htmlize-fstruct-foreground fstruct)
 	    (htmlize-fstruct-background fstruct))))
-       
+
 (defun htmlize-font-insert-text (text fstruct-list buffer)
   ;; In `font' mode, we use the traditional HTML means of altering
   ;; presentation: <font> tag for colors, <b> for bold, <u> for
@@ -1342,7 +1342,10 @@ it's called with the same value of KEY.  All other times, the cached
     (htmlize-ensure-fontified)
     (clrhash htmlize-extended-character-cache)
     (clrhash htmlize-memoization-table)
+    (copy-face 'linum 'htmlize-linum)
+    (set-face-background 'htmlize-linum (face-background 'default))
     (let* ((buffer-faces (htmlize-faces-in-buffer))
+	   (buffer-faces (adjoin 'htmlize-linum buffer-faces))
 	   (face-map (htmlize-make-face-map (adjoin 'default buffer-faces)))
 	   ;; Generate the new buffer.  It's important that it inherits
 	   ;; default-directory from the current buffer.
@@ -1388,7 +1391,7 @@ it's called with the same value of KEY.  All other times, the cached
 	    ;; Declare variables used in loop body outside the loop
 	    ;; because it's faster to establish `let' bindings only
 	    ;; once.
-	    next-change text face-list fstruct-list trailing-ellipsis)
+	    next-change text face-list fstruct-list trailing-ellipsis linenum-format)
 	;; This loop traverses and reads the source buffer, appending
 	;; the resulting HTML to HTMLBUF with `princ'.  This method is
 	;; fast because: 1) it doesn't require examining the text
@@ -1396,8 +1399,11 @@ it's called with the same value of KEY.  All other times, the cached
 	;; to move between runs with the same face), and 2) it doesn't
 	;; require buffer switches, which are slow in Emacs.
 	(goto-char (point-min))
+	(setq linenum-format (concat "%"
+				     (number-to-string (length (number-to-string (line-number-at-pos (point-max)))))
+				     "d "))
 	(while (not (eobp))
-	  (setq next-change (htmlize-next-face-change (point)))
+	  (setq next-change (htmlize-next-face-change (point) (line-end-position)))
 	  ;; Get faces in use between (point) and NEXT-CHANGE, and
 	  ;; convert them to fstructs.
 	  (setq face-list (htmlize-faces-at-point)
@@ -1406,13 +1412,22 @@ it's called with the same value of KEY.  All other times, the cached
 					       face-list)))
           (multiple-value-setq (text trailing-ellipsis)
             (htmlize-extract-text (point) next-change trailing-ellipsis))
+
+	  (if (= (point) (line-beginning-position))
+	      (funcall insert-text-method
+		       (format linenum-format (line-number-at-pos (point)))
+		       (list (htmlize-face-to-fstruct 'htmlize-linum)) htmlbuf))
+	  (if (= next-change (line-end-position))
+	      (setq text (concat text "\n")))
 	  ;; Don't bother writing anything if there's no text (this
 	  ;; happens in invisible regions).
 	  (when (> (length text) 0)
 	    ;; Insert the text, along with the necessary markup to
 	    ;; represent faces in FSTRUCT-LIST.
 	    (funcall insert-text-method text fstruct-list htmlbuf))
-	  (goto-char next-change)))
+	  (if (= next-change (line-end-position))
+	      (goto-char (+ 1 next-change))
+	    (goto-char next-change))))
 
       ;; Insert the epilog and post-process the buffer.
       (with-current-buffer htmlbuf
