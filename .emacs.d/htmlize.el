@@ -1399,9 +1399,7 @@ it's called with the same value of KEY.  All other times, the cached
 	;; to move between runs with the same face), and 2) it doesn't
 	;; require buffer switches, which are slow in Emacs.
 	(goto-char (point-min))
-	(setq linenum-format (concat "%"
-				     (number-to-string (length (number-to-string (line-number-at-pos (point-max)))))
-				     "d "))
+	(setq linenum-format (format "%%%dd " (length (number-to-string (line-number-at-pos (point-max))))))
 	(while (not (eobp))
 	  (setq next-change (htmlize-next-face-change (point) (line-end-position)))
 	  ;; Get faces in use between (point) and NEXT-CHANGE, and
