@@ -68,6 +68,11 @@
 (setq c-backspace-function 'backward-delete-char)
 (define-key global-map (kbd "RET") 'newline-and-indent) ; auto-indent
 
+; tags
+(require 'etags-select)
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
+
 ; Tabbing support options
 (require 'tabbar)
 (tabbar-mode 1)
