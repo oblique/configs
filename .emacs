@@ -26,7 +26,6 @@
 (column-number-mode 1)
 (global-auto-revert-mode 1)
 (show-paren-mode 1)
-(recentf-mode 1)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq Man-width 90)
@@ -259,6 +258,26 @@
       (setq buffer (car list))
       (setq list (cdr list)))))
 
+(defun shifttext-tab-right (tabs)
+  (interactive "P")
+  (unless tabs
+      (setq tabs 1))
+  (let (begin end)
+    (if (mark)
+	(setq begin (region-beginning)
+	      end (region-end))
+      (setq begin (line-beginning-position)
+	     end (line-end-position)))
+      (save-excursion
+	(indent-rigidly begin end (* tab-width tabs))
+	(setq deactivate-mark nil))))
+
+(defun shifttext-tab-left (tabs)
+  (interactive "P")
+  (unless tabs
+    (setq tabs 1))
+  (shifttext-tab-right (- tabs)))
+
 ; hooks
 (add-hook 'desktop-save-hook 'desktop-save-man)
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
@@ -285,3 +304,5 @@
 (global-set-key (kbd "C-c x") 'xclip-cut)
 (global-set-key (kbd "C-c m") 'man)
 (global-set-key (kbd "C-c r") 'rfc-index)
+(global-set-key (kbd "M->") 'shifttext-tab-right)
+(global-set-key (kbd "M-<") 'shifttext-tab-left)
