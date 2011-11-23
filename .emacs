@@ -283,13 +283,18 @@
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
 
 ; key bindings
+(global-set-key (kbd "<clearline>") (key-binding (kbd "<C-end>"))) ; <clearline> (in terminal) == <C-end>
 (global-set-key (kbd "M-9") 'kill-whole-line)
 (global-set-key (kbd "M-l") 'tabbar-forward)
 (global-set-key (kbd "M-j") 'tabbar-backward)
-(global-set-key (kbd "ESC <up>") 'windmove-up) ; M-up
-(global-set-key (kbd "ESC <down>") 'windmove-down) ; M-down
-(global-set-key (kbd "ESC <right>") 'windmove-right) ; M-right
-(global-set-key (kbd "ESC <left>") 'windmove-left) ; M-left
+(global-set-key (kbd "ESC <up>") 'windmove-up) ; M-up in terminal
+(global-set-key (kbd "ESC <down>") 'windmove-down) ; M-down in terminal
+(global-set-key (kbd "ESC <right>") 'windmove-right) ; M-right in terminal
+(global-set-key (kbd "ESC <left>") 'windmove-left) ; M-left in terminal
+(global-set-key (kbd "<M-up>") 'windmove-up) ; M-up in gui
+(global-set-key (kbd "<M-down>") 'windmove-down) ; M-down in gui
+(global-set-key (kbd "<M-right>") 'windmove-right) ; M-right in gui
+(global-set-key (kbd "<M-left>") 'windmove-left) ; M-left in gui
 (global-set-key (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
 (global-set-key (kbd "C-x p") 'other-window-backward)
 (global-set-key (kbd "C-c f") 'my-imenu-tree)
