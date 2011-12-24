@@ -410,7 +410,8 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 -- startup programs
 local r = require("runonce")
-r.run("xcompmgr -cfF -D3")
+r.run("xcompmgr -cF")
+r.run("xsettingsd")
 r.run("arpdetective")
 r.run("wicd-client")
 r.run("mpd")
