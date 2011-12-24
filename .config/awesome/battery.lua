@@ -35,7 +35,7 @@ function get_bat_state (adapter)
         dir = 1
     elseif sta:match("Discharging") then
         dir = -1
-    elseif sta:match("Full") then
+    else
         dir = 0
     end
     return battery, dir
