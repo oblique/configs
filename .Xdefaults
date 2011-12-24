@@ -70,7 +70,7 @@ URxvt*letterSpace:          -1
 URxvt*scrollBar:            true
 URxvt*scrollBar_floating:   true
 URxvt*scrollBar_right:      false
-URxvt*scrollColor:          #202020
+URxvt*scrollColor:          #0c0c0c
 URxvt*saveLines:            5500
 URxvt.perl-ext-common:      default,matcher,-searchable-scrollback
 URxvt.urlLauncher:          firefox
