@@ -6,7 +6,9 @@ function git_prompt_info() {
 
 # Checks if working tree is dirty
 parse_git_dirty() {
-  if [[ -n $(git status -s 2> /dev/null) ]]; then
+  _ST=$(timeout $ZSH_GIT_CHECK_TIMEOUT_SEC git status -s 2> /dev/null)
+  [[ $? -eq 124 ]] && (echo "$ZSH_THEME_GIT_PROMPT_CHECK_TIMEOUT"; return)
+  if [[ -n $_ST ]]; then
     echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
   else
     echo "$ZSH_THEME_GIT_PROMPT_CLEAN"

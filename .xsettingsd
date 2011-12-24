@@ -1,0 +1,25 @@
+Gtk/AutoMnemonics 1
+Gtk/ButtonImages 0
+Gtk/CanChangeAccels 0
+Gtk/CursorBlinkTimeout 10
+Gtk/EnableAnimations 1
+Gtk/FontName "Cantarell 9"
+Gtk/MenuImages 0
+Gtk/Modules "canberra-gtk-module"
+Gtk/ShowInputMethodMenu 1
+Gtk/ShowUnicodeMenu 1
+Gtk/TimeoutInitial 200
+Gtk/TimeoutRepeat 20
+Gtk/ToolbarIconSize "large"
+Gtk/ToolbarStyle "both-horiz"
+Net/CursorBlink 1
+Net/CursorBlinkTime 1200
+Net/DndDragThreshold 8
+Net/DoubleClickTime 400
+Net/FallbackIconTheme "gnome"
+Net/IconThemeName "gnome"
+Net/ThemeName "Adwaita"
+Xft/Antialias 1
+Xft/HintStyle "hintmedium"
+Xft/Hinting 1
+Xft/RGBA "rgb"

@@ -27,6 +27,10 @@ done
 
 synclient VertTwoFingerScroll=1
 
+# clipboard synchronizer
+autocutsel -fork
+autocutsel -selection PRIMARY -fork
+
 #export GDK_USE_XFT=1    # for old gtk applications
 #export QT_XFT=true      # for old qt applicatios
 

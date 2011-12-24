@@ -10,6 +10,7 @@ export PATH="${PATH}:${HOME}/bin"
 source $HOME/.zsh.d/key-bindings.zsh
 source $HOME/.zsh.d/termsupport.zsh
 source $HOME/.zsh.d/git.zsh
+ZSH_GIT_CHECK_TIMEOUT_SEC=15 # git status timeout
 source $HOME/.zsh.d/ssh-agent.zsh
 # battery status
 BATTERY=BAT0
@@ -130,6 +131,7 @@ RPROMPT='$(battery_status)'
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[magenta]%}$(echo -ne \\u25cf)%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CHECK_TIMEOUT="%{$fg_bold[magenta]%}$(echo -n \?)%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 
