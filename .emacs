@@ -38,6 +38,7 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 (require 'htmlize)
+(require 'lua-mode)
 
 ; RFC
 ; you can download RFCs from http://www.rfc-editor.org/download.html
