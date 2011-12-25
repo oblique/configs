@@ -14,9 +14,9 @@ theme.wallpaper_cmd = { "awsetbg -l" }
 theme.font      = "Terminus 8"
 
 -- {{{ Colors
-theme.fg_normal = "#D5D5D5"
+theme.fg_normal = "#517b95"
 theme.fg_focus  = "#80ff80"
-theme.fg_urgent = "#990000"
+theme.fg_urgent = "#d21d4c"
 theme.bg_normal = "#151515"
 theme.bg_focus  = "#151515"
 theme.bg_urgent = "#151515"
