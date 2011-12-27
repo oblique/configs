@@ -1,0 +1,72 @@
+## ncmpcpp config
+
+# mpd
+mpd_host = "/home/oblique/.mpd/socket"
+mpd_music_dir = "~/music"
+mpd_connection_timeout = "5"
+
+# playlist
+song_columns_list_format = "(7f)[green]{l} (25)[blue]{a} (40)[red]{t|f} (30)[magenta]{b}"
+song_list_format = "{$3[%l]$9} {$5%a$9} - {$2%t$9} - {$6%f$9}"
+now_playing_prefix = "$b$1» "
+now_playing_suffix = "$/b"
+playlist_display_mode = "columns" (classic/columns)
+autocenter_mode = "yes"
+centered_cursor = "yes"
+
+# bars
+song_status_format = "$5%a $b$1•$/b $2%t $b$1•$/b $6%b {(Disc %d) }$b$1•$/b $3%y$1"
+progressbar_look = "─╼·"
+
+# browser
+browser_playlist_prefix = "$2playlist »$9 "
+browser_display_mode = "columns" (classic/columns)
+
+# media library
+song_library_format = "{%n - }{%t}|{%f}"
+media_library_album_format = "{(%y) }%b"
+
+# user interface
+user_interface = "alternative" (classic/alternative)
+alternative_header_first_line_format = "$b$1$aqqu$/a$9 $3{%t}|{%f}$9 $1$atqq$/a$9$/b"
+alternative_header_second_line_format = "$b{{$5%a$9}{ $1-$9 $2%b$9}$/b{ $b$1($9$/b$6%y$9$b$1)$9$/b}}|{%D}"
+
+# others
+selected_item_prefix = "$b$2"
+selected_item_suffix = "$9$/b"
+song_window_title_format = "{%a - }{%t}{ [%b{ Disc %d}]}|{%f}"
+search_engine_display_mode = "columns" (classic/columns)
+
+# colors
+colors_enabled = "yes"
+color1 = "black"
+color2 = "blue"
+empty_tag_color = "blue"
+header_window_color = "black"
+volume_color = "black"
+state_flags_color = "black"
+state_line_color = "black"
+main_window_color = "black"
+main_window_highlight_color = "green"
+progressbar_color = "black"
+alternative_ui_separator_color = "black"
+active_column_color = "blue"
+statusbar_color = "red"
+window_border_color = "green"
+active_window_border = "blue"
+
+# various settings
+incremental_seeking = "yes"
+seek_time = "1"
+default_place_to_search_in = "database" (database/playlist)
+media_library_left_column = "a" (possible values: a,y,g,c,p, legend above)
+default_find_mode = "wrapped" (wrapped/normal)
+default_space_mode = "add" (add/select)
+default_tag_editor_left_col = "dirs" (albums/dirs)
+default_tag_editor_pattern = "%n - %t"
+header_visibility = "yes"
+statusbar_visibility = "yes"
+fancy_scrolling = "yes"
+follow_now_playing_lyrics = "no"
+ncmpc_like_songs_adding = "no" (enabled - add/remove, disabled - always add)
+enable_window_title = "yes"

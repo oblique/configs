@@ -1,0 +1,32 @@
+# init config:
+#
+# mkdir -p ~/.mpd/playlists
+# mpd
+# mpc update
+
+music_directory     "~/music"
+
+playlist_directory  "~/.mpd/playlists"
+db_file             "~/.mpd/database"
+log_file            "~/.mpd/log"
+pid_file            "~/.mpd/pid"
+state_file          "~/.mpd/state"
+sticker_file        "~/.mpd/sticker.sql"
+bind_to_address     "/home/oblique/.mpd/socket"
+
+input {
+    plugin "curl"
+}
+
+#audio_output {
+#	type			"alsa"
+#	name			"My ALSA Device"
+#	device			"default:0"
+#	format			"48000:16:2"
+#}
+
+audio_output {
+    type        "pulse"
+    name        "My MPD PulseAudio Output"
+    mixer_type  "software"
+}
