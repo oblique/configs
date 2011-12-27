@@ -35,10 +35,20 @@
 (push '("." . "~/.emacs-backups") backup-directory-alist)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (require 'smooth-scrolling)
-(require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+(require 'show-point-mode)
+(define-globalized-minor-mode global-show-point-mode show-point-mode
+  (lambda ()
+    (show-point-mode t)))
+(global-show-point-mode t)
+(show-point-mode 1)
 (require 'htmlize)
 (require 'lua-mode)
+(require 'highlight-parentheses)
+(define-globalized-minor-mode global-highlight-parentheses-mode
+  highlight-parentheses-mode
+  (lambda ()
+    (highlight-parentheses-mode t)))
+(global-highlight-parentheses-mode t)
 
 ; RFC
 ; you can download RFCs from http://www.rfc-editor.org/download.html
@@ -109,7 +119,6 @@
 
 (add-hook 'c-mode-common-hook 'add-font-lock-numbers)
 
-
 ; cups pdf printer
 (setq ps-printer-name "Virtual_PDF_Printer")
 (setq ps-printer-name-option "-P")
@@ -129,18 +138,21 @@
   (let ((old-ps-line-number ps-line-number)
 	 (old-ps-line-number-font ps-line-number-font)
 	 (old-ps-line-number-font-size ps-line-number-font-size)
-	 (old-ps-font-family ps-font-family))
+	 (old-ps-font-family ps-font-family)
+	 (old-highlight-parentheses-mode highlight-parentheses-mode))
     (setq ps-line-number t)
     (setq ps-font-family 'Courier)
     (setq ps-line-number-font "Courier")
     (setq ps-line-number-font-size ps-font-size)
+    (highlight-parentheses-mode nil)
     (color-theme-print)
     (ps-print-buffer-with-faces filename)
     (funcall ct-theme)
     (setq ps-line-number old-ps-line-number)
     (setq ps-line-number-font old-ps-line-number-font)
     (setq ps-line-number-font-size old-ps-line-number-font-size)
-    (setq ps-font-family old-ps-font-family)))
+    (setq ps-font-family old-ps-font-family)
+    (highlight-parentheses-mode old-highlight-parentheses-mode)))
 
 (defun other-window-backward (&optional n)
     "Select Nth previous window."

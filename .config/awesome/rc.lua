@@ -10,10 +10,35 @@ require("naughty")
 require("vicious")
 require("battery")
 
+
+-- {{{ Error handling
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+if awesome.startup_errors then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = "Oops, there were errors during startup!",
+                     text = awesome.startup_errors })
+end
+
+-- Handle runtime errors after startup
+do
+    local in_error = false
+    awesome.add_signal("debug::error", function (err)
+        -- Make sure we don't go into an endless error loop
+        if in_error then return end
+        in_error = true
+
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "Oops, an error happened!",
+                         text = err })
+        in_error = false
+    end)
+end
+-- }}}
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(awful.util.getdir("config") .. "/themes/daes-ob/theme.lua")
-
 awesome.font = "Sans 10"
 
 -- This is used later as the default terminal and editor to run.
@@ -402,16 +427,16 @@ client.add_signal("manage", function (c, startup)
 end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus
-                                       c.opacity = 1
+  --                                     c.opacity = 1
                            end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal 
-                                         c.opacity = 0.9
+--                                         c.opacity = 0.9
                             end)
 -- }}}
 
 -- startup programs
 local r = require("runonce")
-r.run("xcompmgr -cF -t-10 -r10")
+--r.run("xcompmgr -cF -t-10 -r10")
 r.run("xsettingsd")
 r.run("arpdetective")
 r.run("wicd-client")
