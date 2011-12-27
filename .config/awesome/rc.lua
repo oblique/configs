@@ -380,6 +380,10 @@ clientkeys = awful.util.table.join(
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
+        end),
+    awful.key({ modkey,           }, "s",
+        function (c) 
+            c.size_hints_honor = not c.size_hints_honor 
         end)
 )
 
@@ -443,7 +447,7 @@ awful.rules.rules = {
                      size_hints_honor = false,
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
-      properties = { floating = true } },
+      properties = { floating = true, size_hints_honor = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
