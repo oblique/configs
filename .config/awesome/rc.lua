@@ -40,6 +40,7 @@ end
 -- Themes define colours, icons, and wallpapers
 beautiful.init(awful.util.getdir("config") .. "/themes/daes-ob/theme.lua")
 awesome.font = "Sans 10"
+naughty.config.default_preset.font = "Sans 11"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -82,6 +83,24 @@ for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = awful.tag(tags.names, s, tags.layout)
 end
+-- }}}
+
+-- {{{ Menu
+-- Create a laucher widget and a main menu
+--myawesomemenu = { 
+--   { "manual", terminal .. " -e man awesome" },
+--   { "edit config", editor_cmd .. " " .. awesome.conffile },
+--   { "restart", awesome.restart },
+--   { "quit", awesome.quit }
+--}
+
+--mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+--                                    { "open terminal", terminal }
+--                                  }   
+--                        })  
+
+--mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
+--                                     menu = mymainmenu })
 -- }}}
 
 -- {{{ My widgets
@@ -212,7 +231,7 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+--    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
