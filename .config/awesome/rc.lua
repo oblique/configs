@@ -127,11 +127,17 @@ mytaglist.buttons = awful.util.table.join(
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
                      awful.button({ }, 1, function (c)
-                                              if not c:isvisible() then
-                                                  awful.tag.viewonly(c:tags()[1])
+                                              if c == client.focus then
+                                                  c.minimized = true
+                                              else
+                                                  if not c:isvisible() then
+                                                      awful.tag.viewonly(c:tags()[1])
+                                                  end
+                                                  -- This will also un-minimize
+                                                  -- the client, if needed
+                                                  client.focus = c
+                                                  c:raise()
                                               end
-                                              client.focus = c
-                                              c:raise()
                                           end),
                      awful.button({ }, 3, function ()
                                               if instance then
@@ -218,10 +224,34 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    -- modkey + j, move to left window
-    -- modkey + l, move to right window
-    -- modkey + k, move to down window
-    -- modkey + i, move to up window
+--    awful.key({ modkey,           }, "j",
+--        function ()
+--            awful.client.focus.byidx( 1)
+--            if client.focus then client.focus:raise() end 
+--        end),
+--    awful.key({ modkey,           }, "k",
+--        function ()
+--            awful.client.focus.byidx(-1)
+--            if client.focus then client.focus:raise() end 
+--        end),
+
+    -- modkey + tab, focus next window
+    -- modkey + shift + tab, focus previous window
+    awful.key({ modkey,           }, "Tab",
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end 
+        end),
+    awful.key({ modkey, "Shift"   }, "Tab",
+        function ()
+            awful.client.focus.byidx(-1)
+            if client.focus then client.focus:raise() end 
+        end),
+
+    -- modkey + j, focus left window
+    -- modkey + l, focus right window
+    -- modkey + k, focus down window
+    -- modkey + i, focus up window
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.bydirection("left")
@@ -242,7 +272,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.bydirection("up")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
+--    awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -250,13 +280,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
+--    awful.key({ modkey,           }, "Tab",
+--        function ()
+--            awful.client.focus.history.previous()
+--            if client.focus then
+--                client.focus:raise()
+--            end
+--        end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
@@ -272,6 +302,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+
+    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Multimediakeys keys
     awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer -q -c 0 sset Master 1+") end),
@@ -319,7 +351,12 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",      function (c) c.minimized = not c.minimized    end),
+    awful.key({ modkey,           }, "n",
+        function (c)
+            -- The client currently has the input focus, so it cannot be
+            -- minimized, since minimized clients can't have the focus.
+            c.minimized = true
+        end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
@@ -376,6 +413,7 @@ root.keys(globalkeys)
 -- }}}
 
 -- {{{ Rules
+-- find class with xprop
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -392,9 +430,10 @@ awful.rules.rules = {
     { rule = { class = "gimp" },
       properties = { floating = true } },
     { rule = { class = "Emesene" }, properties = { tag = tags[1][2], floating = true } },
+    { rule = { class = "Pidgin" }, properties = { tag = tags[1][2], floating = true } },
     { rule = { class = "Skype" }, properties = { tag = tags[1][2], floating = true } },
     { rule = { class = "Wicd-client.py" }, properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
+    -- Set Firefox to always map on tags number 3 of screen 1.
     { rule = { class = "Firefox" }, properties = { tag = tags[1][3] } },
 }
 -- }}}
@@ -427,7 +466,7 @@ client.add_signal("manage", function (c, startup)
 end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus
-  --                                     c.opacity = 1
+--                                       c.opacity = 1
                            end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal 
 --                                         c.opacity = 0.9
