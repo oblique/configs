@@ -16,4 +16,18 @@ ctl.pulse {
   type pulse
 }
 
+# record from a monitor source (a.k.a. "What-U-Hear")
+# use 'pactl list | grep -i "monitor source"' to find out the name of the source 
+# in Pulseaudio (e.g. alsa_output.pci-0000_00_1b.0.analog-stereo.monitor)
+# use pulse_monitor as recording source
+pcm.pulse_monitor {
+  type pulse
+  device alsa_output.pci-0000_00_1b.0.analog-stereo.monitor
+}
+
+ctl.pulse_monitor {
+  type pulse
+  device alsa_output.pci-0000_00_1b.0.analog-stereo.monitor
+}
+
 # vim:set ft=alsaconf:
