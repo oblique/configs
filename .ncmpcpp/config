@@ -29,7 +29,7 @@ media_library_album_format = "{(%y) }%b"
 # user interface
 user_interface = "alternative" (classic/alternative)
 alternative_header_first_line_format = "$b$1$aqqu$/a$9 $3{%t}|{%f}$9 $1$atqq$/a$9$/b"
-alternative_header_second_line_format = "$b{{$5%a$9}{ $1-$9 $2%b$9}$/b{ $b$1($9$/b$6%y$9$b$1)$9$/b}}|{%D}"
+alternative_header_second_line_format = "$b{{$5%a$9}{ $1-$9 $2%b$9}$/b{ $b$1($9$/b$3%y$9$b$1)$9$/b}}|{%D}"
 
 # others
 selected_item_prefix = "$b$2"
@@ -39,21 +39,21 @@ search_engine_display_mode = "columns" (classic/columns)
 
 # colors
 colors_enabled = "yes"
-color1 = "black"
-color2 = "blue"
-empty_tag_color = "blue"
-header_window_color = "black"
-volume_color = "black"
-state_flags_color = "black"
+color1 = "cyan"
+color2 = "magenta"
+empty_tag_color = "magenta"
+header_window_color = "magenta"
+volume_color = "magenta"
+state_flags_color = "magenta"
 state_line_color = "black"
-main_window_color = "black"
+main_window_color = "cyan"
 main_window_highlight_color = "green"
 progressbar_color = "black"
 alternative_ui_separator_color = "black"
-active_column_color = "blue"
+active_column_color = "red"
 statusbar_color = "red"
-window_border_color = "green"
-active_window_border = "blue"
+window_border_color = "black"
+active_window_border = "red"
 
 # various settings
 incremental_seeking = "yes"
@@ -66,6 +66,7 @@ default_tag_editor_left_col = "dirs" (albums/dirs)
 default_tag_editor_pattern = "%n - %t"
 header_visibility = "yes"
 statusbar_visibility = "yes"
+titles_visibility = "no"
 fancy_scrolling = "yes"
 follow_now_playing_lyrics = "no"
 ncmpc_like_songs_adding = "no" (enabled - add/remove, disabled - always add)

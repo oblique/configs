@@ -15,7 +15,7 @@ Xft.antialias:  true
 *foreground:    #66FF66
 *cursorColor:   #66ff66
 !black
-*color0:        #404040
+*color0:        #1c1c1c
 *color8:        #4d4d4d
 !red
 *color1:        #D81860
