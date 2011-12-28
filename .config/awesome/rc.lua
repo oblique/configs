@@ -447,7 +447,7 @@ awful.rules.rules = {
                      size_hints_honor = false,
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
-      properties = { floating = true, size_hints_honor = true } },
+      properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
