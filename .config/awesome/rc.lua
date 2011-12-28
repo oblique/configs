@@ -41,6 +41,7 @@ end
 beautiful.init(awful.util.getdir("config") .. "/themes/daes-ob/theme.lua")
 awesome.font = "Sans 10"
 naughty.config.default_preset.font = "Sans 11"
+mpd_host = os.getenv("HOME") .. "/.mpd/socket"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -328,10 +329,10 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer -q -c 0 sset Master 1+") end),
     awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("amixer -q -c 0 sset Master 1-") end),
     awful.key({}, "XF86AudioMute", function() awful.util.spawn("amixer -q sset Master toggle") end),
-    awful.key({}, "XF86AudioStop", function() awful.util.spawn("mpc stop") end),
-    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("mpc toggle") end),
-    awful.key({}, "XF86AudioNext", function() awful.util.spawn("mpc next") end),
-    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("mpc prev") end),
+    awful.key({}, "XF86AudioStop", function() awful.util.spawn("mpc -h " .. mpd_host .. " stop") end),
+    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("mpc -h " .. mpd_host .. " toggle") end),
+    awful.key({}, "XF86AudioNext", function() awful.util.spawn("mpc -h " .. mpd_host .. " next") end),
+    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("mpc -h " .. mpd_host .. " prev") end),
 
     -- Prompt
     awful.key({ modkey },            "r",     

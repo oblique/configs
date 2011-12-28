@@ -1,7 +1,7 @@
 # init config:
 #
 # mkdir -p ~/.mpd/playlists
-# mpd
+# mpd --create-db
 # mpc update
 
 music_directory     "~/music"
