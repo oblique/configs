@@ -7,6 +7,8 @@ export PATH="${PATH}:${HOME}/bin"
 
 # linux console colors
 if [ "$TERM" = "linux" ]; then
+    # reset
+    echo -en '\e]R'
     # black
     echo -en "\e]P0000000"
     echo -en "\e]P84d4d4d"
@@ -29,7 +31,7 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]P643afce"
     echo -en "\e]PE50b2ce"
     # white
-    echo -en "\e]P7aaaaaa"
+    echo -en "\e]P7bbbbbb"
     echo -en "\e]PFffffff"
     # background
     echo -en '\e[40m' # black
