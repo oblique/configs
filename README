@@ -25,6 +25,8 @@ my setup
 * wicd
 * xf86-input-synaptics (syndaemon, synclient)
 * rfkill (for enable/disable bluetooth)
+* scrot
+* udisk
 
 emacs
 =====
