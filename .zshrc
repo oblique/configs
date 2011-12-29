@@ -143,4 +143,3 @@ alias ureboot='dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKi
 alias enable_bluetooth='rfkill unblock $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias disable_bluetooth='rfkill block $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias emacs='emacs -nw'
-xinit() { /usr/bin/xinit "$@" -- -nolisten tcp; }
