@@ -10,9 +10,11 @@ fi
 [ -f .Xresources ] && xrdb -merge ~/.Xresources
 
 setxkbmap -layout us,el
+setxkbmap -variant ,extended
 setxkbmap -option
-setxkbmap -option 'grp:rctrl_rshift_toggle'
+setxkbmap -option grp:rctrl_rshift_toggle
 setxkbmap -option terminate:ctrl_alt_bksp
+setxkbmap -option compose:menu
 
 xinput list | sed -ne 's/^[^ ][^V].*id=\([0-9]*\).*/\1/p' | while read id
 do
