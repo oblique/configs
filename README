@@ -1,0 +1,33 @@
+my setup
+========
+* emacs
+* vim
+* xclip
+* tmux
+* htop
+* zsh
+* gdb
+* git
+* mpd
+* mpc
+* ncmpcpp
+* mplayer
+* rtorrent
+* pulseaudio
+* alsa-utils (amixer)
+* fontconfig
+* xsettingsd (https://github.com/derat/xsettingsd)
+* rxvt-unicode (256 colors)
+* autocutsel
+* awesome-wm
+* feh
+* dmenu
+* wicd
+* xf86-input-synaptics (syndaemon, synclient)
+* rfkill (for enable/disable bluetooth)
+
+emacs
+=====
+* RFCs @ ~/rfc (http://www.rfc-editor.org/download.html)
+* cups-pdf (use Virtual_PDF_Printer as name for pdf printer)
+* ctags
