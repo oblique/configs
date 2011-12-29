@@ -11,12 +11,12 @@ my setup
 * mpd
 * mpc
 * ncmpcpp
-* mplayer
+* mplayer2
 * rtorrent
 * pulseaudio
 * alsa-utils (amixer)
 * fontconfig
-* xsettingsd (https://github.com/derat/xsettingsd)
+* xsettingsd (http://code.google.com/p/xsettingsd/)
 * rxvt-unicode (256 colors)
 * autocutsel
 * awesome-wm

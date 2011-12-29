@@ -5,6 +5,39 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=$LANG
 export PATH="${PATH}:${HOME}/bin"
 
+# linux console colors
+if [ "$TERM" = "linux" ]; then
+    # black
+    echo -en "\e]P0000000"
+    echo -en "\e]P84d4d4d"
+    # red
+    echo -en "\e]P1d81860"
+    echo -en "\e]P9F00060"
+    # green
+    echo -en "\e]P260FF60"
+    echo -en "\e]PA70FF70"
+    # yellow
+    echo -en "\e]P3f9fd75"
+    echo -en "\e]PBf9fd75"
+    # blue
+    echo -en "\e]P44695c8"
+    echo -en "\e]PC4e98c8"
+    # magenta
+    echo -en "\e]P5a78edb"
+    echo -en "\e]PDae99db"
+    # cyan
+    echo -en "\e]P643afce"
+    echo -en "\e]PE50b2ce"
+    # white
+    echo -en "\e]P7aaaaaa"
+    echo -en "\e]PFffffff"
+    # background
+    echo -en '\e[40m' # black
+    # foreground
+    echo -en '\e[37m' # white
+    # store colors
+    echo -en '\e[8]'
+fi
 
 # includes
 source $HOME/.zsh.d/key-bindings.zsh
