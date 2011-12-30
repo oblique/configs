@@ -3,9 +3,6 @@ stop-xscreensaver = yes
 nomouseinput = yes
 identify = yes
 idx = yes
-cache = 8192
-cache-min = 20.0
-cache-seek-min = 50
 #codecpath = /usr/lib/win32
 codecpath = /usr/lib/codecs
 
