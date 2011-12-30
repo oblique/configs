@@ -28,8 +28,8 @@ my setup
 * scrot
 * udisk
 
-emacs
-=====
+for emacs
+=========
 * RFCs @ ~/rfc (http://www.rfc-editor.org/download.html)
 * cups-pdf (use Virtual_PDF_Printer as name for pdf printer)
 * ctags
