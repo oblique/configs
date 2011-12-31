@@ -52,7 +52,7 @@ progressbar_color = "black"
 alternative_ui_separator_color = "black"
 active_column_color = "red"
 statusbar_color = "red"
-window_border_color = "black"
+window_border_color = "green"
 active_window_border = "red"
 
 # various settings
