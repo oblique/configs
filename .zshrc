@@ -7,7 +7,6 @@ export PATH="${PATH}:${HOME}/bin"
 
 if [ $TERM = "linux" ]; then
     python $HOME/.zsh.d/init_linux_console_colors.py
-
 fi
 
 # includes
