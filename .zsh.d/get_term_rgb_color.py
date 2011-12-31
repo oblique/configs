@@ -14,19 +14,18 @@ if (color_num < 0 or color_num > 255):
     exit(1)
 
 lflag = 3
+sz = ctypes.c_int()
 
 fd = os.open(os.readlink("/proc/self/fd/0"), os.O_RDWR | os.O_NOCTTY)
+p = select.poll()
+p.register(fd, select.POLLIN)
+
 t = termios.tcgetattr(fd)
 t[lflag] &= ~(termios.ICANON | termios.ECHO)
 termios.tcsetattr(fd, termios.TCSADRAIN, t)
 
 os.write(fd, bytes("\033]4;%d;?\033\\" % color_num, "UTF-8"))
-
-p = select.poll()
-p.register(fd, select.POLLIN)
 p.poll()
-
-sz = ctypes.c_int()
 fcntl.ioctl(fd, termios.FIONREAD, sz)
 rgb = os.read(fd, sz.value).decode("UTF-8")
 
