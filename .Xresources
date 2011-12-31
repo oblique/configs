@@ -80,4 +80,3 @@ URxvt*colorUL:              yellow
 !URxvt*shading:              15		!trans, 0=opaque
 !URxvt*fading:               10		!term unfocus
 !URxvt*inheritPixmap:        true
-!URxvt*tintColor:            #000000
