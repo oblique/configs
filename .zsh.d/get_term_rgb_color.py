@@ -32,7 +32,11 @@ t[3] |= termios.ICANON | termios.ECHO
 termios.tcsetattr(fd, termios.TCSADRAIN, t)
 os.close(fd)
 
-i = rgb.index("rgb")
+try:
+    i = rgb.index("rgb")
+except ValueError:
+    exit(1)
+
 sys.stdout.write(rgb[i:i+18] + "\n")
 sys.stdout.flush()
 exit(0)
