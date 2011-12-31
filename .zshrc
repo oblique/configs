@@ -192,15 +192,11 @@ ncmpcpp() {
         echo -en "\e]PE4d4d4d"
     else
         # backup cyan rgb
-        echo -en '\e]4;6;?\e\'
-        read -k 23 color6
-        color6=${color6:4:18}
-        echo -en '\e]4;14;?\e\'
-        read -k 23 color14
-        color14=${color14:4:18}
+        color6=$(python $HOME/.zsh.d/get_term_rgb_color.py 6)
+        color14=$(python $HOME/.zsh.d/get_term_rgb_color.py 14)
         # change it to black
-        echo -en '\e]4;6;rgb:4d00/4d00/4d00\e\'
-        echo -en '\e]4;14;rgb:4d00/4d00/4d00\e\'
+        echo -en '\e]4;6;rgb:4d4d/4d4d/4d4d\e\'
+        echo -en '\e]4;14;rgb:4d4d/4d4d/4d4d\e\'
     fi
 
     _ncmpcpp "$@"
