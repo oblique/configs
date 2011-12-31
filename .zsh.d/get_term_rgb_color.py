@@ -5,7 +5,12 @@ import ctypes
 if (len(sys.argv) != 2):
     exit(1)
 
-if (int(sys.argv[1]) < 0 or int(sys.argv[1]) > 255):
+try:
+    color_num = int(sys.argv[1])
+except (ValueError, TypeError):
+    exit(1)
+
+if (color_num < 0 or color_num > 255):
     exit(1)
 
 fd = os.open(os.readlink("/proc/self/fd/0"), os.O_RDWR | os.O_NOCTTY)
@@ -13,7 +18,7 @@ t = termios.tcgetattr(fd)
 t[3] &= ~(termios.ICANON | termios.ECHO)
 termios.tcsetattr(fd, termios.TCSADRAIN, t)
 
-os.write(fd, bytes("\033]4;" + sys.argv[1] + ";?\033\\", "UTF-8"))
+os.write(fd, bytes("\033]4;%d;?\033\\" % color_num, "UTF-8"))
 
 p = select.poll()
 p.register(fd, select.POLLIN)
