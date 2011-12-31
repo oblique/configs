@@ -39,6 +39,10 @@ try:
 except ValueError:
     exit(1)
 
+# rgba not supported
+if (rgb[i+3] == 'a'):
+    exit(1)
+
 sys.stdout.write(rgb[i:i+18] + "\n")
 sys.stdout.flush()
 exit(0)
