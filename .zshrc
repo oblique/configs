@@ -5,9 +5,9 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=$LANG
 export PATH="${PATH}:${HOME}/bin"
 
-# linux console colors
-if [ "$TERM" = "linux" ]; then
-    # reset
+# initialize linux console colors
+_init_linux_console_colors() {
+    # reset colors
     echo -en '\e]R'
     # black
     echo -en "\e]P0000000"
@@ -39,6 +39,10 @@ if [ "$TERM" = "linux" ]; then
     echo -en '\e[37m' # white
     # store colors
     echo -en '\e[8]'
+}
+
+if [ $TERM = "linux" ]; then
+    _init_linux_console_colors
 fi
 
 # includes
@@ -178,3 +182,35 @@ alias ureboot='dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKi
 alias enable_bluetooth='rfkill unblock $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias disable_bluetooth='rfkill block $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias emacs='emacs -nw'
+
+# special ncmpcpp
+alias _ncmpcpp="$(which ncmpcpp)"
+ncmpcpp() {
+    # change the cyan to black (#4d4d4d rgb)
+    if [ $TERM = "linux" ]; then
+        echo -en "\e]P64d4d4d"
+        echo -en "\e]PE4d4d4d"
+    else
+        # backup cyan rgb
+        echo -en '\e]4;6;?\e\'
+        read -k 23 color6
+        color6=${color6:4:18}
+        echo -en '\e]4;14;?\e\'
+        read -k 23 color14
+        color14=${color14:4:18}
+        # change it to black
+        echo -en '\e]4;6;rgb:4d00/4d00/4d00\e\'
+        echo -en '\e]4;14;rgb:4d00/4d00/4d00\e\'
+    fi
+
+    _ncmpcpp "$@"
+
+    if [ $TERM = "linux" ]; then
+        # reinitialize colors
+        _init_linux_console_colors
+    else
+        # restore cyan rgb
+        echo -en "\\e]4;6;$color6\\e\\"
+        echo -en "\\e]4;14;$color14\\e\\"
+    fi
+}
