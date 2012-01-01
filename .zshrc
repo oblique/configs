@@ -154,6 +154,8 @@ ncmpcpp() {
     if [ $TERM = "linux" ]; then
         echo -en "\e]P64d4d4d"
         echo -en "\e]PE4d4d4d"
+    elif [ ${TERM:0:6} = "screen" ]; then
+        # screen and tmux they don't support color changing
     else
         # backup cyan rgb
         color6=$(python $HOME/.zsh.d/get_term_rgb_color.py 6)
@@ -174,6 +176,7 @@ ncmpcpp() {
         # reset colors
         clear
         echo -en '\e]R'
+    elif [ ${TERM:0:6} = "screen" ]; then
     else
         # restore cyan rgb
         echo -en "\\e]4;6;$color6\\e\\"

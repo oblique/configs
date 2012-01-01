@@ -25,7 +25,8 @@ t[lflag] &= ~(termios.ICANON | termios.ECHO)
 termios.tcsetattr(fd, termios.TCSADRAIN, t)
 
 os.write(fd, bytes("\033]4;%d;?\033\\" % color_num, "UTF-8"))
-p.poll()
+if (not p.poll(1000)):
+    exit(1)
 fcntl.ioctl(fd, termios.FIONREAD, sz)
 rgb = os.read(fd, sz.value).decode("UTF-8")
 
