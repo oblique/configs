@@ -33,3 +33,10 @@ for emacs
 * RFCs @ ~/rfc (http://www.rfc-editor.org/download.html)
 * cups-pdf (use Virtual_PDF_Printer as name for pdf printer)
 * ctags
+
+
+you have to replace /home/oblique with your home path in files:
+    .mpdconf
+    .mplayer/config
+    .ncmpcpp/config
+and you can not use '~'
