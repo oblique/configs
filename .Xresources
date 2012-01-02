@@ -10,7 +10,7 @@ Xft.antialias:  true
 !Xft.lcdfilter:  lcddefault
 
 
-! colors
+! light colors
 *background:    #101010
 *foreground:    #66FF66
 *cursorColor:   #66ff66
@@ -39,26 +39,34 @@ Xft.antialias:  true
 *color7:        #f3ebe2
 *color15:       #eeeeee
 
-! darker
+! dark colors
 !*background:    #101010
 !*foreground:    #66ff66
 !*cursorColor:   #66ff66
-!*color0:        #101010
+!!black
+!*color0:        #1c1c1c
+!*color8:        #4d4d4d
+!!red
 !*color1:        #960050
+!*color9:        #bb0064
+!!green
 !*color2:        #66aa11
-!*color3:        #cdd24a
-!*color4:        #30309b
-!*color5:        #7e40a5
-!*color6:        #3579a8
-!*color7:        #9999aa
-!*color8:        #303030
-!*color9:        #ff0090
 !*color10:       #80ff00
-!*color11:       #cdd24a
-!*color12:       #5f5fee
-!*color13:       #bb88dd
-!*color14:       #4eb4fa
-!*color15:       #d0d0d0
+!!yellow
+!*color3:        #cdd24a
+!*color11:       #e0e565
+!!blue
+!*color4:        #30309b
+!*color12:       #4141aa
+!!magenta
+!*color5:        #7e40a5
+!*color13:       #8a5fa5
+!!cyan
+!*color6:        #3579a8
+!*color14:       #4891c3
+!!white
+!*color7:        #bbbbbb
+!*color15:       #dddddd
 
 
 ! urxvt
