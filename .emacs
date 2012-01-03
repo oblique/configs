@@ -291,6 +291,11 @@
     (setq tabs 1))
   (shifttext-tab-right (- tabs)))
 
+(defun clear-tags-path ()
+  (interactive)
+  (setq tags-file-name nil)
+  (setq tags-table-list nil))
+
 ; hooks
 (add-hook 'desktop-save-hook 'desktop-save-man)
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
