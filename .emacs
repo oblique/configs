@@ -296,6 +296,11 @@
   (setq tags-file-name nil)
   (setq tags-table-list nil))
 
+(defun show-file-path ()
+  "Show the full path file name in the minibuffer."
+  (interactive)
+  (message (buffer-file-name)))
+
 ; hooks
 (add-hook 'desktop-save-hook 'desktop-save-man)
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
@@ -329,3 +334,4 @@
 (global-set-key (kbd "C-c r") 'rfc-index)
 (global-set-key (kbd "M->") 'shifttext-tab-right)
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
+(global-set-key (kbd "C-c p") 'show-file-path)
