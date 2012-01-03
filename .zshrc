@@ -65,7 +65,7 @@ setopt pushd_ignore_dups
 autoload zkbd
 function zkbd_file() {
     [[ -f $HOME/.zsh.d/zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
-    [[ -f $HOME/.zsh.d/zkbd/${TERM}-${DISPLAY}          ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}-${DISPLAY}"          && return 0
+    [[ -f $HOME/.zsh.d/zkbd/${TERM}          ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}"          && return 0
     return 1
 }
 
