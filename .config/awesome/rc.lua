@@ -384,6 +384,11 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "s",
         function (c) 
             c.size_hints_honor = not c.size_hints_honor 
+        end),
+    -- Escape from keyboard focus trap (eg Flash plugin in Firefox)
+    awful.key({ modkey, "Control" }, "Escape",
+        function ()
+            awful.util.spawn("xdotool getactivewindow mousemove --window %1 0 0 click --clearmodifiers 2")
         end)
 )
 

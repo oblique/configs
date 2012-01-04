@@ -27,6 +27,7 @@ my setup
 * rfkill (for enable/disable bluetooth)
 * scrot
 * udisk
+* xdotool
 
 for emacs
 =========
