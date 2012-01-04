@@ -244,16 +244,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
---    awful.key({ modkey,           }, "j",
---        function ()
---            awful.client.focus.byidx( 1)
---            if client.focus then client.focus:raise() end 
---        end),
---    awful.key({ modkey,           }, "k",
---        function ()
---            awful.client.focus.byidx(-1)
---            if client.focus then client.focus:raise() end 
---        end),
+    awful.key({ modkey,           }, "j",
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end 
+        end),
+    awful.key({ modkey,           }, "k",
+        function ()
+            awful.client.focus.byidx(-1)
+            if client.focus then client.focus:raise() end 
+        end),
 
     -- modkey + tab, focus next window
     -- modkey + shift + tab, focus previous window
@@ -268,26 +268,26 @@ globalkeys = awful.util.table.join(
             if client.focus then client.focus:raise() end 
         end),
 
-    -- modkey + j, focus left window
-    -- modkey + l, focus right window
-    -- modkey + k, focus down window
-    -- modkey + i, focus up window
-    awful.key({ modkey,           }, "j",
+    -- modkey + shift + left, focus left window
+    -- modkey + shift + right, focus right window
+    -- modkey + shift + down, focus down window
+    -- modkey + shift + up, focus up window
+    awful.key({ modkey, "Shift" }, "Left",
         function ()
             awful.client.focus.bydirection("left")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "l",
+    awful.key({ modkey, "Shift" }, "Right",
         function ()
             awful.client.focus.bydirection("right")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "k",
+    awful.key({ modkey, "Shift" }, "Down",
         function ()
             awful.client.focus.bydirection("down")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "i",
+    awful.key({ modkey, "Shift" }, "Up",
         function ()
             awful.client.focus.bydirection("up")
             if client.focus then client.focus:raise() end
@@ -313,10 +313,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
---    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
---    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "g",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
