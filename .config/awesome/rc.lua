@@ -114,7 +114,7 @@ bat_clo = battery.batclosure("BAT0")
 batterywidget = widget({type = "textbox"})
 batterywidget.text = bat_clo()
 battimer = timer({timeout = 10})
-battimer:add_signal("timeout", function() batterywidget.text = string.format("<span color=\"#d5d5d5\">%s</span>", bat_clo()) end)
+battimer:add_signal("timeout", function() batterywidget.text = string.format("<span color=\"#ffffff\">%s</span>", bat_clo()) end)
 battimer:start()
 
 volwidget = widget({ type = "textbox" })
