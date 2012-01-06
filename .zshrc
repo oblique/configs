@@ -13,7 +13,7 @@ fi
 source $HOME/.zsh.d/key-bindings.zsh
 source $HOME/.zsh.d/termsupport.zsh
 source $HOME/.zsh.d/git.zsh
-ZSH_GIT_CHECK_TIMEOUT_SEC=15 # git status timeout
+ZSH_GIT_CHECK_TIMEOUT_SEC=2 # git status timeout
 source $HOME/.zsh.d/ssh-agent.zsh
 # battery status
 BATTERY=BAT0
@@ -146,6 +146,7 @@ alias ureboot='dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKi
 alias enable_bluetooth='rfkill unblock $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias disable_bluetooth='rfkill block $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias emacs='emacs -nw'
+alias kismet='TERM=rxvt-unicode kismet'
 
 # special ncmpcpp
 alias _ncmpcpp="$(which ncmpcpp)"
