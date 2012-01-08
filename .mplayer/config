@@ -1,7 +1,7 @@
 [default]
 stop-xscreensaver = yes
 nomouseinput = yes
-identify = yes
+#identify = yes
 idx = yes
 #codecpath = /usr/lib/win32
 codecpath = /usr/lib/codecs
