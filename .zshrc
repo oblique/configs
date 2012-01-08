@@ -184,3 +184,9 @@ ncmpcpp() {
         echo -en "\\e]4;14;$color14\\e\\"
     fi
 }
+
+chpixelsize() {
+    stty -echo
+    printf '\33]50;%s\007' xft:Inconsolata:pixelsize=$1
+    stty echo
+}
