@@ -190,3 +190,13 @@ chpixelsize() {
     printf '\33]50;%s\007' xft:Inconsolata:pixelsize=$1
     stty echo
 }
+
+image_music_video () {
+    IMG=$1
+    AUD=$2
+    TMP_IMG=$(mktemp --suffix=.${IMG##*.})
+    cp ${IMG} ${TMP_IMG}
+    mogrify -resize 1920x1080 -background black -gravity center -extent 1920x1080 ${TMP_IMG}
+    ffmpeg -loop_input -i ${TMP_IMG} -i ${AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba ${AUD%.*}.mp4
+    rm -f ${TMP_IMG}
+}
