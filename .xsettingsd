@@ -19,6 +19,7 @@ Net/DoubleClickTime 400
 Net/FallbackIconTheme "gnome"
 Net/IconThemeName "gnome"
 Net/ThemeName "Adwaita"
+Xft/DPI 122880 # 120 dpi
 Xft/Antialias 1
 Xft/HintStyle "hintmedium"
 Xft/Hinting 1
