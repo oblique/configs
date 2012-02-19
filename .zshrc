@@ -46,8 +46,6 @@ WORDCHARS=''
 
 if [ $(id -u) -ne 0 ]; then
     SUDO='sudo'
-else
-    SUDO=''
 fi
 
 # edit command line
