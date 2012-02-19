@@ -44,6 +44,11 @@ setopt long_list_jobs
 unsetopt flow_control
 WORDCHARS=''
 
+if [ $(id -u) -ne 0 ]; then
+    SUDO='sudo'
+else
+    SUDO=''
+fi
 
 # edit command line
 autoload -U edit-command-line
@@ -151,7 +156,7 @@ alias kismet='TERM=rxvt-unicode kismet'
 alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
 alias arm-none-linux-gnueabi-gdb='arm-none-linux-gnueabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
-alias openocd-panda='sudo openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
+alias openocd-panda='$SUDO openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 
 # special ncmpcpp
 alias _ncmpcpp="$(which ncmpcpp)"
@@ -217,7 +222,7 @@ wpa_dhcp() {
         return 1
     fi
 
-    sudo iwconfig $1 channel auto || return $?
+    $SUDO iwconfig $1 channel auto || return $?
 
     tmp_conf=$(mktemp /tmp/XXXXXX.conf)
     wpa_passphrase $2 $3 > $tmp_conf
@@ -228,14 +233,14 @@ wpa_dhcp() {
         return $ret
     fi
 
-    sudo wpa_supplicant -B -Dwext -i $1 -c $tmp_conf
+    $SUDO wpa_supplicant -B -Dwext -i $1 -c $tmp_conf
     ret=$?
     rm -f $tmp_conf
     if [ $ret -ne 0 ]; then
         return $ret
     fi
 
-    sudo dhcpcd $1
+    $SUDO dhcpcd $1
     return $?
 }
 
@@ -245,9 +250,9 @@ wep_dhcp() {
         return 1
     fi
 
-    sudo iwconfig $1 channel auto || return $?
-    sudo iwconfig $1 essid $2 key $3 || return $?
-    sudo dhcpcd $1
+    $SUDO iwconfig $1 channel auto || return $?
+    $SUDO iwconfig $1 essid $2 key $3 || return $?
+    $SUDO dhcpcd $1
     return $?
 }
 
@@ -257,9 +262,9 @@ open_dhcp() {
         return 1
     fi
 
-    sudo iwconfig $1 channel auto || return $?
-    sudo iwconfig $1 essid $2|| return $?
-    sudo dhcpcd $1
+    $SUDO iwconfig $1 channel auto || return $?
+    $SUDO iwconfig $1 essid $2|| return $?
+    $SUDO dhcpcd $1
     return $?
 }
 
@@ -269,8 +274,8 @@ wifi_scan() {
         return 1
     fi
 
-    sudo iwconfig $1 channel auto || return $?
-    sudo iwlist $1 scan
+    $SUDO iwconfig $1 channel auto || return $?
+    $SUDO iwlist $1 scan
     return $?
 }
 
