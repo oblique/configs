@@ -1,14 +1,12 @@
 Xcursor.theme:  Vanilla-DMZ-AA
 
-Xft.antialias:  true
-!Xft.dpi:        120
-!Xft.rgba:       rgb
-!Xft.antialias:  1
-!Xft.hinting:    1
-!Xft.hintstyle:  hintmedium
-!Xft.autohint:   0
-!Xft.lcdfilter:  lcddefault
-
+Xft.antialias:  1
+Xft.hinting:    1
+Xft.autohint:   0
+Xft.hintstyle:  hintmedium
+Xft.lcdfilter:  lcddefault
+Xft.dpi:        120
+Xft.rgba:       rgb
 
 ! light colors
 *background:    #101010

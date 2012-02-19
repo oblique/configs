@@ -5,6 +5,7 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=$LANG
 export PATH="${PATH}:${HOME}/bin"
 
+# init console colors
 if [ $TERM = "linux" ]; then
     python $HOME/.zsh.d/init_linux_console_colors.py
 fi
@@ -147,6 +148,10 @@ alias enable_bluetooth='rfkill unblock $(rfkill list | grep -m 1 Bluetooth | cut
 alias disable_bluetooth='rfkill block $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias emacs='emacs -nw'
 alias kismet='TERM=rxvt-unicode kismet'
+alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
+alias arm-none-linux-gnueabi-gdb='arm-none-linux-gnueabi-gdb -nx -x ${HOME}/.gdbinit.arm'
+alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
+alias openocd-panda='sudo openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 
 # special ncmpcpp
 alias _ncmpcpp="$(which ncmpcpp)"
@@ -191,7 +196,12 @@ chpixelsize() {
     stty echo
 }
 
-image_music_video () {
+image_music_video() {
+    if [ $# -ne 2 ]; then
+        echo "usage: image_music_video <image> <audio>"
+        return 1
+    fi
+
     IMG=$1
     AUD=$2
     TMP_IMG=$(mktemp --suffix=.${IMG##*.})
@@ -199,4 +209,78 @@ image_music_video () {
     mogrify -resize 1920x1080 -background black -gravity center -extent 1920x1080 ${TMP_IMG}
     ffmpeg -loop_input -i ${TMP_IMG} -i ${AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba ${AUD%.*}.mp4
     rm -f ${TMP_IMG}
+}
+
+wpa_dhcp() {
+    if [ $# -ne 3 ]; then
+        echo "usage: wpa_dhcp <interface> <essid> <passphrase>"
+        return 1
+    fi
+
+    sudo iwconfig $1 channel auto || return $?
+
+    tmp_conf=$(mktemp /tmp/XXXXXX.conf)
+    wpa_passphrase $2 $3 > $tmp_conf
+    ret=$?
+    if [ $ret -ne 0 ]; then
+        cat $tmp_conf
+        rm -f $tmp_conf
+        return $ret
+    fi
+
+    sudo wpa_supplicant -B -Dwext -i $1 -c $tmp_conf
+    ret=$?
+    rm -f $tmp_conf
+    if [ $ret -ne 0 ]; then
+        return $ret
+    fi
+
+    sudo dhcpcd $1
+    return $?
+}
+
+wep_dhcp() {
+    if [ $# -ne 3 ]; then
+        echo "usage: wep_dhcp <interface> <essid> <passphrase>"
+        return 1
+    fi
+
+    sudo iwconfig $1 channel auto || return $?
+    sudo iwconfig $1 essid $2 key $3 || return $?
+    sudo dhcpcd $1
+    return $?
+}
+
+open_dhcp() {
+    if [ $# -ne 2 ]; then
+        echo "usage: open_dhcp <interface> <essid>"
+        return 1
+    fi
+
+    sudo iwconfig $1 channel auto || return $?
+    sudo iwconfig $1 essid $2|| return $?
+    sudo dhcpcd $1
+    return $?
+}
+
+wifi_scan() {
+    if [ $# -ne 1 ]; then
+        echo "usage: wifi_scan <interface>"
+        return 1
+    fi
+
+    sudo iwconfig $1 channel auto || return $?
+    sudo iwlist $1 scan
+    return $?
+}
+
+alias _udisks="$(which udisks)"
+udisks() {
+    for x in $*; do
+        if [ $x = "--unmount" ]; then
+            sync
+            break
+        fi
+    done
+    _udisks $*
 }
