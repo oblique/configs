@@ -1,33 +1,16 @@
 # Use PulseAudio by default
 pcm.!default {
   type pulse
+  fallback "sysdefault"
+  hint {
+    show on
+    description "Default ALSA Output (currently PulseAudio Sound Server)"
+  }
 }
 
 ctl.!default {
   type pulse
-}
-
-# Explicit PulseAudio device
-pcm.pulse {
-  type pulse
-}
-
-ctl.pulse {
-  type pulse
-}
-
-# record from a monitor source (a.k.a. "What-U-Hear")
-# use 'pactl list | grep -i "monitor source"' to find out the name of the source 
-# in Pulseaudio (e.g. alsa_output.pci-0000_00_1b.0.analog-stereo.monitor)
-# use pulse_monitor as recording source
-pcm.pulse_monitor {
-  type pulse
-  device alsa_output.pci-0000_00_1b.0.analog-stereo.monitor
-}
-
-ctl.pulse_monitor {
-  type pulse
-  device alsa_output.pci-0000_00_1b.0.analog-stereo.monitor
+  fallback "sysdefault"
 }
 
 # vim:set ft=alsaconf:
