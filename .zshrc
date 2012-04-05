@@ -287,3 +287,33 @@ udisks() {
     done
     _udisks $*
 }
+
+embed_subtitle() {
+    if [ $# -lt 3 ]; then
+        echo "usage: embed_subtitle <video> <subtitle> [ffmpeg options] <output>"
+        return 1
+    fi
+
+    if [ ! -e $1 ]; then
+        echo "file $1 does not exists!"
+        return 1
+    fi
+
+    if [ ! -e $2 ]; then
+        echo "file $2 does not exists!"
+        return 1
+    fi
+
+    VIDRAND_F=$(mktemp -u --suffix=.mp4)
+    SOUNDRAND_F=$(mktemp -u --suffix=.wav)
+
+    mkfifo $VIDRAND_F
+    mkfifo $SOUNDRAND_F
+
+    (mplayer -benchmark -really-quiet -sub $2 -noframedrop -nosound -vo yuv4mpeg:file=${VIDRAND_F} $1 -osdlevel 0 &) > /dev/null 2>1
+    (mplayer -benchmark -really-quiet -noframedrop -ao pcm:file=${SOUNDRAND_F} -novideo $1 &) > /dev/null 2>1
+    sleep 2
+    ffmpeg -i $VIDRAND_F -i $SOUNDRAND_F -isync ${*:3}
+
+    rm -f $VIDRAND_F $SOUNDRAND_F
+}
