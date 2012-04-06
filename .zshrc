@@ -310,8 +310,8 @@ embed_subtitle() {
     mkfifo $VIDRAND_F
     mkfifo $SOUNDRAND_F
 
-    (mplayer -benchmark -really-quiet -sub $2 -noframedrop -nosound -vo yuv4mpeg:file=${VIDRAND_F} $1 -osdlevel 0 &) > /dev/null 2>1
-    (mplayer -benchmark -really-quiet -noframedrop -ao pcm:file=${SOUNDRAND_F} -novideo $1 &) > /dev/null 2>1
+    (mplayer -benchmark -really-quiet -sub $2 -noframedrop -nosound -vo yuv4mpeg:file=${VIDRAND_F} $1 -osdlevel 0 &) > /dev/null 2>&1
+    (mplayer -benchmark -really-quiet -noframedrop -ao pcm:file=${SOUNDRAND_F} -novideo $1 &) > /dev/null 2>&1
     sleep 2
     ffmpeg -i $VIDRAND_F -i $SOUNDRAND_F -isync ${*:3}
 
