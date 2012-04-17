@@ -223,7 +223,7 @@
   (interactive)
   (if (region-active-p)
     (progn
-      (shell-command-on-region (region-beginning) (region-end) "xclip -i -selection clipboard")
+      (call-process-region (region-beginning) (region-end) "xclip" nil 0 nil "-i" "-selection" "clipboard")
       (message "Copy region to clipboard!")
       (deactivate-mark))
     (message "No region active. Can't copy to clipboard!")))
@@ -232,9 +232,8 @@
   (interactive)
   (if (region-active-p)
     (progn
-      (shell-command-on-region (region-beginning) (region-end) "xclip -i -selection clipboard")
-      (message "Cut region to clipboard!")
-      (delete-region (region-beginning) (region-end)))
+      (call-process-region (region-beginning) (region-end) "xclip" t 0 nil "-i" "-selection" "clipboard")
+      (message "Cut region to clipboard!"))
     (message "No region active. Can't cut to clipboard!")))
 
 (defun desktop-save-man ()
