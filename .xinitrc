@@ -30,6 +30,7 @@ do
 done
 
 synclient VertTwoFingerScroll=1
+synclient TapButton1=0 TapButton2=0 TapButton3=0
 
 # clipboard synchronizer
 autocutsel -fork
