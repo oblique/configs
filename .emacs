@@ -49,6 +49,7 @@
   (lambda ()
     (highlight-parentheses-mode t)))
 (global-highlight-parentheses-mode t)
+(require 'arduino-mode)
 
 ; RFC
 ; you can download RFCs from http://www.rfc-editor.org/download.html
