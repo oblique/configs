@@ -81,8 +81,8 @@
 
 ; tags
 (require 'etags-select)
-(define-key my-minor-mode-map "\M-?" 'etags-select-find-tag-at-point)
-(define-key my-minor-mode-map "\M-." 'etags-select-find-tag)
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
 
 ; Tabbing support options
 (require 'tabbar)
@@ -306,9 +306,14 @@
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
 
 ; key bindings
-(define-key my-minor-mode-map (kbd "RET") 'newline-and-indent) ; auto-indent
+(global-set-key (kbd "RET") 'newline-and-indent) ; auto-indent
+(global-set-key (kbd "M-9") 'kill-whole-line)
+(global-set-key (kbd "M->") 'shifttext-tab-right)
+(global-set-key (kbd "M-<") 'shifttext-tab-left)
+(global-set-key (kbd "C-c p") 'show-file-path)
+(global-set-key (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
+(global-set-key (kbd "C-x p") 'other-window-backward)
 (define-key my-minor-mode-map (kbd "<clearline>") (key-binding (kbd "<C-end>"))) ; <clearline> (in terminal) == <C-end>
-(define-key my-minor-mode-map (kbd "M-9") 'kill-whole-line)
 (define-key my-minor-mode-map (kbd "M-l") 'tabbar-forward)
 (define-key my-minor-mode-map (kbd "M-j") 'tabbar-backward)
 (define-key my-minor-mode-map (kbd "ESC <up>") 'windmove-up) ; M-up in terminal
@@ -319,8 +324,6 @@
 (define-key my-minor-mode-map (kbd "<M-down>") 'windmove-down) ; M-down in gui
 (define-key my-minor-mode-map (kbd "<M-right>") 'windmove-right) ; M-right in gui
 (define-key my-minor-mode-map (kbd "<M-left>") 'windmove-left) ; M-left in gui
-(define-key my-minor-mode-map (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
-(define-key my-minor-mode-map (kbd "C-x p") 'other-window-backward)
 (define-key my-minor-mode-map (kbd "C-c f") 'my-imenu-tree)
 (define-key my-minor-mode-map (kbd "C-c d") 'my-dirtree)
 (define-key my-minor-mode-map (kbd "C-c o") 'ob-tree)
@@ -333,9 +336,7 @@
 (define-key my-minor-mode-map (kbd "C-c x") 'xclip-cut)
 (define-key my-minor-mode-map (kbd "C-c m") 'man)
 (define-key my-minor-mode-map (kbd "C-c r") 'rfc-index)
-(define-key my-minor-mode-map (kbd "M->") 'shifttext-tab-right)
-(define-key my-minor-mode-map (kbd "M-<") 'shifttext-tab-left)
-(define-key my-minor-mode-map (kbd "C-c p") 'show-file-path)
+
 (define-minor-mode my-minor-mode
     "A minor mode so that my key settings aren't shadowed by other major/minor modes"
     t "" 'my-minor-mode-map)
