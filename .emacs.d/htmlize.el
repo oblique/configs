@@ -1605,15 +1605,15 @@ does not name a directory, it will be used as output file name."
 			(or target (file-name-directory file)))))
 	;; Try to prevent `find-file-noselect' from triggering
 	;; font-lock because we'll fontify explicitly below.
-	(font-lock-mode nil)
-	(font-lock-auto-fontify nil)
-	(global-font-lock-mode nil)
+	(font-lock-mode -1)
+	(font-lock-auto-fontify -1)
+	(global-font-lock-mode -1)
 	;; Ignore the size limit for the purposes of htmlization.
 	(font-lock-maximum-size nil)
 	;; Disable font-lock support modes.  This will only work in
 	;; more recent Emacs versions, so htmlize-buffer-1 still needs
 	;; to call htmlize-ensure-fontified.
-	(font-lock-support-mode nil))
+	(font-lock-support-mode -1))
     (with-temp-buffer
       ;; Insert FILE into the temporary buffer.
       (insert-file-contents file)

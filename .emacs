@@ -14,8 +14,8 @@
 
 ; various
 (defvar my-minor-mode-map (make-keymap) "my-minor-mode keymap.")
-(menu-bar-mode nil)
-(tool-bar-mode nil)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 (toggle-scroll-bar nil)
 (require 'linum-ex)
 (setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
@@ -145,7 +145,7 @@
     (setq ps-font-family 'Courier)
     (setq ps-line-number-font "Courier")
     (setq ps-line-number-font-size ps-font-size)
-    (highlight-parentheses-mode nil)
+    (highlight-parentheses-mode -1)
     (color-theme-print)
     (ps-print-buffer-with-faces filename)
     (funcall ct-theme)

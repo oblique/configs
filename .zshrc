@@ -35,6 +35,7 @@ setopt append_history
 
 # various options
 setopt extended_glob
+setopt extendedglob
 setopt interactive_comments
 setopt nomatch
 setopt notify
