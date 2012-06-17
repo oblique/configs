@@ -47,7 +47,7 @@ end
 define context
     set $context_i = $CONTEXTSIZE_CODE
     if($context_i > 0)
-        x /i $pc - 8
+        x /i $pc
         set $context_i--
     end
     while ($context_i > 0)
