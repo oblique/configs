@@ -318,3 +318,18 @@ embed_subtitle() {
 
     rm -f $VIDRAND_F $SOUNDRAND_F
 }
+
+mkmagnettorrent() {
+    if [ $# -lt 1 ]; then
+        echo "usage: mkmagnettorrent \"MAGET_URI\""
+        return 1
+    fi
+    [[ "$1" =~ "xt=urn:btih:([^&/]+)" ]] || exit
+    torhash=${match[1]}
+    if [[ "$1" =~ "dn=([^&/]+)" ]]; then
+        torfile=${match[1]}
+    else
+        torfile=$torhash
+    fi
+    echo "d10:magnet-uri${#1}:${1}e" > "meta-${torfile}.torrent"
+}
