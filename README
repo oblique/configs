@@ -8,6 +8,9 @@ my setup
 * zsh
 * gdb
 * git
+* mutt (with sidebar, trash folder, purge message patches)
+* urlview (needed by mutt)
+* w3m (needed by mutt)
 * mpd
 * mpc
 * ncmpcpp

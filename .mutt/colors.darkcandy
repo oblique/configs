@@ -1,0 +1,32 @@
+color normal        color83         color233
+color quoted        color104        color233
+color signature     color197        color233
+color indicator     brightcolor68   color233
+color error         color161        color233
+color status        brightcolor104  color234
+color tree          color104        color233
+color tilde         color228        color233
+color message       color83         color233
+color markers       color228        color233
+color attachment    color228        color233
+color search        color98         color236
+color underline     brightcolor83   color233
+
+color hdrdefault    color240        color233
+color header        brightcolor241  color233 "^(From)"
+color header        color161        color233 "^(Subject)"
+
+# insane URL regex
+color body          color68         color233 "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
+color index         brightcolor161  color233    ~N  # New
+color index         color161        color233    ~O  # Old
+color index         color99         color233    ~T  # Tagged
+color index         color238        color233    ~D  # Deleted
+color index         color81         color233    ~F  # Flagged
+
+# attributes when using a mono terminal
+mono header underline ^(From|Subject):
+mono quoted bold
+
+# vim: filetype=muttrc

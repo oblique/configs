@@ -1,0 +1,32 @@
+source ~/.mutt/accounts
+
+set sort = reverse-date-received
+set sort_aux = last-date-received
+set header_cache = ~/.mutt/hcache
+
+set ssl_force_tls = yes
+set imap_check_subscribed = yes
+unset imap_passive
+set imap_keepalive = 300
+set mail_check = 120
+
+set mailcap_path = ~/.mutt/mailcap
+alternative_order text/plain text/html * 
+auto_view text/html
+
+set editor = 'vim + -c "set textwidth=72" -c "set wrap"'
+
+macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+bind index G imap-fetch-mail
+
+### config for the sidebar patch
+### http://www.lunar-linux.org/mutt-sidebar/
+source ~/.mutt/sidebarrc
+
+### config for the purge message patch
+### http://cedricduval.free.fr/mutt/patches/index.html#purge
+bind index \eD purge-message
+bind pager \eD purge-message
+
+# theme
+source ~/.mutt/colors.darkcandy

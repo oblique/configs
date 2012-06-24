@@ -1,0 +1,19 @@
+### for 'set trash' you need the trash folder patch:
+### http://cedricduval.free.fr/mutt/patches/#trash
+
+### gmail example
+# set realname = 'Name Surname'
+# set from = 'your_username@gmail.com'
+#
+# set imap_user = "$from"
+# set smtp_url = "smtp://$from@smtp.gmail.com"
+# set folder = 'imaps://imap.gmail.com/'
+# set spoolfile = '+INBOX'
+# set postponed = '+[Gmail]/Drafts'
+# set record = '+[Gmail]/Sent Mail'
+# set trash = '+[Gmail]/Trash'
+# set move = no
+####
+
+
+# vim: filetype=muttrc
