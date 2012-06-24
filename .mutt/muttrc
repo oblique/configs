@@ -1,7 +1,7 @@
 source ~/.mutt/accounts.rc
 
-set sort = reverse-date-received
-set sort_aux = last-date-received
+set sort = threads
+set sort_aux = reverse-last-date-received
 set header_cache = ~/.mutt/hcache
 
 set ssl_force_tls = yes
