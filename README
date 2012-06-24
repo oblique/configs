@@ -9,6 +9,7 @@ my setup
 * gdb
 * git
 * mutt (with sidebar, trash folder, purge message patches)
+* abook (needed by mutt)
 * urlview (needed by mutt)
 * w3m (needed by mutt)
 * mpd

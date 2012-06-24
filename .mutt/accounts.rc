@@ -13,7 +13,7 @@
 # set record = '+[Gmail]/Sent Mail'
 # set trash = '+[Gmail]/Trash'
 # set move = no
-####
+###
 
 
 # vim: filetype=muttrc

@@ -1,4 +1,4 @@
-source ~/.mutt/accounts
+source ~/.mutt/accounts.rc
 
 set sort = reverse-date-received
 set sort_aux = last-date-received
@@ -21,12 +21,20 @@ bind index G imap-fetch-mail
 
 ### config for the sidebar patch
 ### http://www.lunar-linux.org/mutt-sidebar/
-source ~/.mutt/sidebarrc
+source ~/.mutt/sidebar.rc
 
 ### config for the purge message patch
 ### http://cedricduval.free.fr/mutt/patches/index.html#purge
 bind index \eD purge-message
 bind pager \eD purge-message
 
-# theme
+### gpg
+source ~/.mutt/gpg.rc
+
+### theme
 source ~/.mutt/colors.darkcandy
+
+### address book
+set query_command = "abook --mutt-query '%s'"
+macro generic,index,pager \ca "<shell-escape>abook<return><redraw-screen>" "launch abook"
+macro index,pager A "<pipe-message>abook --add-email<return><redraw-screen>" "add the sender address to abook"
