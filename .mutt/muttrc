@@ -14,7 +14,7 @@ set mailcap_path = ~/.mutt/mailcap
 alternative_order text/plain text/html * 
 auto_view text/html
 
-set editor = 'vim + -c "set textwidth=72" -c "set wrap"'
+set editor = 'vim +":set textwidth=72" +":set wrap"'
 
 macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 bind index G imap-fetch-mail
