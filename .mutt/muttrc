@@ -18,6 +18,9 @@ set editor = 'vim +":set textwidth=72" +":set wrap"'
 
 macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 bind index G imap-fetch-mail
+macro index <Esc>M "<tag-pattern>~N<enter>;WN<tag-pattern>~O<enter>;WO<untag-pattern>~T<enter>" "Mark all messages as read"
+macro index <Esc>U "t;wN<untag-pattern>~T<enter>" "Mark message as unread"
+macro index <Esc>R "t;WN<untag-pattern>~T<enter>" "Mark message as read"
 
 ### config for the sidebar patch
 ### http://www.lunar-linux.org/mutt-sidebar/

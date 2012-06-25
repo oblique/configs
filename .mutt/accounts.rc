@@ -17,5 +17,9 @@
 # set move = no
 ###
 
+### if you are subscribed to a mailing list you can use the following.
+### (the example is for LKML)
+# subscribe linux-kernel@vger.kernel.org
+###
 
 # vim: filetype=muttrc
