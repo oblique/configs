@@ -12,8 +12,8 @@
 # set postponed = '+[Gmail]/Drafts'
 # set record = '+[Gmail]/Sent Mail'
 # set trash = '+[Gmail]/Trash'
-# macro index,pager S "<save-message>+[Gmail]/Spam<enter><sync-mailbox>" "mark message as spam"
-# macro index,pager H "<save-message>+INBOX<enter><sync-mailbox>" "mark message as ham (non-spam)"
+# macro index,pager <Esc>S "<save-message>+[Gmail]/Spam<enter><sync-mailbox>" "mark message as spam"
+# macro index,pager <Esc>H "<save-message>+INBOX<enter><sync-mailbox>" "mark message as ham (non-spam)"
 # set move = no
 ###
 

@@ -28,8 +28,8 @@ source ~/.mutt/sidebar.rc
 
 ### config for the purge message patch
 ### http://cedricduval.free.fr/mutt/patches/index.html#purge
-bind index \eD purge-message
-bind pager \eD purge-message
+bind index <Esc>D purge-message
+bind pager <Esc>D purge-message
 
 ### gpg
 source ~/.mutt/gpg.rc
