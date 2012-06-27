@@ -56,18 +56,18 @@ abstracts = {
   ## channel specific messages
 
   # highlighted nick/host is printed (joins)
-  channick_hilight = "%g$*%N";
+  channick_hilight = "%b* %g$*%N";
   chanhost_hilight = "{nickhost $*}";
 
   # nick/host is printed (parts, quits, etc.)
-  channick = "%g$*";
+  channick = "%r* %g$*";
   chanhost = "{nickhost $*}";
 
   # highlighted channel name is printed
   channelhilight = "%g$*%n";
 
   # ban/ban exception/invite list mask is printed
-  ban = "$*";
+  ban = "%g$*%N";
 
   ########### messages #################################
 
