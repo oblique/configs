@@ -133,9 +133,9 @@ abstracts = {
   # notices
   ownnotice = "%r$0{comment $1-}%n ";
   notice = "%r$*%n ";
-  pubnotice_channel = " {comment $*}";
-  pvtnotice_host = " {comment $*}";
-  servernotice = " {comment $*}";
+  pubnotice_channel = "{comment %m$*}";
+  pvtnotice_host = "{comment %m$*}";
+  servernotice = "{comment %m$*} ";
 
   # CTCPs
   ownctcp = "%r$0{comment $1-}%n ";
