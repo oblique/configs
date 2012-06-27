@@ -214,6 +214,7 @@ settings = {
     theme = "miromiro";
     hilight_color = "%R";
     hilight_act_color = "%R";
+    hilight_nick_matches = "yes";
   };
   "perl/core/scripts" = {
     awl_display_key = "%K[%n$Q%K:%n$H$C$S%K]%n";

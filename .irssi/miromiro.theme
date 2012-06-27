@@ -1,8 +1,8 @@
 #------------------------------------------
-# file: ~/.irssi/miromiro.theme           
+# file: ~/.irssi/miromiro.theme
 # author: jason ryan http://jasonwryan.com/
 # edited by oblique
-# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:   
+# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:
 #------------------------------------------
 # Based on Pat Brisbin's theme
 
@@ -57,11 +57,11 @@ abstracts = {
   ## channel specific messages
 
   # highlighted nick/host is printed (joins)
-  channick_hilight = "%b* %g$*%N";
+  channick_hilight = "%b>> %g$*%N";
   chanhost_hilight = "{nickhost $*}";
 
   # nick/host is printed (parts, quits, etc.)
-  channick = "%r* %g$*";
+  channick = "%r<< %g$*";
   chanhost = "{nickhost $*}";
 
   # highlighted channel name is printed
@@ -204,7 +204,7 @@ abstracts = {
   prompt = "%c>> ";
 
   sb = "%K[%n %c$*%n %K]%n";
-  sbmode = " mode=%K%g+%n$*%K";
+  sbmode = " mode%K=%g+%n$*%K";
   sbaway = " %g/* zZzZ */%n";
   sbservertag = "%K:%n%c$0";
   sbnickmode = "$0";
