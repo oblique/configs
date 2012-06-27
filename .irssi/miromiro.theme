@@ -202,7 +202,7 @@ abstracts = {
 
   prompt = "%c>> ";
 
-  sb = "%c[$*%c]";
+  sb = "%c[ $* %c]%n";
   sbmode = " mode=%K%g+%n$*%K";
   sbaway = " %g/* zZzZ */%n";
   sbservertag = ":$0";
