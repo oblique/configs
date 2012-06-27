@@ -109,20 +109,20 @@ abstracts = {
   ########## Actions (/ME stuff) #########################
 
   # generic one that's used by most actions
-  action = "  %_$*%n  ";
+  action = "  %y$*%n  ";
 
   # own action, both private/public
-  ownaction = "{action %M*$*}";
+  ownaction = "{action $*}";
 
   # own action with target, both private/public
-  ownaction_target = "{action %M*$*}";
+  ownaction_target = "{action $*}";
 
   # private action sent by others
-  pvtaction = "{action %B*$*}";
-  pvtaction_query = "{action %B*$*}";
+  pvtaction = "{action $*}";
+  pvtaction_query = "{action $*}";
 
   # public action sent by others
-  pubaction = "{action %B*$*}";
+  pubaction = "{action $*}";
 
 
   ########## other IRC events #############################
