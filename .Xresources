@@ -85,6 +85,7 @@ URxvt.perl-ext-common:      default,matcher,-searchable-scrollback
 URxvt.urlLauncher:          firefox
 URxvt.matcher.button:       1
 URxvt*colorUL:              #4695c8
+URxvt*cursorBlink:          true
 !URxvt*transparent:          true
 !URxvt*shading:              15		!trans, 0=opaque
 !URxvt*fading:               10		!term unfocus

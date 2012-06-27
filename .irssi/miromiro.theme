@@ -73,7 +73,7 @@ abstracts = {
   ########### messages #################################
 
   # the basic styling of how to print message, $0 = nick mode, $1 = nick
-  msgnick = "%K%n$0$1-%K%n: %|";
+  msgnick = "$0$1-%K:%n %|";
 
   # $0 = nick mode, $1 = nick
   ownmsgnick = "{msgnick $0 $1-}";
@@ -203,16 +203,16 @@ abstracts = {
 
   prompt = "%c>> ";
 
-  sb = "%c[ $* %c]%n";
+  sb = "%K[%n %c$*%n %K]%n";
   sbmode = " mode=%K%g+%n$*%K";
   sbaway = " %g/* zZzZ */%n";
-  sbservertag = ":$0";
+  sbservertag = "%K:%n%c$0";
   sbnickmode = "$0";
 
   # activity in statusbar
 
   # ',' separator
-  sb_act_sep = "%c$* ";
+  sb_act_sep = "%K$* ";
   # normal text
   sb_act_text = "%c$*";
   # public message
