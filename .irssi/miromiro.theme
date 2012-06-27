@@ -33,19 +33,19 @@ abstracts = {
   error = "%R$*%n";
 
   # channel name is printed
-  channel = "%_$*%_";
+  channel = "%n%b$*%n";
 
   # nick is printed
   nick = "%b$*%n";
 
   # nick host is printed
-  nickhost = "%_$*$_";
+  nickhost = "%_$*%_";
 
   # server name is printed
   server = "%B$*%n";
 
   # some kind of comment is printed
-  comment = "%K(%b$*%K)%n";
+  comment = "%K(%n%b$*%K)%n";
 
   # reason for something is printed (part, quit, kick, ..)
   reason = "{comment $*}";
@@ -100,29 +100,29 @@ abstracts = {
   ownprivmsg = "$0=%b$1-%n ";
 
   # own private message in query
-  ownprivmsgnick = "{msgnick %M$*%n}";
+  ownprivmsgnick = "{msgnick %m$*%n}";
   ownprivnick = "$*";
 
   # private message in query
-  privmsgnick = "{msgnick %B$*%n}";
+  privmsgnick = "{msgnick %b$*%n}";
 
   ########## Actions (/ME stuff) #########################
 
   # generic one that's used by most actions
-  action = "  %y$*%n  ";
+  action = "  %_$*%n  ";
 
   # own action, both private/public
-  ownaction = "{action $*}";
+  ownaction = "{action %M$*}";
 
   # own action with target, both private/public
-  ownaction_target = "{action $*}";
+  ownaction_target = "{action %M$*}";
 
   # private action sent by others
-  pvtaction = "{action $*}";
-  pvtaction_query = "{action $*}";
+  pvtaction = "{action %B$*}";
+  pvtaction_query = "{action %B$*}";
 
   # public action sent by others
-  pubaction = "{action $*}";
+  pubaction = "{action %B$*}";
 
 
   ########## other IRC events #############################
@@ -226,15 +226,15 @@ abstracts = {
 
 formats = {
   "fe-common/core" = {
-    pubmsg = "{pubmsgnick {pubnick %B$[-13]0}$2}$1";
-    own_msg = "{ownmsgnick {ownnick %M$[-13]0}$2}$1";
+    pubmsg = "{pubmsgnick {pubnick %b$[-13]0}$2}$1";
+    own_msg = "{ownmsgnick {ownnick %m$[-13]0}$2}$1";
     own_msg_channel = "{ownmsgnick {ownnick $[-13]0$3}{msgchannel $1}}$2";
     own_msg_private_query = "{ownprivmsgnick {ownprivnick $[-13]2}}$1";
     pubmsg_me = "{pubmsgmenick {menick $[-13]0}$2}$1";
     pubmsg_me_channel = "{pubmsgmenick {menick $[-13]0$3}{msgchannel $1}}$2";
     pubmsg_hilight = "{pubmsghinick $0 $0 $[-13]1$3%n}$2";
     pubmsg_hilight_channel = "{pubmsghinick $0 $[-13]1$4{msgchannel $2}}$3";
-    pubmsg_channel = "{pubmsgnick {pubnick %M$[-13]0}$2}$1";
+    pubmsg_channel = "{pubmsgnick {pubnick %m$[-13]0}$2}$1";
     msg_private_query = "{privmsgnick $[-13]0}$2";
   };
   "fe-common/irc" = {
