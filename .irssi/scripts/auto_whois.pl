@@ -72,7 +72,7 @@ sub msg_private {
   $connection->{starttime} = time();
   push(@seen, $connection);
 
-  $server->command("wii $nick");
+  $server->command("whois $nick $nick");
 }
 
 Irssi::signal_add_first('message private', 'msg_private_first');
