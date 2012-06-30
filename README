@@ -1,5 +1,6 @@
 my setup
 ========
+* urxvt
 * emacs
 * vim
 * xclip
@@ -32,6 +33,7 @@ my setup
 * scrot
 * udisk
 * xdotool
+* youtube-dl
 
 for emacs
 =========
@@ -41,7 +43,8 @@ for emacs
 
 
 you have to replace /home/oblique with your home path in files:
+    .Xresources
     .mpdconf
     .mplayer/config
     .ncmpcpp/config
-and you can not use '~'
+because you can not use '~'

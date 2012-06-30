@@ -68,25 +68,30 @@ Xft.rgba:       rgb
 
 
 ! urxvt
-URxvt*termName:             rxvt-unicode-256color
-URxvt*geometry:             90x25
-URxvt*reverseVideo:         false
-!URxvt*font:                 xft:Terminus:size=10
+URxvt.termName:             rxvt-unicode-256color
+URxvt.geometry:             90x25
+URxvt.reverseVideo:         false
+!URxvt.font:                 xft:Terminus:size=10
 !!! these two go together !!!
-URxvt*font:                 xft:Inconsolata:size=10
-URxvt*letterSpace:          -1
+URxvt.font:                 xft:Inconsolata:size=10
+URxvt.letterSpace:          -1
 !!! these two go together !!!
-URxvt*scrollBar:            true
-URxvt*scrollBar_floating:   true
-URxvt*scrollBar_right:      false
-URxvt*scrollColor:          #0c0c0c
-URxvt*saveLines:            5500
+URxvt.scrollBar:            true
+URxvt.scrollBar_floating:   true
+URxvt.scrollBar_right:      false
+URxvt.scrollColor:          #0c0c0c
+URxvt.saveLines:            5500
 URxvt.perl-ext-common:      default,matcher,-searchable-scrollback
-URxvt.urlLauncher:          firefox
+URxvt.urlLauncher:          /home/oblique/.urxvt/utubify.sh
 URxvt.matcher.button:       1
-URxvt*colorUL:              #4695c8
-URxvt*cursorBlink:          true
-!URxvt*transparent:          true
-!URxvt*shading:              15		!trans, 0=opaque
-!URxvt*fading:               10		!term unfocus
-!URxvt*inheritPixmap:        true
+URxvt.colorUL:              #4695c8
+URxvt.cursorBlink:          true
+URxvt.tabbed.tabbar-fg:     238
+URxvt.tabbed.tabbar-bg:     233
+URxvt.tabbed.tab-fg:        161
+URxvt.tabbed.tab-bg:        233
+!!! for transparent terminal uncomment the following
+!!! also use feh to set your wallpaper
+!URxvt.transparent:          true
+!URxvt.shading:              15
+!URxvt.inheritPixmap:        true
