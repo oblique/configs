@@ -327,7 +327,6 @@ sub tab_key_press {
 	    return 1;
 	} elsif ($keysym == 0xff52) {
 	    $tab->destroy;
-	    $self->refresh;
 	    return 1;
 	} elsif ($keysym == 0xff54) {
 	    $self->new_tab;
