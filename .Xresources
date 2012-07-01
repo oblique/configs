@@ -81,15 +81,21 @@ URxvt.scrollBar_floating:   true
 URxvt.scrollBar_right:      false
 URxvt.scrollColor:          #0c0c0c
 URxvt.saveLines:            5500
-URxvt.perl-ext-common:      default,matcher,-searchable-scrollback
+URxvt.perl-ext-common:      default,matcher,-searchable-scrollback,clipboard,keyboard-select,tabbed
 URxvt.urlLauncher:          /home/oblique/.urxvt/utubify.sh
 URxvt.matcher.button:       1
 URxvt.colorUL:              #4695c8
 URxvt.cursorBlink:          true
 URxvt.tabbed.tabbar-fg:     238
 URxvt.tabbed.tabbar-bg:     233
-URxvt.tabbed.tab-fg:        161
+URxvt.tabbed.tab-fg:        97
 URxvt.tabbed.tab-bg:        233
+URxvt.keysym.Mod4-c:        perl:clipboard:copy
+URxvt.keysym.Mod4-v:        perl:clipboard:paste
+URxvt.keysym.Mod4-C-v:      perl:clipboard:paste_escaped
+URxvt.copyCommand:          xclip -i -selection clipboard
+URxvt.pasteCommand:         xclip -o -selection clipboard
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
 !!! for transparent terminal uncomment the following
 !!! also use feh to set your wallpaper
 !URxvt.transparent:          true

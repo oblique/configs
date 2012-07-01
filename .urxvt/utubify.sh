@@ -11,7 +11,7 @@ if [ -z ${LINK} ]; then
     exit 1
 fi
 
-echo ${LINK} | grep -ie "https\?://\(\(\(www.\)\?youtube.com/watch\(?\|.*&\)v=.\+\)\|\(youtu.be/.\+\)\)"
+echo ${LINK} | grep -ie "^https\?://\(\(\(www.\)\?youtube.com/watch\(?\|.*&\)v=.\+\)\|\(youtu.be/.\+\)\)"
 if [ $? -eq 0 ]; then
     urxvt -e sh -c 'mplayer $(youtube-dl -g ${LINK})' &
 else
