@@ -45,12 +45,12 @@ function battery_status() {
 
     for x in {1..$_BFILLED}
     do
-        _BRES="${_BRES}\u25aa"
+        _BRES="${_BRES}\u25a0"
     done
     if [[ x -lt 10 ]]; then
         for x in {$(( _BFILLED+1 ))..10}
         do
-            _BRES="${_BRES}\u25ab"
+            _BRES="${_BRES}\u25a1"
         done
     fi
 
