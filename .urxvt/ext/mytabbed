@@ -10,7 +10,10 @@ sub refresh {
 
     my @ofs;
 
-    my $ofs = 0;
+    substr $text, 0, 2, "[ ";
+    @$rend[0 .. 1] = ($self->{rs_tab}) x 2;
+
+    my $ofs = 2;
     my $idx = 0;
 
     for my $tab (@{ $self->{tabs} }) {
@@ -30,6 +33,10 @@ sub refresh {
 
 	$ofs += $len + 1;
     }
+
+    substr $text, $ofs, 1, "]";
+    @$rend[$ofs] = $self->{rs_tab};
+    $ofs += 1;
 
     $self->{tabofs} = \@ofs;
 
