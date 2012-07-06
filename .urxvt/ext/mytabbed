@@ -315,7 +315,9 @@ sub tab_destroy {
 sub tab_key_press {
     my ($self, $tab, $event, $keysym, $str) = @_;
 
-    if ($event->{state} & urxvt::ShiftMask) {
+#   if ($event->{state} & urxvt::ShiftMask) {
+    # use control instead of shift
+    if ($event->{state} & urxvt::ControlMask) {
 	if ($keysym == 0xff51 || $keysym == 0xff53) {
 	    my ($idx) = grep $self->{tabs}[$_] == $tab, 0 .. $#{ $self->{tabs} };
 
@@ -333,19 +335,19 @@ sub tab_key_press {
 	    return 1;
 	}
     }
-    elsif ($event->{state} & urxvt::ControlMask) {
-	if ($keysym == 0xff51 || $keysym == 0xff53) {
-	    my ($idx1) = grep $self->{tabs}[$_] == $tab, 0 .. $#{ $self->{tabs} };
-	    my  $idx2  = ($idx1 + ($keysym == 0xff51 ? -1 : +1)) % @{ $self->{tabs} };
+#    elsif ($event->{state} & urxvt::ControlMask) {
+#	if ($keysym == 0xff51 || $keysym == 0xff53) {
+#	    my ($idx1) = grep $self->{tabs}[$_] == $tab, 0 .. $#{ $self->{tabs} };
+#	    my  $idx2  = ($idx1 + ($keysym == 0xff51 ? -1 : +1)) % @{ $self->{tabs} };
 
-	    ($self->{tabs}[$idx1], $self->{tabs}[$idx2]) =
-		($self->{tabs}[$idx2], $self->{tabs}[$idx1]);
+#	    ($self->{tabs}[$idx1], $self->{tabs}[$idx2]) =
+#		($self->{tabs}[$idx2], $self->{tabs}[$idx1]);
 
-	    $self->make_current ($self->{tabs}[$idx2]);
+#	    $self->make_current ($self->{tabs}[$idx2]);
 
-	    return 1;
-	}
-    }
+#	    return 1;
+#	}
+#    }
 
     ()
 }
