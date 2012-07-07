@@ -58,7 +58,7 @@ if you use .fonts.conf or .fonts do the following:
 - - -
 
 you have to replace `/home/oblique` with your home path in the
-following file because you can not use `~`
+following files because you can not use `~`
 
     .Xresources
     .mpdconf
