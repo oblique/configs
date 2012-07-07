@@ -5,7 +5,6 @@ Gtk/CursorBlinkTimeout 10
 Gtk/EnableAnimations 1
 Gtk/FontName "Cantarell 9"
 Gtk/MenuImages 0
-Gtk/Modules "canberra-gtk-module"
 Gtk/ShowInputMethodMenu 1
 Gtk/ShowUnicodeMenu 1
 Gtk/TimeoutInitial 200

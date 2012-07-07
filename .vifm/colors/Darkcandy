@@ -42,7 +42,7 @@ highlight Device cterm=bold ctermfg=161 ctermbg=default
 highlight Fifo cterm=bold ctermfg=215 ctermbg=default
 highlight Executable cterm=bold ctermfg=97 ctermbg=default
 highlight Selected cterm=bold ctermfg=99 ctermbg=default
-highlight CurrLine cterm=bold,reverse ctermfg=default ctermbg=default
+highlight CurrLine cterm=bold,reverse ctermfg=default ctermbg=233
 highlight TopLine cterm=none ctermfg=241 ctermbg=default
 highlight TopLineSel cterm=bold ctermfg=161 ctermbg=default
 highlight StatusLine cterm=bold ctermfg=161 ctermbg=default
