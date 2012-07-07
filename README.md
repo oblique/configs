@@ -17,8 +17,8 @@
     rtorrent
     mplayer2
     fontconfig
-    alsa (that use PulseAudio)
-    libao (that use PulseAudio)
+    alsa (configured to use PulseAudio)
+    libao (configured to use PulseAudio)
     xsettingsd (http://code.google.com/p/xsettingsd/)
 
 
@@ -51,11 +51,15 @@
 
 # other notes
 * if you use .fonts.conf or .fonts do the following:
+
     fc-cache -f
 
+
 * you have to replace /home/oblique with your home path in files:
+
     .Xresources
     .mpdconf
     .mplayer/config
     .ncmpcpp/config
+
 because you can not use '~'
