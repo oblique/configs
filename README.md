@@ -9,6 +9,7 @@
     zsh
     tmux
     awesome-wm
+    irssi
     gdb
     mutt (with sidebar, trash folder, purge message patches)
     urlview (needed by mutt)
