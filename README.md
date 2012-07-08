@@ -47,7 +47,7 @@
 
 ## notes for emacs
 * put RFCs at `~/rfc` (http://www.rfc-editor.org/download.html)
-* cups-pdf (use `Virtual_PDF_Printer` as name for pdf printer)
+* for `cups-pdf` use `Virtual_PDF_Printer` as name for pdf printer
 
 
 ## other notes
@@ -55,7 +55,7 @@ if you use .fonts.conf or .fonts do the following:
 
     fc-cache -f
 
-- - -
+----------------------------------------------------------------
 
 you have to replace `/home/oblique` with your home path in the
 following files because you can not use `~`
