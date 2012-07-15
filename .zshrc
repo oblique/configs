@@ -6,15 +6,13 @@ export LC_CTYPE=$LANG
 export PATH="${PATH}:${HOME}/bin"
 
 # init console colors
-if [ $TERM = "linux" ]; then
+if [[ $TERM = linux* ]]; then
     python $HOME/.zsh.d/init_linux_console_colors.py
 fi
 
 # includes
 source $HOME/.zsh.d/key-bindings.zsh
 source $HOME/.zsh.d/termsupport.zsh
-source $HOME/.zsh.d/git.zsh
-ZSH_GIT_CHECK_TIMEOUT_SEC=2 # git status timeout
 source $HOME/.zsh.d/ssh-agent.zsh
 # battery status
 BATTERY=BAT0
@@ -46,7 +44,7 @@ unsetopt flow_control
 WORDCHARS=''
 
 if [ $(id -u) -ne 0 ]; then
-    SUDO='sudo'
+    _SUDO='sudo'
 fi
 
 # edit command line
@@ -68,37 +66,37 @@ setopt pushd_ignore_dups
 
 # keyboard
 autoload zkbd
-function zkbd_file() {
+function _zkbd_file() {
     [[ -f $HOME/.zsh.d/zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
-    [[ -f $HOME/.zsh.d/zkbd/${TERM}          ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}"          && return 0
+    [[ -f $HOME/.zsh.d/zkbd/${TERM} ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}" && return 0
     return 1
 }
 
 [[ ! -d $HOME/.zsh.d/zkbd ]] && mkdir $HOME/.zsh.d/zkbd
-keyfile=$(zkbd_file)
-ret=$?
+_keyfile=$(_zkbd_file)
+_ret=$?
 if [[ ${ret} -ne 0 ]]; then
     zkbd
-    keyfile=$(zkbd_file)
-    ret=$?
+    _keyfile=$(_zkbd_file)
+    _ret=$?
 fi
-if [[ ${ret} -eq 0 ]] ; then
-    source "${keyfile}"
+if [[ ${_ret} -eq 0 ]] ; then
+    source "${_keyfile}"
 else
     printf 'Failed to setup keys using zkbd.\n'
 fi
-unfunction zkbd_file; unset keyfile ret
+unfunction _zkbd_file; unset _keyfile _ret
 
-[[ -n "${key[Home]}"    ]]  && bindkey  "${key[Home]}"    beginning-of-line
-[[ -n "${key[End]}"     ]]  && bindkey  "${key[End]}"     end-of-line
-[[ -n "${key[Insert]}"  ]]  && bindkey  "${key[Insert]}"  overwrite-mode
-[[ -n "${key[Delete]}"  ]]  && bindkey  "${key[Delete]}"  delete-char
-[[ -n "${key[Up]}"      ]]  && bindkey  "${key[Up]}"      up-line-or-history
-[[ -n "${key[Down]}"    ]]  && bindkey  "${key[Down]}"    down-line-or-history
-[[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
-[[ -n "${key[Right]}"   ]]  && bindkey  "${key[Right]}"   forward-char
-[[ -n "${key[CtrlLeft]}"    ]]  && bindkey  "${key[CtrlLeft]}"    backward-word
-[[ -n "${key[CtrlRight]}"   ]]  && bindkey  "${key[CtrlRight]}"   forward-word
+[[ -n "${key[Home]}" ]]     && bindkey  "${key[Home]}"    beginning-of-line
+[[ -n "${key[End]}" ]]      && bindkey  "${key[End]}"     end-of-line
+[[ -n "${key[Insert]}" ]]   && bindkey  "${key[Insert]}"  overwrite-mode
+[[ -n "${key[Delete]}" ]]   && bindkey  "${key[Delete]}"  delete-char
+[[ -n "${key[Up]}" ]]       && bindkey  "${key[Up]}"      up-line-or-history
+[[ -n "${key[Down]}" ]]     && bindkey  "${key[Down]}"    down-line-or-history
+[[ -n "${key[Left]}" ]]     && bindkey  "${key[Left]}"    backward-char
+[[ -n "${key[Right]}" ]]    && bindkey  "${key[Right]}"   forward-char
+[[ -n "${key[CtrlLeft]}" ]] && bindkey  "${key[CtrlLeft]}"    backward-word
+[[ -n "${key[CtrlRight]}" ]]  && bindkey  "${key[CtrlRight]}"   forward-word
 
 
 # completion
@@ -130,17 +128,22 @@ autoload -U colors && colors
 export LS_COLORS='no=01;32:fi=00:di=00;34:ln=01;36:pi=04;33:so=01;35:bd=33;04:cd=33;04:or=31;01:ex=01;32:*.rtf=00;33:*.txt=00;33:*.html=00;33:*.doc=00;33:*.pdf=00;33:*.ps=00;33:*.sit=00;31:*.hqx=00;31:*.bin=00;31:*.tar=00;31:*.tgz=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.zip=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.deb=00;31:*.dmg=00;36:*.jpg=00;35:*.gif=00;35:*.bmp=00;35:*.ppm=00;35:*.tga=00;35:*.xbm=00;35:*.xpm=00;35:*.tif=00;35:*.mpg=00;37:*.avi=00;37:*.gl=00;37:*.dl=00;37:*.mov=00;37:*.mp3=00;35:'
 export GREP_COLOR='1;31'
 
+# git info
+_git_prompt_info() {
+    local _hash=$(git show -s --pretty=format:%h HEAD 2> /dev/null)
+    [ $_hash ] || return
+    local _name=$(git show -s --pretty=format:%d HEAD 2> /dev/null | awk '{print $2}')
+    [ $_name ] && _name="${_name%,*}"
+    [ $_name ] && _name="${_name%)*}" && _name="$_name "
+    echo -n "%{$fg_bold[red]%}${_name}[${_hash}]%{$reset_color%}"
+}
+
 
 # theme
 setopt prompt_subst
-PROMPT='%{$fg[blue]%}[%D{%d/%m/%y} %T]%{$reset_color%} %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m%{$reset_color%} %{$fg[magenta]%}[%(!.%1~.%~)]%{$reset_color%} $(git_prompt_info)
+PROMPT='%{$fg[blue]%}[%D{%d/%m/%y} %T]%{$reset_color%} %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m%{$reset_color%} %{$fg[magenta]%}[%(!.%1~.%~)]%{$reset_color%} $(_git_prompt_info)
 %{$fg[red]%}>>%{$reset_color%} '
-RPROMPT='$(battery_status)'
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[magenta]%}$(echo -ne \\u25cf)%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CHECK_TIMEOUT="%{$fg_bold[magenta]%}$(echo -n \?)%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+RPROMPT='$(_battery_status)'
 
 
 # aliases
@@ -155,26 +158,27 @@ alias kismet='TERM=rxvt-unicode kismet'
 alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
 alias arm-none-linux-gnueabi-gdb='arm-none-linux-gnueabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
-alias openocd-panda='$SUDO openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
+alias openocd-panda='${_SUDO} openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 
 # special ncmpcpp
 alias _ncmpcpp="$(which ncmpcpp)"
 ncmpcpp() {
+    local _color6
+    local _color14
+
     # change the cyan to black (#4d4d4d rgb)
-    if [ $TERM = "linux" ]; then
+    if [[ $TERM = linux* ]]; then
         echo -en "\e]P64d4d4d"
         echo -en "\e]PE4d4d4d"
-    elif [ ${TERM:0:6} = "screen" ]; then
-        # screen and tmux they don't support color changing
+    elif [[ $TERM = screen* ]]; then
+        # screen and tmux don't support color changing
     else
         # backup cyan rgb
-        color6=$(python $HOME/.zsh.d/get_term_rgb_color.py 6)
-        color14=$(python $HOME/.zsh.d/get_term_rgb_color.py 14)
+        _color6=$(python $HOME/.zsh.d/get_term_rgb_color.py 6)
+        _color14=$(python $HOME/.zsh.d/get_term_rgb_color.py 14)
         # fallback values for cyan
-        [ $color6 ] || color6=" "
-        [ $color14 ] || color14=" "
-        [ ${color6:0:4} != "rgb:" ] && color6='rgb:0000/cdcd/cdcd'
-        [ ${color14:0:4} != "rgb:" ] && color14='rgb:0000/ffff/ffff'
+        [[ $_color6 != rgb:* ]] && _color6='rgb:0000/cdcd/cdcd'
+        [[ $_color14 != rgb:* ]] && _color14='rgb:0000/ffff/ffff'
         # change cyan to black
         echo -en '\e]4;6;rgb:4d4d/4d4d/4d4d\e\'
         echo -en '\e]4;14;rgb:4d4d/4d4d/4d4d\e\'
@@ -182,15 +186,15 @@ ncmpcpp() {
 
     _ncmpcpp "$@"
 
-    if [ $TERM = "linux" ]; then
+    if [[ $TERM = linux* ]]; then
         # reset colors
         clear
         echo -en '\e]R'
-    elif [ ${TERM:0:6} = "screen" ]; then
+    elif [[ $TERM = screen* ]]; then
     else
         # restore cyan rgb
-        echo -en "\\e]4;6;$color6\\e\\"
-        echo -en "\\e]4;14;$color14\\e\\"
+        echo -en "\\e]4;6;${_color6}\\e\\"
+        echo -en "\\e]4;14;${_color14}\\e\\"
     fi
 }
 
@@ -206,13 +210,13 @@ image_music_video() {
         return 1
     fi
 
-    IMG=$1
-    AUD=$2
-    TMP_IMG=$(mktemp --suffix=.${IMG##*.})
-    cp ${IMG} ${TMP_IMG}
-    mogrify -resize 1920x1080 -background black -gravity center -extent 1920x1080 ${TMP_IMG}
-    ffmpeg -loop_input -i ${TMP_IMG} -i ${AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba ${AUD%.*}.mp4
-    rm -f ${TMP_IMG}
+    local _IMG=$1
+    local _AUD=$2
+    local _TMP_IMG=$(mktemp --suffix=.${_IMG##*.})
+    cp ${_IMG} ${_TMP_IMG}
+    mogrify -resize 1920x1080 -background black -gravity center -extent 1920x1080 ${_TMP_IMG}
+    ffmpeg -loop_input -i ${_TMP_IMG} -i ${_AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba ${_AUD%.*}.mp4
+    rm -f ${_TMP_IMG}
 }
 
 wpa_dhcp() {
@@ -221,25 +225,25 @@ wpa_dhcp() {
         return 1
     fi
 
-    $SUDO iwconfig $1 channel auto || return $?
+    $_SUDO iwconfig $1 channel auto || return $?
 
-    tmp_conf=$(mktemp /tmp/XXXXXX.conf)
-    wpa_passphrase $2 $3 > $tmp_conf
-    ret=$?
-    if [ $ret -ne 0 ]; then
-        cat $tmp_conf
-        rm -f $tmp_conf
-        return $ret
+    local _tmp_conf=$(mktemp --suffix=.conf)
+    wpa_passphrase $2 $3 > $_tmp_conf
+    local _ret=$?
+    if [ $_ret -ne 0 ]; then
+        cat $_tmp_conf
+        rm -f $_tmp_conf
+        return $_ret
     fi
 
-    $SUDO wpa_supplicant -B -Dwext -i $1 -c $tmp_conf
-    ret=$?
-    rm -f $tmp_conf
-    if [ $ret -ne 0 ]; then
-        return $ret
+    $_SUDO wpa_supplicant -B -Dwext -i $1 -c $_tmp_conf
+    _ret=$?
+    rm -f $_tmp_conf
+    if [ $_ret -ne 0 ]; then
+        return $_ret
     fi
 
-    $SUDO dhcpcd $1
+    $_SUDO dhcpcd $1
     return $?
 }
 
@@ -249,9 +253,9 @@ wep_dhcp() {
         return 1
     fi
 
-    $SUDO iwconfig $1 channel auto || return $?
-    $SUDO iwconfig $1 essid $2 key $3 || return $?
-    $SUDO dhcpcd $1
+    $_SUDO iwconfig $1 channel auto || return $?
+    $_SUDO iwconfig $1 essid $2 key $3 || return $?
+    $_SUDO dhcpcd $1
     return $?
 }
 
@@ -261,9 +265,9 @@ open_dhcp() {
         return 1
     fi
 
-    $SUDO iwconfig $1 channel auto || return $?
-    $SUDO iwconfig $1 essid $2|| return $?
-    $SUDO dhcpcd $1
+    $_SUDO iwconfig $1 channel auto || return $?
+    $_SUDO iwconfig $1 essid $2|| return $?
+    $_SUDO dhcpcd $1
     return $?
 }
 
@@ -273,8 +277,8 @@ wifi_scan() {
         return 1
     fi
 
-    $SUDO iwconfig $1 channel auto || return $?
-    $SUDO iwlist $1 scan
+    $_SUDO iwconfig $1 channel auto || return $?
+    $_SUDO iwlist $1 scan
     return $?
 }
 
@@ -305,31 +309,36 @@ embed_subtitle() {
         return 1
     fi
 
-    VIDRAND_F=$(mktemp -u --suffix=.mp4)
-    SOUNDRAND_F=$(mktemp -u --suffix=.wav)
+    local _VIDRAND_F=$(mktemp -u --suffix=.mp4)
+    local _SOUNDRAND_F=$(mktemp -u --suffix=.wav)
 
-    mkfifo $VIDRAND_F
-    mkfifo $SOUNDRAND_F
+    mkfifo $_VIDRAND_F
+    mkfifo $_SOUNDRAND_F
 
-    (mplayer -benchmark -really-quiet -sub $2 -noframedrop -nosound -vo yuv4mpeg:file=${VIDRAND_F} $1 -osdlevel 0 &) > /dev/null 2>&1
-    (mplayer -benchmark -really-quiet -noframedrop -ao pcm:file=${SOUNDRAND_F} -novideo $1 &) > /dev/null 2>&1
+    (mplayer -benchmark -really-quiet -sub $2 -noframedrop -nosound -vo yuv4mpeg:file=${_VIDRAND_F} $1 -osdlevel 0 &) > /dev/null 2>&1
+    (mplayer -benchmark -really-quiet -noframedrop -ao pcm:file=${_SOUNDRAND_F} -novideo $1 &) > /dev/null 2>&1
     sleep 2
-    ffmpeg -i $VIDRAND_F -i $SOUNDRAND_F -isync ${*:3}
+    ffmpeg -i $_VIDRAND_F -i $_SOUNDRAND_F -isync ${*:3}
 
-    rm -f $VIDRAND_F $SOUNDRAND_F
+    rm -f $_VIDRAND_F $_SOUNDRAND_F
 }
 
 mkmagnettorrent() {
+    local _torhash
+    local _torfile
+
     if [ $# -lt 1 ]; then
         echo "usage: mkmagnettorrent \"MAGET_URI\""
         return 1
     fi
+
     [[ "$1" =~ "xt=urn:btih:([^&/]+)" ]] || exit
-    torhash=${match[1]}
+    _torhash=${match[1]}
     if [[ "$1" =~ "dn=([^&/]+)" ]]; then
-        torfile=${match[1]}
+        _torfile=${match[1]}
     else
-        torfile=$torhash
+        _torfile=$_torhash
     fi
-    echo "d10:magnet-uri${#1}:${1}e" > "meta-${torfile}.torrent"
+
+    echo "d10:magnet-uri${#1}:${1}e" > "meta-${_torfile}.torrent"
 }

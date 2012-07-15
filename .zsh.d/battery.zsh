@@ -1,28 +1,30 @@
 zmodload -i zsh/mathfunc
 
-function battery_status() {
-    BATPATH=/sys/class/power_supply/$BATTERY
-    [[ -e $BATPATH/status ]] || return
-    [[ -e $BATPATH/energy_now ]] || [[ -e $BATPATH/charge_now ]] || return
-    [[ -e $BATPATH/energy_full ]] || [[ -e $BATPATH/charge_full ]] || return
+function _battery_status() {
+    local _BATPATH=/sys/class/power_supply/$BATTERY
+    [[ -e $_BATPATH/status ]] || return
+    [[ -e $_BATPATH/energy_now ]] || [[ -e $_BATPATH/charge_now ]] || return
+    [[ -e $_BATPATH/energy_full ]] || [[ -e $_BATPATH/charge_full ]] || return
 
-    if [[ -e $BATPATH/energy_now ]]; then
-        _BCUR=$(cat $BATPATH/energy_now)
+    local _BCUR
+    if [[ -e $_BATPATH/energy_now ]]; then
+        _BCUR=$(cat $_BATPATH/energy_now)
     else
-        _BCUR=$(cat $BATPATH/charge_now)
+        _BCUR=$(cat $_BATPATH/charge_now)
     fi
 
-    if [[ -e $BATPATH/energy_full ]]; then
-        _BFULL=$(cat $BATPATH/energy_full)
+    local _BFULL
+    if [[ -e $_BATPATH/energy_full ]]; then
+        _BFULL=$(cat $_BATPATH/energy_full)
     else
-        _BFULL=$(cat $BATPATH/charge_full)
+        _BFULL=$(cat $_BATPATH/charge_full)
     fi
 
-    _BFSTATUS=$(cat $BATPATH/status)
+    local _BFSTATUS=$(cat $_BATPATH/status)
+    local _BPERCENT=$(( int(ceil(_BCUR*100.0/_BFULL)) ))
+    local _BFILLED=$(( int(ceil(_BCUR*10.0/_BFULL)) ))
 
-    _BPERCENT=$(( int(ceil(_BCUR*100.0/_BFULL)) ))
-    _BFILLED=$(( int(ceil(_BCUR*10.0/_BFULL)) ))
-
+    local _BRES
     if [[ $_BFSTATUS = "Charging" ]]; then
         _BRES="%{$fg[magenta]%}\u25b4%{$reset_color%} "
         # ThinkPad laptops does not go above 99%
@@ -47,10 +49,16 @@ function battery_status() {
     do
         _BRES="${_BRES}\u25a0"
     done
+
     if [[ x -lt 10 ]]; then
+        if [[ $TERM = linux* ]]; then
+            _BRES="${_BRES}%{\033[1;30m%}"
+        else
+            _BRES="${_BRES}%{\033[38;05;238m%}"
+        fi
         for x in {$(( _BFILLED+1 ))..10}
         do
-            _BRES="${_BRES}\u25a1"
+            _BRES="${_BRES}\u25a0"
         done
     fi
 
