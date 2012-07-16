@@ -132,9 +132,13 @@ export GREP_COLOR='1;31'
 _git_prompt_info() {
     local _hash=$(git show -s --pretty=format:%h HEAD 2> /dev/null)
     [ $_hash ] || return
-    local _name=$(git show -s --pretty=format:%d HEAD 2> /dev/null | awk '{print $2}')
-    [ $_name ] && _name="${_name%,*}"
-    [ $_name ] && _name="${_name%)*}" && _name="$_name "
+    local _name=$(git symbolic-ref --short HEAD 2> /dev/null)
+    if [[ -z $_name ]]; then
+        _name=$(git show -s --pretty=format:%d HEAD 2> /dev/null | awk '{print $2}')
+        _name="${_name%,*}"
+        _name="${_name%)*}"
+    fi
+    [ $_name ] && _name="$_name "
     echo -n "%{$fg_bold[red]%}${_name}[${_hash}]%{$reset_color%}"
 }
 

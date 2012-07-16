@@ -20,21 +20,34 @@ function _battery_status() {
         _BFULL=$(cat $_BATPATH/charge_full)
     fi
 
+    local _BUP
+    local _BDOWN
+    local _BPOWER
+    if [[ $TERM = linux* ]]; then
+        _BUP="+"
+        _BDOWN="-"
+        _BPOWER="="
+    else
+        _BUP='\u25b4'
+        _BDOWN='\u25be'
+        _BPOWER='\u26a1'
+    fi
+
     local _BFSTATUS=$(cat $_BATPATH/status)
     local _BPERCENT=$(( int(ceil(_BCUR*100.0/_BFULL)) ))
     local _BFILLED=$(( int(ceil(_BCUR*10.0/_BFULL)) ))
 
     local _BRES
     if [[ $_BFSTATUS = "Charging" ]]; then
-        _BRES="%{$fg[magenta]%}\u25b4%{$reset_color%} "
+        _BRES="%{$fg[magenta]%}${_BUP}%{$reset_color%} "
         # ThinkPad laptops does not go above 99%
         if [[ _BPERCENT -ge 99 ]]; then
-            _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
+            _BRES="%{$fg[magenta]%}${_BPOWER}%{$reset_color%} "
         fi
     elif [[ $_BFSTATUS = "Discharging" ]]; then
-        _BRES="%{$fg[red]%}\u25be%{$reset_color%} "
+        _BRES="%{$fg[red]%}${_BDOWN}%{$reset_color%} "
     else
-        _BRES="%{$fg[magenta]%}\u26a1%{$reset_color%} "
+        _BRES="%{$fg[magenta]%}${_BPOWER}%{$reset_color%} "
     fi
 
     if [[ $_BFILLED -gt 6 ]]; then
