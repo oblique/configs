@@ -24,7 +24,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb '#151515' -nf '#787878' -sb '#151515' -sf '#165e92' -fn '-*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
+bindsym $mod+d exec dmenu_run -nb '#151515' -nf '#787878' -sb '#151515' -sf '#1a6fac' -fn '-*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
 
 # change focus
 bindsym $mod+j focus left
@@ -179,7 +179,7 @@ for_window [class="Firefox"] border 1pixel
 for_window [class="Chromium"] border 1pixel
 
 # class                 border  backgr. text    indicator
-client.focused          #202020 #202020 #165e92 #165e92
+client.focused          #202020 #202020 #1a6fac #165e92
 client.focused_inactive #151515 #151515 #787878 #202020
 client.unfocused        #101010 #101010 #787878 #202020
 client.urgent           #151515 #151515 #c00d3b #c00d3b
@@ -196,3 +196,4 @@ exec --no-startup-id arpdetective
 exec --no-startup-id wicd-client --tray
 exec --no-startup-id mpd
 exec --no-startup-id syndaemon -i 1.0 -k -R
+exec --no-startup-id perl ~/.i3/bat_warning.pl 0

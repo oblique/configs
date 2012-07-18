@@ -9,7 +9,7 @@
     zsh
     tmux
     i3wm & i3status
-    awesome-wm
+    awesome-wm (i don't use it anymore)
     irssi
     gdb
     mutt (with sidebar, trash folder, purge message patches)
@@ -61,7 +61,6 @@ if you use .fonts.conf or .fonts do the following:
 you have to replace `/home/oblique` with your home path in the
 following files because you can not use `~`
 
-    .Xresources
     .mpdconf
     .mplayer/config
     .ncmpcpp/config

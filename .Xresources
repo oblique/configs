@@ -82,7 +82,7 @@ URxvt.scrollBar_right:      false
 URxvt.scrollColor:          #0c0c0c
 URxvt.saveLines:            5500
 URxvt.perl-ext-common:      default,matcher,-searchable-scrollback,clipboard,keyboard-select,mytabbed
-URxvt.urlLauncher:          /home/oblique/.urxvt/utubify.sh
+URxvt.urlLauncher:          firefox
 URxvt.matcher.button:       1
 URxvt.colorUL:              #4695c8
 URxvt.cursorBlink:          true
