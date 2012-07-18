@@ -8,6 +8,7 @@
     vifm
     zsh
     tmux
+    i3wm & i3status
     awesome-wm
     irssi
     gdb
