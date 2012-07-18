@@ -90,8 +90,8 @@ URxvt.tabbed.tabbar-fg:     238
 URxvt.tabbed.tabbar-bg:     233
 URxvt.tabbed.tab-fg:        97
 URxvt.tabbed.tab-bg:        233
-URxvt.keysym.Mod4-c:        perl:clipboard:copy
-URxvt.keysym.Mod4-v:        perl:clipboard:paste
+URxvt.keysym.Mod4-Meta-c:   perl:clipboard:copy
+URxvt.keysym.Mod4-Meta-v:   perl:clipboard:paste
 URxvt.keysym.Mod4-C-v:      perl:clipboard:paste_escaped
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.pasteCommand:         xclip -o -selection clipboard

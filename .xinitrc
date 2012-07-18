@@ -44,7 +44,7 @@ autocutsel -selection PRIMARY -fork
 #export GDK_USE_XFT=1    # for old gtk applications
 #export QT_XFT=true      # for old qt applicatios
 
-DEFAULT_SESSION="awesome"
+DEFAULT_SESSION="i3"
 
 if [ "$1" ]; then
     x=$1
