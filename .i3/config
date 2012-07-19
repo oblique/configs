@@ -197,6 +197,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # startup applications
+exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
 exec --no-startup-id xsettingsd
 exec --no-startup-id arpdetective
 exec --no-startup-id wicd-client --tray
