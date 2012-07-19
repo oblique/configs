@@ -2,7 +2,7 @@
 
 use POSIX qw/floor setsid/;
 
-if ($#ARGV == -1) {
+if ($#ARGV != 0) {
     print "$0 <battery_number>\n";
     exit 1;
 }
