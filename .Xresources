@@ -96,6 +96,7 @@ URxvt.keysym.Mod4-C-v:      perl:clipboard:paste_escaped
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.pasteCommand:         xclip -o -selection clipboard
 URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.urgentOnBell:         true
 !!! for transparent terminal uncomment the following
 !!! also use feh to set your wallpaper
 !URxvt.transparent:          true

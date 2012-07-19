@@ -43,9 +43,6 @@ setopt long_list_jobs
 unsetopt flow_control
 WORDCHARS=''
 
-if [ $(id -u) -ne 0 ]; then
-    _SUDO='sudo'
-fi
 
 # edit command line
 autoload -U edit-command-line
@@ -131,14 +128,14 @@ export GREP_COLOR='1;31'
 # git info
 _git_prompt_info() {
     local _hash=$(git show -s --pretty=format:%h HEAD 2> /dev/null)
-    [ $_hash ] || return
+    [[ -z $_hash ]] && return
     local _name=$(git symbolic-ref --short HEAD 2> /dev/null)
     if [[ -z $_name ]]; then
         _name=$(git show -s --pretty=format:%d HEAD 2> /dev/null | awk '{print $2}')
         _name="${_name%,*}"
         _name="${_name%)*}"
     fi
-    [ $_name ] && _name="$_name "
+    [[ -n $_name ]] && _name="$_name "
     echo -n "%{$fg_bold[red]%}${_name}[${_hash}]%{$reset_color%}"
 }
 
@@ -151,6 +148,7 @@ RPROMPT='$(_battery_status)'
 
 
 # aliases
+alias sudo='sudo ' # enable aliases in sudo
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias uhalt='dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop'
@@ -162,10 +160,9 @@ alias kismet='TERM=rxvt-unicode kismet'
 alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
 alias arm-none-linux-gnueabi-gdb='arm-none-linux-gnueabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
-alias openocd-panda='${_SUDO} openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
+alias openocd-panda='openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 
 # special ncmpcpp
-alias _ncmpcpp="$(which ncmpcpp)"
 ncmpcpp() {
     local _color6
     local _color14
@@ -188,7 +185,7 @@ ncmpcpp() {
         echo -en '\e]4;14;rgb:4d4d/4d4d/4d4d\e\'
     fi
 
-    _ncmpcpp "$@"
+    command ncmpcpp $@
 
     if [[ $TERM = linux* ]]; then
         # reset colors
@@ -209,7 +206,7 @@ chpixelsize() {
 }
 
 image_music_video() {
-    if [ $# -ne 2 ]; then
+    if [[ $# -ne 2 ]]; then
         echo "usage: image_music_video <image> <audio>"
         return 1
     fi
@@ -224,91 +221,90 @@ image_music_video() {
 }
 
 wpa_dhcp() {
-    if [ $# -ne 3 ]; then
+    if [[ $# -ne 3 ]]; then
         echo "usage: wpa_dhcp <interface> <essid> <passphrase>"
         return 1
     fi
 
-    $_SUDO iwconfig $1 channel auto || return $?
+    sudo iwconfig $1 channel auto || return $?
 
     local _tmp_conf=$(mktemp --suffix=.conf)
     wpa_passphrase $2 $3 > $_tmp_conf
     local _ret=$?
-    if [ $_ret -ne 0 ]; then
+    if [[ $_ret -ne 0 ]]; then
         cat $_tmp_conf
         rm -f $_tmp_conf
         return $_ret
     fi
 
-    $_SUDO wpa_supplicant -B -Dwext -i $1 -c $_tmp_conf
+    sudo wpa_supplicant -B -Dwext -i $1 -c $_tmp_conf
     _ret=$?
     rm -f $_tmp_conf
-    if [ $_ret -ne 0 ]; then
+    if [[ $_ret -ne 0 ]]; then
         return $_ret
     fi
 
-    $_SUDO dhcpcd $1
+    sudo dhcpcd $1
     return $?
 }
 
 wep_dhcp() {
-    if [ $# -ne 3 ]; then
+    if [[ $# -ne 3 ]]; then
         echo "usage: wep_dhcp <interface> <essid> <passphrase>"
         return 1
     fi
 
-    $_SUDO iwconfig $1 channel auto || return $?
-    $_SUDO iwconfig $1 essid $2 key $3 || return $?
-    $_SUDO dhcpcd $1
+    sudo iwconfig $1 channel auto || return $?
+    sudo iwconfig $1 essid $2 key $3 || return $?
+    sudo dhcpcd $1
     return $?
 }
 
 open_dhcp() {
-    if [ $# -ne 2 ]; then
+    if [[ $# -ne 2 ]]; then
         echo "usage: open_dhcp <interface> <essid>"
         return 1
     fi
 
-    $_SUDO iwconfig $1 channel auto || return $?
-    $_SUDO iwconfig $1 essid $2|| return $?
-    $_SUDO dhcpcd $1
+    sudo iwconfig $1 channel auto || return $?
+    sudo iwconfig $1 essid $2|| return $?
+    sudo dhcpcd $1
     return $?
 }
 
 wifi_scan() {
-    if [ $# -ne 1 ]; then
+    if [[ $# -ne 1 ]]; then
         echo "usage: wifi_scan <interface>"
         return 1
     fi
 
-    $_SUDO iwconfig $1 channel auto || return $?
-    $_SUDO iwlist $1 scan
+    sudo iwconfig $1 channel auto || return $?
+    sudo iwlist $1 scan
     return $?
 }
 
-alias _udisks="$(which udisks)"
 udisks() {
-    for x in $*; do
-        if [ $x = "--unmount" ]; then
+    for x in $@; do
+        if [[ $x = "--unmount" ]]; then
             sync
             break
         fi
     done
-    _udisks $*
+    command udisks $@
 }
 
 embed_subtitle() {
-    if [ $# -lt 3 ]; then
+    if [[ $# -lt 3 ]]; then
         echo "usage: embed_subtitle <video> <subtitle> [ffmpeg options] <output>"
         return 1
     fi
 
-    if [ ! -e $1 ]; then
+    if [[ ! -e $1 ]]; then
         echo "file $1 does not exists!"
         return 1
     fi
 
-    if [ ! -e $2 ]; then
+    if [[ ! -e $2 ]]; then
         echo "file $2 does not exists!"
         return 1
     fi
@@ -331,7 +327,7 @@ mkmagnettorrent() {
     local _torhash
     local _torfile
 
-    if [ $# -lt 1 ]; then
+    if [[ $# -lt 1 ]]; then
         echo "usage: mkmagnettorrent \"MAGET_URI\""
         return 1
     fi
@@ -345,4 +341,11 @@ mkmagnettorrent() {
     fi
 
     echo "d10:magnet-uri${#1}:${1}e" > "meta-${_torfile}.torrent"
+}
+
+beep() {
+    if [[ $# -gt 0 ]]; then
+        eval $@
+    fi
+    echo -en '\a'
 }
