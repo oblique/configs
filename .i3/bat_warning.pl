@@ -1,39 +1,11 @@
 #!/usr/bin/env perl
 
-use POSIX qw/floor setsid/;
+use POSIX qw/floor/;
 
 if ($#ARGV != 0) {
     print "$0 <battery_number>\n";
     exit 1;
 }
-
-my $shell = $ENV{'SHELL'};
-
-if ($shell eq undef) {
-    $shell = "/bin/sh";
-}
-
-sub i3nagbar_msg {
-    my ($msg) = @_;
-    my $pid;
-
-    $pid = fork();
-
-    if ($pid ne undef && $pid == 0) {
-	setsid();
-	$pid = fork();
-
-	if ($pid eq undef) {
-	    exit 1;
-	} if ($pid == 0) {
-	    exec $shell, '-c', "i3-nagbar -m '$msg'";
-	    exit 1;
-	}
-
-	exit 0;
-    }
-}
-
 
 my $bat_path = "/sys/class/power_supply/BAT$ARGV[0]";
 my $bat_path_status = "$bat_path/status";
@@ -86,7 +58,7 @@ while (1) {
 	    while ($levels[$level_idx] >= $bat_percent) {
 		$level_idx++;
 	    }
-	    i3nagbar_msg("Battery charge is low ($bat_percent%)!!");
+	    system("notify-send -u critical 'Battery charge is low! [$bat_percent%]'");
 	}
     } else {
 	$level_idx = 0;

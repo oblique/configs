@@ -8,7 +8,8 @@
     vifm
     zsh
     tmux
-    i3wm & i3status
+    i3-wm & i3status
+    dunst (lightweight notification-daemon, needed by i3-wm)
     awesome-wm (i don't use it anymore)
     irssi
     gdb
