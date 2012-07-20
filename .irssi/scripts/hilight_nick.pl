@@ -1,7 +1,7 @@
 use Irssi;
 use vars qw($VERSION %IRSSI);
 
-$VERSION = "0.2";
+$VERSION = "0.3";
 
 %IRSSI = (
 	authors		=> "oblique",
@@ -15,9 +15,8 @@ $VERSION = "0.2";
 sub sig_message_public {
 	my ($server, $msg, $nick, $address, $target) = @_;
 	my ($win, $theme, $pubmsg, $pubmsg_me);
-	my $hilight_flag = Irssi::settings_get_bool(hilight_nick_matches);
 
-	if ($hilight_flag && index($msg, $server->{nick}) >= 0) {
+	if (Irssi::settings_get_bool('hilight_nick_matches') && $msg =~ m/$server->{nick}/i) {
 		$win = $server->window_find_item($target);
 		$theme = Irssi::current_theme();
 
@@ -27,6 +26,9 @@ sub sig_message_public {
 		$win->command("^format pubmsg $pubmsg_me");
 		Irssi::signal_continue(@_);
 		$win->activity(3);
+		if (Irssi::settings_get_bool('bell_beeps') && Irssi::settings_get_str('beep_msg_level') =~ m/HILIGHT/) {
+			$win->command("^beep");
+		}
 		$win->command("^format pubmsg $pubmsg");
 	}
 }
@@ -34,10 +36,9 @@ sub sig_message_public {
 sub sig_message_irc_action {
 	my ($server, $msg, $nick, $address, $target) = @_;
 	my ($win, $theme, $action_public_old, $action_public_new, $hcolor);
-	my $hilight_flag = Irssi::settings_get_bool(hilight_nick_matches);
 
-	if ($hilight_flag && index($msg, $server->{nick}) >= 0) {
-		$hcolor = Irssi::settings_get_str("hilight_color");
+	if (Irssi::settings_get_bool('hilight_nick_matches') && $msg =~ m/$server->{nick}/i) {
+		$hcolor = Irssi::settings_get_str('hilight_color');
 		$win = $server->window_find_item($target);
 		$theme = Irssi::current_theme();
 
@@ -48,6 +49,9 @@ sub sig_message_irc_action {
 		$win->command("^format action_public $action_public_new");
 		Irssi::signal_continue(@_);
 		$win->activity(3);
+		if (Irssi::settings_get_bool('bell_beeps') && Irssi::settings_get_str('beep_msg_level') =~ m/HILIGHT/) {
+			$win->command("^beep");
+		}
 		$win->command("^format action_public $action_public_old");
 	}
 }

@@ -215,6 +215,8 @@ settings = {
     hilight_color = "%R";
     hilight_act_color = "%R";
     hilight_nick_matches = "yes";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS HILIGHT";
   };
   "perl/core/scripts" = {
     awl_display_key = "%K[%n$Q%K:%n$H$C$S%K]%n";
