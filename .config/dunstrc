@@ -18,14 +18,14 @@
     # keybindings to remove notification
     # available modifiers are 'ctrl', 'mod1' (the alt-key), 'mod2', 'mod3'
     # and 'mod4' (windows-key)
-    #modifier = ctrl
+    modifier = ctrl
 
     # use xev to find the names for keys
-    #key = space
+    key = space
     # key to clear all messages
-    #all_key = Menu
+    all_key = Menu
     # key to redisplay last message(s)
-    #history_key = grave
+    history_key = grave
 
     # alignment of message text.
     # Possible values are "left", "center" and "right"

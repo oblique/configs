@@ -21,6 +21,9 @@ setxkbmap -option grp:rctrl_rshift_toggle
 setxkbmap -option terminate:ctrl_alt_bksp
 setxkbmap -option compose:menu
 
+# remap Menu key
+xmodmap -e "keycode 135 = Menu"
+
 xinput list | sed -ne 's/^[^ ][^V].*id=\([0-9]*\).*/\1/p' | while read id
 do
         case `xinput list-props $id` in
