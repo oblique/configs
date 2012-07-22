@@ -119,30 +119,30 @@ mode "resize" {
 	# when pressing left, the window is resized so that it has
 	# more space on its left
 
-	bindsym j resize shrink left 10 px or 10 ppt
-	bindsym Shift+J resize grow   left 10 px or 10 ppt
+	bindsym j resize shrink left 9 px or 10 ppt
+	bindsym Shift+J resize grow left 9 px or 10 ppt
 
-	bindsym k resize shrink down 10 px or 10 ppt
-	bindsym Shift+K resize grow   down 10 px or 10 ppt
+	bindsym k resize shrink down 18 px or 10 ppt
+	bindsym Shift+K resize grow down 18 px or 10 ppt
 
-	bindsym l resize shrink up 10 px or 10 ppt
-	bindsym Shift+L resize grow   up 10 px or 10 ppt
+	bindsym l resize shrink up 18 px or 10 ppt
+	bindsym Shift+L resize grow up 18 px or 10 ppt
 
-	bindsym semicolon resize shrink right 10 px or 10 ppt
-	bindsym Shift+colon resize grow   right 10 px or 10 ppt
+	bindsym semicolon resize shrink right 9 px or 10 ppt
+	bindsym Shift+colon resize grow right 9 px or 10 ppt
 
 	# same bindings, but for the arrow keys
-	bindsym Left resize shrink left 10 px or 10 ppt
-	bindsym Shift+Left resize grow   left 10 px or 10 ppt
+	bindsym Left resize shrink left 9 px or 10 ppt
+	bindsym Shift+Left resize grow left 9 px or 10 ppt
 
-	bindsym Down resize shrink down 10 px or 10 ppt
-	bindsym Shift+Down resize grow   down 10 px or 10 ppt
+	bindsym Down resize shrink down 18 px or 10 ppt
+	bindsym Shift+Down resize grow down 18 px or 10 ppt
 
-	bindsym Up resize shrink up 10 px or 10 ppt
-	bindsym Shift+Up resize grow   up 10 px or 10 ppt
+	bindsym Up resize shrink up 18 px or 10 ppt
+	bindsym Shift+Up resize grow up 18 px or 10 ppt
 
-	bindsym Right resize shrink right 10 px or 10 ppt
-	bindsym Shift+Right resize grow   right 10 px or 10 ppt
+	bindsym Right resize shrink right 9 px or 10 ppt
+	bindsym Shift+Right resize grow right 9 px or 10 ppt
 
 	#back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -178,6 +178,9 @@ bar {
               urgent_workspace   #101010 #101010 #c00d3b
 	}
 }
+
+floating_minimum_size 72 x 54
+floating_maximum_size -1 x -1
 
 for_window [class="Firefox"] border 1pixel
 for_window [class="Firefox" title="Downloads"] floating enable
