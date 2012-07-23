@@ -21,33 +21,21 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvt
 
 # kill focused window
-bindsym $mod+Shift+Q kill
+bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -nb '#151515' -nf '#787878' -sb '#151515' -sf '#1a6fac' -fn '-*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
 
 # change focus
-#bindsym $mod+j focus left
-#bindsym $mod+k focus down
-#bindsym $mod+l focus up
-#bindsym $mod+semicolon focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
 bindsym $mod+Right focus right
 
 # move focused window
-#bindsym $mod+Shift+J move left
-#bindsym $mod+Shift+K move down
-#bindsym $mod+Shift+L move up
-#bindsym $mod+Shift+colon move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
@@ -76,10 +64,6 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindcode $mod+d focus child
 
-# switch to previous or next workspace
-bindsym $mod+j workspace prev
-bindsym $mod+l workspace next
-
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -93,73 +77,43 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+at move workspace 2
-bindsym $mod+Shift+numbersign move workspace 3
-bindsym $mod+Shift+dollar move workspace 4
-bindsym $mod+Shift+percent move workspace 5
-bindsym $mod+Shift+asciicircum move workspace 6
-bindsym $mod+Shift+ampersand move workspace 7
-bindsym $mod+Shift+asterisk move workspace 8
-bindsym $mod+Shift+parenleft move workspace 9
-bindsym $mod+Shift+parenright move workspace 10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+C reload
+bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+R restart
+bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
+bindsym $mod+Shift+e exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
 	# These bindings trigger as soon as you enter the resize mode
 
-	# They resize the border in the direction you pressed, e.g.
-	# when pressing left, the window is resized so that it has
-	# more space on its left
+	# Pressing left will shrink the window’s width.
+	# Pressing right will grow the window’s width.
+	# Pressing up will shrink the window’s height.
+	# Pressing down will grow the window’s height.
+	bindsym Left  resize shrink width 9 px or 10 ppt
+	bindsym Down  resize grow height 18 px or 10 ppt
+	bindsym Up    resize shrink height 18 px or 10 ppt
+	bindsym Right resize grow width 9 px or 10 ppt
 
-	bindsym j resize shrink left 9 px or 10 ppt
-	bindsym Shift+J resize grow left 9 px or 10 ppt
-
-	bindsym k resize shrink down 18 px or 10 ppt
-	bindsym Shift+K resize grow down 18 px or 10 ppt
-
-	bindsym l resize shrink up 18 px or 10 ppt
-	bindsym Shift+L resize grow up 18 px or 10 ppt
-
-	bindsym semicolon resize shrink right 9 px or 10 ppt
-	bindsym Shift+colon resize grow right 9 px or 10 ppt
-
-	# same bindings, but for the arrow keys
-	bindsym Left resize shrink left 9 px or 10 ppt
-	bindsym Shift+Left resize grow left 9 px or 10 ppt
-
-	bindsym Down resize shrink down 18 px or 10 ppt
-	bindsym Shift+Down resize grow down 18 px or 10 ppt
-
-	bindsym Up resize shrink up 18 px or 10 ppt
-	bindsym Shift+Up resize grow up 18 px or 10 ppt
-
-	bindsym Right resize shrink right 9 px or 10 ppt
-	bindsym Shift+Right resize grow right 9 px or 10 ppt
-
-	#back to normal: Enter or Escape
+	# back to normal: Enter or Escape
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
-
-# sound keys
-set $mpd_socket ~/.mpd/socket
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q -c 0 sset Master 1+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q -c 0 sset Master 1-
-bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle
-bindsym XF86AudioStop exec --no-startup-id mpc -h $mpd_socket stop
-bindsym XF86AudioPlay exec --no-startup-id mpc -h $mpd_socket toggle
-bindsym XF86AudioNext exec --no-startup-id mpc -h $mpd_socket next
-bindsym XF86AudioPrev exec --no-startup-id mpc -h $mpd_socket prev
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -179,25 +133,44 @@ bar {
 	}
 }
 
-floating_minimum_size 72 x 54
-floating_maximum_size -1 x -1
 
-for_window [class="Firefox"] border 1pixel
-for_window [class="Firefox" title="Downloads"] floating enable
-for_window [class="Chromium"] border 1pixel
-for_window [class="Wicd-client.py"] floating enable
+# volume keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q -c 0 sset Master 1+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q -c 0 sset Master 1-
+bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
 
-# class                 border  backgr. text    indicator
-client.focused          #202020 #202020 #1a6fac #165e92
-client.focused_inactive #151515 #151515 #787878 #202020
-client.unfocused        #101010 #101010 #787878 #202020
-client.urgent           #151515 #151515 #c00d3b #c00d3b
+# mpd keys
+set $mpd_socket       ~/.mpd/socket
+bindsym XF86AudioStop exec --no-startup-id mpc -h $mpd_socket stop
+bindsym XF86AudioPlay exec --no-startup-id mpc -h $mpd_socket toggle
+bindsym XF86AudioNext exec --no-startup-id mpc -h $mpd_socket next
+bindsym XF86AudioPrev exec --no-startup-id mpc -h $mpd_socket prev
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
+
+# switch to previous or next workspace
+bindsym $mod+j workspace prev
+bindsym $mod+l workspace next
+
+# floating size boundaries
+floating_minimum_size 72 x 54
+floating_maximum_size -1 x -1
+
+# window commands
+for_window [class="Firefox"] border 1pixel
+for_window [class="Firefox" title="Downloads"] floating enable
+for_window [class="Chromium"] border 1pixel
+for_window [class="Wicd-client.py"] floating enable
+
+# color class           border  backgr. text    indicator
+client.focused          #202020 #202020 #1a6fac #165e92
+client.focused_inactive #151515 #151515 #787878 #202020
+client.unfocused        #101010 #101010 #787878 #202020
+client.urgent           #151515 #151515 #c00d3b #c00d3b
 
 # startup applications
 exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
