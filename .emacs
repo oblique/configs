@@ -317,6 +317,22 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
+(defun enable-spaces ()
+  "Use spaces instead of tabs"
+  (interactive)
+  (setq tab-width 4)
+  (setq c-basic-offset 4)
+  (setq indent-tabs-mode nil)
+  (message "You can retab the whole buffer by pressing C-x h C-M-\\"))
+
+(defun enable-tabs ()
+  "Use tabs instead of spaces"
+  (interactive)
+  (setq tab-width 8)
+  (setq c-basic-offset 8)
+  (setq indent-tabs-mode t)
+  (message "You can retab the whole buffer by pressing C-x h C-M-\\"))
+
 ; hooks
 (add-hook 'desktop-save-hook 'desktop-save-man)
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
