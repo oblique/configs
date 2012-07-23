@@ -58,6 +58,7 @@ function _battery_status() {
         _BRES="${_BRES}%{$fg[red]%}"
     fi
 
+    local x
     for x in {1..$_BFILLED}
     do
         _BRES="${_BRES}\u25a0"

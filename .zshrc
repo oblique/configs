@@ -18,7 +18,6 @@ source $HOME/.zsh.d/ssh-agent.zsh
 BATTERY=BAT0
 source $HOME/.zsh.d/battery.zsh
 
-
 # history options
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -29,7 +28,6 @@ setopt hist_expire_dups_first
 setopt extended_history
 setopt hist_verify
 setopt append_history
-
 
 # various options
 setopt extended_glob
@@ -43,23 +41,19 @@ setopt long_list_jobs
 unsetopt flow_control
 WORDCHARS=''
 
-
 # edit command line
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
-
 # smart urls
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
-
 
 # directories
 setopt auto_name_dirs
 setopt auto_pushd
 setopt pushd_ignore_dups
-
 
 # keyboard
 autoload zkbd
@@ -95,7 +89,6 @@ unfunction _zkbd_file; unset _keyfile _ret
 [[ -n "${key[CtrlLeft]}" ]] && bindkey  "${key[CtrlLeft]}"    backward-word
 [[ -n "${key[CtrlRight]}" ]]  && bindkey  "${key[CtrlRight]}"   forward-word
 
-
 # completion
 zmodload zsh/complist
 autoload -U compinit && compinit
@@ -119,7 +112,6 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         operator pcap postfix postgres privoxy pulse pvm quagga radvd \
         rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
 
-
 # colors
 autoload -U colors && colors
 export LS_COLORS='no=01;32:fi=00:di=00;34:ln=01;36:pi=04;33:so=01;35:bd=33;04:cd=33;04:or=31;01:ex=01;32:*.rtf=00;33:*.txt=00;33:*.html=00;33:*.doc=00;33:*.pdf=00;33:*.ps=00;33:*.sit=00;31:*.hqx=00;31:*.bin=00;31:*.tar=00;31:*.tgz=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.zip=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.deb=00;31:*.dmg=00;36:*.jpg=00;35:*.gif=00;35:*.bmp=00;35:*.ppm=00;35:*.tga=00;35:*.xbm=00;35:*.xpm=00;35:*.tif=00;35:*.mpg=00;37:*.avi=00;37:*.gl=00;37:*.dl=00;37:*.mov=00;37:*.mp3=00;35:'
@@ -139,13 +131,14 @@ _git_prompt_info() {
     echo -n "%{$fg_bold[red]%}${_name}[${_hash}]%{$reset_color%}"
 }
 
-
-# theme
+# prompt theme
 setopt prompt_subst
 PROMPT='%{$fg[blue]%}[%D{%d/%m/%y} %T]%{$reset_color%} %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m%{$reset_color%} %{$fg[magenta]%}[%(!.%1~.%~)]%{$reset_color%} $(_git_prompt_info)
 %{$fg[red]%}>>%{$reset_color%} '
-RPROMPT='$(_battery_status)'
-
+# use battery status only if we are in linux console, screen or tmux
+if [[ $TERM = linux* || $TERM = screen* ]]; then
+    RPROMPT='$(_battery_status)'
+fi
 
 # aliases
 alias sudo='sudo ' # enable aliases in sudo
@@ -199,6 +192,7 @@ ncmpcpp() {
     fi
 }
 
+# command for resizing fonts
 chpixelsize() {
     stty -echo
     printf '\33]50;%s\007' xft:Inconsolata:pixelsize=$1
@@ -284,6 +278,7 @@ wifi_scan() {
 }
 
 udisks() {
+    local x
     for x in $@; do
         if [[ $x = "--unmount" ]]; then
             sync
