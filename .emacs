@@ -333,9 +333,27 @@
   (setq indent-tabs-mode t)
   (message "You can retab the whole buffer by pressing C-x h C-M-\\"))
 
+; hooks for ARM assembly 
+(defun arm-asm-mode-set-comment-hook ()
+  (when (string-match ".S$" (buffer-file-name))
+    ;; asm files ending in .S are usually arm assembler
+    (setq asm-comment-char ?@)))
+
+(defun arm-asm-mode-hook ()
+  ;; asm files ending in .S are usually arm assembler
+  (when (string-match ".S$" (buffer-file-name))
+    ;; Get the newlines right
+    ;; `newline-and-indent' calls `indent-line-function'
+    (set (make-local-variable 'indent-line-function) 'indent-relative)
+    (define-key asm-mode-map "\C-m" 'newline-and-indent)
+    ;; Get the comments right
+    (setq comment-column 30)))
+
 ; hooks
 (add-hook 'desktop-save-hook 'desktop-save-man)
 (add-hook 'desktop-save-hook 'desktop-save-rfc)
+(add-hook 'asm-mode-set-comment-hook 'arm-asm-mode-set-comment-hook)
+(add-hook 'asm-mode-hook 'arm-asm-mode-hook)
 
 ; key bindings
 (global-set-key (kbd "RET") 'newline-and-indent) ; auto-indent
