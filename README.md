@@ -35,6 +35,7 @@
     pulseaudio
     alsa-utils
     autocutsel
+    pcmanfm
     feh
     wicd
     dmenu (needed by awesome-wm)

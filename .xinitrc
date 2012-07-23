@@ -3,16 +3,17 @@
 cd ~
 
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/*; do
-    [ -x "$f" ] && . "$f"
-  done
-  unset f
+    for f in /etc/X11/xinit/xinitrc.d/*; do
+        # Do not launch dbus before ConsoleKit (FS#25031)
+        [ "$f" -ne "/etc/X11/xinit/xinitrc.d/30-dbus" ] && [ -x "$f" ] && . "$f"
+    done
+    unset f
 fi
 
 # nvidia flashplugin fix
 export VDPAU_NVIDIA_NO_OVERLAY=1
 
-[ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
+[ -f ~/.Xresources ] && xrdb -load ~/.Xresources
 
 setxkbmap -layout us,el
 setxkbmap -variant ,extended
@@ -58,28 +59,25 @@ fi
 case $x in
     kde)
         export XSESSION="KDE-4"
-        exec ck-launch-session startkde
+        exec ck-launch-session dbus-launch startkde
         ;;
     gnome)
         #export OOO_FORCE_DESKTOP=gnome
         #export XDG_MENU_PREFIX=gnome-
-        exec ck-launch-session gnome-session
+        exec ck-launch-session dbus-launch gnome-session
         ;;
     fluxbox)
-        exec ck-launch-session startfluxbox
+        exec ck-launch-session dbus-launch startfluxbox
         ;;
     awesome)
         xsetroot -cursor_name left_ptr
-        exec ck-launch-session awesome
+        exec ck-launch-session dbus-launch awesome
         ;;
     i3)
-        exec ck-launch-session i3
+        exec ck-launch-session dbus-launch i3
         ;;
-    pekwm)
-        exec ck-launch-session pekwm
-        ;;
-    wmfs)
-        exec ck-launch-session wmfs
+    mcwm)
+        exec ck-launch-session dbus-launch mcwm
         ;;
     *)
         echo "Wrong session name!"
