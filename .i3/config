@@ -124,7 +124,7 @@ bindsym $mod+r mode "resize"
 bar {
 	font -misc-fixed-bold-r-normal--14-*-*-*-C-*-iso10646-1
 	position top
-	status_command i3status --config ~/.i3/i3status.conf
+	status_command i3status
 
 	colors {
 	       background #101010
@@ -181,7 +181,6 @@ exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
 exec --no-startup-id dunst
 exec --no-startup-id xsettingsd
 exec --no-startup-id arpdetective
-exec --no-startup-id wicd-client --tray
 exec --no-startup-id mpd
 exec --no-startup-id syndaemon -i 1.0 -k -R
 exec --no-startup-id perl ~/.i3/bat_warning.pl 0
