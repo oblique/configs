@@ -66,3 +66,9 @@ following files because you can not use `~`
     .mpdconf
     .mplayer/config
     .ncmpcpp/config
+
+----------------------------------------------------------------
+
+if you want to use my ncmpcpp theme, you must also add the ncmpcpp()
+function that i have in my .zshrc to your .bashrc/.zshrc
+
