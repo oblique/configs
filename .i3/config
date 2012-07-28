@@ -166,7 +166,7 @@ floating_maximum_size -1 x -1
 
 # window commands
 for_window [class="Firefox"] border 1pixel
-for_window [class="Firefox" title="Downloads"] floating enable
+for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="Chromium"] border 1pixel
 for_window [class="Wicd-client.py"] floating enable
 

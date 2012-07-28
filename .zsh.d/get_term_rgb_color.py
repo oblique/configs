@@ -21,6 +21,7 @@ p = select.poll()
 p.register(fd, select.POLLIN)
 
 t = termios.tcgetattr(fd)
+old_t = t
 t[lflag] &= ~(termios.ICANON | termios.ECHO)
 termios.tcsetattr(fd, termios.TCSADRAIN, t)
 
@@ -30,8 +31,7 @@ if (not p.poll(1000)):
 fcntl.ioctl(fd, termios.FIONREAD, sz)
 rgb = os.read(fd, sz.value).decode("UTF-8")
 
-t[lflag] |= termios.ICANON | termios.ECHO
-termios.tcsetattr(fd, termios.TCSADRAIN, t)
+termios.tcsetattr(fd, termios.TCSADRAIN, old_t)
 os.close(fd)
 
 try:
