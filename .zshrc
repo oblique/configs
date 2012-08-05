@@ -2,7 +2,8 @@
 export EDITOR=vim
 export PAGER=less
 export LANG=en_US.UTF-8
-export LC_CTYPE=$LANG
+export LC_COLLATE=C
+export LC_MESSAGES=C
 export PATH="${PATH}:${HOME}/bin"
 
 # init console colors

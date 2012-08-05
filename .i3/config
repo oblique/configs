@@ -160,6 +160,9 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+j workspace prev
 bindsym $mod+l workspace next
 
+# other keybindings
+bindsym Print exec scrot -e "mv \$f /tmp"
+
 # floating size boundaries
 floating_minimum_size 72 x 54
 floating_maximum_size -1 x -1
@@ -169,6 +172,7 @@ for_window [class="Firefox"] border 1pixel
 for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="Chromium"] border 1pixel
 for_window [class="Wicd-client.py"] floating enable
+for_window [class="^Wine$"] floating enable
 
 # color class           border  backgr. text    indicator
 client.focused          #202020 #202020 #1a6fac #165e92
