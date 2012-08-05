@@ -29,6 +29,7 @@
 (show-paren-mode 1)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
+(setq inhibit-startup-buffer-menu t)
 (setq initial-scratch-message nil)
 (setq message-log-max nil)
 (kill-buffer "*Messages*")
