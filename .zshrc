@@ -120,6 +120,7 @@ export GREP_COLOR='1;31'
 
 # git info
 _git_prompt_info() {
+    [[ ! -d .git ]] && return
     local _hash=$(git show -s --pretty=format:%h HEAD 2> /dev/null)
     [[ -z $_hash ]] && return
     local _name=$(git symbolic-ref --short HEAD 2> /dev/null)
