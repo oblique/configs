@@ -29,7 +29,7 @@
 ### multiple gmail accounts example
 
 ## base hook to reset account variables to known state before activating new ones
-# account-hook . 'unset preconnect imap_user imap_pass imap_authenticators'
+# account-hook . 'unset preconnect imap_user imap_pass imap_authenticators; unsubscribe .*'
 ##
 
 ## gmail account 1
