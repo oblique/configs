@@ -1,25 +1,79 @@
 ### for 'set trash' you need the trash folder patch:
 ### http://cedricduval.free.fr/mutt/patches/#trash
 
+
 ### gmail example
+
+# set imap_user = 'your_username@gmail.com'
 # set realname = 'Name Surname'
 # set from = 'your_username@gmail.com'
-#
-# set imap_user = "$from"
-# set smtp_url = "smtp://$from@smtp.gmail.com"
-# set folder = 'imaps://imap.gmail.com/'
+# set folder = 'imaps://your_username@imap.gmail.com'
+# set smtp_url = "smtps://your_username@smtp.gmail.com"
 # set spoolfile = '+INBOX'
 # set postponed = '+[Gmail]/Drafts'
 # set record = '+[Gmail]/Sent Mail'
 # set trash = '+[Gmail]/Trash'
+# set move = no
 # macro index,pager <Esc>S "<save-message>+[Gmail]/Spam<enter><sync-mailbox>" "mark message as spam"
 # macro index,pager <Esc>H "<save-message>+INBOX<enter><sync-mailbox>" "mark message as ham (non-spam)"
-# set move = no
-###
 
-### if you are subscribed to a mailing list you can use the following.
-### (the example is for LKML)
+## if you are subscribed to a mailing list you can use the following.
+## (example for LKML)
 # subscribe linux-kernel@vger.kernel.org
-###
+##
+
+### end of gmail example
+
+
+
+### multiple gmail accounts example
+
+## base hook to reset account variables to known state before activating new ones
+# account-hook . 'unset preconnect imap_user imap_pass imap_authenticators'
+##
+
+## gmail account 1
+# account-hook imaps://your_username1@imap.gmail.com \
+#   "set imap_user = 'your_username1@gmail.com'"
+# folder-hook imaps://your_username1@imap.gmail.com \
+#   "set realname = 'Name Surname'; \
+#   set from = 'your_username1@gmail.com'; \
+#   set folder = 'imaps://your_username1@imap.gmail.com'; \
+#   set smtp_url = 'smtps://your_username1@smtp.gmail.com'; \
+#   set spoolfile = '+INBOX'; \
+#   set postponed = '+[Gmail]/Drafts'; \
+#   set record = '+[Gmail]/Sent Mail'; \
+#   set trash = '+[Gmail]/Trash'; \
+#   set move = no; \
+#   subscribe linux-kernel@vger.kernel.org"
+##
+
+## gmail account 2
+# account-hook imaps://your_username2@imap.gmail.com \
+#   "set imap_user = 'your_username2@gmail.com'"
+# folder-hook imaps://your_username2@imap.gmail.com \
+#   "set realname = 'Name Surname'; \
+#   set from = 'your_username2@gmail.com'; \
+#   set folder = 'imaps://your_username2@imap.gmail.com'; \
+#   set smtp_url = 'smtps://your_username2@smtp.gmail.com'; \
+#   set spoolfile = '+INBOX'; \
+#   set postponed = '+[Gmail]/Drafts'; \
+#   set record = '+[Gmail]/Sent Mail'; \
+#   set trash = '+[Gmail]/Trash'; \
+#   set move = no;"
+##
+
+## this will work fine in both emails
+# macro index,pager <Esc>S '<save-message>+[Gmail]/Spam<enter><sync-mailbox>' 'mark message as spam'"
+# macro index,pager <Esc>H '<save-message>+INBOX<enter><sync-mailbox>' 'mark message as ham (non-spam)'
+##
+
+## f2 key show your_username1, f3 key show your_username2
+# macro index <f2> '<change-folder>imaps://your_username1@imap.gmail.com<enter>'
+# macro index <f3> '<change-folder>imaps://your_username2@imap.gmail.com<enter>'
+##
+
+### end of multiple gmail accounts example
+
 
 # vim: filetype=muttrc
