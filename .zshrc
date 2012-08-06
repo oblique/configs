@@ -23,7 +23,7 @@ source $HOME/.zsh.d/battery.zsh
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt hist_ignore_space 
+setopt hist_ignore_space
 setopt hist_ignore_dups
 setopt hist_expire_dups_first
 setopt extended_history
@@ -166,32 +166,86 @@ ncmpcpp() {
     if [[ $TERM = linux* ]]; then
         echo -en "\e]P64d4d4d"
         echo -en "\e]PE4d4d4d"
-    elif [[ $TERM = screen* ]]; then
-        # screen and tmux don't support color changing
-    else
+    elif [[ $TERM != screen* ]]; then # screen and tmux don't support color changing
         # backup cyan rgb
         _color6=$(python $HOME/.zsh.d/get_term_rgb_color.py 6)
         _color14=$(python $HOME/.zsh.d/get_term_rgb_color.py 14)
-        # fallback values for cyan
-        [[ $_color6 != rgb:* ]] && _color6='rgb:0000/cdcd/cdcd'
-        [[ $_color14 != rgb:* ]] && _color14='rgb:0000/ffff/ffff'
         # change cyan to black
-        echo -en '\e]4;6;rgb:4d4d/4d4d/4d4d\e\'
-        echo -en '\e]4;14;rgb:4d4d/4d4d/4d4d\e\'
+        echo -en "\e]4;6;rgb:4d4d/4d4d/4d4d\e\\"
+        echo -en "\e]4;14;rgb:4d4d/4d4d/4d4d\e\\"
     fi
 
     command ncmpcpp $@
+    local _ret=$?
 
     if [[ $TERM = linux* ]]; then
         # reset colors
+        echo -en "\e]R"
         clear
-        echo -en '\e]R'
-    elif [[ $TERM = screen* ]]; then
-    else
+    elif [[ $TERM != screen* ]]; then
         # restore cyan rgb
-        echo -en "\\e]4;6;${_color6}\\e\\"
-        echo -en "\\e]4;14;${_color14}\\e\\"
+        echo -en "\e]4;6;${_color6}\e\\"
+        echo -en "\e]4;14;${_color14}\e\\"
     fi
+
+    return $_ret
+}
+
+wicd-curses() {
+    local _c
+    local _shellname
+
+    if [[ $TERM = linux* ]]; then
+        # replace white with blue
+        echo -en "\e]P74695c8"
+        echo -en "\e]PF5a9dc8"
+        # replace yellow with magenta
+        echo -en "\e]P3a78edb"
+        echo -en "\e]PBb29fdb"
+        # replace non-bold blue with black
+        echo -en "\e]P4000000"
+        # change foreground to green
+        echo -en "\e[32m\e[8]"
+    elif [[ $TERM != screen* ]]; then  # screen and tmux don't support color changing
+        _shellname=$(ps h -p $$ | awk '{print $5}')
+
+        if [[ ${_shellname} = *zsh ]]; then
+            setopt KSH_ARRAYS
+        fi
+
+        _c=($(python $HOME/.zsh.d/get_term_rgb_color.py {0..15} bg))
+
+        # replace white with blue
+        echo -en "\e]4;7;${_c[4]}\e\\"
+        echo -en "\e]4;15;${_c[12]}\e\\"
+        # replace yellow with magenta
+        echo -en "\e]4;3;${_c[5]}\e\\"
+        echo -en "\e]4;11;${_c[13]}\e\\"
+        # replace non-bold blue with background color
+        echo -en "\e]4;4;${_c[16]}\e\\"
+    fi
+
+    command wicd-curses $@
+    local _ret=$?
+
+    if [[ $TERM = linux* ]]; then
+        # change foreground back to white
+        echo -en "\e[37m\e[8]"
+        # reset colors
+        echo -en "\e]R"
+        clear
+    elif [[ $TERM != screen* ]]; then
+        # restore colors
+        for x in {0..15}; do
+            echo -en "\e]4;${x};${_c[$x]}\e\\"
+        done
+
+        if [[ $_shellname = *zsh ]]; then
+            unsetopt KSH_ARRAYS
+        fi
+    fi
+
+    return $_ret
 }
 
 # command for resizing fonts
