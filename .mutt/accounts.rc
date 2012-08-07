@@ -11,9 +11,11 @@
 # set smtp_url = "smtps://your_username@smtp.gmail.com"
 # set spoolfile = '+INBOX'
 # set postponed = '+[Gmail]/Drafts'
-# set record = '+[Gmail]/Sent Mail'
 # set trash = '+[Gmail]/Trash'
 # set move = no
+## we don't need record because gmail's
+## stmp server stores the message automatically.
+# unset record
 # macro index,pager <Esc>S "<save-message>+[Gmail]/Spam<enter><sync-mailbox>" "mark message as spam"
 # macro index,pager <Esc>H "<save-message>+INBOX<enter><sync-mailbox>" "mark message as ham (non-spam)"
 
@@ -42,9 +44,9 @@
 #   set smtp_url = 'smtps://your_username1@smtp.gmail.com'; \
 #   set spoolfile = '+INBOX'; \
 #   set postponed = '+[Gmail]/Drafts'; \
-#   set record = '+[Gmail]/Sent Mail'; \
 #   set trash = '+[Gmail]/Trash'; \
 #   set move = no; \
+#   unset record; \
 #   subscribe linux-kernel@vger.kernel.org"
 ##
 
@@ -58,9 +60,9 @@
 #   set smtp_url = 'smtps://your_username2@smtp.gmail.com'; \
 #   set spoolfile = '+INBOX'; \
 #   set postponed = '+[Gmail]/Drafts'; \
-#   set record = '+[Gmail]/Sent Mail'; \
 #   set trash = '+[Gmail]/Trash'; \
-#   set move = no;"
+#   set move = no; \
+#   unset record"
 ##
 
 ## this will work fine in both emails
