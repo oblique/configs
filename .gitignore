@@ -1,5 +1,7 @@
 *~
+/.vifm/vifminfo
 /.emacs.d/*/*.elc
+/.emacs.d/*.elc
 /.emacs.d/autosave
 /.emacs.d/backup
 /.emacs.d/sessions
