@@ -19,10 +19,9 @@
 (toggle-scroll-bar nil)
 (require 'linum-ex)
 (setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
-                                imenu-tree-mode fundamental-mode term-mode
-                                completion-list-mode tags-tree-mode help-mode
-                                dired-mode dirtree-mode desktop-menu-mode
-                                Buffer-menu-mode Man-mode Custom-mode))
+                                fundamental-mode term-mode etags-select-mode
+                                completion-list-mode help-mode dired-mode 
+                                desktop-menu-mode Buffer-menu-mode Man-mode Custom-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
@@ -35,17 +34,10 @@
 (kill-buffer "*Messages*")
 (kill-buffer "*Compile-Log*")
 (setq Man-width 90)
-(setq explicit-shell-file-name "/bin/bash")
 (setq-default show-trailing-whitespace t)
 (setq backup-directory-alist '(("." . "~/.emacs-backups")))
 (defalias 'yes-or-no-p 'y-or-n-p)
 (require 'smooth-scrolling)
-(require 'show-point-mode)
-(define-globalized-minor-mode global-show-point-mode show-point-mode
-  (lambda ()
-    (show-point-mode t)))
-(global-show-point-mode t)
-(show-point-mode 1)
 (require 'htmlize)
 (require 'lua-mode)
 (require 'highlight-parentheses)
@@ -61,23 +53,8 @@
 (require 'rfc)
 (setq rfc-archive-alist (list (file-truename "~/rfc")))
 
-; sticky windows
-(require 'sticky-windows)
-(define-key my-minor-mode-map (kbd "C-x 0") 'sticky-window-delete-window)
-(define-key my-minor-mode-map (kbd "C-x 1") 'sticky-window-delete-other-windows)
-(define-key my-minor-mode-map (kbd "C-x 9") 'sticky-window-keep-window-visible)
-
 ; session manager
 (require 'desktop-menu)
-
-; tree widgets
-(require 'tree-mode)
-(require 'imenu-tree)
-(setq imenu-tree-auto-update t)
-(setq imenu-tree-update-interval 1)
-(setq imenu-tree-windata '(frame left 0.15 nil))
-(require 'dirtree)
-(setq dirtree-windata '(frame left 0.15 nil))
 
 ; coding
 (setq c-default-style "linux")
@@ -93,10 +70,6 @@
 (tabbar-mode 1)
 (setq tabbar-separator (quote (" ")))
 (setq tabbar-use-images nil)
-
-; undo
-(require 'undo-tree)
-(global-undo-tree-mode)
 
 ; fonts
 (if initial-window-system
@@ -163,62 +136,6 @@
     "Select Nth previous window."
     (interactive "P")
     (other-window (- (prefix-numeric-value n))))
-
-(defun my-dirtree ()
-  (interactive)
-  (dirtree (expand-file-name default-directory) nil)
-  (select-window (get-buffer-window dirtree-buffer)))
-
-(defun my-imenu-tree ()
-  (interactive)
-  (imenu-tree nil)
-  (select-window (get-buffer-window imenu-tree-buffer)))
-
-(defun ob-tree ()
-  (interactive)
-  (let ((buf (current-buffer)))
-    (unless (or (string-match "^\\*.+\\*$" (buffer-name))
-                (eq major-mode 'fundamental-mode))
-      (progn
-        (delete-other-windows)
-        (imenu-tree nil)
-        (delete-window (selected-window))
-        (dirtree (expand-file-name default-directory) nil)
-        (delete-window (selected-window))
-        (setq newwin (split-window nil 30 t))
-        (split-window-vertically nil)
-        (switch-to-buffer imenu-tree-buffer)
-        (sticky-window-keep-window-visible)
-        (other-window 1)
-        (switch-to-buffer dirtree-buffer)
-        (sticky-window-keep-window-visible)
-        (select-window (get-buffer-window buf))))))
-
-(defun my-eshell ()
-  (interactive)
-  (let ((active-eshell-window nil) newwin)
-    (walk-windows (function (lambda (window)
-                              (if (string= (buffer-name (window-buffer window)) "*eshell*")
-                                (setq active-eshell-window window)))))
-    (if active-eshell-window
-      (select-window active-eshell-window)
-      (let ((buf (current-buffer)) eshellbuf)
-        (eshell)
-        (setq eshellbuf (current-buffer))
-        (switch-to-buffer buf)
-        (setq newwin (split-window nil 40))
-        (select-window newwin)
-        (switch-to-buffer eshellbuf)
-        (sticky-window-keep-window-visible)))))
-
-(defun my-eshell-kill ()
-  (interactive)
-  (let ((active-eshell-window nil))
-    (walk-windows (function (lambda (window)
-                              (if (string= (buffer-name (window-buffer window)) "*eshell*")
-                                (setq active-eshell-window window)))))
-    (if active-eshell-window
-      (delete-window active-eshell-window))))
 
 (defun xclip-paste ()
   (interactive)
@@ -365,7 +282,6 @@
 (global-set-key (kbd "M->") 'shifttext-tab-right)
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
 (global-set-key (kbd "C-c p") 'show-file-path)
-(global-set-key (kbd "C-^") 'undo-tree-redo) ; redo with C-6, undo with C-7 (in terminal)
 (global-set-key (kbd "C-x p") 'other-window-backward)
 (define-key my-minor-mode-map (kbd "<clearline>") (key-binding (kbd "<C-end>"))) ; <clearline> (in terminal) == <C-end>
 (define-key my-minor-mode-map (kbd "M-l") 'tabbar-forward)
@@ -378,12 +294,6 @@
 (define-key my-minor-mode-map (kbd "<M-down>") 'windmove-down) ; M-down in gui
 (define-key my-minor-mode-map (kbd "<M-right>") 'windmove-right) ; M-right in gui
 (define-key my-minor-mode-map (kbd "<M-left>") 'windmove-left) ; M-left in gui
-(define-key my-minor-mode-map (kbd "C-c f") 'my-imenu-tree)
-(define-key my-minor-mode-map (kbd "C-c d") 'my-dirtree)
-(define-key my-minor-mode-map (kbd "C-c o") 'ob-tree)
-(define-key my-minor-mode-map (kbd "C-c q") 'delete-other-windows)
-(define-key my-minor-mode-map (kbd "C-c z") 'my-eshell)
-(define-key my-minor-mode-map (kbd "C-c Z") 'my-eshell-kill)
 (define-key my-minor-mode-map (kbd "C-c s") 'desktop-menu)
 (define-key my-minor-mode-map (kbd "C-c v") 'xclip-paste)
 (define-key my-minor-mode-map (kbd "C-c c") 'xclip-copy)
