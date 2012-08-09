@@ -35,7 +35,6 @@
 (kill-buffer "*Compile-Log*")
 (setq Man-width 90)
 (setq-default show-trailing-whitespace t)
-(setq backup-directory-alist '(("." . "~/.emacs-backups")))
 (defalias 'yes-or-no-p 'y-or-n-p)
 (require 'smooth-scrolling)
 (require 'htmlize)
@@ -47,13 +46,27 @@
 (global-highlight-parentheses-mode t)
 (require 'arduino-mode)
 
+; backup/autosave
+(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
+(make-directory backup-dir t)
+(setq backup-directory-alist `((".*" . ,backup-dir)))
+(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+(make-directory autosave-dir t)
+(setq auto-save-list-file-prefix (concat autosave-dir ".auto-saves-"))
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
+; session manager
+(require 'desktop-menu)
+(setq desktop-menu-base-filename (convert-standard-filename "session"))
+(setq desktop-menu-list-file (convert-standard-filename "sessions"))
+(defvar sessions-dir (expand-file-name "~/.emacs.d/sessions/"))
+(make-directory sessions-dir t)
+(setq desktop-menu-directory sessions-dir)
+
 ; RFC
 ; you can download RFCs from http://www.rfc-editor.org/download.html
 (require 'rfc)
 (setq rfc-archive-alist (list (file-truename "~/rfc")))
-
-; session manager
-(require 'desktop-menu)
 
 ; coding
 (setq c-default-style "linux")
