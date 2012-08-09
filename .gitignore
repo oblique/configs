@@ -1,4 +1,5 @@
 *~
-\#*#
-*.elc
-/.emacs.d/auto-save-list
+/.emacs.d/*/*.elc
+/.emacs.d/autosave
+/.emacs.d/backup
+/.emacs.d/sessions
