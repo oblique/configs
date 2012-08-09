@@ -39,7 +39,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (require 'smooth-scrolling)
 (require 'htmlize)
-(require 'lua-mode)
 (require 'highlight-parentheses)
 (define-globalized-minor-mode global-highlight-parentheses-mode
   highlight-parentheses-mode
