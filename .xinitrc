@@ -38,6 +38,10 @@ do
         esac
 done
 
+# load nvidia settings
+nvidia-settings -l
+
+# synaptics settings
 synclient VertTwoFingerScroll=1
 synclient TapButton1=0 TapButton2=0 TapButton3=0
 
