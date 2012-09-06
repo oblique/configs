@@ -39,7 +39,7 @@ do
 done
 
 # load nvidia settings
-nvidia-settings -l
+[[ -f ~/.nvidia-settings-rc ]] && nvidia-settings -l
 
 # synaptics settings
 synclient VertTwoFingerScroll=1
