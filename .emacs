@@ -20,7 +20,7 @@
 (require 'linum-ex)
 (setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
                                 fundamental-mode term-mode etags-select-mode
-                                completion-list-mode help-mode dired-mode 
+                                completion-list-mode help-mode dired-mode
                                 desktop-menu-mode Buffer-menu-mode Man-mode Custom-mode))
 (global-linum-mode 1)
 (column-number-mode 1)
@@ -269,7 +269,7 @@
   (setq indent-tabs-mode t)
   (message "You can retab the whole buffer by pressing C-x h C-M-\\"))
 
-; hooks for ARM assembly 
+; hooks for ARM assembly
 (defun arm-asm-mode-set-comment-hook ()
   (when (string-match ".S$" (buffer-file-name))
     ;; asm files ending in .S are usually arm assembler
