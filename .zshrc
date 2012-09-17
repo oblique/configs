@@ -156,6 +156,7 @@ alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
 alias arm-none-linux-gnueabi-gdb='arm-none-linux-gnueabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias openocd-panda='openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
+alias shred='shred -n 10 -u -v -z --random-source /dev/urandom'
 
 # special ncmpcpp
 ncmpcpp() {
@@ -342,6 +343,11 @@ udisks() {
         fi
     done
     command udisks $@
+}
+
+udisksctl() {
+    [[ $1 = unmount ]] && sync
+    command udisksctl $@
 }
 
 embed_subtitle() {
