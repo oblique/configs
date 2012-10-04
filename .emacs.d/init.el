@@ -5,7 +5,7 @@
 (setq byte-compile-warnings t)
 
 ; load my rxvt.el
-(unless (or noninteractive initial-window-system)
+(unless (or noninteractive window-system)
     (if (string-match "^rxvt.*" (getenv "TERM"))
         (progn
             (setq term-file-prefix nil)
@@ -16,7 +16,8 @@
 (defvar my-minor-mode-map (make-keymap) "my-minor-mode keymap.")
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(toggle-scroll-bar nil)
+(if window-system
+  (toggle-scroll-bar nil))
 (require 'linum-ex)
 (setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
                                 fundamental-mode term-mode etags-select-mode
@@ -86,7 +87,7 @@
 (setq tabbar-use-images nil)
 
 ; fonts
-(if initial-window-system
+(if window-system
     (setq default-frame-alist '((font . "Inconsolata-10"))))
 
 ; theme

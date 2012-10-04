@@ -234,7 +234,7 @@ and you have to scroll or press C-l to update the numbers."
             (push ov linum-overlays)
             (overlay-put ov 'before-string
                          (propertize " " 'display `((margin left-margin) ,str)))
-            (unless initial-window-system
+            (unless window-system
                 (overlay-put ov 'after-string (propertize " " 'face 'linum-terminal-seperator)))
             (overlay-put ov 'linum-str str))))
       (forward-line)
