@@ -172,8 +172,8 @@ ncmpcpp() {
         _color6=$(python $HOME/.zsh.d/get_term_rgb_color.py 6)
         _color14=$(python $HOME/.zsh.d/get_term_rgb_color.py 14)
         # change cyan to black
-        echo -en "\e]4;6;rgb:4d4d/4d4d/4d4d\e\\"
-        echo -en "\e]4;14;rgb:4d4d/4d4d/4d4d\e\\"
+        echo -en "\e]4;6;rgb:5d5d/5d5d/5d5d\e\\"
+        echo -en "\e]4;14;rgb:5d5d/5d5d/5d5d\e\\"
     fi
 
     command ncmpcpp $@
@@ -267,7 +267,7 @@ image_music_video() {
     local _TMP_IMG=$(mktemp --suffix=.${_IMG##*.})
     cp ${_IMG} ${_TMP_IMG}
     mogrify -resize 1920x1080 -background black -gravity center -extent 1920x1080 ${_TMP_IMG}
-    ffmpeg -loop 1 -i ${_TMP_IMG} -i ${_AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba $(basename ${_AUD%.*}.mp4)
+    ffmpeg -loop 1 -i ${_TMP_IMG} -i ${_AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba "$(basename ${_AUD%.*}.mp4)"
     rm -f ${_TMP_IMG}
 }
 

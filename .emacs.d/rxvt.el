@@ -234,9 +234,9 @@ for the currently selected frame."
 	    (tty-color-define (format "color-%d" (- 256 ncolors))
 			      (- 256 ncolors)
 			      (mapcar 'rxvt-rgb-convert-to-16bit
-                                      (list (if (zerop r) 0 (+ (* r 40) 45))
-                                            (if (zerop g) 0 (+ (* g 40) 45))
-                                            (if (zerop b) 0 (+ (* b 40) 44)))))
+                                      (list (if (zerop r) 0 (+ (* r 40) 55))
+                                            (if (zerop g) 0 (+ (* g 40) 55))
+                                            (if (zerop b) 0 (+ (* b 40) 55)))))
 
 	    (setq b (1+ b))
 	    (if (> b 5)

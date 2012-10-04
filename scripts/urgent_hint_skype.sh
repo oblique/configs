@@ -10,10 +10,10 @@ wid=''
 
 for x in $(xdotool search --class skype); do
     wm_name=$(xprop -id $x WM_NAME)
-    wm_role=$(xprop -id $x WM_WINDOW_ROLE)
-    map_state=$(xwininfo -id $x | grep 'Map State')
     if [[ $wm_name =~ .*\ -\ Skype.* ]]; then
+        map_state=$(xwininfo -id $x | grep 'Map State')
         [[ $map_state =~ .*IsUnMapped.* ]] && continue
+        wm_role=$(xprop -id $x WM_WINDOW_ROLE)
         if [[ $wm_role =~ .*ConversationsWindow.* ]]; then
             wid=$x
             break

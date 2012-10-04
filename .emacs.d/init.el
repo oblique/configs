@@ -39,7 +39,6 @@
 (setq Man-width 90)
 (setq-default show-trailing-whitespace t)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(require 'smooth-scrolling)
 (require 'htmlize)
 (require 'highlight-parentheses)
 (define-globalized-minor-mode global-highlight-parentheses-mode
