@@ -84,7 +84,7 @@ URxvt.saveLines:            5500
 URxvt.perl-ext-common:      default,matcher,-searchable-scrollback,clipboard,keyboard-select
 URxvt.urlLauncher:          firefox
 URxvt.matcher.button:       1
-URxvt.colorUL:              #4695c8
+URxvt.colorUL:              #5f87d7
 URxvt.colorIT:              #d81860
 URxvt.cursorBlink:          true
 URxvt.tabbed.tabbar-fg:     238

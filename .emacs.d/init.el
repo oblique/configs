@@ -66,6 +66,12 @@
 (make-directory sessions-dir t)
 (setq desktop-menu-directory sessions-dir)
 
+; add repositories in emacs' package manager
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
 ; RFC
 ; you can download RFCs from http://www.rfc-editor.org/download.html
 (require 'rfc)
@@ -91,16 +97,12 @@
     (setq default-frame-alist '((font . "Inconsolata-10"))))
 
 ; theme
-(require 'color-theme)
-(color-theme-initialize)
-(setq ct-theme 'color-theme-molokai-ob) ; set your theme here
-(funcall ct-theme)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(setq themename 'behelit) ; set your theme here
+(load-theme themename t)
 
 ; special highlighting for numbers
-(make-face 'font-lock-number-face)
-(set-face-attribute 'font-lock-number-face nil :inherit font-lock-constant-face)
-(setq font-lock-number-face 'font-lock-number-face)
-(defvar font-lock-number "\\([0-9]+\\.\\)?[0-9]+\\([eE][+-]?[0-9]*\\)?\\([uU]?[lL]\\{0,2\\}\\|[lL]\\{0,2\\}[uU]?\\)")
+(defvar font-lock-number "[0-9]*\\.?[0-9]+\\([eE][+-]?[0-9]*\\)?\\([uU]?[lL]\\{0,2\\}\\|[lL]\\{0,2\\}[uU]?\\)")
 (defvar font-lock-hexnumber "0[xX][0-9a-fA-F]+")
 (defun add-font-lock-numbers ()
   (font-lock-add-keywords nil (list
@@ -138,9 +140,9 @@
     (setq ps-line-number-font "Courier")
     (setq ps-line-number-font-size ps-font-size)
     (highlight-parentheses-mode -1)
-    (color-theme-print)
+    (load-theme 'print t)
     (ps-print-buffer-with-faces filename)
-    (funcall ct-theme)
+    (load-theme themename t)
     (setq ps-line-number old-ps-line-number)
     (setq ps-line-number-font old-ps-line-number-font)
     (setq ps-line-number-font-size old-ps-line-number-font-size)
