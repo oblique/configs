@@ -1,4 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
+;;; version: 1.1
 
 ;; Copyright (C) 2012 oblique
 
@@ -17,7 +18,8 @@
 
 ;;; Installation:
 ;;
-;; add the following in your ~/.emacs or ~/.emacs.d/init.el:
+;; put this file in ~/.emacs.d/themes and add the following
+;; in your ~/.emacs or ~/.emacs.d/init.el
 ;;
 ;;    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;;    (load-theme 'behelit t)
@@ -91,7 +93,6 @@
    `(font-lock-variable-name-face ((,class (:foreground "#d7005f" :weight bold))))
    `(font-lock-warning-face ((,class (:foreground "#d7005f" :weight bold))))
    `(c-annotation-face ((,class (:inherit font-lock-constant-face))))
-   ;; check init.el for font-lock-number-face
    `(font-lock-number-face ((,class (:foreground "#af87ff"))))
 
    ;;; diff
@@ -141,6 +142,23 @@
    `(outline-8 ((,class (:foreground "#87ff5f"))))
 
    ))
+
+
+;;; special highlighting for numbers
+(unless (boundp 'font-lock-number-face)
+  (progn
+    (make-face 'font-lock-number-face)
+    (setq font-lock-number-face 'font-lock-number-face)))
+
+(defun add-font-lock-numbers ()
+  (font-lock-add-keywords nil
+     '(
+       ("\\<\\(\\([0-9]+\\.\\)?[0-9]+\\([eE][+-]?[0-9]*\\)?\\([uU]?[lL]\\{0,2\\}\\|[lL]\\{0,2\\}[uU]?\\)\\)\\>" . font-lock-number-face)
+       ("\\<\\(0[xX][0-9a-fA-F]+\\)\\>" . font-lock-number-face)
+       )))
+
+;; enable font-lock-number-face for the following modes
+(add-hook 'c-mode-common-hook 'add-font-lock-numbers)
 
 
 (provide-theme 'behelit)

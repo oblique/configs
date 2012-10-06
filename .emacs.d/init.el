@@ -98,21 +98,7 @@
 
 ; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(setq themename 'behelit) ; set your theme here
-(load-theme themename t)
-
-; special highlighting for numbers
-(defvar font-lock-number "[0-9]*\\.?[0-9]+\\([eE][+-]?[0-9]*\\)?\\([uU]?[lL]\\{0,2\\}\\|[lL]\\{0,2\\}[uU]?\\)")
-(defvar font-lock-hexnumber "0[xX][0-9a-fA-F]+")
-(defun add-font-lock-numbers ()
-  (font-lock-add-keywords nil (list
-			       (list (concat "\\<\\(" font-lock-number "\\)\\>" )
-				     0 font-lock-number-face)
-			       (list (concat "\\<\\(" font-lock-hexnumber "\\)\\>" )
-				     0 font-lock-number-face)
-			       )))
-
-(add-hook 'c-mode-common-hook 'add-font-lock-numbers)
+(load-theme 'behelit t)
 
 ; cups pdf printer
 (setq ps-printer-name "Virtual_PDF_Printer")
@@ -131,18 +117,31 @@
 (defun print-code (&optional filename)
   (interactive (list (ps-print-preprint current-prefix-arg)))
   (let ((old-ps-line-number ps-line-number)
-	 (old-ps-line-number-font ps-line-number-font)
-	 (old-ps-line-number-font-size ps-line-number-font-size)
-	 (old-ps-font-family ps-font-family)
-	 (old-highlight-parentheses-mode highlight-parentheses-mode))
+        (old-ps-line-number-font ps-line-number-font)
+        (old-ps-line-number-font-size ps-line-number-font-size)
+        (old-ps-font-family ps-font-family)
+        (old-highlight-parentheses-mode highlight-parentheses-mode)
+        (old-custom-enabled-themes custom-enabled-themes))
     (setq ps-line-number t)
     (setq ps-font-family 'Courier)
     (setq ps-line-number-font "Courier")
     (setq ps-line-number-font-size ps-font-size)
     (highlight-parentheses-mode -1)
+    (let ((list old-custom-enabled-themes)
+          x)
+      (while list
+        (setq x (car list))
+        (setq list (cdr list))
+        (disable-theme x)))
     (load-theme 'print t)
     (ps-print-buffer-with-faces filename)
-    (load-theme themename t)
+    (disable-theme 'print)
+    (let ((list (reverse old-custom-enabled-themes))
+          x)
+      (while list
+        (setq x (car list))
+        (setq list (cdr list))
+        (load-theme x t)))
     (setq ps-line-number old-ps-line-number)
     (setq ps-line-number-font old-ps-line-number-font)
     (setq ps-line-number-font-size old-ps-line-number-font-size)
