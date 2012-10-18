@@ -294,7 +294,7 @@
 
 ; key bindings
 (global-set-key (kbd "RET") 'newline-and-indent) ; auto-indent
-(global-set-key (kbd "M-9") 'kill-whole-line)
+(global-set-key (kbd "C-k") 'kill-whole-line)
 (global-set-key (kbd "M->") 'shifttext-tab-right)
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
 (global-set-key (kbd "C-c p") 'show-file-path)

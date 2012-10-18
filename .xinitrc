@@ -40,7 +40,7 @@ done
 
 # load nvidia settings
 [[ -f ~/.nvidia-settings-rc ]] && nvidia-settings -l
-nvidia-settings -a '0/Gamma[DFP-0]=0.842'
+nvidia-settings -a '0/Gamma[DFP-0]=0.820'
 
 # synaptics settings
 synclient VertTwoFingerScroll=1

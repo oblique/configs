@@ -137,8 +137,8 @@ _git_prompt_info() {
 setopt prompt_subst
 PROMPT='%{$fg[blue]%}[%D{%d/%m/%y} %T]%{$reset_color%} %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m%{$reset_color%} %{$fg[magenta]%}[%(!.%1~.%~)]%{$reset_color%} $(_git_prompt_info)
 %{$fg[red]%}>>%{$reset_color%} '
-# use battery status only if we are in linux console, screen or tmux
-if [[ $TERM = linux* || $TERM = screen* ]]; then
+# use battery status only if we are in linux console
+if [[ $TERM = linux* ]]; then
     RPROMPT='$(_battery_status)'
 fi
 
@@ -267,7 +267,7 @@ image_music_video() {
     local _TMP_IMG=$(mktemp --suffix=.${_IMG##*.})
     cp ${_IMG} ${_TMP_IMG}
     mogrify -resize 1920x1080 -background black -gravity center -extent 1920x1080 ${_TMP_IMG}
-    ffmpeg -loop 1 -i ${_TMP_IMG} -i ${_AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba "$(basename ${_AUD%.*}.mp4)"
+    ffmpeg -loop 1 -i ${_TMP_IMG} -i ${_AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba "$(basename ${_AUD%.*}.mkv)"
     rm -f ${_TMP_IMG}
 }
 
