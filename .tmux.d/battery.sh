@@ -17,17 +17,7 @@ else
     BFULL=$(cat $BATPATH/charge_full)
 fi
 
-if [[ $TERM = linux* ]]; then
-    BUP="+"
-    BDOWN="-"
-    BPOWER="="
-    CMAGENTA="#[fg=magenta,bg=default]"
-    CRED="#[fg=red,bg=default]"
-    CYELLOW="#[fg=yellow,bg=default]"
-    CGRAY="#[fg=brightblack,bg=default]"
-    CGREEN="#[fg=green,bg=default]"
-    CRESET="#[fg=default,bg=default]"
-else
+if [[ $(tput colors) = 256 ]]; then
     BUP='\u25b4'
     BDOWN='\u25be'
     BPOWER='\u26a1'
@@ -36,6 +26,16 @@ else
     CYELLOW="#[fg=colour191,bg=default]"
     CGRAY="#[fg=colour238,bg=default]"
     CGREEN="#[fg=colour83,bg=default]"
+    CRESET="#[fg=default,bg=default]"
+else
+    BUP="+"
+    BDOWN="-"
+    BPOWER="="
+    CMAGENTA="#[fg=magenta,bg=default]"
+    CRED="#[fg=red,bg=default]"
+    CYELLOW="#[fg=yellow,bg=default]"
+    CGRAY="#[fg=brightblack,bg=default]"
+    CGREEN="#[fg=green,bg=default]"
     CRESET="#[fg=default,bg=default]"
 fi
 
