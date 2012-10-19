@@ -24,7 +24,7 @@ if [[ $TERM = linux* ]]; then
     CMAGENTA="#[fg=magenta,bg=default]"
     CRED="#[fg=red,bg=default]"
     CYELLOW="#[fg=yellow,bg=default]"
-    CGRAY="#[fg=black,bg=default,bright]"
+    CGRAY="#[fg=brightblack,bg=default]"
     CGREEN="#[fg=green,bg=default]"
     CRESET="#[fg=default,bg=default]"
 else
@@ -41,7 +41,8 @@ fi
 
 BFSTATUS=$(cat $BATPATH/status)
 BPERCENT=$(( (BCUR*100/BFULL) + 1 ))
-BFILLED=$(( (BCUR*10/BFULL) + 1 ))
+[[ $BPERCENT -ge 100 ]] && BPERCENT=100
+BFILLED=$(( BPERCENT/10 ))
 
 if [[ $BFSTATUS = "Charging" ]]; then
     BRES="${CMAGENTA}${BUP} "
