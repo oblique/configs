@@ -158,6 +158,15 @@ alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias openocd-panda='openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 alias shred='shred -n 10 -u -v -z --random-source /dev/urandom'
 
+# mutt wrapper that choose 256 colors theme if the terminal supports it
+mutt() {
+    if [[ $(tput colors) = 256 ]]; then
+        command mutt -e 'source ~/.mutt/darkcandy256_theme' $@
+    else
+        command mutt $@
+    fi
+}
+
 # special ncmpcpp
 ncmpcpp() {
     local _color6
@@ -167,13 +176,18 @@ ncmpcpp() {
     if [[ $TERM = linux* ]]; then
         echo -en "\e]P64d4d4d"
         echo -en "\e]PE4d4d4d"
-    elif [[ $TERM != screen* ]]; then # screen and tmux don't support color changing
+    elif [[ $TERM != screen* || -n $TMUX ]]; then # screen don't support color changing
         # backup cyan rgb
         _color6=$(python $HOME/.zsh.d/get_term_rgb_color.py 6)
         _color14=$(python $HOME/.zsh.d/get_term_rgb_color.py 14)
         # change cyan to black
-        echo -en "\e]4;6;rgb:5d5d/5d5d/5d5d\e\\"
-        echo -en "\e]4;14;rgb:5d5d/5d5d/5d5d\e\\"
+        if [[ -n $TMUX ]]; then
+            echo -en "\ePtmux;\e\e]4;6;rgb:5d5d/5d5d/5d5d\e\e\\\0\e\\"
+            echo -en "\ePtmux;\e\e]4;14;rgb:5d5d/5d5d/5d5d\e\e\\\0\e\\"
+        else
+            echo -en "\e]4;6;rgb:5d5d/5d5d/5d5d\e\\"
+            echo -en "\e]4;14;rgb:5d5d/5d5d/5d5d\e\\"
+        fi
     fi
 
     command ncmpcpp $@
@@ -187,6 +201,10 @@ ncmpcpp() {
         # restore cyan rgb
         echo -en "\e]4;6;${_color6}\e\\"
         echo -en "\e]4;14;${_color14}\e\\"
+    elif [[ -n $TMUX ]]; then
+        # restore cyan rgb
+        echo -en "\ePtmux;\e\e]4;6;${_color6}\e\e\\\0\e\\"
+        echo -en "\ePtmux;\e\e]4;14;${_color14}\e\e\\\0\e\\"
     fi
 
     return $_ret
@@ -207,7 +225,7 @@ wicd-curses() {
         echo -en "\e]P4000000"
         # change foreground to green
         echo -en "\e[32m\e[8]"
-    elif [[ $TERM != screen* ]]; then  # screen and tmux don't support color changing
+    elif [[ $TERM != screen* || -n $TMUX ]]; then  # screen don't support color changing
         _shellname=$(ps h -p $$ | awk '{print $5}')
 
         if [[ ${_shellname} = *zsh ]]; then
@@ -216,14 +234,25 @@ wicd-curses() {
 
         _c=($(python $HOME/.zsh.d/get_term_rgb_color.py {0..15} bg))
 
-        # replace white with blue
-        echo -en "\e]4;7;${_c[4]}\e\\"
-        echo -en "\e]4;15;${_c[12]}\e\\"
-        # replace yellow with magenta
-        echo -en "\e]4;3;${_c[5]}\e\\"
-        echo -en "\e]4;11;${_c[13]}\e\\"
-        # replace non-bold blue with background color
-        echo -en "\e]4;4;${_c[16]}\e\\"
+        if [[ -n $TMUX ]]; then
+            # replace white with blue
+            echo -en "\ePtmux;\e\e]4;7;${_c[4]}\e\e\\\0\e\\"
+            echo -en "\ePtmux;\e\e]4;15;${_c[12]}\e\e\\\0\e\\"
+            # replace yellow with magenta
+            echo -en "\ePtmux;\e\e]4;3;${_c[5]}\e\e\\\0\e\\"
+            echo -en "\ePtmux;\e\e]4;11;${_c[13]}\e\e\\\0\e\\"
+            # replace non-bold blue with background color
+            echo -en "\ePtmux;\e\e]4;4;${_c[16]}\e\e\\\0\e\\"
+        else
+            # replace white with blue
+            echo -en "\e]4;7;${_c[4]}\e\\"
+            echo -en "\e]4;15;${_c[12]}\e\\"
+            # replace yellow with magenta
+            echo -en "\e]4;3;${_c[5]}\e\\"
+            echo -en "\e]4;11;${_c[13]}\e\\"
+            # replace non-bold blue with background color
+            echo -en "\e]4;4;${_c[16]}\e\\"
+        fi
     fi
 
     command wicd-curses $@
@@ -235,10 +264,14 @@ wicd-curses() {
         # reset colors
         echo -en "\e]R"
         clear
-    elif [[ $TERM != screen* ]]; then
+    elif [[ $TERM != screen* || -n $TMUX ]]; then
         # restore colors
         for x in {0..15}; do
-            echo -en "\e]4;${x};${_c[$x]}\e\\"
+            if [[ -n $TMUX ]]; then
+                echo -en "\ePtmux;\e\e]4;${x};${_c[$x]}\e\e\\\0\e\\"
+            else
+                echo -en "\e]4;${x};${_c[$x]}\e\\"
+            fi
         done
 
         if [[ $_shellname = *zsh ]]; then

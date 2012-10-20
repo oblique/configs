@@ -25,10 +25,6 @@ color index         brightcolor161  color233    ~N  # New
 color index         color161        color233    ~O  # Old
 color index         color99         color233    ~T  # Tagged
 color index         color238        color233    ~D  # Deleted
-color index         color81         color233    ~F  # Flagged
-
-# attributes when using a mono terminal
-mono header         underline       "^(From|Subject):"
-mono quoted         bold
+color index         black           color227    ~F  # Flagged
 
 # vim: filetype=muttrc

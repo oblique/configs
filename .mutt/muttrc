@@ -22,10 +22,6 @@ macro index <Esc>M "<tag-pattern>~N<enter>;WN<tag-pattern>~O<enter>;WO<untag-pat
 macro index <Esc>U "t;wN<untag-pattern>~T<enter>" "Mark message as unread"
 macro index <Esc>R "t;WN<untag-pattern>~T<enter>" "Mark message as read"
 
-### config for the sidebar patch
-### http://www.lunar-linux.org/mutt-sidebar/
-source ~/.mutt/sidebar.rc
-
 ### config for the purge message patch
 ### http://cedricduval.free.fr/mutt/patches/index.html#purge
 bind index <Esc>D purge-message
@@ -34,10 +30,13 @@ bind pager <Esc>D purge-message
 ### gpg
 source ~/.mutt/gpg.rc
 
-### theme
-source ~/.mutt/colors.darkcandy
-
 ### address book
 set query_command = "abook --mutt-query '%s'"
 macro generic,index,pager \ca "<shell-escape>abook<return><redraw-screen>" "launch abook"
 macro index,pager A "<pipe-message>abook --add-email<return><redraw-screen>" "add the sender address to abook"
+
+### theme
+### you can also choose your theme from shell, for example:
+### % mutt -e 'source ~/.mutt/darkcandy256_theme'
+source ~/.mutt/darkcandy16_theme
+#source ~/.mutt/darkcandy256_theme
