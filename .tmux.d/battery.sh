@@ -41,8 +41,9 @@ fi
 
 BFSTATUS=$(cat $BATPATH/status)
 BPERCENT=$(( (BCUR*100/BFULL) + 1 ))
-[[ $BPERCENT -ge 100 ]] && BPERCENT=100
 BFILLED=$(( BPERCENT/10 ))
+[[ $(( BFILLED * 10 )) -lt $BPERCENT ]] && BFILLED=$(( BFILLED + 1 ))
+[[ $BFILLED -ge 10 ]] && BFILLED=10
 
 if [[ $BFSTATUS = "Charging" ]]; then
     BRES="${CMAGENTA}${BUP} "
