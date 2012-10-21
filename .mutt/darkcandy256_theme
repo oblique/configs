@@ -11,7 +11,7 @@ color tilde         color228        color233
 color message       color83         color233
 color markers       color228        color233
 color attachment    color228        color233
-color search        color98         color236
+color search        color233        color227
 color underline     brightcolor83   color233
 
 color hdrdefault    color240        color233
@@ -25,6 +25,6 @@ color index         brightcolor161  color233    ~N  # New
 color index         color161        color233    ~O  # Old
 color index         color99         color233    ~T  # Tagged
 color index         color238        color233    ~D  # Deleted
-color index         black           color227    ~F  # Flagged
+color index         color233        color227    ~F  # Flagged
 
 # vim: filetype=muttrc
