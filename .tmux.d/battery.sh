@@ -78,4 +78,4 @@ if [[ x -lt 10 ]]; then
     done
 fi
 
-echo -ne "${BRES}${CRESET}"
+echo -ne " ${BRES}${CRESET}"
