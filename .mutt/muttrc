@@ -2,6 +2,7 @@ source ~/.mutt/accounts.rc
 
 set sort = threads
 set sort_aux = reverse-last-date-received
+set pager_index_lines = 8
 set header_cache = ~/.mutt/hcache
 
 set ssl_force_tls = yes
