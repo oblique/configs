@@ -5,6 +5,7 @@ export LANG=en_US.UTF-8
 export LC_COLLATE=C
 export LC_MESSAGES=C
 export PATH="${PATH}:${HOME}/bin"
+export GOPATH="${HOME}/go"
 export WINEARCH=wine32
 
 # init console colors
@@ -146,8 +147,6 @@ fi
 alias sudo='sudo ' # enable aliases in sudo
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-alias uhalt='dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop'
-alias ureboot='dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart'
 alias enable_bluetooth='rfkill unblock $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias disable_bluetooth='rfkill block $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias emacs='emacs -nw'
