@@ -110,14 +110,14 @@ mode "resize" {
     # when pressing left, the window is resized so that it has
     # more space on its left
 
-    bindsym Left        resize shrink left 9 px or 10 ppt
-    bindsym Shift+Left  resize grow left 9 px or 10 ppt
-    bindsym Down        resize shrink down 18 px or 10 ppt
-    bindsym Shift+Down  resize grow down 18 px or 10 ppt
-    bindsym Up          resize shrink up 18 px or 10 ppt
-    bindsym Shift+Up    resize grow up 18 px or 10 ppt
-    bindsym Right       resize shrink right 9 px or 10 ppt
-    bindsym Shift+Right resize grow right 9 px or 10 ppt
+    bindsym Left        resize shrink left 30 px or 10 ppt
+    bindsym Shift+Left  resize grow left 30 px or 10 ppt
+    bindsym Down        resize shrink down 30 px or 10 ppt
+    bindsym Shift+Down  resize grow down 30 px or 10 ppt
+    bindsym Up          resize shrink up 30 px or 10 ppt
+    bindsym Shift+Up    resize grow up 30 px or 10 ppt
+    bindsym Right       resize shrink right 30 px or 10 ppt
+    bindsym Shift+Right resize grow right 30 px or 10 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -164,15 +164,19 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # switch to previous or next workspace
-bindsym $mod+j workspace prev
-bindsym $mod+l workspace next
+bindsym $mod+j      workspace prev
+bindsym $mod+l      workspace next
+bindsym $mod+grave  workspace back_and_forth
 
 # other keybindings
 bindsym Print exec scrot -e "mv \$f /tmp"
 bindsym $mod+Print exec scrot -s -e "mv \$f /tmp"
 
+# grid 2x2
+bindsym $mod+g     exec ~/.i3/grid_2x2.sh
+
 # floating size boundaries
-floating_minimum_size 72 x 54
+floating_minimum_size -1 x -1
 floating_maximum_size -1 x -1
 
 # window commands
@@ -192,7 +196,6 @@ client.urgent           #151515 #151515 #d7005f #d7005f
 exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
 exec --no-startup-id dunst
 exec --no-startup-id xsettingsd
-exec --no-startup-id arpdetective
 exec --no-startup-id mpd
 exec --no-startup-id syndaemon -i 1.0 -k -R
 exec --no-startup-id perl ~/.i3/bat_warning.pl 0
