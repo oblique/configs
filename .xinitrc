@@ -2,10 +2,9 @@
 
 cd ~
 
-if [[ -d /etc/X11/xinit/xinitrc.d ]]; then
+if [[ $1 != "i3dev" && -d /etc/X11/xinit/xinitrc.d ]]; then
     for f in /etc/X11/xinit/xinitrc.d/*; do
-        # Do not launch dbus before ConsoleKit (FS#25031)
-        [[ ! "$f" =~ /etc/X11/xinit/xinitrc.d/.*dbus.* ]] && [[ -x "$f" ]] && . "$f"
+        [[ -x "$f" ]] && . "$f"
     done
     unset f
 fi
@@ -40,7 +39,7 @@ done
 
 # load nvidia settings
 [[ -f ~/.nvidia-settings-rc ]] && nvidia-settings -l
-nvidia-settings -a '0/Gamma[DFP-0]=0.820'
+nvidia-settings -a ':0[dpy:1]/Gamma=0.820'
 
 # synaptics settings
 synclient VertTwoFingerScroll=1
@@ -64,26 +63,31 @@ fi
 case $x in
     kde)
         export XSESSION="KDE-4"
-        exec ck-launch-session dbus-launch startkde
+        exec startkde
         ;;
     gnome)
         #export OOO_FORCE_DESKTOP=gnome
         #export XDG_MENU_PREFIX=gnome-
-        exec ck-launch-session dbus-launch gnome-session
+        exec gnome-session
         ;;
     fluxbox)
-        exec ck-launch-session dbus-launch startfluxbox
+        exec startfluxbox
         ;;
     awesome)
         xsetroot -cursor_name left_ptr
-        exec ck-launch-session dbus-launch awesome
+        exec awesome
         ;;
     i3)
         xsetroot -solid "#101010"
-        exec ck-launch-session dbus-launch i3
+        exec i3
         ;;
+    i3dev)
+        xsetroot -solid "#606060"
+        exec i3 -c ~/.i3/configdev
+        ;;
+
     mcwm)
-        exec ck-launch-session dbus-launch mcwm
+        exec mcwm
         ;;
     *)
         echo "Wrong session name!"
