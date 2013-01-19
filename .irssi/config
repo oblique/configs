@@ -209,6 +209,12 @@ settings = {
     alternate_nick = "your_alternick";
 #    ctcp_version_reply = "...";
   };
+  "irc/dcc" = {
+# you must port forward 10000-10050 tcp ports
+    dcc_port = "10000 10050";
+# replace 0.0.0.0 with your public ip
+    dcc_own_ip = "0.0.0.0";
+  };
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = {
     theme = "miromiro";
