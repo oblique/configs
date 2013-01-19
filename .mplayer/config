@@ -5,13 +5,13 @@ idx = yes
 #codecpath = /usr/lib/win32
 codecpath = /usr/lib/codecs
 
-subpos = 100
+subpos = 95
 sub-fuzziness = 1
 fontconfig = yes
 ass = yes
 embeddedfonts = yes
 ass-line-spacing = 0
-ass-font-scale = 1
+ass-font-scale = 1.1
 ass-styles = /home/oblique/.mplayer/styles.ass
 
 # font encoding
