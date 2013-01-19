@@ -156,6 +156,7 @@ alias arm-none-linux-gnueabi-gdb='arm-none-linux-gnueabi-gdb -nx -x ${HOME}/.gdb
 alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias openocd-panda='openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 alias shred='shred -n 10 -u -v -z --random-source /dev/urandom'
+alias mpc='mpc -h ~/.mpd/socket'
 
 # mutt wrapper that choose 256 colors theme if the terminal supports it
 mutt() {
@@ -298,8 +299,8 @@ image_music_video() {
     local _AUD=$2
     local _TMP_IMG=$(mktemp --suffix=.${_IMG##*.})
     cp ${_IMG} ${_TMP_IMG}
-    mogrify -resize 1920x1080 -background black -gravity center -extent 1920x1080 ${_TMP_IMG}
-    ffmpeg -loop 1 -i ${_TMP_IMG} -i ${_AUD} -shortest -strict experimental -s hd1080 -acodec copy -vcodec libx264 -pix_fmt rgba "$(basename ${_AUD%.*}.mkv)"
+    mogrify -resize 1920x1080 ${_TMP_IMG}
+    ffmpeg -loop 1 -i ${_TMP_IMG} -i ${_AUD} -shortest -pix_fmt yuvj420p -acodec copy -strict -2 -vcodec libx264 "$(basename ${_AUD%.*}.mkv)"
     rm -f ${_TMP_IMG}
 }
 
