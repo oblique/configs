@@ -19,8 +19,8 @@ subcp = ISO-8859-7
 #subcp = UTF-8
 #subfont-encoding = ISO-8859-7
 
-ao = pulse
-vo = vdpau
+ao = pulse,alsa,
+vo = vdpau,xv,
 
 softvol = yes
 softvol-max = 300
