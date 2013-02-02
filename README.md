@@ -46,6 +46,9 @@
     udisk
     youtube-dl
     gnome-themes-standard (needed by xsettingsd)
+    gtk-engine-unico (needed by xsettingsd)
+    gtk-engine-murrine (needed by xsettingsd)
+    AwOken icons (http://alecive.deviantart.com/art/AwOken-163570862) (needed by xsettingsd)
 
 
 ## notes for emacs
@@ -56,7 +59,7 @@
 ## other notes
 if you use .fonts.conf or .fonts do the following:
 
-    fc-cache -f
+    fc-cache -r
 
 ----------------------------------------------------------------
 
@@ -72,3 +75,12 @@ following files because you can not use `~`
 if you want to use my ncmpcpp theme, you must also add the ncmpcpp()
 function that i have in my .zshrc to your .bashrc/.zshrc
 
+----------------------------------------------------------------
+
+Steps to install AwOken icons:
+1) download them from http://alecive.deviantart.com/art/AwOken-163570862
+2) extract them to `~/.icons`
+3) `.AwOken` to `~/`
+4) `~/.icons/AwOken/awoken-icon-theme-customization`
+5) choose `Customize Clear version` 
+6) choose `Recover configuration options from previous installations`
