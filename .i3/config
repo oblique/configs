@@ -185,6 +185,7 @@ for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="Chromium"] border 1pixel
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="^Wine$"] floating enable
+for_window [class="^Skype$" title="^Skype. [^ ]* for Linux$"] floating enable
 
 # color class           border  backgr. text    indicator
 client.focused          #202020 #202020 #1a6fac #165e92
