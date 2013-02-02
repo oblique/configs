@@ -1,0 +1,33 @@
+Version FlatStudio v1.01 (2012-10-16)
+--------------------------------------
+- Added 2 new themes: FlatStudioGray and FlatStudioDark
+- Reworked Metacity theme  (recomended clean install)
+  Added new style square buttons on new themes (hamed asl contribution, thanks!) 
+  More flattened buttons on FlatStudio and FlatStudioLight
+  Now, Unity also is borderless
+  Note: readme.txt has instructions for exchanging buttons between themes
+- correction of some bugs reported by users in GTK2 (white text on white background)
+- fixed frame color Google Chrome (incognito mode)
+- small cosmetic changes
+
+Version FlatStudio v1.0 (2012-10-04)
+------------------------------------
+- correction of bugs detected in the RC
+- small cosmetic changes
+
+
+Version  FlatStudio RC2 (2012-09-29)
+------------------------------------
+FlatStudioLight
+some changes to try to be more like the original mockup.
+- tabs style
+- radio-button style 
+- button-hover effect
+- (slightly) menus of the menu bar
+
+
+Version  FlatStudio RC (2012-09-27)
+------------------------------------
+Release candidate 
+
+
