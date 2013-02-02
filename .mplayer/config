@@ -11,7 +11,7 @@ fontconfig = yes
 ass = yes
 embeddedfonts = yes
 ass-line-spacing = 0
-ass-font-scale = 1.1
+ass-font-scale = 1.0
 ass-styles = /home/oblique/.mplayer/styles.ass
 
 # font encoding
