@@ -168,6 +168,9 @@ bindsym $mod+j      workspace prev
 bindsym $mod+l      workspace next
 bindsym $mod+grave  workspace back_and_forth
 
+# bind snotes
+bindsym $mod+n exec snotes
+
 # other keybindings
 bindsym Print exec scrot -e "mv \$f /tmp"
 bindsym $mod+Print exec scrot -s -e "mv \$f /tmp"
@@ -186,6 +189,7 @@ for_window [class="Chromium"] border 1pixel
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [class="^Skype$" title="^Skype. [^ ]* for Linux$"] floating enable
+for_window [instance="^snotes$"] floating enable
 
 # color class           border  backgr. text    indicator
 client.focused          #202020 #202020 #1a6fac #165e92

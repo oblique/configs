@@ -1,0 +1,9 @@
+DMENU_ARGS='-nb #151515 -nf #787878 -sb #151515 -sf #1a6fac -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
+SNOTES_EDITOR="urxvt -name snotes -geometry 85x40 -e emacs -nw"
+SNOTES_DB="${HOME}/.snotes/notes"
+
+# clean trailing whitespace from file automatically
+SNOTES_CLEANUP="yes"
+
+# how many commits should be shown for "changed:note"
+SNOTES_CHANGED_COMMITS=2
