@@ -299,6 +299,7 @@
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
 (global-set-key (kbd "C-c p") 'show-file-path)
 (global-set-key (kbd "C-x p") 'other-window-backward)
+(global-set-key (kbd "C-c b") 'browse-url-firefox)
 (define-key my-minor-mode-map (kbd "<clearline>") (key-binding (kbd "<C-end>"))) ; <clearline> (in terminal) == <C-end>
 (define-key my-minor-mode-map (kbd "M-l") 'tabbar-forward)
 (define-key my-minor-mode-map (kbd "M-j") 'tabbar-backward)
