@@ -169,7 +169,8 @@ bindsym $mod+l      workspace next
 bindsym $mod+grave  workspace back_and_forth
 
 # bind snotes
-bindsym $mod+n exec --no-startup-id snotes
+bindsym $mod+n          exec --no-startup-id snotes
+bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
 # other keybindings
 bindsym Print exec scrot -e "mv \$f /tmp"
