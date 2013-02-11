@@ -23,6 +23,7 @@
     alsa (configured to use PulseAudio)
     libao (configured to use PulseAudio)
     xsettingsd (http://code.google.com/p/xsettingsd/)
+    gpg
 
 
 ## dependencies and other useful programs
