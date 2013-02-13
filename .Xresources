@@ -8,64 +8,9 @@ Xft.lcdfilter:  lcddefault
 Xft.dpi:        120
 Xft.rgba:       rgb
 
-! light colors
-*background:    #101010
-*foreground:    #66FF66
-*cursorColor:   #66ff66
-!black
-*color0:        #1c1c1c
-*color8:        #4d4d4d
-!red
-*color1:        #D81860
-*color9:        #F00060
-!green
-*color2:        #60FF60
-*color10:       #70FF70
-!yellow
-*color3:        #f9fd75
-*color11:       #f9fd80
-!blue
-*color4:        #4695c8
-*color12:       #5a9dc8
-!magenta
-*color5:        #a78edb
-*color13:       #b29fdb
-!cyan
-*color6:        #43afce
-*color14:       #69b8ce
-!white
-*color7:        #f3ebe2
-*color15:       #eeeeee
-
-! dark colors
-!*background:    #101010
-!*foreground:    #66ff66
-!*cursorColor:   #66ff66
-!!black
-!*color0:        #1c1c1c
-!*color8:        #4d4d4d
-!!red
-!*color1:        #960050
-!*color9:        #bb0064
-!!green
-!*color2:        #66aa11
-!*color10:       #80ff00
-!!yellow
-!*color3:        #cdd24a
-!*color11:       #e0e565
-!!blue
-!*color4:        #30309b
-!*color12:       #4141aa
-!!magenta
-!*color5:        #7e40a5
-!*color13:       #8a5fa5
-!!cyan
-!*color6:        #3579a8
-!*color14:       #4891c3
-!!white
-!*color7:        #bbbbbb
-!*color15:       #dddddd
-
+! color themes
+#include ".xdefaults.d/behelit.theme"
+!#include ".xdefaults.d/behelit_darker.theme"
 
 ! urxvt
 URxvt.termName:             rxvt-unicode-256color
