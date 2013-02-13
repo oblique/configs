@@ -31,7 +31,7 @@ bindsym $mod+Shift+Return   exec urxvt -e tmux
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb '#151515' -nf '#787878' -sb '#151515' -sf '#1a6fac' -fn '-*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
+bindsym $mod+d exec dmenu_run -nb '#151515' -nf '#787878' -sb '#151515' -sf '#a78edb' -fn '-*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
 
 # change focus
 bindsym $mod+Left   focus left
@@ -135,12 +135,12 @@ bar {
 
     colors {
         background #101010
-        statusline #165e92
+        statusline #5f87d7
 
         focused_workspace   #a78edb #a78edb #000000
         active_workspace    #101010 #101010 #a78edb
-        inactive_workspace  #101010 #101010 #404040
-        urgent_workspace    #101010 #101010 #d7005f
+        inactive_workspace  #101010 #101010 #606060
+        urgent_workspace    #101010 #101010 #d81860
     }
 }
 
@@ -181,7 +181,7 @@ bindsym $mod+m exec urxvt -name urxvt_floating -geometry 90x30 -e zsh -i -c ncmp
 bindsym $mod+g     exec ~/.i3/grid_2x2.sh
 
 # floating size boundaries
-floating_minimum_size -1 x -1
+floating_minimum_size 0 x 0
 floating_maximum_size -1 x -1
 
 # window commands
@@ -194,10 +194,10 @@ for_window [class="^Skype$" title="^Skype. [^ ]* for Linux$"] floating enable
 for_window [instance="^urxvt_floating$"] floating enable
 
 # color class           border  backgr. text    indicator
-client.focused          #202020 #202020 #1a6fac #165e92
-client.focused_inactive #151515 #151515 #787878 #202020
+client.focused          #202020 #202020 #5f87d7 #5f87d7
+client.focused_inactive #151515 #151515 #787878 #303030
 client.unfocused        #101010 #101010 #787878 #202020
-client.urgent           #151515 #151515 #d7005f #d7005f
+client.urgent           #151515 #151515 #d81860 #d81860
 
 # startup applications
 exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
