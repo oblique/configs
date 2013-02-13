@@ -1,4 +1,4 @@
-DMENU_ARGS='-nb #151515 -nf #787878 -sb #151515 -sf #1a6fac -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
+DMENU_ARGS='-nb #151515 -nf #787878 -sb #151515 -sf #a78edb -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
 SNOTES_EDITOR="urxvt -name urxvt_floating -geometry 85x40 -e emacs -nw"
 SNOTES_DB="${HOME}/.snotes/notes"
 
