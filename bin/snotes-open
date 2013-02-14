@@ -1,5 +1,5 @@
 #!/bin/sh
-# snotes-0.9 by v4hn / 2009-2013
+# snotes-1.0 by v4hn / 2009-2013
 # See LICENSE file for copyright and license details.
 
 info(){
@@ -18,11 +18,11 @@ newtemp(){
     echo $tmp
 }
 
-[ -n "`which git 2>/dev/null`" ] || die "git not in PATH"
+type git >/dev/null 2>&1 || die "git not in PATH"
 
-source "$HOME/.snotes/config" || die "config ~/.snotes/config messed up"
+. "$HOME/.snotes/config" || die "config ~/.snotes/config messed up"
 
-if [ "${SNOTES_CLEANUP}" = "yes" -a -z "`which perl 2>/dev/null`" ]; then
+if [ "${SNOTES_CLEANUP}" = "yes" ] && ! type perl >/dev/null 2>&1; then
     info "cleanup mode requires perl"
     SNOTES_CLEANUP="no"
 fi
@@ -34,10 +34,14 @@ cd "${SNOTES_DB}"
 unset snotes_file
 unset snotes_file_flags
 
+cancreate(){
+    [ ! -e "$1" -o -f "$1" ] && (touch "$1" && rm -f "$1") > /dev/null 2>&1
+}
+
 blame(){
     local tmp
     tmp="`newtemp`"
-    git blame --relative-date "$1" | sed 's/^\^\?/commit:/' > "$tmp"
+    git blame --relative-date -- "$1" | sed 's/^\^\?/commit:/' > "$tmp"
     chmod 0400 "$tmp"
     snotes_file="$tmp"
     snotes_file_flags=temp
@@ -57,8 +61,8 @@ changed(){
     local diffcommit
     tmp="`newtemp`"
 
-    diffcommit="`git log --oneline --color=never --max-count=${SNOTES_CHANGED_COMMITS} \"$1\" | tail -n1 | cut -d' ' -f1`"
-    git diff --color=never "${diffcommit}^" "$1" > "$tmp"
+    diffcommit="`git log --oneline --color=never --max-count=${SNOTES_CHANGED_COMMITS} -- \"$1\" | tail -n1 | cut -d' ' -f1`"
+    git diff --color=never "${diffcommit}^" -- "$1" > "$tmp"
     chmod 0400 "$tmp"
     snotes_file="$tmp"
     snotes_file_flags=temp
@@ -66,10 +70,11 @@ changed(){
 
 cleanup(){
     local tmp
-    tmp=`newtemp`
 
-    # cleanup
-    cat "$1" | perl -e '
+    if [ -f "$1" -a "${1##*.}" != "gpg" ]; then
+        tmp=`newtemp`
+        # cleanup
+        cat "$1" | perl -e '
 while(<>){
     next if(/^[ \t\n]*$/);
     last;
@@ -80,15 +85,16 @@ do {
     if(/^[ \t\n]*$/){ $tmp= $tmp."\n" }
     else { print $tmp.$_."\n"; $tmp="" };
 } while(<>);' > "$tmp"
-    cat "$tmp" > "$1"
-    rm "$tmp"
+        cat "$tmp" > "$1"
+        rm "$tmp"
+    fi
 }
 
 case "${1%:*}" in
 note)
     snotes_file="${1##*:}"
     if [ ! -f "$snotes_file" ]; then
-        touch "$snotes_file" && snotes_file_flags=created || die "could not create file '`pwd`/$snotes_file'"
+        cancreate "$snotes_file" && snotes_file_flags=created || die "could not create file '`pwd`/$snotes_file'"
     fi
     ;;
 blame)
@@ -100,23 +106,30 @@ commit)
 changed)
     changed "${1##*:}"
     ;;
+remove)
+    snotes_file="${1##*:}"
+    snotes_file_flags=deleted
+    ;;
 *)
     die "unknown prefix '${1%:*}'"
     ;;
 esac
 
-${SNOTES_EDITOR} "$snotes_file"
+if [ "$snotes_file_flags" != "deleted" ]; then
+    ${SNOTES_EDITOR} "$snotes_file"
+    [ ! -f "$snotes_file" -a "$snotes_file_flags" = "created" ] && die "file '`pwd`/$snotes_file' didn't created"
 
-if [ "${SNOTES_CLEANUP}" = "yes" -a "$snotes_file_flags" != "temp" ]; then
-    cleanup "$snotes_file"
+    if [ "${SNOTES_CLEANUP}" = "yes" -a "$snotes_file_flags" != "temp" ]; then
+        cleanup "$snotes_file"
+    fi
+
+    [ ! -s "$snotes_file" -a -z "$snotes_file_flags" ] && snotes_file_flags=deleted
 fi
-
-[ ! -s "$snotes_file" -a -z "$snotes_file_flags" ] && snotes_file_flags=deleted
 
 case "$snotes_file_flags" in
 created)
     if [ -s "$snotes_file" ]; then
-        git add "$snotes_file"
+        git add -- "$snotes_file"
         git commit -q -m "created note '$snotes_file'"
     else
         rm -f "$snotes_file"
@@ -126,12 +139,12 @@ temp)
     rm -f "$snotes_file"
     ;;
 deleted)
-    git rm -q -f "$snotes_file"
+    git rm -q -f -- "$snotes_file"
     git commit -q -m "removed note '$snotes_file'"
     ;;
 *)
-    if ! git diff --quiet "$snotes_file"; then
-        git add "$snotes_file"
+    if ! git diff --quiet -- "$snotes_file"; then
+        git add -- "$snotes_file"
         git commit -q -m "changed note '$snotes_file'"
     fi
     ;;
