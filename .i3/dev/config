@@ -131,7 +131,7 @@ bindsym $mod+r mode "resize"
 bar {
     font -misc-fixed-bold-r-normal--14-*-*-*-C-*-iso10646-1
     position top
-    status_command i3status
+    status_command ~/.i3/dev/git/i3status/i3status
 
     colors {
         background #101010

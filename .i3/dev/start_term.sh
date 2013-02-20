@@ -4,6 +4,4 @@ if [[ ! -d ~/.i3/dev/git/i3 || ! -d ~/.i3/dev/git/i3status ]]; then
     exit 1
 fi
 
-~/.i3/i3-exec-wait.pl ~/.i3/dev/start_xephyr.sh
-~/.i3/i3-exec-wait.pl ~/.i3/dev/start_term.sh
-~/.i3/i3-exec-wait.pl ~/.i3/dev/start_i3.sh
+urxvt -e bash -c 'cd ~/.i3/dev; DISPLAY=:1.0 tmux' &
