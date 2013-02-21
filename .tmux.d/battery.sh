@@ -67,14 +67,14 @@ fi
 
 for ((x=0; x < BFILLED; x++))
 do
-    BRES="${BRES}\u25a0"
+    BRES="${BRES}\u25fe"
 done
 
 if [[ x -lt 10 ]]; then
     BRES="${BRES}${CGRAY}"
     for ((; x < 10; x++))
     do
-        BRES="${BRES}\u25a0"
+        BRES="${BRES}\u25fe"
     done
 fi
 
