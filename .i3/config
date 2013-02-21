@@ -199,7 +199,7 @@ for_window [instance="^urxvt_floating$"] floating enable
 client.focused          #202020 #202020 #5f87d7 #5f87d7
 client.focused_inactive #151515 #151515 #787878 #303030
 client.unfocused        #101010 #101010 #787878 #202020
-client.urgent           #151515 #151515 #d81860 #d81860
+client.urgent           #f00060 #f00060 #101010 #f00060
 
 # startup applications
 exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
