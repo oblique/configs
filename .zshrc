@@ -285,7 +285,7 @@ wicd-curses() {
 # command for resizing fonts
 chpixelsize() {
     stty -echo
-    printf '\33]50;%s\007' xft:Source Code Pro:pixelsize=$1
+    printf '\33]50;%s\007' "xft:Source Code Pro:pixelsize=${1}"
     stty echo
 }
 
