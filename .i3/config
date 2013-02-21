@@ -189,6 +189,7 @@ floating_maximum_size -1 x -1
 new_window pixel 4
 
 # window commands
+for_window [class="^Xephyr$"] border normal
 for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="^Wine$"] floating enable
