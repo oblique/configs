@@ -16,9 +16,8 @@ Xft.rgba:       rgb
 URxvt.termName:             rxvt-unicode-256color
 URxvt.geometry:             90x25
 URxvt.reverseVideo:         false
-!URxvt.font:                 xft:Terminus:size=10
 !!! these two go together !!!
-URxvt.font:                 xft:Inconsolata:size=10
+URxvt.font:                 xft:Source Code Pro:pixelsize=14
 URxvt.letterSpace:          -1
 !!! these two go together !!!
 URxvt.scrollBar:            true
