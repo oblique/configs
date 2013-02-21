@@ -185,6 +185,9 @@ bindsym $mod+g     exec ~/.i3/grid_2x2.sh
 floating_minimum_size 0 x 0
 floating_maximum_size -1 x -1
 
+# make borders 4 pixels
+new_window pixel 4
+
 # window commands
 for_window [class="Firefox"] border 1pixel
 for_window [class="Firefox" title="^Downloads$"] floating enable
