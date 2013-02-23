@@ -24,6 +24,7 @@
     libao (configured to use PulseAudio)
     xsettingsd (http://code.google.com/p/xsettingsd/)
     gpg
+    zathura
 
 
 ## dependencies and other useful programs
@@ -50,6 +51,8 @@
     gtk-engine-unico (needed by xsettingsd)
     gtk-engine-murrine (needed by xsettingsd)
     AwOken icons (http://alecive.deviantart.com/art/AwOken-163570862) (needed by xsettingsd)
+    zathura-pdf-poppler (needed by zathura)
+    zathura-cb (needed by zathura)
 
 
 ## notes for emacs
