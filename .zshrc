@@ -267,6 +267,7 @@ wicd-curses() {
         clear
     elif [[ $TERM != screen* || -n $TMUX ]]; then
         # restore colors
+        local x
         for x in {0..15}; do
             if [[ -n $TMUX ]]; then
                 echo -en "\ePtmux;\e\e]4;${x};${_c[$x]}\e\e\\\0\e\\"
