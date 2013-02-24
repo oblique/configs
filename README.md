@@ -25,6 +25,7 @@
     xsettingsd (http://code.google.com/p/xsettingsd/)
     gpg
     zathura
+    slurm
 
 
 ## dependencies and other useful programs
