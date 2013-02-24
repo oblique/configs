@@ -197,10 +197,10 @@ for_window [class="^Skype$" title="^Skype. [^ ]* for Linux$"] floating enable
 for_window [instance="^urxvt_floating$"] floating enable; border pixel 10
 
 # color class           border  backgr. text    indicator
-client.focused          #202020 #202020 #5f87d7 #5f87d7
+client.focused          #5f87d7 #5f87d7 #101010 #799de4
 client.focused_inactive #151515 #151515 #787878 #303030
 client.unfocused        #101010 #101010 #787878 #202020
-client.urgent           #f00060 #f00060 #101010 #f00060
+client.urgent           #f00060 #f00060 #101010 #f5468d
 
 # startup applications
 exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
