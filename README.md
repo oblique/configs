@@ -8,7 +8,9 @@
     vifm
     zsh
     tmux
-    i3-wm & i3status
+    i3-wm
+    i3status
+    i3lock (patch that change the colors)
     dunst (lightweight notification-daemon, needed by i3-wm)
     awesome-wm (i don't use it anymore)
     irssi
