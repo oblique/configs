@@ -16,3 +16,9 @@ if [[ ! -d i3status ]]; then
     cd i3status
     make
 fi
+
+if [[ ! -d i3lock ]]; then
+    git clone git://code.i3wm.org/i3lock
+    cd i3lock
+    make
+fi
