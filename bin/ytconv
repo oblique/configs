@@ -10,9 +10,9 @@ identify "$1" > /dev/null 2>&1 || {
     exit 1
 }
 
-IMG=$1
+IMG="$1"
 TMP_IMG=$(mktemp --suffix=.${IMG##*.})
-cp ${IMG} ${TMP_IMG}
+cp "${IMG}" ${TMP_IMG}
 mogrify -resize 1920x1080 ${TMP_IMG}
 shift 1
 
