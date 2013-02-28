@@ -1,0 +1,70 @@
+#!/bin/bash
+
+if [[ $# -lt 2 ]]; then
+    echo "usage: ytconv <image> <audio 1> [<audio 2> [.. <audio N>]]"
+    exit 1
+fi
+
+identify "$1" > /dev/null 2>&1 || {
+    echo "ERROR: \`$1' is not an image file."
+    exit 1
+}
+
+IMG=$1
+TMP_IMG=$(mktemp --suffix=.${IMG##*.})
+cp ${IMG} ${TMP_IMG}
+mogrify -resize 1920x1080 ${TMP_IMG}
+shift 1
+
+TMP_ALIST=$(mktemp)
+for x in "$@"; do
+    echo file \'$(realpath "$x")\' >> $TMP_ALIST
+done
+
+(ffmpeg -codecs 2> /dev/null | grep libfdk_aac > /dev/null) && aac_codec="libfdk_aac"
+[[ -z "$aac_codec" ]] &&
+    (ffmpeg -codecs 2> /dev/null | grep libfaac > /dev/null) && aac_codec="libfaac"
+[[ -z "$aac_codec" ]] && aac_codec="aac"
+
+ffmpeg -loop 1 -i ${TMP_IMG} -f concat -i ${TMP_ALIST} -shortest -pix_fmt yuvj420p -c:a ${aac_codec} -b:a 512k -ar 96k -c:v libx264 -strict -2 out.mp4
+
+ret=$?
+rm -f ${TMP_IMG} ${TMP_ALIST}
+[[ $ret -ne 0 ]] && exit $ret
+
+rm -f out.txt
+H=0
+M=0
+S=0
+CS=0
+
+for x in "$@"; do
+    printf "%02d:%02d:%02d - %s\n" $H $M $S "$x" >> out.txt
+
+    t=$(ffmpeg -i "$x" 2>&1 | grep 'Duration:' | tr ',' ' ' | awk '{print $2}')
+    t=$(echo $t | tr ':.' ' ')
+    t=${t// 0/ }
+    t=( ${t#0*} )
+
+    H=$(( ${t[0]} + $H ))
+    M=$(( ${t[1]} + $M ))
+    S=$(( ${t[2]} + $S ))
+    CS=$(( ${t[3]} + $CS ))
+
+    if [[ $CS -ge 100 ]]; then
+        S=$(( $S + 1 ))
+        CS=$(( $CS - 100 ))
+    fi
+
+    if [[ $S -ge 60 ]]; then
+        M=$(( $M + 1 ))
+        S=$(( $S - 60 ))
+    fi
+
+    if [[ $M -ge 60 ]]; then
+        H=$(( $H + 1 ))
+        M=$(( $M - 60 ))
+    fi
+done
+
+exit 0

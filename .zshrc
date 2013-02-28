@@ -292,40 +292,6 @@ chpixelsize() {
     stty echo
 }
 
-ytconv() {
-    if [[ $# -lt 2 ]]; then
-        echo "usage: ytconv <image> <audio 1> [<audio 2> [.. <audio N>]]"
-        return 1
-    fi
-
-    identify "$1" > /dev/null 2>&1 || {
-        echo "ERROR: \`$1' is not an image file."
-        return 1
-    }
-
-    local _IMG=$1
-    local _TMP_IMG=$(mktemp --suffix=.${_IMG##*.})
-    cp ${_IMG} ${_TMP_IMG}
-    mogrify -resize 1920x1080 ${_TMP_IMG}
-    shift 1
-
-    local _TMP_ALIST=$(mktemp)
-    local x
-    for x in $@; do
-        echo "file '$(realpath $x)'" >> $_TMP_ALIST
-    done
-
-    local _aac_code
-    (ffmpeg -codecs 2> /dev/null | grep libfdk_aac > /dev/null) && _aac_codec="libfdk_aac"
-    [[ -z "$_aac_codec" ]] &&
-        (ffmpeg -codecs 2> /dev/null | grep libfaac > /dev/null) && _aac_codec="libfaac"
-    [[ -z "$_aac_codec" ]] && _aac_codec="aac"
-
-    ffmpeg -loop 1 -i ${_TMP_IMG} -f concat -i ${_TMP_ALIST} -shortest -pix_fmt yuvj420p -c:a ${_aac_codec} -b:a 512k -ar 96k -c:v libx264 -strict -2 out.mp4
-
-    rm -f ${_TMP_IMG} ${_TMP_ALIST}
-}
-
 wpa_dhcp() {
     if [[ $# -ne 3 ]]; then
         echo "usage: wpa_dhcp <interface> <essid> <passphrase>"
