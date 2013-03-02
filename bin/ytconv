@@ -57,7 +57,7 @@ S=0
 CS=0
 
 for x in "$@"; do
-    nm=$(echo "$x" | sed -e 's/\([:digit:]*\) \?- \?/\1. /')
+    nm=$(echo "$x" | sed -e 's/\([:digit:]*\) \?[-.] \?/\1. /')
     printf "[%02d:%02d:%02d] %s\n" $H $M $S "${nm%.*}" >> out.txt
 
     t=$(ffmpeg -i "$x" 2>&1 | grep 'Duration:' | tr ',' ' ' | awk '{print $2}')
