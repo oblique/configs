@@ -9,8 +9,8 @@ fi
 
 if [[ "$1" != "-t" ]]; then
     identify "$1" > /dev/null 2>&1 || {
-	echo "ERROR: \`$1' is not an image file."
-	exit 1
+        echo "ERROR: \`$1' is not an image file."
+        exit 1
     }
 
     echo "Converting image .."
@@ -23,17 +23,17 @@ if [[ "$1" != "-t" ]]; then
     IW=$(identify -format '%w' ${TMP_IMG})
     IH=$(identify -format '%h' ${TMP_IMG})
     if [[ $(( $IW % 2 )) -ne 0 ]]; then
-	IW=$(( $IW - 1 ))
-	mogrify -crop "${IW}x${IH}+0+0" ${TMP_IMG}
+        IW=$(( $IW - 1 ))
+        mogrify -crop "${IW}x${IH}+0+0" ${TMP_IMG}
     fi
     if [[ $(( $IH % 2 )) -ne 0 ]]; then
-	IH=$(( $IH - 1 ))
-	mogrify -crop "${IW}x${IH}+0+0" ${TMP_IMG}
+        IH=$(( $IH - 1 ))
+        mogrify -crop "${IW}x${IH}+0+0" ${TMP_IMG}
     fi
 
     TMP_ALIST=$(mktemp)
     for x in "$@"; do
-	echo file \'$(realpath "$x")\' >> $TMP_ALIST
+        echo file \'$(realpath "$x")\' >> $TMP_ALIST
     done
 
     (ffmpeg -codecs 2> /dev/null | grep libfdk_aac > /dev/null) && aac_codec="libfdk_aac"
