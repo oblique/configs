@@ -1,36 +1,54 @@
 #!/bin/bash
 
 if [[ $# -lt 2 ]]; then
-    echo "usage: ytconv <image> <audio 1> [<audio 2> [.. <audio N>]]"
+    echo "usage: ytconv [options] [<image>] <audio 1> [<audio 2> [.. <audio N>]]"
+    echo -e "\nOptions:"
+    echo -e "\t-t\t\tproduce only out.txt"
     exit 1
 fi
 
-identify "$1" > /dev/null 2>&1 || {
-    echo "ERROR: \`$1' is not an image file."
-    exit 1
-}
+if [[ "$1" != "-t" ]]; then
+    identify "$1" > /dev/null 2>&1 || {
+	echo "ERROR: \`$1' is not an image file."
+	exit 1
+    }
 
-IMG="$1"
-TMP_IMG=$(mktemp --suffix=.${IMG##*.})
-cp "${IMG}" ${TMP_IMG}
-mogrify -resize 1920x1080 ${TMP_IMG}
-shift 1
+    echo "Converting image .."
+    IMG="$1"
+    shift 1 # remove image from args
+    TMP_IMG=$(mktemp --suffix=.png)
+    convert "${IMG}" ${TMP_IMG}
+    mogrify -resize 1920x1080 ${TMP_IMG}
+    # ffmpeg does not accept images with odd width or height
+    IW=$(identify -format '%w' ${TMP_IMG})
+    IH=$(identify -format '%h' ${TMP_IMG})
+    if [[ $(( $IW % 2 )) -ne 0 ]]; then
+	IW=$(( $IW - 1 ))
+	mogrify -crop "${IW}x${IH}+0+0" ${TMP_IMG}
+    fi
+    if [[ $(( $IH % 2 )) -ne 0 ]]; then
+	IH=$(( $IH - 1 ))
+	mogrify -crop "${IW}x${IH}+0+0" ${TMP_IMG}
+    fi
 
-TMP_ALIST=$(mktemp)
-for x in "$@"; do
-    echo file \'$(realpath "$x")\' >> $TMP_ALIST
-done
+    TMP_ALIST=$(mktemp)
+    for x in "$@"; do
+	echo file \'$(realpath "$x")\' >> $TMP_ALIST
+    done
 
-(ffmpeg -codecs 2> /dev/null | grep libfdk_aac > /dev/null) && aac_codec="libfdk_aac"
-[[ -z "$aac_codec" ]] &&
-    (ffmpeg -codecs 2> /dev/null | grep libfaac > /dev/null) && aac_codec="libfaac"
-[[ -z "$aac_codec" ]] && aac_codec="aac"
+    (ffmpeg -codecs 2> /dev/null | grep libfdk_aac > /dev/null) && aac_codec="libfdk_aac"
+    [[ -z "$aac_codec" ]] && (ffmpeg -codecs 2> /dev/null | grep libfaac > /dev/null) && aac_codec="libfaac"
+    [[ -z "$aac_codec" ]] && aac_codec="aac"
 
-ffmpeg -loop 1 -i ${TMP_IMG} -f concat -i ${TMP_ALIST} -shortest -pix_fmt yuvj420p -c:a ${aac_codec} -b:a 512k -ar 96k -c:v libx264 -strict -2 out.mp4
+    ffmpeg -loop 1 -i ${TMP_IMG} -f concat -i ${TMP_ALIST} -shortest -pix_fmt yuvj420p -c:a ${aac_codec} -b:a 512k -ar 96k -c:v libx264 -strict -2 out.mp4
 
-ret=$?
-rm -f ${TMP_IMG} ${TMP_ALIST}
-[[ $ret -ne 0 ]] && exit $ret
+    ret=$?
+    rm -f ${TMP_IMG} ${TMP_ALIST}
+    [[ $ret -ne 0 ]] && exit $ret
+else
+    shift 1 # remove -t from args
+    identify "$1" > /dev/null 2>&1 && shift 1 # remove image from args
+fi
 
 rm -f out.txt
 H=0
@@ -39,7 +57,8 @@ S=0
 CS=0
 
 for x in "$@"; do
-    printf "%02d:%02d:%02d - %s\n" $H $M $S "$x" >> out.txt
+    nm=$(echo "$x" | sed -e 's/\([:digit:]*\) \?- \?/\1. /')
+    printf "[%02d:%02d:%02d] %s\n" $H $M $S "${nm%.*}" >> out.txt
 
     t=$(ffmpeg -i "$x" 2>&1 | grep 'Duration:' | tr ',' ' ' | awk '{print $2}')
     t=$(echo $t | tr ':.' ' ')
