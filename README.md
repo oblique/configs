@@ -28,6 +28,7 @@
     gpg
     zathura
     slurm
+    radare2
 
 
 ## dependencies and other useful programs
