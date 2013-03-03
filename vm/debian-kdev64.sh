@@ -17,4 +17,4 @@ else
     [[ -e "$kernel_img" ]] && KARGS=(-kernel "$kernel_img" -append root=/dev/sda1)
 fi
 
-qemu-system-x86_64 --enable-kvm -net nic,model=virtio -net vde,sock="${vdesock}" -smp 1 -m 512 -vga std "${CD[@]}" -hda "${VMIMG}" "${KARGS[@]}"
+qemu-system-x86_64 -enable-kvm -net nic,model=virtio -net vde,sock="${vdesock}" -smp 1 -m 512 -vga std "${CD[@]}" -hda "${VMIMG}" "${KARGS[@]}"
