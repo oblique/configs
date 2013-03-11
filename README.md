@@ -13,7 +13,7 @@
     i3lock (patch that change the colors)
     dunst (lightweight notification-daemon, needed by i3-wm)
     awesome-wm (i don't use it anymore)
-    irssi
+    irssi (i don't use it anymore)
     gdb
     mutt (with sidebar, trash folder, purge message patches)
     urlview (needed by mutt)
@@ -29,6 +29,7 @@
     zathura
     slurm
     radare2
+    weechat
 
 
 ## dependencies and other useful programs
@@ -57,6 +58,8 @@
     AwOken icons (http://alecive.deviantart.com/art/AwOken-163570862) (needed by xsettingsd)
     zathura-pdf-poppler (needed by zathura)
     zathura-cb (needed by zathura)
+    perl-text-charwidth (needed by weechat's coords.pl script)
+    pure-python-otr (https://github.com/afflux/pure-python-otr) (needed by weechat's otr.py script)
 
 
 ## notes for emacs
