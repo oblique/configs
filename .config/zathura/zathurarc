@@ -2,6 +2,7 @@ set show-scrollbars         true
 set window-title-basename   true
 set statusbar-basename      true
 
+unmap q
 map <F11> feedkeys ":set show-scrollbars false<Return><F5>"
 map <C-s> feedkeys ":set show-scrollbars<Return>"
 
