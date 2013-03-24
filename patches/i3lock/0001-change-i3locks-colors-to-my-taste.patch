@@ -1,4 +1,4 @@
-From 0822063abf318cb593ed1fcc6d41525a045392d5 Mon Sep 17 00:00:00 2001
+From f1e63b2d6b03bfcbd084f05b3fc4d45d0c4506c3 Mon Sep 17 00:00:00 2001
 From: oblique <psyberbits@gmail.com>
 Date: Mon, 25 Feb 2013 14:01:35 +0200
 Subject: [PATCH] change i3locks colors to my taste
@@ -9,7 +9,7 @@ Subject: [PATCH] change i3locks colors to my taste
  2 files changed, 10 insertions(+), 21 deletions(-)
 
 diff --git a/i3lock.c b/i3lock.c
-index df07d90..cd37443 100644
+index c555ee8..363bb43 100644
 --- a/i3lock.c
 +++ b/i3lock.c
 @@ -36,7 +36,7 @@
@@ -100,5 +100,5 @@ index ab4d56e..730e86d 100644
              cairo_stroke(ctx);
  
 -- 
-1.8.1.4
+1.8.1.5
 
