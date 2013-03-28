@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.5
+;;; version: 1.6
 
 ;; Copyright (C) 2012 oblique
 
@@ -69,7 +69,7 @@
    `(hl-line ((,class (:background "#1c1c1c"))))
 
    ;;; tabbar
-   `(tabbar-default ((,class (:background "#1c1c1c" :box nil :underline nil :weight normal))))
+   `(tabbar-default ((,class (:background "#1c1c1c" :box nil :underline nil :height 1.0 :weight normal))))
    `(tabbar-unselected ((,class (:background "#1c1c1c" :foreground "#5f5f5f"
 					     :box nil :underline nil :weight normal))))
    `(tabbar-selected ((,class (:background "#1c1c1c" :foreground "#d7005f"
