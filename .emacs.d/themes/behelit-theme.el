@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.3
+;;; version: 1.4
 
 ;; Copyright (C) 2012 oblique
 
@@ -40,6 +40,7 @@
    `(mode-line-inactive ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :box nil))))
    `(linum ((,class (:background "#101010" :foreground "#5f87af"
 				 :underline nil :slant normal :weight normal))))
+   `(menu ((,class (:foreground "#5f5faf" :background "#1c1c1c" :inverse-video nil))))
    ;; check linum-ex.el for linum-terminal-seperator
    `(linum-terminal-seperator ((,class (:background "#1c1c1c" :underline nil))))
    `(minibuffer-prompt ((,class (:foreground "#00afff"))))
