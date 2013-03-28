@@ -94,7 +94,7 @@
 
 ; fonts
 (if window-system
-    (setq default-frame-alist '((font . "Source Code Pro-8"))))
+    (setq default-frame-alist '((font . "Source Code Pro-9"))))
 
 ; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
