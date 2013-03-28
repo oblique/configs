@@ -18,7 +18,7 @@
 (tool-bar-mode -1)
 (if window-system
   (toggle-scroll-bar nil))
-(require 'linum-ex)
+(require 'my-linum)
 (setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
                                 fundamental-mode term-mode etags-select-mode
                                 completion-list-mode help-mode dired-mode
