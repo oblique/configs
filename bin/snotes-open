@@ -18,6 +18,10 @@ newtemp(){
     echo $tmp
 }
 
+cancreate(){
+    [ ! -e "$1" -o -f "$1" ] && (touch "$1" && rm -f "$1") > /dev/null 2>&1
+}
+
 type git >/dev/null 2>&1 || die "git not in PATH"
 
 . "$HOME/.snotes/config" || die "config ~/.snotes/config messed up"
@@ -33,10 +37,6 @@ cd "${SNOTES_DB}"
 
 unset snotes_file
 unset snotes_file_flags
-
-cancreate(){
-    [ ! -e "$1" -o -f "$1" ] && (touch "$1" && rm -f "$1") > /dev/null 2>&1
-}
 
 blame(){
     local tmp
@@ -70,11 +70,10 @@ changed(){
 
 cleanup(){
     local tmp
+    tmp=`newtemp`
 
-    if [ -f "$1" -a "${1##*.}" != "gpg" ]; then
-        tmp=`newtemp`
-        # cleanup
-        cat "$1" | perl -e '
+    # cleanup
+    cat "$1" | perl -e '
 while(<>){
     next if(/^[ \t\n]*$/);
     last;
@@ -85,10 +84,11 @@ do {
     if(/^[ \t\n]*$/){ $tmp= $tmp."\n" }
     else { print $tmp.$_."\n"; $tmp="" };
 } while(<>);' > "$tmp"
-        cat "$tmp" > "$1"
-        rm "$tmp"
-    fi
+    cat "$tmp" > "$1"
+    rm "$tmp"
 }
+
+[ -n "${1##*:}" ] || die "command with an empty argument"
 
 case "${1%:*}" in
 note)
@@ -98,33 +98,29 @@ note)
     fi
     ;;
 blame)
+    [ -f "${1##*:}" ] || die "'`pwd`/${1##*:}' does not exist"
     blame "${1##*:}"
     ;;
 commit)
     commit "${1##*:}"
     ;;
 changed)
+    [ -f "${1##*:}" ] || die "'`pwd`/${1##*:}' does not exist"
     changed "${1##*:}"
-    ;;
-remove)
-    snotes_file="${1##*:}"
-    snotes_file_flags=deleted
     ;;
 *)
     die "unknown prefix '${1%:*}'"
     ;;
 esac
 
-if [ "$snotes_file_flags" != "deleted" ]; then
-    ${SNOTES_EDITOR} "$snotes_file"
-    [ ! -f "$snotes_file" -a "$snotes_file_flags" = "created" ] && die "file '`pwd`/$snotes_file' didn't created"
+${SNOTES_EDITOR} "$snotes_file"
 
-    if [ "${SNOTES_CLEANUP}" = "yes" -a "$snotes_file_flags" != "temp" ]; then
-        cleanup "$snotes_file"
-    fi
-
-    [ ! -s "$snotes_file" -a -z "$snotes_file_flags" ] && snotes_file_flags=deleted
+if [ "${SNOTES_CLEANUP}" = "yes" -a "$snotes_file_flags" != "temp" -a -f "$snotes_file" \
+    -a $(expr "$snotes_file" : "$SNOTES_DONTCLEAN_REGEXP") = 0 ]; then
+    cleanup "$snotes_file"
 fi
+
+[ ! -s "$snotes_file" -a -z "$snotes_file_flags" ] && snotes_file_flags=deleted
 
 case "$snotes_file_flags" in
 created)

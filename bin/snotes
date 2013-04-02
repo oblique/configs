@@ -24,15 +24,23 @@ while [ -n "$1" ]; do
 done
 
 if [ ! -d "$HOME/.snotes" ]; then
-    info "creating config folder ~/.snotes"
+    info "creating folder ~/.snotes"
     mkdir $HOME/.snotes || die "Could not create $HOME/.snotes"
+fi
+
+if [ ! -f "$HOME/.snotes/config" ]; then
+    info "creating config file ~/.snotes/cofig"
     cat > $HOME/.snotes/config <<'EOF'
 SNOTES_EDITOR="xterm -e ${VISUAL:-${EDITOR:-vi}}"
-
 SNOTES_DB="$HOME/.snotes/notes"
+
+#DMENU_ARGS="-p Open: -sb darkgreen"
 
 # clean trailing whitespace from file automatically
 SNOTES_CLEANUP="yes"
+
+# files you don't want to be cleaned
+#SNOTES_DONTCLEAN_REGEXP='^.*\.gpg$\|^.*\.asc$'
 
 # how many commits should be shown for "changed:note"
 SNOTES_CHANGED_COMMITS=2
@@ -83,10 +91,10 @@ adding keywords to the individual notes.
 
 You might have noticed snotes' git dependency. All your notes
 and edits are stored in a git repository. This allows you to keep
-track of your changes easily. For example, if you add " changed" or " c"
+track of your changes easily. For example, if you add "/changed" or "/c"
 after the name of a note in `snotes` you want to look at, snotes will present you
 with a diff of recent changes you applied to that specific note.
-Adding " blame" or " b" after the name of a note will on the other hand
+Adding "/blame" or "/b" after the name of a note will on the other hand
 provide you with a detailed `git blame` of that note. Technically, the git
 repository also makes it quite easy to synchronize your notes from different
 platforms.
@@ -123,8 +131,8 @@ cd "$SNOTES_DB"
 
 if [ "${SNOTES_SEARCH}" = "yes" ]; then
     regex=`echo | dmenu ${DMENU_ARGS}`
-    [ -n "$regex" ] || die "regex empty"
-    select="`(grep -sil $regex *; find . -path ./.git -prune -o -regex ".*$regex.*" -exec basename \{\} \; ) | sort -u | dmenu`"
+    [ -n "$regex" ] || exit 0 # no regex means we don't need to search
+    select="`(grep -sil $regex *; find . -path ./.git -prune -o -regex ".*$regex.*" -exec basename \{\} \; ) | sort -u | dmenu ${DMENU_ARGS}`"
 else
     select=`ls | dmenu ${DMENU_ARGS}`
 fi
@@ -133,21 +141,12 @@ if [ -z "$select" ]; then
     exit 0
 fi
 
-case "${select##* }" in
+case "${select##*/}" in
 blame|b)
-    file="blame:${select% *}"
+    file="blame:${select%/*}"
     ;;
 changed|c)
-    file="changed:${select% *}"
-    ;;
-remove|rm)
-    [ ! -e "${select% *}" ] && die "file '`pwd`/${select% *}' doesn't exists"
-    while [ "$rmselect" != "NO" -a "$rmselect" != "YES" ]; do
-        rmselect=`echo -e 'NO\nYES' | dmenu ${DMENU_ARGS} -i -p "Do you want to remove '${select% *}' note?"`
-        [ -z "$rmselect" ] && exit 0
-    done
-    [ "$rmselect" = "NO" ] && exit 0
-    file="remove:${select% *}"
+    file="changed:${select%/*}"
     ;;
 *)
     file="note:${select}"
