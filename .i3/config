@@ -178,6 +178,7 @@ bindsym Print           exec --no-startup-id scrot -e "mv \$f /tmp"
 bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 90x30 -e zsh -i -c ncmpcpp
 bindsym $mod+shift+x    exec ~/.i3/i3lock_wrapper.sh
 bindsym $mod+u          [urgent=oldest] focus
+bindsym $mod+t          exec --no-startup-id ~/.i3/redshift.sh
 
 # grid 2x2
 bindsym $mod+g     exec ~/.i3/grid_2x2.sh
