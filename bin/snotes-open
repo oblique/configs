@@ -116,7 +116,7 @@ esac
 ${SNOTES_EDITOR} "$snotes_file"
 
 if [ "${SNOTES_CLEANUP}" = "yes" -a "$snotes_file_flags" != "temp" -a -f "$snotes_file" \
-    -a $(expr "$snotes_file" : "$SNOTES_DONTCLEAN_REGEXP") = 0 ]; then
+    -a $(expr "$snotes_file" : "$SNOTES_DONTCLEAN_REGEXP") -eq 0 ]; then
     cleanup "$snotes_file"
 fi
 
