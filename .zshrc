@@ -169,6 +169,15 @@ mutt() {
     fi
 }
 
+# tmux wrapper that choose 256 colors config if the terminal supports it
+tmux() {
+    if [[ $(tput colors) = 256 ]]; then
+        command tmux -f ~/.tmux.d/256colors.conf $@
+    else
+        command tmux $@
+    fi
+}
+
 # special ncmpcpp
 ncmpcpp() {
     local _color6
