@@ -254,21 +254,25 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
-(defun enable-spaces ()
+(defun enable-spaces (width)
   "Use spaces instead of tabs"
-  (interactive)
-  (setq tab-width 4)
-  (setq c-basic-offset 4)
+  (interactive "P")
+  (unless width
+    (setq width 4))
+  (setq tab-width width)
+  (setq c-basic-offset width)
   (setq indent-tabs-mode nil)
-  (message "You can retab the whole buffer by pressing C-x h C-M-\\"))
+  (message "You can retab the whole buffer by pressing C-x h M-x untabify"))
 
-(defun enable-tabs ()
+(defun enable-tabs (width)
   "Use tabs instead of spaces"
-  (interactive)
-  (setq tab-width 8)
-  (setq c-basic-offset 8)
+  (interactive "P")
+  (unless width
+    (setq width 8))
+  (setq tab-width width)
+  (setq c-basic-offset width)
   (setq indent-tabs-mode t)
-  (message "You can retab the whole buffer by pressing C-x h C-M-\\"))
+  (message "You can retab the whole buffer by pressing C-x h M-x tabify"))
 
 ; hooks for ARM assembly
 (defun arm-asm-mode-set-comment-hook ()
