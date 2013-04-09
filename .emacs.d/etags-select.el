@@ -290,6 +290,9 @@ to do."
 
 (defun etags-select-find (tagname)
   "Core tag finding function."
+  (if etags-select-use-xemacs-etags-p
+      (push-tag-mark)
+    (ring-insert find-tag-marker-ring (point-marker)))
   (let ((tag-files (etags-select-get-tag-files))
         (tag-count 0))
     (setq etags-select-source-buffer (buffer-name))
@@ -302,6 +305,7 @@ to do."
               (setq tag-count (etags-select-insert-matches tagname tag-file tag-count)))
             tag-files)
     (cond ((= tag-count 0)
+           (pop-tag-mark)
            (message (concat "No matches for tag \"" tagname "\""))
            (ding))
           ((and (= tag-count 1) etags-select-no-select-for-one-match)
@@ -352,9 +356,6 @@ Use the C-u prefix to prevent the etags-select window from closing."
           (delete-window (selected-window))
           (select-window etags-select-opened-window)))
       (switch-to-buffer etags-select-source-buffer)
-      (if etags-select-use-xemacs-etags-p
-          (push-tag-mark)
-        (ring-insert find-tag-marker-ring (point-marker)))
       (if other-window
           (find-file-other-window filename)
         (find-file filename))
@@ -414,7 +415,8 @@ Use the C-u prefix to prevent the etags-select window from closing."
   "Quit etags-select buffer."
   (interactive)
   (kill-buffer nil)
-  (delete-window))
+  (delete-window)
+  (pop-tag-mark))
 
 (defun etags-select-by-tag-number (first-digit)
   "Select a tag by number."
