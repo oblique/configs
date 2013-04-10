@@ -49,6 +49,10 @@
 (global-highlight-parentheses-mode t)
 (require 'arduino-mode)
 
+; modes for mutt
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+(add-hook 'mail-mode-hook '(lambda () (auto-fill-mode)))
+
 ; backup/autosave
 (defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
 (make-directory backup-dir t)
