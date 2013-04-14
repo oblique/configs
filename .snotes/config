@@ -6,7 +6,7 @@ SNOTES_DB="${HOME}/.snotes/notes"
 SNOTES_CLEANUP="yes"
 
 # files you don't want to be cleaned
-SNOTES_DONTCLEAN_REGEXP='^.*\.gpg$\|^.*\.asc$'
+SNOTES_DONTCLEAN_REGEXP='^.*\.gpg$|^.*\.asc$'
 
 # how many commits should be shown for "changed:note"
 SNOTES_CHANGED_COMMITS=2
