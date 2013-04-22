@@ -158,6 +158,7 @@ alias openocd-panda='openocd -f /usr/share/openocd/scripts/interface/flyswatter2
 alias shred='shred -n 10 -u -v -z --random-source /dev/urandom'
 alias mpc='mpc -h ~/.mpd/socket'
 alias mplayergr='mplayer --ass-font-scale=1.3 --slang=gr'
+alias mplayerxv='mplayer -vo xv'
 alias slurm='slurm -t ~/.slurm.d/miro'
 
 # mutt wrapper that choose 256 colors theme if the terminal supports it
