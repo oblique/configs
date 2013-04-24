@@ -33,7 +33,13 @@ if [[ "$1" != "-t" ]]; then
 
     TMP_ALIST=$(mktemp)
     for x in "$@"; do
-        echo file \'$(realpath "$x")\' >> $TMP_ALIST
+        FILE_PATH=$(realpath "$x")
+        if [[ "$FILE_PATH" = *\'* ]]; then
+            TMP_FILE=$(mktemp /tmp/tmp.ytconv.$$.XXXXXX.${x#*.})
+            ln -fs "$FILE_PATH" "$TMP_FILE"
+            FILE_PATH="$TMP_FILE"
+        fi
+        echo file \'"$FILE_PATH"\' >> "$TMP_ALIST"
     done
 
     (ffmpeg -codecs 2> /dev/null | grep libfdk_aac > /dev/null) && aac_codec="libfdk_aac"
@@ -43,7 +49,7 @@ if [[ "$1" != "-t" ]]; then
     ffmpeg -loop 1 -i ${TMP_IMG} -f concat -i ${TMP_ALIST} -shortest -pix_fmt yuvj420p -c:a ${aac_codec} -b:a 512k -ar 96k -c:v libx264 -strict -2 out.mp4
 
     ret=$?
-    rm -f ${TMP_IMG} ${TMP_ALIST}
+    rm -f ${TMP_IMG} ${TMP_ALIST} /tmp/tmp.ytconv.$$.*
     [[ $ret -ne 0 ]] && exit $ret
 else
     shift 1 # remove -t from args
