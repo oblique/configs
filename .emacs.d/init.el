@@ -53,14 +53,9 @@
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 (add-hook 'mail-mode-hook '(lambda () (auto-fill-mode)))
 
-; backup/autosave
-(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
-(make-directory backup-dir t)
-(setq backup-directory-alist `((".*" . ,backup-dir)))
-(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
-(make-directory autosave-dir t)
-(setq auto-save-list-file-prefix (concat autosave-dir ".auto-saves-"))
-(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+; disable backup/autosave
+(setq backup-inhibited t)
+(setq auto-save-default nil)
 
 ; session manager
 (require 'desktop-menu)
