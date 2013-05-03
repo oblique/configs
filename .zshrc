@@ -176,7 +176,7 @@ tmux() {
     if [[ $(tput colors) = 256 ]]; then
         command tmux -f ~/.tmux.d/256colors.conf $@
     else
-        command tmux $@
+        command tmux -f ~/.tmux.d/8colors.conf $@
     fi
 }
 
