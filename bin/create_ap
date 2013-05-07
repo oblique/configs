@@ -1,0 +1,84 @@
+#!/bin/bash
+
+if [[ $(id -u) -ne 0 ]]; then
+    echo "You must run it as root."
+    exit 1
+fi
+
+if [[ $# -lt 3 ]]; then
+    echo "Usage: create_ap <wifi-interface> <interface-with-internet> <wifi-name> [<wpa2-passphrase>]"
+    exit 1
+fi
+
+WIFI_IFACE=$1
+INTERNET_IFACE=$2
+SSID=$3
+PASSPHRASE=$4
+
+CONFDIR=$(mktemp -d /tmp/create_ap.${WIFI_IFACE}.conf.XXXXXXXX)
+echo "Config dir: $CONFDIR"
+
+# hostapd config
+cat << EOF > $CONFDIR/hostapd.conf
+ssid=${SSID}
+interface=${WIFI_IFACE}
+driver=nl80211
+hw_mode=g
+channel=1
+
+ctrl_interface=$CONFDIR/hostapd_ctrl
+ctrl_interface_group=0
+EOF
+
+if [[ -n "$PASSPHRASE" ]]; then
+    cat << EOF >> $CONFDIR/hostapd.conf
+# wpa + wpa2
+wpa=3
+wpa_passphrase=$4
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+EOF
+fi
+
+# dnsmasq config (dhcp + dns)
+cat << EOF > $CONFDIR/dnsmasq.conf
+interface=${WIFI_IFACE}
+bind-interfaces
+dhcp-range=192.168.12.2,192.168.12.254,255.255.255.0,24h
+EOF
+
+# enable interface
+ifconfig ${WIFI_IFACE} down
+ifconfig ${WIFI_IFACE} up 192.168.12.1 netmask 255.255.255.0
+
+# enable NAT
+iptables -t nat -A POSTROUTING -o ${INTERNET_IFACE} -j MASQUERADE
+iptables -A FORWARD -i ${WIFI_IFACE} -j ACCEPT
+OLD_IP_FORWARD=$(cat /proc/sys/net/ipv4/ip_forward)
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# boost low-entropy
+if [[ $(cat /proc/sys/kernel/random/entropy_avail) -lt 1000 ]]; then
+    which haveged > /dev/null 2>&1 && {
+	haveged -w 1024 -p $CONFDIR/haveged.pid
+    }
+fi
+
+# start dns + dhcp server
+dnsmasq -C $CONFDIR/dnsmasq.conf -x $CONFDIR/dnsmasq.pid
+
+# start access point
+echo "hostapd command-line interface: hostapd_cli -p $CONFDIR/hostapd_ctrl"
+hostapd $CONFDIR/hostapd.conf
+
+# exiting
+for x in $CONFDIR/*.pid; do
+    kill -9 $(cat $x)
+done
+rm -rf $CONFDIR
+iptables -t nat -D POSTROUTING -o ${INTERNET_IFACE} -j MASQUERADE
+iptables -D FORWARD -i ${WIFI_IFACE} -j ACCEPT
+echo $OLD_IP_FORWARD > /proc/sys/net/ipv4/ip_forward
+ifconfig ${WIFI_IFACE} down
+exit 0
