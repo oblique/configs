@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# dependencies:
+#	hostapd
+#	dnsmasq
+#	iptables
+#	net-tools
+#	haveged (optional)
+#	bash (to run this script)
+
 if [[ $# -ne 3 && $# -ne 4 ]]; then
     echo "Usage: create_ap <wifi-interface> <interface-with-internet> <wifi-name> [<wpa2-passphrase>]"
     echo
