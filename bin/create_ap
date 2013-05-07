@@ -1,12 +1,14 @@
 #!/bin/bash
 
-if [[ $(id -u) -ne 0 ]]; then
-    echo "You must run it as root."
+if [[ $# -ne 3 && $# -ne 4 ]]; then
+    echo "Usage: create_ap <wifi-interface> <interface-with-internet> <wifi-name> [<wpa2-passphrase>]"
+    echo
+    echo "example: create_ap wlan0 eth0 MyAccessPoint MyPassPhrase"
     exit 1
 fi
 
-if [[ $# -lt 3 ]]; then
-    echo "Usage: create_ap <wifi-interface> <interface-with-internet> <wifi-name> [<wpa2-passphrase>]"
+if [[ $(id -u) -ne 0 ]]; then
+    echo "You must run it as root."
     exit 1
 fi
 
