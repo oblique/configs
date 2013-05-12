@@ -32,7 +32,7 @@ GATEWAY=192.168.12.1
 WPA_VERSION=1+2
 ETC_HOSTS=0
 
-while true; do
+while :; do
     case "$1" in
 	-h|--help)
 	    usage
