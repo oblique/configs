@@ -173,6 +173,11 @@ bindsym $mod+grave  workspace back_and_forth
 bindsym $mod+n          exec --no-startup-id snotes
 bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
+# multimedia switch
+bindsym $mod+shift+l    exec --no-startup-id ~/bin/mmswitch-monitor LVDS-0
+bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor -d
+bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound -d
+
 # other keybindings
 bindsym Print           exec --no-startup-id scrot -e "mv \$f /tmp"
 bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 90x30 -e zsh -i -c ncmpcpp
