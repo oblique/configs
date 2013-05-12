@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DEFAULT_SESSION="i3"
+
 cd ~
 
 if [[ -d /etc/X11/xinit/xinitrc.d ]]; then
@@ -51,11 +53,6 @@ synclient TapButton1=0 TapButton2=0 TapButton3=0
 autocutsel -fork
 autocutsel -selection PRIMARY -fork
 
-#export GDK_USE_XFT=1    # for old gtk applications
-#export QT_XFT=true      # for old qt applicatios
-
-DEFAULT_SESSION="i3"
-
 if [[ -n "$1" ]]; then
     x=$1
 else
@@ -63,21 +60,11 @@ else
 fi
 
 case $x in
-    kde)
-        export XSESSION="KDE-4"
-        exec startkde
-        ;;
     gnome)
-        #export OOO_FORCE_DESKTOP=gnome
-        #export XDG_MENU_PREFIX=gnome-
         exec gnome-session
         ;;
     fluxbox)
         exec startfluxbox
-        ;;
-    awesome)
-        xsetroot -cursor_name left_ptr
-        exec awesome
         ;;
     i3)
         xsetroot -solid "#101010"

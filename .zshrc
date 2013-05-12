@@ -159,7 +159,6 @@ alias shred='shred -n 10 -u -v -z --random-source /dev/urandom'
 alias mpc='mpc -h ~/.mpd/socket'
 alias mplayergr='mplayer --ass-font-scale=1.3 --slang=gr'
 alias mplayerxv='mplayer -vo xv'
-alias slurm='slurm -t ~/.slurm.d/miro'
 alias HandBrakeCLI_HD="HandBrakeCLI -e x264 -2 -T -q 18.0 -a 1,1 -E faac,copy:ac3 -B 160,160 -6 dpl2,auto -R Auto,Auto -D 0.0,0.0 -4 --decomb --strict-anamorphic --crop 0:0:0:0 -m -x level=41:b-adapt=1:rc-lookahead=50:me=umh:trellis=2"
 
 # mutt wrapper that choose 256 colors theme if the terminal supports it
@@ -223,79 +222,6 @@ ncmpcpp() {
     return $_ret
 }
 
-wicd-curses() {
-    local _c
-    local _shellname
-
-    if [[ $TERM = linux* ]]; then
-        # replace white with blue
-        echo -en "\e]P74695c8"
-        echo -en "\e]PF5a9dc8"
-        # replace yellow with magenta
-        echo -en "\e]P3a78edb"
-        echo -en "\e]PBb29fdb"
-        # replace non-bold blue with black
-        echo -en "\e]P4000000"
-        # change foreground to green
-        echo -en "\e[32m\e[8]"
-    elif [[ $TERM != screen* || -n $TMUX ]]; then  # screen don't support color changing
-        _shellname=$(ps h -p $$ | awk '{print $5}')
-
-        if [[ ${_shellname} = *zsh ]]; then
-            setopt KSH_ARRAYS
-        fi
-
-        _c=($(python $HOME/.zsh.d/get_term_rgb_color.py {0..15} bg))
-
-        if [[ -n $TMUX ]]; then
-            # replace white with blue
-            echo -en "\ePtmux;\e\e]4;7;${_c[4]}\e\e\\\0\e\\"
-            echo -en "\ePtmux;\e\e]4;15;${_c[12]}\e\e\\\0\e\\"
-            # replace yellow with magenta
-            echo -en "\ePtmux;\e\e]4;3;${_c[5]}\e\e\\\0\e\\"
-            echo -en "\ePtmux;\e\e]4;11;${_c[13]}\e\e\\\0\e\\"
-            # replace non-bold blue with background color
-            echo -en "\ePtmux;\e\e]4;4;${_c[16]}\e\e\\\0\e\\"
-        else
-            # replace white with blue
-            echo -en "\e]4;7;${_c[4]}\e\\"
-            echo -en "\e]4;15;${_c[12]}\e\\"
-            # replace yellow with magenta
-            echo -en "\e]4;3;${_c[5]}\e\\"
-            echo -en "\e]4;11;${_c[13]}\e\\"
-            # replace non-bold blue with background color
-            echo -en "\e]4;4;${_c[16]}\e\\"
-        fi
-    fi
-
-    command wicd-curses $@
-    local _ret=$?
-
-    if [[ $TERM = linux* ]]; then
-        # change foreground back to white
-        echo -en "\e[37m\e[8]"
-        # reset colors
-        echo -en "\e]R"
-        clear
-    elif [[ $TERM != screen* || -n $TMUX ]]; then
-        # restore colors
-        local x
-        for x in {0..15}; do
-            if [[ -n $TMUX ]]; then
-                echo -en "\ePtmux;\e\e]4;${x};${_c[$x]}\e\e\\\0\e\\"
-            else
-                echo -en "\e]4;${x};${_c[$x]}\e\\"
-            fi
-        done
-
-        if [[ $_shellname = *zsh ]]; then
-            unsetopt KSH_ARRAYS
-        fi
-    fi
-
-    return $_ret
-}
-
 # command for resizing fonts
 chpixelsize() {
     stty -echo
@@ -303,113 +229,9 @@ chpixelsize() {
     stty echo
 }
 
-wpa_dhcp() {
-    if [[ $# -ne 3 ]]; then
-        echo "usage: wpa_dhcp <interface> <essid> <passphrase>"
-        return 1
-    fi
-
-    sudo iwconfig $1 channel auto || return $?
-
-    local _tmp_conf=$(mktemp --suffix=.conf)
-    wpa_passphrase $2 $3 > $_tmp_conf
-    local _ret=$?
-    if [[ $_ret -ne 0 ]]; then
-        cat $_tmp_conf
-        rm -f $_tmp_conf
-        return $_ret
-    fi
-
-    sudo wpa_supplicant -B -Dwext -i $1 -c $_tmp_conf
-    _ret=$?
-    rm -f $_tmp_conf
-    if [[ $_ret -ne 0 ]]; then
-        return $_ret
-    fi
-
-    sudo dhcpcd $1
-    return $?
-}
-
-wep_dhcp() {
-    if [[ $# -ne 3 ]]; then
-        echo "usage: wep_dhcp <interface> <essid> <passphrase>"
-        return 1
-    fi
-
-    sudo iwconfig $1 channel auto || return $?
-    sudo iwconfig $1 essid $2 key $3 || return $?
-    sudo dhcpcd $1
-    return $?
-}
-
-open_dhcp() {
-    if [[ $# -ne 2 ]]; then
-        echo "usage: open_dhcp <interface> <essid>"
-        return 1
-    fi
-
-    sudo iwconfig $1 channel auto || return $?
-    sudo iwconfig $1 essid $2|| return $?
-    sudo dhcpcd $1
-    return $?
-}
-
-wifi_scan() {
-    if [[ $# -ne 1 ]]; then
-        echo "usage: wifi_scan <interface>"
-        return 1
-    fi
-
-    sudo iwconfig $1 channel auto || return $?
-    sudo iwlist $1 scan
-    return $?
-}
-
-udisks() {
-    local x
-    for x in $@; do
-        if [[ $x = "--unmount" ]]; then
-            sync
-            break
-        fi
-    done
-    command udisks $@
-}
-
 udisksctl() {
     [[ $1 = unmount ]] && sync
     command udisksctl $@
-}
-
-embed_subtitle() {
-    if [[ $# -lt 3 ]]; then
-        echo "usage: embed_subtitle <video> <subtitle> [ffmpeg options] <output>"
-        return 1
-    fi
-
-    if [[ ! -e $1 ]]; then
-        echo "file $1 does not exists!"
-        return 1
-    fi
-
-    if [[ ! -e $2 ]]; then
-        echo "file $2 does not exists!"
-        return 1
-    fi
-
-    local _VIDRAND_F=$(mktemp -u --suffix=.mp4)
-    local _SOUNDRAND_F=$(mktemp -u --suffix=.wav)
-
-    mkfifo $_VIDRAND_F
-    mkfifo $_SOUNDRAND_F
-
-    (mplayer -benchmark -really-quiet -sub $2 -noframedrop -nosound -vo yuv4mpeg:file=${_VIDRAND_F} $1 -osdlevel 0 &) > /dev/null 2>&1
-    (mplayer -benchmark -really-quiet -noframedrop -ao pcm:file=${_SOUNDRAND_F} -novideo $1 &) > /dev/null 2>&1
-    sleep 2
-    ffmpeg -i $_VIDRAND_F -i $_SOUNDRAND_F -isync ${*:3}
-
-    rm -f $_VIDRAND_F $_SOUNDRAND_F
 }
 
 mkmagnettorrent() {

@@ -1,21 +1,17 @@
 ## configs
     Xdefaults/Xresources
     xinitrc
-    xserverrc
     urxvt (256 colors)
     emacs
     vim
-    vifm
     zsh
     tmux
     i3-wm
     i3status
     i3lock (patch that change the colors)
     dunst (lightweight notification-daemon, needed by i3-wm)
-    awesome-wm (i don't use it anymore)
-    irssi (i don't use it anymore)
     gdb
-    mutt (with sidebar, trash folder, purge message patches)
+    mutt (trash folder, purge message patches)
     urlview (needed by mutt)
     mpd
     ncmpcpp
@@ -27,7 +23,6 @@
     xsettingsd (http://code.google.com/p/xsettingsd/)
     gpg
     zathura
-    slurm
     radare2
     weechat
     redshift
@@ -46,13 +41,11 @@
     pcmanfm
     feh
     wicd
-    dmenu (needed by awesome-wm)
-    xdotool (needed by awesome-wm)
+    dmenu
     xf86-input-synaptics (syndaemon, synclient)
     rfkill (enable/disable bluetooth)
     scrot
-    udisk
-    youtube-dl
+    udisk2
     gnome-themes-standard (needed by xsettingsd)
     gtk-engine-unico (needed by xsettingsd)
     gtk-engine-murrine (needed by xsettingsd)
