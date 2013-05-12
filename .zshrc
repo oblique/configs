@@ -160,7 +160,7 @@ alias mpc='mpc -h ~/.mpd/socket'
 alias mplayergr='mplayer --ass-font-scale=1.3 --slang=gr'
 alias mplayerxv='mplayer -vo xv'
 alias slurm='slurm -t ~/.slurm.d/miro'
-alias HandBrakeCLI_HD="HandBrakeCLI -e x264 -2 -T -q 18.0 -a 1,1 -E faac,copy:ac3 -B 160,160 -6 dpl2,auto -R Auto,Auto -D 0.0,0.0 -4 --decomb --strict-anamorphic --crop 0:0:0:0 -m -x level=41:b-adapt=2:rc-lookahead=50:me=umh:trellis=2"
+alias HandBrakeCLI_HD="HandBrakeCLI -e x264 -2 -T -q 18.0 -a 1,1 -E faac,copy:ac3 -B 160,160 -6 dpl2,auto -R Auto,Auto -D 0.0,0.0 -4 --decomb --strict-anamorphic --crop 0:0:0:0 -m -x level=41:b-adapt=1:rc-lookahead=50:me=umh:trellis=2"
 
 # mutt wrapper that choose 256 colors theme if the terminal supports it
 mutt() {
