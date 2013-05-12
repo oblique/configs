@@ -1,0 +1,111 @@
+#!/bin/sh
+
+DMENU_ARGS='-nb #151515 -nf #787878 -sb #151515 -sf #a78edb -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
+
+die() {
+    echo "$(basename $0): Error: $1" >&2
+    exit 1
+}
+
+list_sinks() {
+    pacmd list-sinks | grep -E "index: |name: |device.description = " | paste - - - | \
+	tr '*' ' ' | tr '<>' '"' | sed 's/device.description =/description:/' | \
+	sed -e 's/[ \t][ \t]*/ /g' | sed -e 's/^ //'
+}
+
+list_sink_inputs() {
+    pacmd list-sink-inputs | grep 'index: ' | awk '{print $2}'
+}
+
+get_index_from_desc() {
+    list_sinks | grep "description: \"$1\"" | awk '{print $2}'
+}
+
+get_index_from_name() {
+    list_sinks | grep " name: \"$1\" " | awk '{print $2}'
+}
+
+get_desc_from_index() {
+    list_sinks | grep -E "^index: $1 " | sed 's/.* description: \"\(.*\)\"$/\1/'
+}
+
+get_name_from_index() {
+    list_sinks | grep -E "^index: $1 "  | sed 's/.* name: \"\(.*\)\" .*$/\1/'
+}
+
+set_sink_from_index() {
+    local x
+    pacmd set-default-sink $1 > /dev/null 2>&1
+    for x in $(list_sink_inputs); do
+	pacmd move-sink-input $x $1 > /dev/null 2>&1
+    done
+}
+
+usage() {
+    echo "Usage $(basename $0) [options] index:NUMBER | name:NAME | desc:DESCRIPTION"
+    echo
+    echo "Options:"
+    echo "  -h, --help            Show this help menu"
+    echo "  -l, --list-cards      List sound cards"
+    echo "  -d                    Use dmenu"
+    echo
+    echo "Examples:"
+    echo "  $(basename $0) index:0"
+    echo "  $(basename $0) name:$(get_name_from_index 0)"
+    echo "  $(basename $0) desc:\"$(get_desc_from_index 0)\""
+}
+
+ARGS=$(getopt -o lhd -l "list-cards,help" -n $(basename $0) -- "$@")
+[ $? -ne 0 ] && exit 1
+eval set -- "$ARGS"
+
+while :; do
+    case "$1" in
+	-h|--help)
+	    usage
+	    exit 1
+	    ;;
+	-l|--list-cards)
+	    list_sinks
+	    exit 0
+	    ;;
+	-d)
+	    SELECT=$(list_sinks | sed 's/.* description: \"\(.*\)\"$/\1/' | \
+		dmenu -i -p 'Choose sound card:' $DMENU_ARGS)
+	    [ -z "$SELECT" ] && exit 0
+	    ARG=desc:"$SELECT"
+	    break
+	    ;;
+	--)
+	    shift
+	    ARG="$@"
+	    break
+	    ;;
+    esac
+done
+
+if [ -z "$ARG" ]; then
+    usage
+    exit 1
+fi
+
+case "${ARG%%:*}" in
+    index)
+	[ $(list_sinks | grep -E -c "^index: ${ARG#*:} ") -eq 0 ] && \
+	    die "Sound card with index \`${ARG#*:}' does not exist."
+	set_sink_from_index "${ARG#*:}"
+	;;
+    name)
+	INDEX=$(get_index_from_name "${ARG#*:}")
+	[ -z "$INDEX" ] && die "Sound card with name \`${ARG#*:}' does not exist."
+	set_sink_from_index $INDEX
+	;;
+    desc)
+	INDEX=$(get_index_from_desc "${ARG#*:}")
+	[ -z "$INDEX" ] && die "Sound card with description \`${ARG#*:}' does not exist."
+	set_sink_from_index $INDEX
+	;;
+    *)
+	die "You must specify if \`${ARG#*:}' is an index, a name or a description. See --help."
+	;;
+esac
