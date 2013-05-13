@@ -176,7 +176,7 @@ bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 # multimedia switch
 bindsym $mod+shift+l    exec --no-startup-id ~/bin/mmswitch-monitor LVDS-0
 bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor --dmenu
-bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound -d
+bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 # other keybindings
 bindsym Print           exec --no-startup-id scrot -e "mv \$f /tmp"

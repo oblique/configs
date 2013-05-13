@@ -47,7 +47,7 @@ usage() {
     echo "Options:"
     echo "  -h, --help            Show this help menu"
     echo "  -l, --list-cards      List sound cards"
-    echo "  -d                    Use dmenu"
+    echo "  --dmenu               Use dmenu"
     echo
     echo "Examples:"
     echo "  $(basename $0) index:0"
@@ -55,7 +55,7 @@ usage() {
     echo "  $(basename $0) desc:\"$(get_desc_from_index 0)\""
 }
 
-ARGS=$(getopt -o lhd -l "list-cards,help" -n $(basename $0) -- "$@")
+ARGS=$(getopt -o lh -l "list-cards,dmenu,help" -n $(basename $0) -- "$@")
 [ $? -ne 0 ] && exit 1
 eval set -- "$ARGS"
 
@@ -69,7 +69,7 @@ while :; do
 	    list_sinks
 	    exit 0
 	    ;;
-	-d)
+	--dmenu)
 	    SELECT=$(list_sinks | sed 's/.* description: \"\(.*\)\"$/\1/' | \
 		dmenu -i -p 'Choose sound card:' $DMENU_ARGS)
 	    [ -z "$SELECT" ] && exit 0
