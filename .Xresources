@@ -25,7 +25,7 @@ URxvt.scrollBar_floating:   true
 URxvt.scrollBar_right:      false
 URxvt.scrollColor:          #0c0c0c
 URxvt.saveLines:            5500
-URxvt.perl-ext-common:      default,matcher,-searchable-scrollback,clipboard,keyboard-select,osc-xterm-clipboard
+URxvt.perl-ext-common:      default,matcher,-searchable-scrollback,clipboard,keyboard-select
 URxvt.url-launcher:         firefox
 URxvt.matcher.button:       1
 URxvt.colorUL:              #5f87d7
