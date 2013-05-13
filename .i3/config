@@ -100,7 +100,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec ~/.i3/exit_menu.sh
+bindsym $mod+Shift+e exec ~/.i3/bin/exit_menu.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -181,12 +181,12 @@ bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound -d
 # other keybindings
 bindsym Print           exec --no-startup-id scrot -e "mv \$f /tmp"
 bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 90x30 -e zsh -i -c ncmpcpp
-bindsym $mod+shift+x    exec ~/.i3/i3lock_wrapper.sh
+bindsym $mod+shift+x    exec ~/.i3/bin/i3lock_wrapper.sh
 bindsym $mod+u          [urgent=oldest] focus
-bindsym $mod+t          exec --no-startup-id ~/.i3/redshift.sh
+bindsym $mod+t          exec --no-startup-id ~/.i3/bin/redshift.sh
 
 # grid 2x2
-bindsym $mod+g     exec ~/.i3/grid_2x2.sh
+bindsym $mod+g     exec ~/.i3/bin/grid_2x2.sh
 
 # floating size boundaries
 floating_minimum_size 0 x 0
@@ -215,4 +215,4 @@ exec --no-startup-id dunst
 exec --no-startup-id xsettingsd
 exec --no-startup-id mpd
 exec --no-startup-id syndaemon -i 1.0 -k -R
-exec --no-startup-id perl ~/.i3/bat_warning.pl 0
+exec --no-startup-id perl ~/.i3/bin/bat_warning.pl 0

@@ -48,6 +48,9 @@ sub event_type {
     return ($type & 0x7f);
 }
 
+sub sync_with_i3 {
+    
+}
 
 
 help() if ($#ARGV == -1);
