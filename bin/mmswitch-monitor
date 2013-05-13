@@ -86,7 +86,7 @@ while :; do
 	    ;;
 	-d)
 	    SELECT=$({
-		    echo Join monitors
+		    echo Extend monitors
 		    echo Duplicate monitors
 		    list_monitors
 		} | dmenu -i -p 'Choose monitor:' $DMENU_ARGS)
@@ -95,7 +95,7 @@ while :; do
 
 	    ARGS=
 	    case "$SELECT" in
-		"Join monitors")
+		"Extend monitors")
 		    for x in $(list_monitors); do
 			ARGS="${ARGS} ${x}"
 		    done
