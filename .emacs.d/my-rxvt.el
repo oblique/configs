@@ -1,7 +1,6 @@
 ;;; rxvt.el --- define function key sequences and standard colors for rxvt
 
-;; Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011
-;;   Free Software Foundation, Inc.
+;; Copyright (C) 2002-2013 Free Software Foundation, Inc.
 
 ;; Author: Eli Zaretskii
 ;; Keywords: terminals
@@ -115,11 +114,11 @@
 
 (defvar rxvt-alternatives-map
   (let ((map (make-sparse-keymap)))
-    ;; The terminal intialization C code file might have initialized
+    ;; The terminal initialization C code file might have initialized
     ;; function keys F11->F42 from the termcap/terminfo information.  On
     ;; a PC-style keyboard these keys correspond to
     ;; MODIFIER-FUNCTION_KEY, where modifier is S-, C-, C-S-.  The
-    ;; code here subsitutes the corresponding defintions in
+    ;; code here substitutes the corresponding definitions in
     ;; function-key-map.  This substitution is needed because if a key
     ;; definition if found in function-key-map, there are no further
     ;; lookups in other keymaps.
@@ -167,7 +166,7 @@
 
   ;; Use inheritance to let the main keymap override those defaults.
   ;; This way we don't override terminfo-derived settings or settings
-  ;; made in the .emacs file.
+  ;; made in the init file.
   (let ((m (copy-keymap rxvt-function-map)))
     (set-keymap-parent m (keymap-parent input-decode-map))
     (set-keymap-parent input-decode-map m))
@@ -229,7 +228,7 @@ for the currently selected frame."
 	;; 216 non-gray colors first
 	(let ((r 0) (g 0) (b 0))
 	  (while (> ncolors 24)
-	    ;; This and other formulae taken from 256colres.pl and
+	    ;; This and other formulas taken from 256colres.pl and
 	    ;; 88colres.pl in the xterm distribution.
 	    (tty-color-define (format "color-%d" (- 256 ncolors))
 			      (- 256 ncolors)
@@ -311,6 +310,5 @@ for the currently selected frame."
 	     (* (apply '+ (car (cddr (nth 15 rxvt-standard-colors)))) 0.6))
 	  (set-terminal-parameter nil 'background-mode 'dark)))))
 
-(provide 'rxvt)
-;; arch-tag: 20cf2fb6-6318-4bab-9dbf-1d15048f2257
+(provide 'my-rxvt)
 ;;; rxvt.el ends here

@@ -4,12 +4,12 @@
 (byte-recompile-directory "~/.emacs.d" 0)
 (setq byte-compile-warnings t)
 
-; load my rxvt.el
+; load my-rxvt.el
 (unless (or noninteractive window-system)
     (if (string-match "^rxvt.*" (getenv "TERM"))
         (progn
             (setq term-file-prefix nil)
-            (require 'rxvt)
+            (require 'my-rxvt)
             (terminal-init-rxvt))))
 
 ; various
