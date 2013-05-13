@@ -3,12 +3,14 @@
 DMENU_ARGS='-nb #151515 -nf #787878 -sb #151515 -sf #a78edb -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
 
 usage() {
-    echo "Usage $(basename $0) [options] MONITOR .."
+    echo "Usage $(basename $0) [options] [MONITOR ..]"
     echo
     echo "Options:"
     echo "  -h, --help             Show this help menu"
     echo "  -l, --list-monitors    List connected monitors"
-    echo "  -d                     Use dmenu"
+    echo "  -e                     Extent all monitors (ignores [MONITOR ..] list)"
+    echo "  -d                     Duplicate all monitors (ignores [MONITOR ..] list)"
+    echo "  --dmenu                Use dmenu"
     echo
     echo "If a connected monitor is not listed in the arguments, then it will switched off."
     echo
@@ -25,6 +27,8 @@ usage() {
     echo
     echo "Example:"
     echo "  $(basename $0) LVDS-0 DP-0"
+    echo "  $(basename $0) -e"
+    echo "  $(basename $0) -d"
 }
 
 die() {
@@ -70,7 +74,7 @@ last_arg() {
     echo $last
 }
 
-ARGS=$(getopt -o lhd -l "list-monitors,help" -n $(basename $0) -- "$@")
+ARGS=$(getopt -o lhed -l "list-monitors,help,dmenu" -n $(basename $0) -- "$@")
 [ $? -ne 0 ] && exit 1
 eval set -- "$ARGS"
 
@@ -84,7 +88,22 @@ while :; do
 	    list_monitors
 	    exit 0
 	    ;;
+	-e)
+	    ARGS=
+	    for x in $(list_monitors); do
+		ARGS="${ARGS} ${x}"
+	    done
+	    break
+	    ;;
 	-d)
+	    ARGS=
+	    for x in $(list_monitors); do
+		[ -n "$ARGS" ] && ARGS="${ARGS}="
+		ARGS="${ARGS}${x}"
+	    done
+	    break
+	    ;;
+	--dmenu)
 	    SELECT=$({
 		    echo Extend monitors
 		    echo Duplicate monitors
