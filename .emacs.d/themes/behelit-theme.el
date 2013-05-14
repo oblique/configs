@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.6
+;;; version: 1.7
 
 ;; Copyright (C) 2012 oblique
 
@@ -95,15 +95,16 @@
    `(font-lock-number-face ((,class (:foreground "#af87ff"))))
 
    ;;; diff
-   `(diff-added ((,class (:foreground "#5fafff" :weight bold))))
-   `(diff-removed ((,class (:foreground "#d7005f" :weight bold))))
-   `(diff-indicator-added ((,class (:foreground "#5fafff"))))
-   `(diff-indicator-removed ((,class (:foreground "#d7005f"))))
+   `(diff-added ((,class (:foreground "#000000" :background "#d7ffd7" :weight normal))))
+   `(diff-removed ((,class (:foreground "#000000" :background "#ffd7ff" :weight normal))))
+   `(diff-indicator-added ((,class (:inherit diff-added))))
+   `(diff-indicator-removed ((,class (:inherit diff-removed))))
+   `(diff-refine-added ((,class (:inherit diff-added :background "#87ff87"))))
+   `(diff-refine-removed ((,class (:inherit diff-removed :background "#ff87ff"))))
    `(diff-context ((,class (:foreground "#66ff66"))))
    `(diff-file-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
    `(diff-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
    `(diff-hunk-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
-   `(diff-refine-change ((,class (:background "#303030"))))
 
    ;;; rfc
    `(rfc-node ((,class (:bold t :foreground "#af87ff"))))
