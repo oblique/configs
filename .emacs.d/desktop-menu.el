@@ -360,11 +360,10 @@ With optional argument READ-MAIN-P non-nil, read the file
         (insert (if (string= name (car desktop-menu--current-desktop))
                     "."
                   " ")
-                (format "  %-30s %20s  %s"
+                (format "  %-30s %20s  %s\n"
                         name
                         (desktop-menu-extra-desktop-description fname)
-                        fname))
-        (newline))
+                        fname)))
       (setq desktops (cdr desktops)))
     (backward-delete-char 1)
     (beginning-of-line)
