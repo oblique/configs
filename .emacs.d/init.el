@@ -29,6 +29,7 @@
 (show-paren-mode 1)
 (icomplete-mode 99)
 (iswitchb-mode 1)
+(delete-selection-mode 1)
 (setq iswitchb-default-method 'samewindow)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
