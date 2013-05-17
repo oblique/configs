@@ -59,6 +59,11 @@
 	     (if (member major-mode linum-disabled-modes-list)
 		 (linum-mode -1))))
 
+; keep track of the recently opened file
+(setq recentf-max-saved-items 200)
+(setq recentf-max-menu-items 15)
+(recentf-mode 1)
+
 ; modes for mutt
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 (add-hook 'mail-mode-hook '(lambda () (auto-fill-mode)))
@@ -329,6 +334,7 @@
 (define-key my-minor-mode-map (kbd "C-c x") 'xclip-cut)
 (define-key my-minor-mode-map (kbd "C-c m") 'man)
 (define-key my-minor-mode-map (kbd "C-c r") 'rfc-index)
+(define-key my-minor-mode-map (kbd "C-x C-r") 'recentf-open-files)
 
 (define-minor-mode my-minor-mode
     "A minor mode so that my key settings aren't shadowed by other major/minor modes"
