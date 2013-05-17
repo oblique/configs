@@ -30,6 +30,7 @@
 (icomplete-mode 99)
 (iswitchb-mode 1)
 (delete-selection-mode 1)
+(electric-indent-mode 1)
 (setq iswitchb-default-method 'samewindow)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
@@ -297,7 +298,6 @@
 (add-hook 'asm-mode-hook 'arm-asm-mode-hook)
 
 ; key bindings
-(global-set-key (kbd "RET") 'newline-and-indent) ; auto-indent
 (global-set-key (kbd "C-k") 'kill-whole-line)
 (global-set-key (kbd "M->") 'shifttext-tab-right)
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
