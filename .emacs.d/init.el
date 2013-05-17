@@ -18,12 +18,6 @@
 (tool-bar-mode -1)
 (if window-system
   (toggle-scroll-bar nil))
-(require 'my-linum)
-(setq linum-disabled-modes-list '(eshell-mode apropos-mode compilation-mode
-                                fundamental-mode term-mode etags-select-mode
-                                completion-list-mode help-mode dired-mode
-                                desktop-menu-mode Buffer-menu-mode Man-mode Custom-mode))
-(global-linum-mode 1)
 (column-number-mode 1)
 (global-auto-revert-mode 1)
 (show-paren-mode 1)
@@ -50,6 +44,20 @@
     (highlight-parentheses-mode t)))
 (global-highlight-parentheses-mode t)
 (require 'arduino-mode)
+
+; linum mode
+(require 'my-linum)
+(global-linum-mode 1)
+(setq linum-disabled-modes-list
+      '(eshell-mode apropos-mode compilation-mode term-mode
+		    fundamental-mode etags-select-mode
+		    completion-list-mode help-mode dired-mode
+		    desktop-menu-mode Buffer-menu-mode Man-mode
+		    Custom-mode recentf-dialog-mode))
+(add-hook 'after-change-major-mode-hook
+	  '(lambda()
+	     (if (member major-mode linum-disabled-modes-list)
+		 (linum-mode -1))))
 
 ; modes for mutt
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
