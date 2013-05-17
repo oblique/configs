@@ -213,7 +213,7 @@
   (unless tabs
       (setq tabs 1))
   (let (begin end)
-    (if (mark)
+    (if (region-active-p)
 	(setq begin (region-beginning)
 	      end (region-end))
       (setq begin (line-beginning-position)
