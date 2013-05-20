@@ -25,6 +25,7 @@
 (iswitchb-mode 1)
 (delete-selection-mode 1)
 (electric-indent-mode 1)
+(global-hl-line-mode 1)
 (setq iswitchb-default-method 'samewindow)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
