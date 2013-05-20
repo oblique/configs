@@ -1,7 +1,7 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.7
+;;; version: 1.8
 
-;; Copyright (C) 2012 oblique
+;; Copyright (C) 2012-2013 oblique
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@
    `(hi-pink ((,class (:background "#d7005f" :foreground "#1c1c1c"))))
    `(hi-red-b ((,class (:foreground "#d7005f" :weight bold))))
    `(hi-yellow ((,class (:background "#ffff5f" :foreground "#1c1c1c"))))
-   `(hl-line ((,class (:background "#1c1c1c"))))
+   `(hl-line ((,class (:background "#1c1c1c" :inherit nil))))
 
    ;;; tabbar
    `(tabbar-default ((,class (:background "#1c1c1c" :box nil :underline nil :height 1.0 :weight normal))))
