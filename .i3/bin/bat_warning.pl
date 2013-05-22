@@ -42,23 +42,25 @@ while (1) {
     close file;
 
     if (lc($bat_status) eq "discharging") {
-	open file, "<", $bat_path_now;
-	$bat_now = <file>;
-	chomp($bat_now);
-	close file;
+	if ($level_idx <= $#levels) {
+	    open file, "<", $bat_path_now;
+	    $bat_now = <file>;
+	    chomp($bat_now);
+	    close file;
 
-	open file, "<", $bat_path_full;
-	$bat_full = <file>;
-	chomp($bat_full);
-	close file;
+	    open file, "<", $bat_path_full;
+	    $bat_full = <file>;
+	    chomp($bat_full);
+	    close file;
 
-	$bat_percent = floor($bat_now * 100 / $bat_full);
+	    $bat_percent = floor($bat_now * 100 / $bat_full);
 
-	if ($levels[$level_idx] >= $bat_percent) {
-	    while ($levels[$level_idx] >= $bat_percent) {
-		$level_idx++;
+	    if ($levels[$level_idx] >= $bat_percent) {
+		system("notify-send -u critical 'Battery charge is low! [$bat_percent%]'");
+		while ($level_idx <= $#levels && $levels[$level_idx] >= $bat_percent) {
+		    $level_idx++;
+		}
 	    }
-	    system("notify-send -u critical 'Battery charge is low! [$bat_percent%]'");
 	}
     } else {
 	$level_idx = 0;
