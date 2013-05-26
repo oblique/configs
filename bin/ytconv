@@ -13,10 +13,13 @@ if [[ "$1" != "-t" ]]; then
         exit 1
     }
 
+    TMP_DIR=$(mktemp -d /tmp/tmp.ytconv.$$.XXXXXX)
+    TMP_IMG=${TMP_DIR}/image.png
+    TMP_ALIST=${TMP_DIR}/audio_list
+
     echo "Converting image .."
     IMG="$1"
     shift 1 # remove image from args
-    TMP_IMG=$(mktemp --suffix=.png)
     convert "${IMG}" ${TMP_IMG}
     mogrify -resize 1920x1080 ${TMP_IMG}
     # ffmpeg does not accept images with odd width or height
@@ -31,15 +34,13 @@ if [[ "$1" != "-t" ]]; then
         mogrify -crop "${IW}x${IH}+0+0" ${TMP_IMG}
     fi
 
-    TMP_ALIST=$(mktemp)
     for x in "$@"; do
         FILE_PATH=$(realpath "$x")
-        if [[ "$FILE_PATH" = *\'* ]]; then
-            TMP_FILE=$(mktemp /tmp/tmp.ytconv.$$.XXXXXX.${x#*.})
-            ln -fs "$FILE_PATH" "$TMP_FILE"
-            FILE_PATH="$TMP_FILE"
-        fi
-        echo file \'"$FILE_PATH"\' >> "$TMP_ALIST"
+        # because ffmpeg doesn't have a way to escape all special characters we
+        # create a symbolic link of the file that contains only alfanumeric characters
+        LN_FILE=$(mktemp ${TMP_DIR}/XXXXXX.${x#*.})
+        ln -fs "$FILE_PATH" "$LN_FILE"
+        echo file \'"$LN_FILE"\' >> "$TMP_ALIST"
     done
 
     (ffmpeg -codecs 2> /dev/null | grep libfdk_aac > /dev/null) && aac_codec="libfdk_aac"
@@ -49,7 +50,7 @@ if [[ "$1" != "-t" ]]; then
     ffmpeg -loop 1 -i ${TMP_IMG} -f concat -i ${TMP_ALIST} -shortest -pix_fmt yuvj420p -c:a ${aac_codec} -b:a 512k -ar 96k -c:v libx264 -strict -2 out.mp4
 
     ret=$?
-    rm -f ${TMP_IMG} ${TMP_ALIST} /tmp/tmp.ytconv.$$.*
+    rm -rf ${TMP_DIR}
     [[ $ret -ne 0 ]] && exit $ret
 else
     shift 1 # remove -t from args
