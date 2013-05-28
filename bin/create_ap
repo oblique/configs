@@ -122,6 +122,7 @@ EOF
 
 # enable interface
 ip link set down dev ${WIFI_IFACE}
+ip addr flush ${WIFI_IFACE}
 ip link set up dev ${WIFI_IFACE}
 ip addr add ${GATEWAY}/24 dev ${WIFI_IFACE}
 
@@ -154,4 +155,5 @@ iptables -t nat -D POSTROUTING -o ${INTERNET_IFACE} -j MASQUERADE
 iptables -D FORWARD -i ${WIFI_IFACE} -j ACCEPT
 echo $OLD_IP_FORWARD > /proc/sys/net/ipv4/ip_forward
 ip link set down dev ${WIFI_IFACE}
+ip addr flush ${WIFI_IFACE}
 exit 0
