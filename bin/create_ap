@@ -3,7 +3,6 @@
 # dependencies:
 #    bash (to run this script)
 #    util-linux (for getopt)
-#    net-tools (for ifconfig)
 #    hostapd
 #    dnsmasq
 #    iptables
@@ -122,8 +121,9 @@ EOF
 [[ $ETC_HOSTS -eq 0 ]] && echo no-hosts >> $CONFDIR/dnsmasq.conf
 
 # enable interface
-ifconfig ${WIFI_IFACE} down
-ifconfig ${WIFI_IFACE} up ${GATEWAY} netmask 255.255.255.0
+ip link set down dev ${WIFI_IFACE}
+ip link set up dev ${WIFI_IFACE}
+ip addr add ${GATEWAY}/24 dev ${WIFI_IFACE}
 
 # enable NAT
 iptables -t nat -A POSTROUTING -o ${INTERNET_IFACE} -j MASQUERADE
@@ -153,5 +153,5 @@ rm -rf $CONFDIR
 iptables -t nat -D POSTROUTING -o ${INTERNET_IFACE} -j MASQUERADE
 iptables -D FORWARD -i ${WIFI_IFACE} -j ACCEPT
 echo $OLD_IP_FORWARD > /proc/sys/net/ipv4/ip_forward
-ifconfig ${WIFI_IFACE} down
+ip link set down dev ${WIFI_IFACE}
 exit 0
