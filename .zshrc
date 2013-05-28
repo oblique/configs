@@ -147,8 +147,6 @@ fi
 alias sudo='sudo ' # enable aliases in sudo
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-alias enable_bluetooth='rfkill unblock $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
-alias disable_bluetooth='rfkill block $(rfkill list | grep -m 1 Bluetooth | cut -b 1)'
 alias emacs='emacs -nw'
 alias kismet='TERM=rxvt-unicode kismet'
 alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
