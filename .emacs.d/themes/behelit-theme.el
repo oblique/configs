@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.8
+;;; version: 1.9
 
 ;; Copyright (C) 2012-2013 oblique
 
@@ -38,7 +38,7 @@
 
    `(mode-line ((,class (:foreground "#5f5faf" :background "#1c1c1c" :box nil))))
    `(mode-line-inactive ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :box nil))))
-   `(linum ((,class (:background "#101010" :foreground "#5f87af"
+   `(linum ((,class (:background nil :foreground "#5f87af"
 				 :underline nil :slant normal :weight normal))))
    `(menu ((,class (:foreground "#5f5faf" :background "#1c1c1c" :inverse-video nil))))
    `(minibuffer-prompt ((,class (:foreground "#00afff"))))
@@ -53,7 +53,7 @@
 
    ;;; highlight
    `(isearch ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
-   `(isearch-fail ((,class (:foreground "#d7005f" :background "#101010" :weight bold))))
+   `(isearch-fail ((,class (:foreground "#d7005f" :background nil :weight bold))))
    `(lazy-highlight ((,class (:foreground "#000000" :background "#ffff5f" :weight normal))))
    `(highlight ((,class (:foreground "#000000" :background "#5f87d7"))))
    `(hi-black ((,class (:background "#1c1c1c" :foreground "#3a3a3a"))))
@@ -95,12 +95,14 @@
    `(font-lock-number-face ((,class (:foreground "#af87ff"))))
 
    ;;; diff
-   `(diff-added ((,class (:foreground "#000000" :background "#d7ffd7" :weight normal))))
-   `(diff-removed ((,class (:foreground "#000000" :background "#ffd7ff" :weight normal))))
+   `(diff-added ((,class (:foreground "#5fafff" :background nil :weight bold))))
+   `(diff-removed ((,class (:foreground "#d7005f" :background nil :weight bold))))
    `(diff-indicator-added ((,class (:inherit diff-added))))
    `(diff-indicator-removed ((,class (:inherit diff-removed))))
-   `(diff-refine-added ((,class (:inherit diff-added :background "#87ff87"))))
-   `(diff-refine-removed ((,class (:inherit diff-removed :background "#ff87ff"))))
+   `(diff-refine-added ((,class (:inherit diff-added :weight normal
+					  :foreground "#000000" :background "#5fafff"))))
+   `(diff-refine-removed ((,class (:inherit diff-removed :weight normal
+					    :foreground "#000000" :background "#d7005f"))))
    `(diff-context ((,class (:foreground "#66ff66"))))
    `(diff-file-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
    `(diff-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
