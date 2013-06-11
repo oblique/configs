@@ -1,0 +1,47 @@
+#!/bin/sh
+
+debian_arch="armel"
+debian_version="wheezy"
+chroot_shell="bash"
+
+qemu_user_path="/usr/bin/qemu-arm-static"
+binfmt_name="armel"
+binfmt_magic='\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00'
+binfmt_mask='\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff'
+
+usage() {
+    echo "Usage: $(basename "$0") [build] chroot_directory"
+    exit 1
+}
+
+is_mounted() {
+    mount | grep "$1" > /dev/null 2>&1
+}
+
+[ $# -lt 1 -o $# -gt 2 ] && usage
+[ $# -eq 2 -a ! "$1" = "build" ] && usage
+
+[ -d /proc/sys/fs/binfmt_misc ] || modprobe binfmt_misc
+[ -f /proc/sys/fs/binfmt_misc/register ] || mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
+if [ -f "/proc/sys/fs/binfmt_misc/${binfmt_name}" ]; then
+    qemu_user_path="$(grep interpreter "/proc/sys/fs/binfmt_misc/${binfmt_name}" | awk '{print $2}')"
+else
+    echo ":${binfmt_name}:M::${binfmt_magic}:${binfmt_mask}:${qemu_user_path}:" > /proc/sys/fs/binfmt_misc/register
+fi
+
+if [ $# -eq 2 -a "$1" = "build" ]; then
+    chroot_path="$2"
+    mkdir -p "${chroot_path}$(dirname "${qemu_user_path}")" || exit 1
+    cp "${qemu_user_path}" "${chroot_path}$(dirname "${qemu_user_path}")" || exit 1
+    debootstrap --arch $debian_arch $debian_version "$chroot_path" || exit 1
+    exit 0
+fi
+
+chroot_path="$1"
+is_mounted "${chroot_path}/proc" || mount -t proc proc "${chroot_path}/proc"
+is_mounted "${chroot_path}/sys" || mount -t sysfs sys "${chroot_path}/sys"
+is_mounted "${chroot_path}/dev" || mount -t devtmpfs dev "${chroot_path}/dev"
+is_mounted "${chroot_path}/dev/pts" || mount -t devpts pts "${chroot_path}/dev/pts"
+cp -L /etc/resolv.conf "${chroot_path}/etc/resolv.conf"
+
+chroot "${chroot_path}" "${chroot_shell}"
