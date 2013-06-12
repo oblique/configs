@@ -1,7 +1,7 @@
 #!/bin/sh
 
 debian_arch="armel"
-debian_version="wheezy"
+debian_version="jessie"
 chroot_shell="bash"
 
 qemu_user_path="/usr/bin/qemu-arm-static"
@@ -44,4 +44,4 @@ is_mounted "${chroot_path}/dev" || mount -t devtmpfs dev "${chroot_path}/dev"
 is_mounted "${chroot_path}/dev/pts" || mount -t devpts pts "${chroot_path}/dev/pts"
 cp -L /etc/resolv.conf "${chroot_path}/etc/resolv.conf"
 
-chroot "${chroot_path}" "${chroot_shell}"
+chroot "${chroot_path}" sh -c ". /etc/profile; cd ~; ${chroot_shell}"
