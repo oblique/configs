@@ -126,7 +126,12 @@ _git_prompt_info() {
     [[ -z $_hash ]] && return
     local _name=$(git symbolic-ref --short HEAD 2> /dev/null)
     if [[ -z $_name ]]; then
-        _name=$(git show -s --pretty=format:%d HEAD 2> /dev/null | sed 's/.*, \(.*\))/\1/')
+        _name=$(git show -s --pretty=format:%d HEAD 2> /dev/null)
+        if [[ $_name = *,\ *\) ]]; then
+            _name=$(echo $_name | sed 's/.*, \(.*\))/\1/')
+        else
+            unset _name
+        fi
     fi
     [[ -n $_name ]] && _name="$_name "
     echo -n "%{$fg_bold[red]%}${_name}[${_hash}]%{$reset_color%}"
