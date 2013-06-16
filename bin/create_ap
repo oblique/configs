@@ -6,6 +6,7 @@
 #    hostapd
 #    dnsmasq
 #    iptables
+#    iproute2
 #    haveged (optional)
 
 usage() {
@@ -20,6 +21,10 @@ usage() {
     echo
     echo "Example:"
     echo "  $(basename $0) wlan0 eth0 MyAccessPoint MyPassPhrase"
+}
+
+get_macaddr() {
+    ip link show "$1" | sed -n 's/.*ether \([0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]\) .*/\1/p'
 }
 
 ARGS=$(getopt -o hc:w:g:d -l "help" -n $(basename $0) -- "$@")
@@ -144,7 +149,17 @@ dnsmasq -C $CONFDIR/dnsmasq.conf -x $CONFDIR/dnsmasq.pid
 
 # start access point
 echo "hostapd command-line interface: hostapd_cli -p $CONFDIR/hostapd_ctrl"
-hostapd $CONFDIR/hostapd.conf
+hostapd $CONFDIR/hostapd.conf || {
+    echo
+    echo "Hostapd failed to run, maybe a program is interfering."
+    echo "If you use NetworkManager then add the following in"
+    echo "/etc/NetworkManager/NetworkManager.conf and retry."
+    echo "Don't forget to remove it after you finish."
+    echo
+    echo "[keyfile]"
+    echo "unmanaged-devices=mac:$(get_macaddr "$WIFI_IFACE")"
+    echo
+}
 
 # exiting
 for x in $CONFDIR/*.pid; do
