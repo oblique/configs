@@ -316,8 +316,7 @@
 ;;   setw -g xterm-keys on
 (if (getenv "TMUX")
     (progn
-      (let ((x 2)
-	    (tkey ""))
+      (let ((x 2) (tkey ""))
 	(while (<= x 8)
 	  ;; shift
 	  (if (= x 2)
