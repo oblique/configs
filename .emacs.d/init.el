@@ -54,7 +54,8 @@
 		    fundamental-mode etags-select-mode
 		    completion-list-mode help-mode dired-mode
 		    desktop-menu-mode Buffer-menu-mode Man-mode
-		    Custom-mode recentf-dialog-mode))
+		    Custom-mode recentf-dialog-mode occur-mode))
+
 (add-hook 'after-change-major-mode-hook
 	  '(lambda()
 	     (if (member major-mode linum-disabled-modes-list)
