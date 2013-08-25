@@ -13,13 +13,22 @@ die(){
 
 newtemp(){
     local tmp
-    tmp="`mktemp -t snotes.tmp.XXXXXX`"
+    tmp="$(mktemp -t snotes.tmp.XXXXXX)"
     [ -e "$tmp" ] || die "Could not create temporary file"
-    echo $tmp
+    echo "$tmp"
 }
 
 cancreate(){
     [ ! -e "$1" -o -f "$1" ] && (touch "$1" && rm -f "$1") > /dev/null 2>&1
+}
+
+validnote(){
+    echo $1 | grep -q -E -v \
+        -e "^/" \
+        -e "(^|/)\.\./" \
+        -e "(^|/)\./" \
+        -e "^~[^/]*/" \
+        -e "^\.git"
 }
 
 type git >/dev/null 2>&1 || die "git not in PATH"
@@ -40,7 +49,7 @@ unset snotes_file_flags
 
 blame(){
     local tmp
-    tmp="`newtemp`"
+    tmp="$(newtemp)"
     git blame --relative-date -- "$1" | sed 's/^\^\?/commit:/' > "$tmp"
     chmod 0400 "$tmp"
     snotes_file="$tmp"
@@ -49,7 +58,7 @@ blame(){
 
 commit(){
     local tmp
-    tmp="`newtemp`"
+    tmp="$(newtemp)"
     git show --color=never "$1" > "$tmp"
     chmod 0400 "$tmp"
     snotes_file="$tmp"
@@ -59,9 +68,9 @@ commit(){
 changed(){
     local tmp
     local diffcommit
-    tmp="`newtemp`"
+    tmp="$(newtemp)"
 
-    diffcommit="`git log --oneline --color=never --max-count=${SNOTES_CHANGED_COMMITS} -- \"$1\" | tail -n1 | cut -d' ' -f1`"
+    diffcommit="$(git log --oneline --color=never --max-count=${SNOTES_CHANGED_COMMITS} -- "$1" | tail -n1 | cut -d' ' -f1)"
     git diff --color=never "${diffcommit}^" -- "$1" > "$tmp"
     chmod 0400 "$tmp"
     snotes_file="$tmp"
@@ -70,7 +79,7 @@ changed(){
 
 cleanup(){
     local tmp
-    tmp=`newtemp`
+    tmp="$(newtemp)"
 
     # cleanup
     cat "$1" | perl -e '
@@ -88,25 +97,28 @@ do {
     rm "$tmp"
 }
 
-[ -n "${1##*:}" ] || die "command with an empty argument"
+snotes_file="${1##*:}"
+
+[ -n "$snotes_file" ] || die "command with an empty argument"
+validnote "$snotes_file" || die "note name is invalid. please don't try anything fancy"
+
 
 case "${1%:*}" in
 note)
-    snotes_file="${1##*:}"
     if [ ! -f "$snotes_file" ]; then
-        cancreate "$snotes_file" && snotes_file_flags=created || die "could not create file '`pwd`/$snotes_file'"
+        cancreate "$snotes_file" && snotes_file_flags=created || die "could not create file '$(pwd)/$snotes_file'"
     fi
     ;;
 blame)
-    [ -f "${1##*:}" ] || die "'`pwd`/${1##*:}' does not exist"
-    blame "${1##*:}"
+    [ -f "$snotes_file" ] || die "'$(pwd)/$snotes_file' does not exist"
+    blame "$snotes_file"
     ;;
 commit)
-    commit "${1##*:}"
+    commit "$snotes_file"
     ;;
 changed)
-    [ -f "${1##*:}" ] || die "'`pwd`/${1##*:}' does not exist"
-    changed "${1##*:}"
+    [ -f "$snotes_file" ] || die "'$(pwd)/$snotes_file' does not exist"
+    changed "$snotes_file"
     ;;
 *)
     die "unknown prefix '${1%:*}'"
@@ -116,7 +128,7 @@ esac
 ${SNOTES_EDITOR} "$snotes_file"
 
 if [ "${SNOTES_CLEANUP}" = "yes" -a "$snotes_file_flags" != "temp" -a -f "$snotes_file" \
-    -a $(echo "$snotes_file" | grep -E -c "$SNOTES_DONTCLEAN_REGEXP") -eq 0 ]; then
+    -a "$(echo "$snotes_file" | grep -E -c "$SNOTES_DONTCLEAN_REGEXP")" -eq 0 ]; then
     cleanup "$snotes_file"
 fi
 
