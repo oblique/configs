@@ -6,3 +6,5 @@ text/x-c=emacs.desktop
 text/x-diff=emacs.desktop
 text/x-chdr=emacs.desktop
 text/x-asm=emacs.desktop
+image/png=eog.desktop
+image/jpeg=eog.desktop
