@@ -32,6 +32,7 @@
 (setq inhibit-startup-buffer-menu t)
 (setq initial-scratch-message nil)
 (setq message-log-max nil)
+(setq fill-column 80)
 (kill-buffer "*Messages*")
 (kill-buffer "*Compile-Log*")
 (setq Man-width 90)
