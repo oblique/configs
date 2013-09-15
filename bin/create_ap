@@ -98,7 +98,7 @@ fi
 CONFDIR=$(mktemp -d /tmp/create_ap.${WIFI_IFACE}.conf.XXXXXXXX)
 echo "Config dir: $CONFDIR"
 
-[[ $HIDDEN = 1 ]] && echo "Access Point's SSID is hidden!"
+[[ $HIDDEN -eq 1 ]] && echo "Access Point's SSID is hidden!"
 
 # hostapd config
 cat << EOF > $CONFDIR/hostapd.conf
