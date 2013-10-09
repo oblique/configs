@@ -61,15 +61,15 @@ setopt pushd_ignore_dups
 # keyboard
 autoload zkbd
 function _zkbd_file() {
-    [[ -f $HOME/.zsh.d/zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
-    [[ -f $HOME/.zsh.d/zkbd/${TERM} ]] && printf '%s' $HOME/".zsh.d/zkbd/${TERM}" && return 0
+    [[ -f $HOME/.zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' $HOME/".zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
+    [[ -f $HOME/.zkbd/${TERM}-${DISPLAY} ]] && printf '%s' $HOME/".zkbd/${TERM}-${DISPLAY}" && return 0
     return 1
 }
 
-[[ ! -d $HOME/.zsh.d/zkbd ]] && mkdir $HOME/.zsh.d/zkbd
+[[ ! -d $HOME/.zkbd ]] && mkdir $HOME/.zkbd
 _keyfile=$(_zkbd_file)
 _ret=$?
-if [[ ${ret} -ne 0 ]]; then
+if [[ ${_ret} -ne 0 ]]; then
     zkbd
     _keyfile=$(_zkbd_file)
     _ret=$?
