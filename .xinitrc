@@ -16,9 +16,6 @@ export VDPAU_NVIDIA_NO_OVERLAY=1
 
 [[ -f ~/.Xresources ]] && xrdb -load ~/.Xresources
 
-# remap Menu key
-xmodmap -e "keycode 135 = Menu"
-
 # keyboard settings
 setxkbmap -layout us,el
 setxkbmap -variant ,extended
@@ -26,6 +23,9 @@ setxkbmap -option
 setxkbmap -option grp:rctrl_rshift_toggle
 setxkbmap -option terminate:ctrl_alt_bksp
 setxkbmap -option compose:menu
+
+# remap Menu key
+xmodmap -e "keycode 135 = Menu"
 
 # Thinkpad's TrackPoint settings
 xinput list | sed -ne 's/^[^ ][^V].*id=\([0-9]*\).*/\1/p' | while read id
