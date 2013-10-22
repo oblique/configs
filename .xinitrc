@@ -45,6 +45,9 @@ done
 [[ -f ~/.nvidia-settings-rc ]] && nvidia-settings -l
 #nvidia-settings -a ':0[dpy:1]/Gamma=0.820'
 
+# set primary screen
+xrandr --output LVDS-0 --primary
+
 # synaptics settings
 synclient VertTwoFingerScroll=1
 synclient TapButton1=0 TapButton2=0 TapButton3=0
