@@ -136,6 +136,7 @@ bar {
     font -misc-fixed-bold-r-normal--14-*-*-*-C-*-iso10646-1
     position top
     status_command i3status
+    tray_output primary
 
     colors {
         background #101010
