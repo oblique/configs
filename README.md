@@ -40,7 +40,6 @@
     autocutsel
     pcmanfm
     feh
-    wicd
     dmenu
     xf86-input-synaptics (syndaemon, synclient)
     rfkill (enable/disable bluetooth)
@@ -54,6 +53,7 @@
     zathura-cb (needed by zathura)
     perl-text-charwidth (needed by weechat's coords.pl script)
     pure-python-otr (https://github.com/afflux/pure-python-otr) (needed by weechat's otr.py script)
+    NetworkManager + Network-Manager-Applet (nm-applet)
 
 
 ## notes for emacs
