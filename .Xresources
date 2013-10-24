@@ -39,6 +39,12 @@ URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.pasteCommand:         xclip -o -selection clipboard
 URxvt.keysym.M-Escape:      perl:keyboard-select:activate
 URxvt.urgentOnBell:         true
+! some distributions (like fedora) use shift-{up,down,home,end} for scrolling.
+! the following settings will rebind them to their normal character sequence.
+URxvt.keysym.S-Up:          \033[a
+URxvt.keysym.S-Down:        \033[b
+URxvt.keysym.S-Home:        \033[7$
+URxvt.keysym.S-End:         \033[8$
 !!! for transparent terminal uncomment the following
 !!! also use feh to set your wallpaper
 !URxvt.transparent:          true
