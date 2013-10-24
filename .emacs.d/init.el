@@ -279,7 +279,8 @@
   (setq tab-width width)
   (setq c-basic-offset width)
   (setq indent-tabs-mode nil)
-  (message "You can retab the whole buffer by pressing C-x h M-x untabify"))
+  (if (called-interactively-p 'any)
+      (message "You can retab the whole buffer by pressing C-x h M-x untabify")))
 
 (defun enable-tabs (width)
   "Use tabs instead of spaces"
@@ -289,7 +290,8 @@
   (setq tab-width width)
   (setq c-basic-offset width)
   (setq indent-tabs-mode t)
-  (message "You can retab the whole buffer by pressing C-x h M-x tabify"))
+  (if (called-interactively-p 'any)
+      (message "You can retab the whole buffer by pressing C-x h M-x tabify")))
 
 ; hooks for ARM assembly
 (defun arm-asm-mode-set-comment-hook ()
