@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.10
+;;; version: 1.11
 
 ;; Copyright (C) 2012-2013 oblique
 
@@ -36,7 +36,8 @@
    `(default ((,class (:foreground "#66ff66" :background "#101010"))))
    `(cursor ((,class (:background "#66ff66"))))
 
-   `(mode-line ((,class (:foreground "#5f5faf" :background "#1c1c1c" :box nil))))
+   `(mode-line ((,class (:foreground "#5f5faf" :background "#1c1c1c" :box nil
+				     :underline nil :weight normal :slant normal))))
    `(mode-line-inactive ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :box nil))))
    `(linum ((,class (:background nil :foreground "#5f87af"
 				 :underline nil :slant normal :weight normal))))
@@ -50,6 +51,12 @@
 
    `(show-paren-match-face ((,class (:foreground "#000000" :background "#ff875f"))))
    `(show-paren-mismatch-face ((,class (:foreground "#000000" :background "#d7005f"))))
+
+   ;; faces used by ggtags.el
+   `(compilation-info ((,class (:foreground "#5f87d7"))))
+   `(compilation-mode-line-exit ((,class (:foreground "#5f87d7"))))
+   `(compilation-error ((,class (:foreground "#d7005f"))))
+   `(error ((,class (:foreground "#d7005f"))))
 
    ;;; highlight
    `(isearch ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
