@@ -52,7 +52,7 @@
 (global-linum-mode 1)
 (setq linum-disabled-modes-list
       '(eshell-mode apropos-mode compilation-mode term-mode
-		    fundamental-mode etags-select-mode
+		    fundamental-mode ggtags-global-mode
 		    completion-list-mode help-mode dired-mode
 		    desktop-menu-mode Buffer-menu-mode Man-mode
 		    Custom-mode recentf-dialog-mode occur-mode))
@@ -98,10 +98,12 @@
 (setq c-default-style "linux")
 (setq c-backspace-function 'backward-delete-char)
 
-; tags
-(require 'etags-select)
-(global-set-key "\M-?" 'etags-select-find-tag-at-point)
-(global-set-key "\M-." 'etags-select-find-tag)
+; ggtags (https://github.com/leoliu/ggtags)
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+	      (ggtags-mode 1))))
 
 ; Tabbing support options
 (require 'tabbar)
@@ -244,11 +246,6 @@
   (unless tabs
     (setq tabs 1))
   (shifttext-tab-right (- tabs)))
-
-(defun clear-tags-path ()
-  (interactive)
-  (setq tags-file-name nil)
-  (setq tags-table-list nil))
 
 (defun show-file-path ()
   "Show the full path file name in the minibuffer."

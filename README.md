@@ -29,7 +29,6 @@
 
 
 ## dependencies and other useful programs
-    ctags
     xclip
     htop
     git
@@ -54,6 +53,7 @@
     perl-text-charwidth (needed by weechat's coords.pl script)
     pure-python-otr (https://github.com/afflux/pure-python-otr) (needed by weechat's otr.py script)
     NetworkManager + Network-Manager-Applet (nm-applet)
+    GNU Global + ctags + idutils (needed by .emacs.d/ggtags.el)
 
 
 ## notes for emacs
