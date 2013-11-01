@@ -290,6 +290,23 @@
   (if (called-interactively-p 'any)
       (message "You can retab the whole buffer by pressing C-x h M-x tabify")))
 
+;; emulate vim's softtabstop
+(defun backward-delete-whitespace-to-column ()
+  "delete back to the previous column of whitespace, or as much whitespace as possible,
+or just one char if that's not possible"
+  (interactive)
+  (if indent-tabs-mode
+      (call-interactively 'backward-delete-char)
+    (let ((movement (% (current-column) tab-width))
+          (p (point)) sp)
+      (when (= movement 0) (setq movement tab-width))
+      (setq sp (- p movement))
+      (when (<= sp 0) (setq sp 1))
+      (save-match-data
+        (if (string-match "\\w*\\(\\s-+\\)$" (buffer-substring-no-properties sp p))
+            (backward-delete-char-untabify (- (match-end 1) (match-beginning 1)))
+	  (call-interactively 'backward-delete-char))))))
+
 ; hooks for ARM assembly
 (defun arm-asm-mode-set-comment-hook ()
   (when (string-match ".S$" (buffer-file-name))
@@ -411,6 +428,7 @@
 (global-set-key (kbd "C-c p") 'show-file-path)
 (global-set-key (kbd "C-x p") 'other-window-backward)
 (global-set-key (kbd "C-c b") 'browse-url-firefox)
+(define-key my-minor-mode-map (kbd "DEL") 'backward-delete-whitespace-to-column)
 (define-key my-minor-mode-map (kbd "<clearline>") (key-binding (kbd "<C-end>"))) ; <clearline> (in terminal) == <C-end>
 (define-key my-minor-mode-map (kbd "M-l") 'tabbar-forward)
 (define-key my-minor-mode-map (kbd "M-j") 'tabbar-backward)
