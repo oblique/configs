@@ -46,6 +46,7 @@
     (highlight-parentheses-mode t)))
 (global-highlight-parentheses-mode t)
 (require 'arduino-mode)
+(require 'go-mode-load)
 
 ; linum mode
 (require 'my-linum)
