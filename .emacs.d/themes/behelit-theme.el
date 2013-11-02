@@ -54,8 +54,9 @@
 
    ;; faces used by ggtags.el
    `(compilation-info ((,class (:foreground "#5f87d7"))))
-   `(compilation-mode-line-exit ((,class (:foreground "#5f87d7"))))
    `(compilation-error ((,class (:foreground "#d7005f"))))
+   `(compilation-mode-line-exit ((,class (:foreground "#5f87d7"))))
+   `(compilation-mode-line-fail ((,class (:foreground "#d7005f"))))
    `(error ((,class (:foreground "#d7005f"))))
 
    ;;; highlight
