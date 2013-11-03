@@ -47,6 +47,7 @@
 (global-highlight-parentheses-mode t)
 (require 'arduino-mode)
 (require 'go-mode-load)
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ; linum mode
 (require 'my-linum)
