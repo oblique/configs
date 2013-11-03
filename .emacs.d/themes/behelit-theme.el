@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.11
+;;; version: 1.12
 
 ;; Copyright (C) 2012-2013 oblique
 
@@ -52,12 +52,33 @@
    `(show-paren-match-face ((,class (:foreground "#000000" :background "#ff875f"))))
    `(show-paren-mismatch-face ((,class (:foreground "#000000" :background "#d7005f"))))
 
-   ;; faces used by ggtags.el
+   ;;; faces used by ggtags.el
    `(compilation-info ((,class (:foreground "#5f87d7"))))
    `(compilation-error ((,class (:foreground "#d7005f"))))
    `(compilation-mode-line-exit ((,class (:foreground "#5f87d7"))))
    `(compilation-mode-line-fail ((,class (:foreground "#d7005f"))))
    `(error ((,class (:foreground "#d7005f"))))
+
+   ;;; ediff
+   `(ediff-even-diff-A ((,class (:foreground "#000000" :background "#5fffaf" :weight normal))))
+   `(ediff-odd-diff-A ((,class (:foreground "#000000" :background "#5fffaf" :weight normal))))
+   `(ediff-current-diff-A ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
+   `(ediff-fine-diff-A ((,class (:foreground "#000000" :background "#d70087" :weight normal))))
+
+   `(ediff-even-diff-B ((,class (:foreground "#000000" :background "#5f87d7" :weight normal))))
+   `(ediff-odd-diff-B ((,class (:foreground "#000000" :background "#5f87d7" :weight normal))))
+   `(ediff-current-diff-B ((,class (:foreground "#000000" :background "#5f5fff" :weight normal))))
+   `(ediff-fine-diff-B ((,class (:foreground "#000000" :background "#d70087" :weight normal))))
+
+   `(ediff-even-diff-C ((,class (:foreground "#000000" :background "#af87ff" :weight normal))))
+   `(ediff-odd-diff-C ((,class (:foreground "#000000" :background "#af87ff" :weight normal))))
+   `(ediff-current-diff-C ((,class (:foreground "#000000" :background "#af5fff" :weight normal))))
+   `(ediff-fine-diff-C ((,class (:foreground "#000000" :background "#d70087" :weight normal))))
+
+   `(ediff-even-diff-Ancestor ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
+   `(ediff-odd-diff-Ancestor ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
+   `(ediff-current-diff-Ancestor ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(ediff-fine-diff-Ancestor ((,class (:foreground "#000000" :background "#d70087" :weight normal))))
 
    ;;; highlight
    `(isearch ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
