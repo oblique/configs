@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ $# -lt 2 -o $# -gt 3 ]; then
+    echo "usage: emacsdiff <file 1> <file 2> [<file 3>]"
+    exit 1
+fi
+
+# if is not a terminal
+tty > /dev/null 2>&1 || URXVT="urxvt -e"
+
+if [ $# -eq 2 ]; then
+    ${URXVT} emacs -nw --eval "(ediff-files \"$1\" \"$2\")"
+else
+    ${URXVT} emacs -nw --eval "(ediff-files3 \"$1\" \"$2\" \"$3\")"
+fi
+
+exit 0
