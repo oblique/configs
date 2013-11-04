@@ -1,17 +1,79 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ $# -lt 2 -o $# -gt 3 ]; then
-    echo "usage: emacsdiff <file 1> <file 2> [<file 3>]"
+usage() {
+    echo "Usage: emacsdiff [options] <file1> <file2> [<file3>]"
+    echo
+    echo "Options:"
+    echo "  -h, --help     Show this help"
+    echo "  -a             Merge with ancestor (file1 = local, file2 = other, file3 = base)"
+    echo "  -o             Output file (use it only with -a)"
+    echo
     exit 1
-fi
+}
 
-# if is not a terminal
-tty > /dev/null 2>&1 || URXVT="urxvt -e"
+ARGS=$(getopt -o hao: -l "help" -n $(basename $0) -- "$@")
+[[ $? -ne 0 ]] && exit 1
+eval set -- "$ARGS"
 
-if [ $# -eq 2 ]; then
-    ${URXVT} emacs -nw --eval "(ediff-files \"$1\" \"$2\")"
+ANCESTOR=0
+
+while :; do
+    case "$1" in
+	-h|--help)
+	    usage
+	    ;;
+	-a)
+	    shift
+	    ANCESTOR=1
+	    ;;
+	-o)
+	    shift
+	    OUTPUT="$1"
+	    shift
+	    ;;
+	--)
+	    shift
+	    break
+	    ;;
+    esac
+done
+
+if [[ $ANCESTOR -eq 1 ]]; then
+    [[ $# -ne 3 ]] && usage
 else
-    ${URXVT} emacs -nw --eval "(ediff-files3 \"$1\" \"$2\" \"$3\")"
+    [[ -n "$OUTPUT" ]] && usage
+    [[ $# -lt 2 || $# -gt 3 ]] && usage
 fi
+
+if [[ $ANCESTOR -eq 1 ]]; then
+    EMACSEVAL="(ediff-merge"
+else
+    EMACSEVAL="(ediff"
+fi
+
+if [ -d "$1" ]; then
+    EMACSEVAL="${EMACSEVAL}-directories"
+else
+    EMACSEVAL="${EMACSEVAL}-files"
+fi
+
+if [[ $ANCESTOR -eq 1 ]]; then
+    EMACSEVAL="${EMACSEVAL}-with-ancestor \"$1\" \"$2\" \"$3\""
+    [[ -n "$OUTPUT" ]] && EMACSEVAL="${EMACSEVAL} nil \"${OUTPUT}\""
+else
+    if [ $# -eq 2 ]; then
+	EMACSEVAL="${EMACSEVAL} \"$1\" \"$2\""
+    else
+	EMACSEVAL="${EMACSEVAL}3 \"$1\" \"$2\" \"$3\""
+    fi
+    [[ -d "$1" ]] && EMACSEVAL="${EMACSEVAL} \"\""
+fi
+
+EMACSEVAL="${EMACSEVAL})"
+
+# if it's not a terminal
+tty > /dev/null 2>&1 || RUNTERM="urxvt -e"
+
+${RUNTERM} emacs -nw --eval "${EMACSEVAL}"
 
 exit 0
