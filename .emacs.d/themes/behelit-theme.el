@@ -53,11 +53,14 @@
    `(show-paren-mismatch-face ((,class (:foreground "#000000" :background "#d7005f"))))
 
    ;;; faces used by ggtags.el
+   `(ggtags-global-line ((,class (:inherit nil :underline t))))
+   `(compilation-line-number ((,class (:foreground "#d7005f"))))
    `(compilation-info ((,class (:foreground "#5f87d7"))))
    `(compilation-error ((,class (:foreground "#d7005f"))))
    `(compilation-mode-line-exit ((,class (:foreground "#5f87d7"))))
    `(compilation-mode-line-fail ((,class (:foreground "#d7005f"))))
    `(error ((,class (:foreground "#d7005f"))))
+   `(success ((,class (:foreground "#00ff87"))))
 
    ;;; ediff
    `(ediff-even-diff-A ((,class (:foreground "#000000" :background "#5fffaf" :weight normal))))
