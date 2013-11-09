@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.12
+;;; version: 1.13
 
 ;; Copyright (C) 2012-2013 oblique
 
@@ -93,8 +93,8 @@
    `(hi-black-hb ((,class (:background "#3a3a3a" :foreground "#1c1c1c" :weight bold :height 1.50))))
    `(hi-blue ((,class (:background "#0087ff" :foreground "#1c1c1c"))))
    `(hi-blue-b ((,class (:foreground "#0087ff" :weight bold))))
-   `(hi-green ((,class (:background "#00ff00" :foreground "#1c1c1c"))))
-   `(hi-green-b ((,class (:foreground "#00ff00" :weight bold))))
+   `(hi-green ((,class (:background "#00ff87" :foreground "#1c1c1c"))))
+   `(hi-green-b ((,class (:foreground "#00ff87" :weight bold))))
    `(hi-pink ((,class (:background "#d7005f" :foreground "#1c1c1c"))))
    `(hi-red-b ((,class (:foreground "#d7005f" :weight bold))))
    `(hi-yellow ((,class (:background "#ffff5f" :foreground "#1c1c1c"))))
