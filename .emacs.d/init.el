@@ -1,7 +1,10 @@
 (add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
 (setq byte-compile-warnings nil)
 (byte-recompile-directory "~/.emacs.d")
 (byte-recompile-directory "~/.emacs.d" 0)
+(byte-recompile-directory "~/.emacs.d/auto-complete")
+(byte-recompile-directory "~/.emacs.d/auto-complete" 0)
 (setq byte-compile-warnings t)
 
 ; load my-rxvt.el
@@ -48,6 +51,15 @@
 (require 'arduino-mode)
 (require 'go-mode-load)
 (setq ediff-split-window-function 'split-window-horizontally)
+
+;; auto-complete
+(semantic-mode 1)
+(add-hook 'c-mode-common-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
+(ac-config-default)
+(setq ac-use-menu-map t)
+(setq ac-quick-help-delay 0.1)
 
 ;; linum mode
 (global-linum-mode 1)

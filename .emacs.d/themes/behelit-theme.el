@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 1.13
+;;; version: 2.0
 
 ;; Copyright (C) 2012-2013 oblique
 
@@ -82,6 +82,28 @@
    `(ediff-odd-diff-Ancestor ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
    `(ediff-current-diff-Ancestor ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
    `(ediff-fine-diff-Ancestor ((,class (:foreground "#000000" :background "#d70087" :weight normal))))
+
+   ;;; popup.el
+   `(popup-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-isearch-match ((,class (:foreground "#000000" :background "#af87ff" :weight normal))))
+   `(popup-menu-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-menu-mouse-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
+   `(popup-menu-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
+   `(popup-menu-summary-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-scroll-bar-background-face ((,class (:background "#1c1c1c"))))
+   `(popup-scroll-bar-foreground-face ((,class (:background "#00ff87"))))
+   `(popup-summary-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-tip-face ((,class (:foreground "#0087ff" :background "#1c1c1c" :weight normal))))
+
+   ;;; auto-complete.el
+   `(ac-candidate-mouse-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
+   `(ac-completion-face ((,class (:foreground "#af87ff" :weight normal :underline t))))
+   `(ac-candidate-face ((,class (:foreground "#5c5c5c" :background "#1c1c1c" :weight normal))))
+   `(ac-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
+   `(ac-gtags-candidate-face ((,class (:foreground "#af87ff" :background "#1c1c1c" :weight normal))))
+   `(ac-gtags-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
+   `(ac-yasnippet-candidate-face ((,class (:foreground "#0087ff" :background "#1c1c1c" :weight normal))))
+   `(ac-yasnippet-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
 
    ;;; highlight
    `(isearch ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
@@ -178,6 +200,8 @@
 
    ))
 
+;;; popup.el: disable cursor color changing
+(setq popup-isearch-cursor-color nil)
 
 ;;; special highlighting for numbers
 (unless (boundp 'font-lock-number-face)
