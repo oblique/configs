@@ -49,8 +49,7 @@
 (require 'go-mode-load)
 (setq ediff-split-window-function 'split-window-horizontally)
 
-; linum mode
-(require 'my-linum)
+;; linum mode
 (global-linum-mode 1)
 (setq linum-disabled-modes-list
       '(eshell-mode apropos-mode compilation-mode term-mode
@@ -63,6 +62,27 @@
 	  '(lambda()
 	     (if (member major-mode linum-disabled-modes-list)
 		 (linum-mode -1))))
+
+;;; linum separator for terminal
+;; 1) add a hook to calculate the format
+(unless window-system
+  (add-hook 'linum-before-numbering-hook
+	    (lambda ()
+	      (setq-local linum-format-fmt
+			  (let ((w (length (number-to-string
+					    (count-lines (point-min) (point-max))))))
+			    (concat "%" (number-to-string w) "d"))))))
+
+;; 2) evaluate the format and concatenate the separetor to it
+(defun linum-format-func (line)
+  (concat
+   (propertize (format linum-format-fmt line) 'face 'linum)
+   (propertize " " 'face 'mode-line)))
+
+;; 3) set the function pointer to linum-format
+(unless window-system
+  (setq linum-format 'linum-format-func))
+;;;
 
 ; keep track of the recently opened file
 (setq recentf-max-saved-items 200)
