@@ -248,6 +248,9 @@ properly update `ggtags-mode-map'."
                                            (ggtags-current-project-root))))
                     (mapcar #'substitute-env-vars ggtags-process-environment))
                   process-environment
+                  (and (ggtags-current-project-root)
+                       (list (concat "GTAGSROOT="
+                                     (ggtags-current-project-root))))
                   (and (ggtags-find-project)
                        (not (ggtags-project-has-rtags (ggtags-find-project)))
                        (list "GTAGSLABEL=ctags")))))
@@ -326,9 +329,16 @@ properly update `ggtags-mode-map'."
         (remhash (ggtags-project-root ggtags-project) ggtags-projects)
         (kill-local-variable 'ggtags-project)
         (ggtags-find-project))
-    (let ((root (ignore-errors (file-name-as-directory
-                                ;; Resolves symbolic links
-                                (ggtags-process-string "global" "-pr")))))
+    (let ((root (or (ignore-errors (file-name-as-directory
+                                    ;; Resolves symbolic links
+                                    (ggtags-process-string "global" "-pr")))
+                    ;; 'global -pr' resolves symlinks before checking
+                    ;; the GTAGS file which could cause issues such as
+                    ;; https://github.com/leoliu/ggtags/issues/22, so
+                    ;; let's help it out.
+                    (let ((gtags (locate-dominating-file
+                                  default-directory "GTAGS")))
+                      (and gtags (file-truename gtags))))))
       (setq ggtags-project
             (and root (or (gethash root ggtags-projects)
                           (ggtags-make-project root)))))))
@@ -936,9 +946,7 @@ Global and Emacs."
     (define-key map "\M-o" 'ggtags-navigation-visible-mode)
     (define-key map [return] 'ggtags-navigation-mode-done)
     (define-key map "\r" 'ggtags-navigation-mode-done)
-    ;; Intercept M-. and M-* keys
     (define-key map [remap pop-tag-mark] 'ggtags-navigation-mode-abort)
-    (define-key map [remap ggtags-find-tag-dwim] 'undefined)
     map))
 
 (defvar ggtags-mode-map-alist
