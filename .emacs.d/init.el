@@ -322,6 +322,12 @@
   (if (called-interactively-p 'any)
       (message "You can retab the whole buffer by pressing C-x h M-x tabify")))
 
+(defun hide-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+
 ;; emulate vim's softtabstop
 (defun backward-delete-whitespace-to-column ()
   "delete back to the previous column of whitespace, or as much whitespace as possible,
