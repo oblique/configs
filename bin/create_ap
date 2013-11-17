@@ -25,6 +25,8 @@ usage() {
     echo "Examples:"
     echo "  $(basename $0) wlan0 eth0 MyAccessPoint MyPassPhrase"
     echo "  $(basename $0) -n wlan0 MyAccessPoint MyPassPhrase"
+    echo "  echo -e 'MyAccessPoint\nMyPassPhrase' | $(basename $0) wlan0 eth0"
+    echo "  echo -e 'MyAccessPoint\nMyPassPhrase' | $(basename $0) -n wlan0"
 }
 
 get_macaddr() {
@@ -88,23 +90,47 @@ while :; do
     esac
 done
 
-if [[ $SHARE_INTERNET -eq 1 ]]; then
-    if [[ $# -ne 3 && $# -ne 4 ]]; then
-	usage
-	exit 1
-    fi
-    INTERNET_IFACE=$2
-    SSID=$3
-    PASSPHRASE=$4
-else
-    if [[ $# -ne 2 && $# -ne 3 ]]; then
-	usage
-	exit 1
-    fi
-    SSID=$2
-    PASSPHRASE=$3
+if [[ $# -lt 1 ]]; then
+    usage
+    exit 1
 fi
+
 WIFI_IFACE=$1
+
+if [[ $# -gt 2 ]]; then
+    if [[ $SHARE_INTERNET -eq 1 ]]; then
+        if [[ $# -ne 3 && $# -ne 4 ]]; then
+            usage
+            exit 1
+        fi
+        INTERNET_IFACE=$2
+        SSID=$3
+        PASSPHRASE=$4
+    else
+        if [[ $# -ne 2 && $# -ne 3 ]]; then
+            usage
+            exit 1
+        fi
+        SSID=$2
+        PASSPHRASE=$3
+    fi
+else
+    if [[ $SHARE_INTERNET -eq 1 ]]; then
+        if [[ $# -ne 2 ]]; then
+            usage
+            exit 1
+        fi
+        INTERNET_IFACE=$2
+    fi
+    if tty -s; then
+        read -p "SSID: " SSID
+        read -p "Passphrase: " -s PASSPHRASE
+        echo
+    else
+        read SSID
+        read PASSPHRASE
+    fi
+fi
 
 if [[ $(id -u) -ne 0 ]]; then
     echo "You must run it as root."
@@ -133,7 +159,7 @@ if [[ -n "$PASSPHRASE" ]]; then
     [[ "$WPA_VERSION" == "1+2" || "$WPA_VERSION" == "2+1" ]] && WPA_VERSION=3
     cat << EOF >> $CONFDIR/hostapd.conf
 wpa=${WPA_VERSION}
-wpa_passphrase=$4
+wpa_passphrase=$PASSPHRASE
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
