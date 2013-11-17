@@ -59,7 +59,6 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
 (ac-config-default)
 (setq ac-use-menu-map t)
-(setq ac-quick-help-delay 0.1)
 
 ;; linum mode
 (global-linum-mode 1)
