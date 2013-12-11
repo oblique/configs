@@ -1,76 +1,77 @@
-import os, sys, termios
-import select, fcntl
-import ctypes
+# License: GPL
+import os, sys, re
+import termios, select
 
 if (len(sys.argv) < 2):
     exit(1)
 
-lflag = 3
-sz = ctypes.c_int()
-
-fd = os.open(os.readlink("/proc/self/fd/0"), os.O_RDWR | os.O_NOCTTY)
+fd = 0 # stdin
+c_lflag = 3
+c_cc = 6
 p = select.poll()
 p.register(fd, select.POLLIN)
 
-t = termios.tcgetattr(fd)
-old_t = t[:]
-t[lflag] &= ~(termios.ICANON | termios.ECHO)
-termios.tcsetattr(fd, termios.TCSAFLUSH, t)
+ndec = "[0-9]+"
+nhex = "[0-9a-fA-F]+"
+re_rgb = re.compile("\033]({ndec};)+(rgba?:({nhex}/)?{nhex}/{nhex}/{nhex})".format(**vars()))
+
+tc = termios.tcgetattr(fd)
+old_tc = tc[:]
+
+def flush_input():
+    while p.poll(0):
+        os.read(fd, 4096)
+
+def restore():
+    flush_input()
+    termios.tcsetattr(fd, termios.TCSANOW, old_tc)
+
+tc[c_lflag] &= ~(termios.ICANON | termios.ECHO)
+tc[c_cc][termios.VMIN] = 0
+tc[c_cc][termios.VTIME] = 0
+termios.tcsetattr(fd, termios.TCSANOW, tc)
 
 rgb = []
-seq = ''
 
 for x in sys.argv[1:]:
     if x == 'bg':
-        seq = "\033]11;?\033\\"
+        seq = "\033]11;?\007"
     elif x == 'fg':
-        seq = "\033]10;?\033\\"
+        seq = "\033]10;?\007"
     elif x.isdigit() and int(x) >= 0 and int(x) <= 255:
-        seq = "\033]4;%d;?\033\\" % int(x)
+        seq = "\033]4;%d;?\007" % int(x)
     else:
-        termios.tcsetattr(fd, termios.TCSAFLUSH, old_t)
-        os.close(fd)
+        restore()
         exit(1)
 
+    # some terminals will not responce to our request, so we add a common request
+    # at the end to maximize the change to get an immediate responce.
+    seq += "\033[6n"
+
+    # if the user the the program inside tmux, make it to forward our request
+    # to the actual terminal
     if (os.getenv("TMUX")):
         seq = "\033Ptmux;" + seq.replace("\033", "\033\033") + "\0\033\\"
 
-    os.write(fd, bytes(seq, "UTF-8"))
+    flush_input()
+    os.write(fd, seq.encode())
 
     if (not p.poll(1000)):
-        termios.tcsetattr(fd, termios.TCSAFLUSH, old_t)
-        os.close(fd)
+        restore()
         exit(1)
 
-    fcntl.ioctl(fd, termios.FIONREAD, sz)
-    r = os.read(fd, sz.value).decode("UTF-8")
+    r = os.read(fd, 4096).decode()
 
-    try:
-        i = r.index("rgb")
-    except ValueError:
-        termios.tcsetattr(fd, termios.TCSAFLUSH, old_t)
-        os.close(fd)
-        exit(1)
+    m = re_rgb.match(r)
+    if m:
+        rgb.append(m.group(2))
 
-    # rgba not supported
-    if (r[i+3] == 'a'):
-        termios.tcsetattr(fd, termios.TCSAFLUSH, old_t)
-        os.close(fd)
-        exit(1)
-
-    rgb.append(r[i:i+18])
-
-
-if (os.getenv("TMUX") and p.poll(1000)):
-    fcntl.ioctl(fd, termios.FIONREAD, sz)
-    os.read(fd, sz.value)
-
-termios.tcsetattr(fd, termios.TCSAFLUSH, old_t)
-os.close(fd)
-
+restore()
 r = ''
 for x in rgb:
     r += x + ' '
+if r == '':
+    exit(1)
 sys.stdout.write(r[:-1])
 sys.stdout.flush()
 exit(0)
