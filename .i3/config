@@ -75,6 +75,13 @@ bindsym $mod+a focus parent
 # focus the child container
 # bindsym $mod+d focus child
 
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -98,6 +105,12 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+# move workspace
+bindsym $mod+Ctrl+Left  move workspace to output left
+bindsym $mod+Ctrl+Down  move workspace to output down
+bindsym $mod+Ctrl+Up    move workspace to output up
+bindsym $mod+Ctrl+Right move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -150,7 +163,6 @@ bar {
     }
 }
 
-
 # volume keys
 bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q sset Master 5%+
 bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q sset Master 5%-
@@ -162,12 +174,6 @@ bindsym XF86AudioStop   exec --no-startup-id mpc -h $mpd_socket stop
 bindsym XF86AudioPlay   exec --no-startup-id mpc -h $mpd_socket toggle
 bindsym XF86AudioNext   exec --no-startup-id mpc -h $mpd_socket next
 bindsym XF86AudioPrev   exec --no-startup-id mpc -h $mpd_socket prev
-
-# Make the currently focused window a scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
 
 # switch to previous or next workspace
 bindsym $mod+j      workspace prev
@@ -184,11 +190,12 @@ bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor --dmenu
 bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 # other keybindings
-bindsym Print           exec --no-startup-id scrot -e "mv \$f /tmp"
 bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 105x30 -e zsh -i -c ncmpcpp
 bindsym $mod+shift+x    exec ~/.i3/bin/i3lock_wrapper.sh
 bindsym $mod+u          [urgent=oldest] focus
 bindsym $mod+t          exec --no-startup-id ~/.i3/bin/redshift.sh
+bindsym --release Print           exec --no-startup-id scrot -e "mv \$f /tmp"
+bindsym --release $mod+Print      exec --no-startup-id scrot -s -e "mv \$f /tmp"
 
 # grid 2x2
 bindsym $mod+g     exec ~/.i3/bin/grid_2x2.sh
@@ -197,8 +204,8 @@ bindsym $mod+g     exec ~/.i3/bin/grid_2x2.sh
 floating_minimum_size 0 x 0
 floating_maximum_size -1 x -1
 
-# make borders 4 pixels
-new_window pixel 4
+# make borders 3 pixels
+new_window pixel 3
 
 # window commands
 for_window [class="^Xephyr$"] border normal
