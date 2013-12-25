@@ -59,6 +59,7 @@
 (ac-config-default)
 (setq ac-use-menu-map t)
 (setq ac-use-quick-help nil)
+(setq ac-auto-start nil)
 
 ;; linum mode
 (global-linum-mode 1)
@@ -461,6 +462,7 @@ or just one char if that's not possible"
   )
 
 ; key bindings
+(global-set-key (kbd "M-/") 'auto-complete)
 (global-set-key (kbd "C-k") 'kill-whole-line)
 (global-set-key (kbd "M->") 'shifttext-tab-right)
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
