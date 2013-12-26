@@ -158,8 +158,6 @@ alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias openocd-panda='openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 alias shred='shred -n 10 -u -v -z --random-source /dev/urandom'
 alias mpc='mpc -h ~/.mpd/socket'
-alias mplayergr='mplayer --ass-font-scale=1.3 --slang=gr'
-alias mplayerxv='mplayer -vo xv'
 alias HandBrakeCLI_HD="HandBrakeCLI -e x264 -2 -T -q 18.0 -a 1,1 -E faac,copy:ac3 -B 160,160 -6 dpl2,auto -R Auto,Auto -D 0.0,0.0 -4 --decomb --strict-anamorphic --crop 0:0:0:0 -m -x level=41:b-adapt=1:rc-lookahead=50:me=umh:trellis=2"
 
 # mutt wrapper that choose 256 colors theme if the terminal supports it
