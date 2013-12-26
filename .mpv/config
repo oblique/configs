@@ -1,0 +1,30 @@
+[default]
+idx = yes
+joystick = no
+
+sub-text-font = 'Bitstream Vera Sans:style=Bold'
+sub-text-font-size = 65
+subcp = UTF-8:ISO-8859-7
+
+ao = pulse,alsa,
+vo = vdpau,opengl-hq,xv,
+
+# Pretend to be Window Media Player.
+# Fixes playback when playlist and media file use the same URL.
+#user-agent=NSPlayer/4.1.0.3856
+
+# Pretend to be Quicktime
+# Fixes playback for apple.com/trailers redirects
+#user-agent="QuickTime"
+
+# Pretend to be Realplayer SP
+# Fixes playback for some video streaming sites
+#user-agent=RMA/1.0
+
+# Pretend to be Winamp
+# Fixes playback of some NSV streams
+#user-agent="Winamp NSV Player/5.12 (ultravox/2.0)"
+
+[vo.vdpau]
+hwdec = vdpau
+vf-clr = yes
