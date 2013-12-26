@@ -18,9 +18,10 @@ else
 fi
 
 if [[ $(tput colors) = 256 ]]; then
-    BUP='\u25b4'
-    BDOWN='\u25be'
+    BUP='\u25b2'
+    BDOWN='\u25bc'
     BPOWER='\u26a1'
+    BBOX='\u25a0'
     CMAGENTA="#[fg=colour141,bg=default]"
     CRED="#[fg=colour161,bg=default]"
     CYELLOW="#[fg=colour191,bg=default]"
@@ -31,6 +32,7 @@ else
     BUP="+"
     BDOWN="-"
     BPOWER="="
+    BBOX='\u25a0'
     CMAGENTA="#[fg=magenta,bg=default]"
     CRED="#[fg=red,bg=default]"
     CYELLOW="#[fg=yellow,bg=default]"
@@ -67,14 +69,14 @@ fi
 
 for ((x=0; x < BFILLED; x++))
 do
-    BRES="${BRES}\u25fe"
+    BRES="${BRES}${BBOX}"
 done
 
 if [[ x -lt 10 ]]; then
     BRES="${BRES}${CGRAY}"
     for ((; x < 10; x++))
     do
-        BRES="${BRES}\u25fe"
+        BRES="${BRES}${BBOX}"
     done
 fi
 

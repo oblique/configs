@@ -27,10 +27,12 @@ function _battery_status() {
         _BUP="+"
         _BDOWN="-"
         _BPOWER="="
+        _BBOX='\u25a0'
     else
-        _BUP='\u25b4'
-        _BDOWN='\u25be'
+        _BUP='\u25b2'
+        _BDOWN='\u25bc'
         _BPOWER='\u26a1'
+        _BBOX='\u25a0'
     fi
 
     local _BFSTATUS=$(cat $_BATPATH/status)
@@ -61,7 +63,7 @@ function _battery_status() {
     local x
     for x in {1..$_BFILLED}
     do
-        _BRES="${_BRES}\u25a0"
+        _BRES="${_BRES}${_BBOX}"
     done
 
     if [[ x -lt 10 ]]; then
@@ -72,7 +74,7 @@ function _battery_status() {
         fi
         for x in {$(( _BFILLED+1 ))..10}
         do
-            _BRES="${_BRES}\u25a0"
+            _BRES="${_BRES}${_BBOX}"
         done
     fi
 
