@@ -8,7 +8,7 @@
     tmux
     i3-wm
     i3status
-    i3lock (patch that change the colors)
+    i3lock (see patches/i3lock directory)
     dunst (lightweight notification-daemon, needed by i3-wm)
     gdb
     mutt (trash folder, purge message patches)
@@ -16,7 +16,7 @@
     mpd
     ncmpcpp
     rtorrent
-    mplayer2
+    mpv
     fontconfig
     alsa (configured to use PulseAudio)
     libao (configured to use PulseAudio)
