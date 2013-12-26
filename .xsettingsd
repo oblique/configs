@@ -17,7 +17,7 @@ Net/DndDragThreshold 8
 Net/DoubleClickTime 400
 Net/FallbackIconTheme "gnome"
 Net/IconThemeName "AwOken"
-Net/ThemeName "FlatStudioDark"
+Net/ThemeName "Adwaita"
 Xft/Antialias 1
 Xft/Hinting 1
 Xft/HintStyle "hintmedium"
