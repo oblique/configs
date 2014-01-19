@@ -1,0 +1,41 @@
+[log]
+	decorate = short
+[push]
+	default = simple
+[alias]
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit
+[merge]
+	tool = meld
+[color]
+	ui = true
+[color "diff"]
+	old = red
+	new = blue
+	frag = magenta
+	whitespace = black bold
+	meta = magenta
+	commit = magenta
+[color "branch"]
+	current = magenta
+	local = blue
+	remote = red
+[color "decorate"]
+	HEAD = green
+	branch = blue
+	remoteBranch = red
+	tag = cyan
+[color "grep"]
+	filename = magenta
+	separator = cyan
+	linenumber = magenta bold
+	match = red bold
+[color "status"]
+	untracked = red
+	changed = red
+	added = blue
+	updated = blue
+[color "interactive"]
+	error = red
+	header = red
+	help = magenta
+	prompt = blue bold
