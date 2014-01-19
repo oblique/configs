@@ -2,7 +2,7 @@
 idx = yes
 joystick = no
 
-sub-text-font = 'Bitstream Vera Sans:style=Bold'
+sub-text-font = 'Bitstream Vera Sans'
 sub-text-font-size = 65
 subcp = UTF-8:ISO-8859-7
 
