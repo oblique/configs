@@ -3,7 +3,7 @@
 [push]
 	default = simple
 [alias]
-	tree = log --graph --decorate --pretty=oneline --abbrev-commit
+	tree = log --graph --decorate
 [merge]
 	tool = meld
 [color]
