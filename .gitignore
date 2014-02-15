@@ -5,4 +5,6 @@
 /.emacs.d/backup
 /.emacs.d/sessions
 /.emacs.d/server
-/.emacs.d/elpa/archives
+/.emacs.d/ac-comphist.dat
+/.emacs.d/auto-save-list
+/.emacs.d/el-get

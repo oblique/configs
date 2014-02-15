@@ -57,9 +57,9 @@
 
 
 ## notes for emacs
+* run `emacs -q --script ~/.emacs.d/install_el-get.el` to install el-get and the packages
 * put RFCs at `~/rfc` (http://www.rfc-editor.org/download.html)
 * for `cups-pdf` use `Virtual_PDF_Printer` as name for pdf printer
-
 
 ## other notes
 if you use .fonts.conf or .fonts do the following:

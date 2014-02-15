@@ -1,11 +1,7 @@
-(add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/auto-complete")
-(setq byte-compile-warnings nil)
-(byte-recompile-directory "~/.emacs.d")
-(byte-recompile-directory "~/.emacs.d" 0)
-(byte-recompile-directory "~/.emacs.d/auto-complete")
-(byte-recompile-directory "~/.emacs.d/auto-complete" 0)
-(setq byte-compile-warnings t)
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(require 'el-get)
+(el-get 'sync)
 
 ; load my-rxvt.el
 (unless (or noninteractive window-system)
@@ -36,7 +32,6 @@
 (setq message-log-max nil)
 (setq fill-column 80)
 (kill-buffer "*Messages*")
-(kill-buffer "*Compile-Log*")
 (setq Man-width 90)
 (setq-default show-trailing-whitespace t)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -51,15 +46,27 @@
 (require 'go-mode-load)
 (setq ediff-split-window-function 'split-window-horizontally)
 
-;; auto-complete
-(semantic-mode 1)
-(add-hook 'c-mode-common-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
-(ac-config-default)
-(setq ac-use-menu-map t)
-(setq ac-use-quick-help nil)
-(setq ac-auto-start nil)
+;; irony-mode
+(require 'auto-complete)
+(require 'yasnippet)
+(require 'irony) ;Note: hit `C-c C-b' to open build menu
+
+;; the ac plugin will be activated in each buffer using irony-mode
+(irony-enable 'ac)             ; hit C-RET to trigger completion
+
+(defun c-hook-enable-irony ()
+  "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
+  ;; be cautious, if yas is not enabled before (auto-complete-mode 1), overlays
+  ;; *may* persist after an expansion.
+  (yas/minor-mode-on)
+  (auto-complete-mode 1)
+
+  ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
+  (when (member major-mode irony-known-modes)
+    (irony-mode 1)))
+
+(add-hook 'c++-mode-hook 'c-hook-enable-irony)
+(add-hook 'c-mode-hook 'c-hook-enable-irony)
 
 ;; linum mode
 (global-linum-mode 1)
@@ -147,7 +154,7 @@
 
 ; fonts
 (if window-system
-    (setq default-frame-alist '((font . "Source Code Pro-9"))))
+    (setq default-frame-alist '((font . "Hermit:style=medium:pixelsize=14"))))
 
 ; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -399,62 +406,92 @@ or just one char if that's not possible"
 	      (setq tkey "C-M-S-"))
 
 	  ;; arrows
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d A" x)) (kbd (format "%s<up>" tkey)))
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d B" x)) (kbd (format "%s<down>" tkey)))
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d C" x)) (kbd (format "%s<right>" tkey)))
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d D" x)) (kbd (format "%s<left>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d A" x))
+	    (kbd (format "%s<up>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d B" x))
+	    (kbd (format "%s<down>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d C" x))
+	    (kbd (format "%s<right>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d D" x))
+	    (kbd (format "%s<left>" tkey)))
 	  ;; home
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d H" x)) (kbd (format "%s<home>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d H" x))
+	    (kbd (format "%s<home>" tkey)))
 	  ;; end
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d F" x)) (kbd (format "%s<end>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d F" x))
+	    (kbd (format "%s<end>" tkey)))
 	  ;; page up
-	  (define-key key-translation-map (kbd (format "M-[ 5 ; %d ~" x)) (kbd (format "%s<prior>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 5 ; %d ~" x))
+	    (kbd (format "%s<prior>" tkey)))
 	  ;; page down
-	  (define-key key-translation-map (kbd (format "M-[ 6 ; %d ~" x)) (kbd (format "%s<next>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 6 ; %d ~" x))
+	    (kbd (format "%s<next>" tkey)))
 	  ;; insert
-	  (define-key key-translation-map (kbd (format "M-[ 2 ; %d ~" x)) (kbd (format "%s<delete>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 2 ; %d ~" x))
+	    (kbd (format "%s<delete>" tkey)))
 	  ;; delete
-	  (define-key key-translation-map (kbd (format "M-[ 3 ; %d ~" x)) (kbd (format "%s<delete>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 3 ; %d ~" x))
+	    (kbd (format "%s<delete>" tkey)))
 	  ;; f1
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d P" x)) (kbd (format "%s<f1>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d P" x))
+	    (kbd (format "%s<f1>" tkey)))
 	  ;; f2
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d Q" x)) (kbd (format "%s<f2>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d Q" x))
+	    (kbd (format "%s<f2>" tkey)))
 	  ;; f3
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d R" x)) (kbd (format "%s<f3>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d R" x))
+	    (kbd (format "%s<f3>" tkey)))
 	  ;; f4
-	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d S" x)) (kbd (format "%s<f4>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d S" x))
+	    (kbd (format "%s<f4>" tkey)))
 	  ;; f5
-	  (define-key key-translation-map (kbd (format "M-[ 15 ; %d ~" x)) (kbd (format "%s<f5>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 15 ; %d ~" x))
+	    (kbd (format "%s<f5>" tkey)))
 	  ;; f6
-	  (define-key key-translation-map (kbd (format "M-[ 17 ; %d ~" x)) (kbd (format "%s<f6>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 17 ; %d ~" x))
+	    (kbd (format "%s<f6>" tkey)))
 	  ;; f7
-	  (define-key key-translation-map (kbd (format "M-[ 18 ; %d ~" x)) (kbd (format "%s<f7>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 18 ; %d ~" x))
+	    (kbd (format "%s<f7>" tkey)))
 	  ;; f8
-	  (define-key key-translation-map (kbd (format "M-[ 19 ; %d ~" x)) (kbd (format "%s<f8>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 19 ; %d ~" x))
+	    (kbd (format "%s<f8>" tkey)))
 	  ;; f9
-	  (define-key key-translation-map (kbd (format "M-[ 20 ; %d ~" x)) (kbd (format "%s<f9>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 20 ; %d ~" x))
+	    (kbd (format "%s<f9>" tkey)))
 	  ;; f10
-	  (define-key key-translation-map (kbd (format "M-[ 21 ; %d ~" x)) (kbd (format "%s<f10>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 21 ; %d ~" x))
+	    (kbd (format "%s<f10>" tkey)))
 	  ;; f11
-	  (define-key key-translation-map (kbd (format "M-[ 23 ; %d ~" x)) (kbd (format "%s<f11>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 23 ; %d ~" x))
+	    (kbd (format "%s<f11>" tkey)))
 	  ;; f12
-	  (define-key key-translation-map (kbd (format "M-[ 24 ; %d ~" x)) (kbd (format "%s<f12>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 24 ; %d ~" x))
+	    (kbd (format "%s<f12>" tkey)))
 	  ;; f13
-	  (define-key key-translation-map (kbd (format "M-[ 25 ; %d ~" x)) (kbd (format "%s<f13>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 25 ; %d ~" x))
+	    (kbd (format "%s<f13>" tkey)))
 	  ;; f14
-	  (define-key key-translation-map (kbd (format "M-[ 26 ; %d ~" x)) (kbd (format "%s<f14>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 26 ; %d ~" x))
+	    (kbd (format "%s<f14>" tkey)))
 	  ;; f15
-	  (define-key key-translation-map (kbd (format "M-[ 28 ; %d ~" x)) (kbd (format "%s<f15>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 28 ; %d ~" x))
+	    (kbd (format "%s<f15>" tkey)))
 	  ;; f16
-	  (define-key key-translation-map (kbd (format "M-[ 29 ; %d ~" x)) (kbd (format "%s<f16>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 29 ; %d ~" x))
+	    (kbd (format "%s<f16>" tkey)))
 	  ;; f17
-	  (define-key key-translation-map (kbd (format "M-[ 31 ; %d ~" x)) (kbd (format "%s<f17>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 31 ; %d ~" x))
+	    (kbd (format "%s<f17>" tkey)))
 	  ;; f18
-	  (define-key key-translation-map (kbd (format "M-[ 32 ; %d ~" x)) (kbd (format "%s<f18>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 32 ; %d ~" x))
+	    (kbd (format "%s<f18>" tkey)))
 	  ;; f19
-	  (define-key key-translation-map (kbd (format "M-[ 33 ; %d ~" x)) (kbd (format "%s<f19>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 33 ; %d ~" x))
+	    (kbd (format "%s<f19>" tkey)))
 	  ;; f20
-	  (define-key key-translation-map (kbd (format "M-[ 34 ; %d ~" x)) (kbd (format "%s<f20>" tkey)))
+	  (define-key key-translation-map (kbd (format "M-[ 34 ; %d ~" x))
+	    (kbd (format "%s<f20>" tkey)))
 
 	  (setq x (+ x 1))
 	  ))
@@ -492,3 +529,5 @@ or just one char if that's not possible"
 (define-minor-mode my-minor-mode
     "A minor mode so that my key settings aren't shadowed by other major/minor modes"
     t "" 'my-minor-mode-map)
+
+(load-file "~/.emacs.d/custom.el")
