@@ -1,5 +1,5 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 2.1
+;;; version: 2.2
 
 ;; Copyright (C) 2012-2013 oblique
 
@@ -33,18 +33,19 @@
   (custom-theme-set-faces
    'behelit
 
-   `(default ((,class (:foreground "#66ff66" :background "#101010"))))
-   `(cursor ((,class (:background "#66ff66"))))
+   `(default ((,class (:foreground "#5fff5f" :background "#101010"))))
+   `(cursor ((,class (:background "#5fff5f"))))
 
    `(vertical-border ((,class (:foreground "#1c1c1c" :background "#1c1c1c"))))
-   `(fringe ((,class (:foreground "#5f5faf" :background "#1c1c1c"))))
+   `(fringe ((,class (:foreground "#b03060" :background "#1c1c1c"))))
    `(mode-line ((,class (:foreground "#5f5faf" :background "#1c1c1c" :box nil
 				     :underline nil :weight normal :slant normal))))
    `(mode-line-inactive ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :box nil))))
+   `(mode-line-highlight ((,class (:box nil :underline t))))
    `(linum ((,class (:background nil :foreground "#5f87af"
 				 :underline nil :slant normal :weight normal))))
    `(menu ((,class (:foreground "#5f5faf" :background "#1c1c1c" :inverse-video nil))))
-   `(minibuffer-prompt ((,class (:foreground "#00afff"))))
+   `(minibuffer-prompt ((,class (:foreground "#5f87d7" :weight bold))))
    `(region ((,class (:background "#262626"))))
    `(button ((,class (:foreground "#5f87d7"))))
    `(trailing-whitespace ((,class (:background "#ff005f"))))
@@ -89,23 +90,25 @@
    `(popup-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
    `(popup-isearch-match ((,class (:foreground "#000000" :background "#af87ff" :weight normal))))
    `(popup-menu-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
-   `(popup-menu-mouse-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
-   `(popup-menu-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
+   `(popup-menu-mouse-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(popup-menu-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
    `(popup-menu-summary-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
    `(popup-scroll-bar-background-face ((,class (:background "#1c1c1c"))))
-   `(popup-scroll-bar-foreground-face ((,class (:background "#00ff87"))))
+   `(popup-scroll-bar-foreground-face ((,class (:background "#af87d7"))))
    `(popup-summary-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
-   `(popup-tip-face ((,class (:foreground "#0087ff" :background "#1c1c1c" :weight normal))))
+   `(popup-tip-face ((,class (:foreground "#ff5faf" :background "#1c1c1c" :weight normal))))
 
    ;;; auto-complete.el
-   `(ac-candidate-mouse-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
-   `(ac-completion-face ((,class (:foreground "#af87ff" :weight normal :underline t))))
+   `(ac-candidate-mouse-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(ac-completion-face ((,class (:foreground "#af87d7" :weight normal :underline t))))
    `(ac-candidate-face ((,class (:foreground "#5c5c5c" :background "#1c1c1c" :weight normal))))
-   `(ac-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
-   `(ac-gtags-candidate-face ((,class (:foreground "#af87ff" :background "#1c1c1c" :weight normal))))
-   `(ac-gtags-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
-   `(ac-yasnippet-candidate-face ((,class (:foreground "#0087ff" :background "#1c1c1c" :weight normal))))
-   `(ac-yasnippet-selection-face ((,class (:foreground "#000000" :background "#0087ff" :weight normal))))
+   `(ac-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(ac-gtags-candidate-face ((,class (:foreground "#af87d7" :background "#1c1c1c" :weight normal))))
+   `(ac-gtags-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(ac-yasnippet-candidate-face ((,class (:foreground "#ff5f5f" :background "#1c1c1c" :weight normal))))
+   `(ac-yasnippet-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(ac-irony-candidate-face ((,class (:foreground "#ff5f5f" :background "#1c1c1c" :weight normal))))
+   `(ac-irony-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
 
    ;;; highlight
    `(isearch ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
@@ -126,7 +129,7 @@
    `(match ((,class (:background "#ffff5f" :foreground "#4e4e4e" :inherit nil))))
 
    ;;; tabbar
-   `(tabbar-default ((,class (:background "#1c1c1c" :box nil :underline nil :height 1.0 :weight normal))))
+   `(tabbar-default ((,class (:background "#1c1c1c" :box nil :underline nil :height 1.0 :weight normal :inherit nil))))
    `(tabbar-unselected ((,class (:background "#1c1c1c" :foreground "#5f5f5f"
 					     :box nil :underline nil :weight normal))))
    `(tabbar-selected ((,class (:background "#1c1c1c" :foreground "#d7005f"
@@ -160,10 +163,10 @@
 					  :foreground "#000000" :background "#5fafff"))))
    `(diff-refine-removed ((,class (:inherit diff-removed :weight normal
 					    :foreground "#000000" :background "#d7005f"))))
-   `(diff-context ((,class (:foreground "#66ff66"))))
-   `(diff-file-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
-   `(diff-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
-   `(diff-hunk-header ((,class (:foreground "#af87ff" :background "#1c1c1c"))))
+   `(diff-context ((,class (:foreground "#5fff5f"))))
+   `(diff-file-header ((,class (:foreground "#af87ff" :background nil))))
+   `(diff-header ((,class (:foreground "#af87ff" :background nil))))
+   `(diff-hunk-header ((,class (:foreground "#ff5f5f" :background nil))))
 
    ;;; rfc
    `(rfc-node ((,class (:bold t :foreground "#af87ff"))))
