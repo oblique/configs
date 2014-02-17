@@ -1,7 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get)
-(el-get 'sync)
+(when (require 'el-get nil t)
+  (el-get 'sync))
 
 ; load my-rxvt.el
 (unless (or noninteractive window-system)
@@ -42,31 +42,29 @@
   (lambda ()
     (highlight-parentheses-mode t)))
 (global-highlight-parentheses-mode t)
-(require 'arduino-mode)
-(require 'go-mode-load)
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;; irony-mode
-(require 'auto-complete)
-(require 'yasnippet)
-(require 'irony) ;Note: hit `C-c C-b' to open build menu
+; Note: hit `C-c C-b' to open build menu
+(when (and (require 'auto-complete nil t)
+	   (require 'yasnippet nil t)
+	   (require 'irony nil t))
+  ;; the ac plugin will be activated in each buffer using irony-mode
+  (irony-enable 'ac) ; hit C-RET to trigger completion
 
-;; the ac plugin will be activated in each buffer using irony-mode
-(irony-enable 'ac)             ; hit C-RET to trigger completion
+  (defun c-hook-enable-irony ()
+    "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
+    ;; be cautious, if yas is not enabled before (auto-complete-mode 1), overlays
+    ;; *may* persist after an expansion.
+    (yas/minor-mode-on)
+    (auto-complete-mode 1)
 
-(defun c-hook-enable-irony ()
-  "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
-  ;; be cautious, if yas is not enabled before (auto-complete-mode 1), overlays
-  ;; *may* persist after an expansion.
-  (yas/minor-mode-on)
-  (auto-complete-mode 1)
+    ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
+    (when (member major-mode irony-known-modes)
+      (irony-mode 1)))
 
-  ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
-  (when (member major-mode irony-known-modes)
-    (irony-mode 1)))
-
-(add-hook 'c++-mode-hook 'c-hook-enable-irony)
-(add-hook 'c-mode-hook 'c-hook-enable-irony)
+  (add-hook 'c++-mode-hook 'c-hook-enable-irony)
+  (add-hook 'c-mode-hook 'c-hook-enable-irony))
 
 ;; linum mode
 (global-linum-mode 1)
@@ -140,11 +138,11 @@
 (setq c-backspace-function 'backward-delete-char)
 
 ; ggtags (https://github.com/leoliu/ggtags)
-(require 'ggtags)
-(add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-	      (ggtags-mode 1))))
+(when (require 'ggtags nil t)
+  (add-hook 'c-mode-common-hook
+	    (lambda ()
+	      (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+		(ggtags-mode 1)))))
 
 ; Tabbing support options
 (require 'tabbar)
@@ -499,7 +497,8 @@ or just one char if that's not possible"
   )
 
 ; key bindings
-(global-set-key (kbd "M-/") 'auto-complete)
+(when (require 'auto-complete nil t)
+  (global-set-key (kbd "M-/") 'auto-complete))
 (global-set-key (kbd "C-k") 'kill-whole-line)
 (global-set-key (kbd "M->") 'shifttext-tab-right)
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
