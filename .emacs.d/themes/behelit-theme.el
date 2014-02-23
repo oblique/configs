@@ -46,7 +46,7 @@
 				 :underline nil :slant normal :weight normal))))
    `(menu ((,class (:foreground "#5f5faf" :background "#1c1c1c" :inverse-video nil))))
    `(minibuffer-prompt ((,class (:foreground "#5f87d7" :weight bold))))
-   `(region ((,class (:background "#262626"))))
+   `(region ((,class (:background "#1c1c1c"))))
    `(button ((,class (:foreground "#5f87d7"))))
    `(trailing-whitespace ((,class (:background "#ff005f"))))
    `(escape-glyph ((,class (:foreground "#ffff5f"))))
