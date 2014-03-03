@@ -46,6 +46,10 @@
 (global-highlight-parentheses-mode t)
 (setq ediff-split-window-function 'split-window-horizontally)
 
+;; set temporary directory
+(setq temporary-file-directory (format "/tmp/emacs-tmp-%s/" (user-real-login-name)))
+(make-directory temporary-file-directory t)
+
 ;; irony-mode
 ; Note: hit `C-c C-b' to open build menu
 (when (and (require 'auto-complete nil t)
