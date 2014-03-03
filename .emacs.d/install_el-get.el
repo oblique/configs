@@ -1,4 +1,4 @@
-(setq my-packages '(irony-mode ggtags go-mode arduino-mode rainbow-mode))
+(setq my-packages '(irony-mode ggtags go-mode arduino-mode rainbow-mode markdown-mode))
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
