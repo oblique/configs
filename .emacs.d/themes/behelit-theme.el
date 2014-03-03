@@ -152,7 +152,8 @@
    `(font-lock-variable-name-face ((,class (:foreground "#d7005f" :weight bold))))
    `(font-lock-warning-face ((,class (:foreground "#d7005f" :weight bold))))
    `(c-annotation-face ((,class (:inherit font-lock-constant-face))))
-   `(font-lock-number-face ((,class (:foreground "#af87ff"))))
+   `(font-lock-custom-number-face ((,class (:foreground "#af87ff"))))
+   `(font-lock-custom-todo-face ((,class (:foreground "#af87ff" :weight bold))))
 
    ;;; diff
    `(diff-added ((,class (:foreground "#5fafff" :background nil :weight bold))))
@@ -208,21 +209,29 @@
 ;;; popup.el: disable cursor color changing
 (setq popup-isearch-cursor-color nil)
 
-;;; special highlighting for numbers
-(unless (boundp 'font-lock-number-face)
+;;; additional highlightings
+(unless (boundp 'font-lock-custom-number-face)
   (progn
-    (make-face 'font-lock-number-face)
-    (setq font-lock-number-face 'font-lock-number-face)))
+    (make-face 'font-lock-custom-number-face)
+    (setq font-lock-custom-number-face 'font-lock-custom-number-face)))
 
-(defun add-font-lock-numbers ()
+(unless (boundp 'font-lock-custom-todo-face)
+  (progn
+    (make-face 'font-lock-custom-todo-face)
+    (setq font-lock-custom-todo-face 'font-lock-custom-todo-face)))
+
+(defun add-font-locks ()
   (font-lock-add-keywords nil
      '(
-       ("\\<\\(\\([0-9]+\\.\\)?[0-9]+\\([eE][+-]?[0-9]*\\)?\\([uU]?[lL]\\{0,2\\}\\|[lL]\\{0,2\\}[uU]?\\)\\)\\>" . font-lock-number-face)
-       ("\\<\\(0[xX][0-9a-fA-F]+\\)\\>" . font-lock-number-face)
-       )))
+       ("\\<\\(\\([0-9]+\\.\\)?[0-9]+\\([eE][+-]?[0-9]*\\)?\\([uU]?[lL]\\{0,2\\}\\|[lL]\\{0,2\\}[uU]?\\)\\)\\>" . font-lock-custom-number-face)
+       ("\\<\\(0[xX][0-9a-fA-F]+\\)\\>" . font-lock-custom-number-face)
+       ))
+  (font-lock-add-keywords nil '(("\\<\\(FIXME\\):" 1 font-lock-warning-face t)))
+  (font-lock-add-keywords nil '(("\\<\\(TODO\\):" 1 font-lock-custom-todo-face t))))
 
-;; enable font-lock-number-face for the following modes
-(add-hook 'c-mode-common-hook 'add-font-lock-numbers)
+
+;; enable additional font-locks for the following modes
+(add-hook 'c-mode-common-hook 'add-font-locks)
 
 
 (provide-theme 'behelit)
