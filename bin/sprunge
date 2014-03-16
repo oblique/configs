@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# upload text to sprunge.us
+
+SPRUNGE() {
+    curl -F 'sprunge=<-' http://sprunge.us
+}
+
+if test -z "$1"
+then cat -    | SPRUNGE
+else cat "$1" | SPRUNGE
+fi
