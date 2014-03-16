@@ -1,3 +1,9 @@
+[sendemail]
+	#from = Fist-name Last-name <username@gmail.com>
+	#smtpuser = username
+	smtpserver = smtp.gmail.com
+	smtpencryption = ssl
+	smtpserverport = 465
 [log]
 	decorate = short
 [push]
