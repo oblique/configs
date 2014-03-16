@@ -32,6 +32,8 @@
     xclip
     htop
     git
+    mercurial (needed by git-remote-hg)
+    hg-git (needed by git-remote-hg)
     abook (needed by mutt)
     w3m (needed by mutt)
     pulseaudio
