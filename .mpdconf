@@ -5,7 +5,6 @@
 # mpc update
 
 music_directory     "~/music"
-
 playlist_directory  "~/.mpd/playlists"
 db_file             "~/.mpd/database"
 log_file            "~/.mpd/log"
@@ -13,6 +12,7 @@ pid_file            "~/.mpd/pid"
 state_file          "~/.mpd/state"
 sticker_file        "~/.mpd/sticker.sql"
 bind_to_address     "/home/oblique/.mpd/socket"
+restore_paused      "yes"
 
 input {
     plugin "curl"
