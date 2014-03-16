@@ -45,3 +45,5 @@
 	header = red
 	help = magenta
 	prompt = blue bold
+[remote-hg]
+	hg-git-compat = true
