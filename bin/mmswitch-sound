@@ -7,10 +7,14 @@ die() {
     exit 1
 }
 
-list_sinks() {
+list_sinks_with_default() {
     pacmd list-sinks | grep -E "index: |name: |device.description = " | paste - - - | \
-	tr '*' ' ' | tr '<>' '"' | sed 's/device.description =/description:/' | \
-	sed -e 's/[ \t][ \t]*/ /g' | sed -e 's/^ //'
+        tr '<>' '"' | sed 's/device.description =/description:/' | \
+        sed -e 's/[ \t][ \t]*/ /g' | sed -e 's/^ //'
+}
+
+list_sinks() {
+    list_sinks_with_default | sed -e "s/^\* //"
 }
 
 list_sink_inputs() {
@@ -18,7 +22,7 @@ list_sink_inputs() {
 }
 
 get_index_from_desc() {
-    list_sinks | grep "description: \"$1\"" | awk '{print $2}'
+    list_sinks | grep " description: \"$1\"" | awk '{print $2}'
 }
 
 get_index_from_name() {
@@ -37,7 +41,7 @@ set_sink_from_index() {
     local x
     pacmd set-default-sink $1 > /dev/null 2>&1
     for x in $(list_sink_inputs); do
-	pacmd move-sink-input $x $1 > /dev/null 2>&1
+        pacmd move-sink-input $x $1 > /dev/null 2>&1
     done
 }
 
@@ -47,6 +51,7 @@ usage() {
     echo "Options:"
     echo "  -h, --help            Show this help menu"
     echo "  -l, --list-cards      List sound cards"
+    echo "  -d, --default-card    Show current default card"
     echo "  --dmenu               Use dmenu"
     echo
     echo "Examples:"
@@ -55,32 +60,37 @@ usage() {
     echo "  $(basename $0) desc:\"$(get_desc_from_index 0)\""
 }
 
-ARGS=$(getopt -o lh -l "list-cards,dmenu,help" -n $(basename $0) -- "$@")
+ARGS=$(getopt -o ldh -l "list-cards,default-card,dmenu,help" -n $(basename $0) -- "$@")
 [ $? -ne 0 ] && exit 1
 eval set -- "$ARGS"
 
 while :; do
     case "$1" in
-	-h|--help)
-	    usage
-	    exit 1
-	    ;;
-	-l|--list-cards)
-	    list_sinks
-	    exit 0
-	    ;;
-	--dmenu)
-	    SELECT=$(list_sinks | sed 's/.* description: \"\(.*\)\"$/\1/' | \
-		dmenu -i -p 'Choose sound card:' $DMENU_ARGS)
-	    [ -z "$SELECT" ] && exit 0
-	    ARG=desc:"$SELECT"
-	    break
-	    ;;
-	--)
-	    shift
-	    ARG="$@"
-	    break
-	    ;;
+        -h|--help)
+            usage
+            exit 1
+            ;;
+        -l|--list-cards)
+            list_sinks
+            exit 0
+            ;;
+        -d|--default-card)
+            list_sinks_with_default | grep -E '^\* ' | sed 's/^\* //'
+            exit 0
+            ;;
+        --dmenu)
+            SELECT=$(list_sinks_with_default | sed 's/\(\*\?\).* description: \"\(.*\)\"$/\1\2/' | \
+                dmenu -i -p 'Choose sound card:' $DMENU_ARGS)
+            [ -n "$SELECT" ] && SELECT=$(echo $SELECT | sed 's/^\*//')
+            [ -z "$SELECT" ] && exit 0
+            ARG=desc:"$SELECT"
+            break
+            ;;
+        --)
+            shift
+            ARG="$@"
+            break
+            ;;
     esac
 done
 
@@ -91,21 +101,21 @@ fi
 
 case "${ARG%%:*}" in
     index)
-	[ $(list_sinks | grep -E -c "^index: ${ARG#*:} ") -eq 0 ] && \
-	    die "Sound card with index \`${ARG#*:}' does not exist."
-	set_sink_from_index "${ARG#*:}"
-	;;
+        [ $(list_sinks | grep -E -c "^index: ${ARG#*:} ") -eq 0 ] && \
+            die "Sound card with index \`${ARG#*:}' does not exist."
+        set_sink_from_index "${ARG#*:}"
+        ;;
     name)
-	INDEX=$(get_index_from_name "${ARG#*:}")
-	[ -z "$INDEX" ] && die "Sound card with name \`${ARG#*:}' does not exist."
-	set_sink_from_index $INDEX
-	;;
+        INDEX=$(get_index_from_name "${ARG#*:}")
+        [ -z "$INDEX" ] && die "Sound card with name \`${ARG#*:}' does not exist."
+        set_sink_from_index $INDEX
+        ;;
     desc)
-	INDEX=$(get_index_from_desc "${ARG#*:}")
-	[ -z "$INDEX" ] && die "Sound card with description \`${ARG#*:}' does not exist."
-	set_sink_from_index $INDEX
-	;;
+        INDEX=$(get_index_from_desc "${ARG#*:}")
+        [ -z "$INDEX" ] && die "Sound card with description \`${ARG#*:}' does not exist."
+        set_sink_from_index $INDEX
+        ;;
     *)
-	die "You must specify if \`${ARG#*:}' is an index, a name or a description. See --help."
-	;;
+        die "You must specify if \`${ARG#*:}' is an index, a name or a description. See --help."
+        ;;
 esac
