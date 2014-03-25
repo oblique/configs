@@ -1,7 +1,7 @@
 ;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 2.2
+;;; version: 2.3
 
-;; Copyright (C) 2012-2013 oblique
+;; Copyright (C) 2012-2014 oblique
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@
    `(fringe ((,class (:foreground "#b03060" :background "#1c1c1c"))))
    `(mode-line ((,class (:foreground "#5f5faf" :background "#1c1c1c" :box nil
 				     :underline nil :weight normal :slant normal))))
-   `(mode-line-inactive ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :box nil))))
+   `(mode-line-inactive ((,class (:foreground "#585858" :background "#1c1c1c" :box nil))))
    `(mode-line-highlight ((,class (:box nil :underline t))))
    `(linum ((,class (:background nil :foreground "#5f87af"
 				 :underline nil :slant normal :weight normal))))
@@ -87,15 +87,15 @@
    `(ediff-fine-diff-Ancestor ((,class (:foreground "#000000" :background "#d70087" :weight normal))))
 
    ;;; popup.el
-   `(popup-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
    `(popup-isearch-match ((,class (:foreground "#000000" :background "#af87ff" :weight normal))))
-   `(popup-menu-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-menu-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
    `(popup-menu-mouse-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
    `(popup-menu-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
-   `(popup-menu-summary-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-menu-summary-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
    `(popup-scroll-bar-background-face ((,class (:background "#1c1c1c"))))
    `(popup-scroll-bar-foreground-face ((,class (:background "#af87d7"))))
-   `(popup-summary-face ((,class (:foreground "#5f5f5f" :background "#1c1c1c" :weight normal))))
+   `(popup-summary-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
    `(popup-tip-face ((,class (:foreground "#ff5faf" :background "#1c1c1c" :weight normal))))
 
    ;;; auto-complete.el
@@ -130,17 +130,17 @@
 
    ;;; tabbar
    `(tabbar-default ((,class (:background "#1c1c1c" :box nil :underline nil :height 1.0 :weight normal :inherit nil))))
-   `(tabbar-unselected ((,class (:background "#1c1c1c" :foreground "#5f5f5f"
+   `(tabbar-unselected ((,class (:background "#1c1c1c" :foreground "#585858"
 					     :box nil :underline nil :weight normal))))
    `(tabbar-selected ((,class (:background "#1c1c1c" :foreground "#d7005f"
 					   :box nil :underline nil :weight bold))))
-   `(tabbar-button ((,class (:background "#1c1c1c" :foreground "#5f5f5f"
+   `(tabbar-button ((,class (:background "#1c1c1c" :foreground "#585858"
 					 :box nil :underline nil))))
 
    ;;; font lock
    `(font-lock-builtin-face ((,class (:foreground "#8787af"))))
-   `(font-lock-comment-face ((,class (:foreground "#5f5f5f"))))
-   `(font-lock-comment-delimiter-face ((,class (:foreground "#5f5f5f"))))
+   `(font-lock-comment-face ((,class (:foreground "#585858"))))
+   `(font-lock-comment-delimiter-face ((,class (:foreground "#585858"))))
    `(font-lock-constant-face ((,class (:foreground "#af87ff"))))
    `(font-lock-doc-face ((,class (:foreground "#5f5f87"))))
    `(font-lock-function-name-face ((,class (:foreground "#af87ff" :weight bold))))
@@ -191,7 +191,7 @@
    `(markdown-reference-face ((,class (:foreground "#5fafff"))))
    `(markdown-url-face ((,class (:foreground "#ffff87"))))
    `(markdown-link-title-face ((,class (:foreground "#d7005f"))))
-   `(markdown-comment-face ((,class (:foreground "#5f5f5f"))))
+   `(markdown-comment-face ((,class (:foreground "#585858"))))
    `(markdown-math-face ((,class (:foreground "#af87ff" :slant italic))))
 
    ;;; outline-mode
