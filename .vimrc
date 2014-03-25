@@ -19,4 +19,4 @@
 :set laststatus=2
 :set wildmenu
 ":setlocal spell spelllang=el
-:colorscheme molokai
+:colorscheme behelit
