@@ -213,7 +213,7 @@ for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [class="^Skype$" title="^Skype. [^ ]* for Linux$"] floating enable
-for_window [instance="^urxvt_floating$"] floating enable; border pixel 10
+for_window [instance="^urxvt_floating$"] floating enable
 
 # color class           border  backgr. text    indicator
 client.focused          #5f87d7 #5f87d7 #101010 #799de4
