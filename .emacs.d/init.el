@@ -14,8 +14,8 @@
 ; various
 (defvar my-minor-mode-map (make-keymap) "my-minor-mode keymap.")
 (menu-bar-mode -1)
-(tool-bar-mode -1)
-(if window-system
+(when window-system
+  (tool-bar-mode -1)
   (toggle-scroll-bar nil))
 (column-number-mode 1)
 (global-auto-revert-mode 1)
