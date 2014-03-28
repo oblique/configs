@@ -35,7 +35,7 @@ if [[ "$1" != "-t" ]]; then
     fi
 
     for x in "$@"; do
-        FILE_PATH=$(realpath "$x")
+        FILE_PATH=$(readlink -f "$x")
         # because ffmpeg doesn't have a way to escape all special characters we
         # create a symbolic link of the file that contains only alfanumeric characters
         LN_FILE=$(mktemp ${TMP_DIR}/XXXXXX.${x##*.})
