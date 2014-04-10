@@ -1,5 +1,4 @@
 :syntax on
-:set t_Co=256
 :set nocompatible 
 :set number
 :set expandtab 
