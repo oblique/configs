@@ -10,8 +10,8 @@ Xft.rgba:       rgb
 
 ! behelit color theme
 URxvt.background:    #101010
-URxvt.foreground:    #66FF66
-URxvt.cursorColor:   #66ff66
+URxvt.foreground:    #60ff60
+URxvt.cursorColor:   #60ff60
 
 ! black
 URxvt.color0:        #1c1c1c
