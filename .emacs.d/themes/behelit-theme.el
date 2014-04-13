@@ -1,5 +1,5 @@
-;;; behelit-theme.el --- A heavily modified molokai-based theme.
-;;; version: 2.3
+;;; behelit theme
+;;; version: 2.4
 
 ;; Copyright (C) 2012-2014 oblique
 
@@ -148,7 +148,7 @@
    `(font-lock-negation-char-face ((,class (:weight bold))))
    `(font-lock-preprocessor-face ((,class (:foreground "#87ff5f" :weight bold))))
    `(font-lock-string-face ((,class (:foreground "#ffff87"))))
-   `(font-lock-type-face ((,class (:foreground "#5fafff"))))
+   `(font-lock-type-face ((,class (:foreground "#5f87ff"))))
    `(font-lock-variable-name-face ((,class (:foreground "#d7005f" :weight bold))))
    `(font-lock-warning-face ((,class (:foreground "#d7005f" :weight bold))))
    `(c-annotation-face ((,class (:inherit font-lock-constant-face))))
@@ -156,12 +156,12 @@
    `(font-lock-custom-todo-face ((,class (:foreground "#af87ff" :weight bold))))
 
    ;;; diff
-   `(diff-added ((,class (:foreground "#5fafff" :background nil :weight bold))))
+   `(diff-added ((,class (:foreground "#5f87ff" :background nil :weight bold))))
    `(diff-removed ((,class (:foreground "#d7005f" :background nil :weight bold))))
    `(diff-indicator-added ((,class (:inherit diff-added))))
    `(diff-indicator-removed ((,class (:inherit diff-removed))))
    `(diff-refine-added ((,class (:inherit diff-added :weight normal
-					  :foreground "#000000" :background "#5fafff"))))
+					  :foreground "#000000" :background "#5f87ff"))))
    `(diff-refine-removed ((,class (:inherit diff-removed :weight normal
 					    :foreground "#000000" :background "#d7005f"))))
    `(diff-context ((,class (:foreground "#5fff5f"))))
@@ -177,30 +177,30 @@
    `(markdown-italic-face ((,class (:slant italic))))
    `(markdown-bold-face ((,class (:weight bold))))
    `(markdown-header-face ((,class (:weight normal))))
-   `(markdown-header-face-1 ((,class (:foreground "#5fafff"))))
+   `(markdown-header-face-1 ((,class (:foreground "#5f87ff"))))
    `(markdown-header-face-2 ((,class (:foreground "#d7005f"))))
    `(markdown-header-face-3 ((,class (:foreground "#87ff5f"))))
    `(markdown-header-face-4 ((,class (:foreground "#af87ff"))))
    `(markdown-header-face-5 ((,class (:foreground "#ffff87"))))
-   `(markdown-header-face-6 ((,class (:foreground "#5fafff"))))
-   `(markdown-inline-code-face ((,class (:foreground "#5fafff"))))
+   `(markdown-header-face-6 ((,class (:foreground "#5f87ff"))))
+   `(markdown-inline-code-face ((,class (:foreground "#5f87ff"))))
    `(markdown-list-face ((,class (:foreground "#87ff5f"))))
    `(markdown-blockquote-face ((,class (:slant italic))))
    `(markdown-pre-face ((,class (:foreground "#af87ff"))))
-   `(markdown-link-face ((,class (:foreground "#5fafff"))))
-   `(markdown-reference-face ((,class (:foreground "#5fafff"))))
+   `(markdown-link-face ((,class (:foreground "#5f87ff"))))
+   `(markdown-reference-face ((,class (:foreground "#5f87ff"))))
    `(markdown-url-face ((,class (:foreground "#ffff87"))))
    `(markdown-link-title-face ((,class (:foreground "#d7005f"))))
    `(markdown-comment-face ((,class (:foreground "#585858"))))
    `(markdown-math-face ((,class (:foreground "#af87ff" :slant italic))))
 
    ;;; outline-mode
-   `(outline-1 ((,class (:foreground "#5fafff"))))
+   `(outline-1 ((,class (:foreground "#5f87ff"))))
    `(outline-2 ((,class (:foreground "#d7005f"))))
    `(outline-3 ((,class (:foreground "#87ff5f"))))
    `(outline-4 ((,class (:foreground "#af87ff"))))
    `(outline-5 ((,class (:foreground "#ffff87"))))
-   `(outline-6 ((,class (:foreground "#5fafff"))))
+   `(outline-6 ((,class (:foreground "#5f87ff"))))
    `(outline-7 ((,class (:foreground "#d7005f"))))
    `(outline-8 ((,class (:foreground "#87ff5f"))))
 
