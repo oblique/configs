@@ -8,9 +8,42 @@ Xft.lcdfilter:  lcddefault
 Xft.dpi:        120
 Xft.rgba:       rgb
 
-! color themes
-#include ".xdefaults.d/behelit.theme"
-!#include ".xdefaults.d/behelit_darker.theme"
+! behelit color theme
+URxvt.background:    #101010
+URxvt.foreground:    #66FF66
+URxvt.cursorColor:   #66ff66
+
+! black
+URxvt.color0:        #1c1c1c
+URxvt.color8:        #4d4d4d
+
+! red
+URxvt.color1:        #d81860
+URxvt.color9:        #f00060
+
+! green
+URxvt.color2:        #60ff60
+URxvt.color10:       #70ff70
+
+! yellow
+URxvt.color3:        #f9fd75
+URxvt.color11:       #f9fd80
+
+! blue
+URxvt.color4:        #5d97fa
+URxvt.color12:       #679dfa
+
+! magenta
+URxvt.color5:        #a78edb
+URxvt.color13:       #b29fdb
+
+! cyan
+URxvt.color6:        #4695c8
+URxvt.color14:       #5a9dc8
+
+! white
+URxvt.color7:        #f3ebe2
+URxvt.color15:       #eeeeee
 
 ! urxvt
 URxvt.termName:             rxvt-unicode-256color
