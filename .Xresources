@@ -35,7 +35,7 @@ URxvt.color12:       #679dfa
 
 ! magenta
 URxvt.color5:        #a78edb
-URxvt.color13:       #b29fdb
+URxvt.color13:       #ad97db
 
 ! cyan
 URxvt.color6:        #4695c8
