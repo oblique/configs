@@ -13,6 +13,7 @@
 # set postponed = '+[Gmail]/Drafts'
 # set trash = '+[Gmail]/Trash'
 # set move = no
+# set signature="~/.mutt/signature"
 ## we don't need record because gmail's
 ## stmp server stores the message automatically.
 # unset record
@@ -31,7 +32,8 @@
 ### multiple gmail accounts example
 
 ## base hook to reset account variables to known state before activating new ones
-# account-hook . 'unset preconnect imap_user imap_pass imap_authenticators; unsubscribe .*'
+# account-hook . 'unset preconnect imap_user imap_pass imap_authenticators'
+# folder-hook . 'unset signature; unsubscribe .*'
 ##
 
 ## gmail account 1
@@ -46,6 +48,7 @@
 #   set postponed = '+[Gmail]/Drafts'; \
 #   set trash = '+[Gmail]/Trash'; \
 #   set move = no; \
+#   set signature="~/.mutt/username1_signature"; \
 #   unset record; \
 #   subscribe linux-kernel@vger.kernel.org"
 ##
