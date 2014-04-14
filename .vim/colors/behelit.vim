@@ -1,5 +1,5 @@
 " Theme: behelit
-" Version: 0.2
+" Version: 0.3
 " Maintainer: oblique <psyberbits@gmail.com>
 " 
 " Copyright (c) 2014, oblique
@@ -82,7 +82,7 @@ highlight CursorLineNr    guifg=#ff5f5f    guibg=#1c1c1c    gui=NONE
 highlight Question        guifg=#5f87d7    guibg=NONE       gui=bold
 highlight WarningMsg      guifg=#ff5f5f    guibg=NONE       gui=bold
 highlight Statement       guifg=#d7005f    guibg=NONE       gui=NONE
-highlight Type            guifg=#5f87ff    guibg=NONE       gui=NONE
+highlight Type            guifg=#5f87d7    guibg=NONE       gui=NONE
 highlight Error           guifg=#d7005f    guibg=NONE       gui=bold
 highlight Todo            guifg=#af87ff    guibg=NONE       gui=bold
 highlight Title           guifg=#af87ff    guibg=NONE       gui=NONE
@@ -94,7 +94,7 @@ highlight Character       guifg=#ffff87    guibg=NONE       gui=NONE
 highlight Underlined      guifg=NONE       guibg=NONE       gui=underline
 highlight diffRemoved     guifg=#d7005f    guibg=NONE       gui=NONE
 highlight diffAdded       guifg=#5f87ff    guibg=NONE       gui=NONE
-highlight diffFile        guifg=#afafff    guibg=NONE       gui=NONE
+highlight diffFile        guifg=#af87ff    guibg=NONE       gui=NONE
 
 if &t_Co > 255
   highlight Normal          ctermfg=83      ctermbg=233     cterm=NONE
@@ -150,7 +150,7 @@ if &t_Co > 255
   highlight Question        ctermfg=68      ctermbg=NONE    cterm=bold
   highlight WarningMsg      ctermfg=203     ctermbg=NONE    cterm=bold
   highlight Statement       ctermfg=161     ctermbg=NONE    cterm=bold
-  highlight Type            ctermfg=69      ctermbg=NONE    cterm=NONE
+  highlight Type            ctermfg=68      ctermbg=NONE    cterm=NONE
   highlight Error           ctermfg=161     ctermbg=NONE    cterm=bold
   highlight Todo            ctermfg=141     ctermbg=NONE    cterm=bold
   highlight Title           ctermfg=141     ctermbg=NONE    cterm=NONE
