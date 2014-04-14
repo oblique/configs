@@ -148,7 +148,7 @@
    `(font-lock-negation-char-face ((,class (:weight bold))))
    `(font-lock-preprocessor-face ((,class (:foreground "#87ff5f" :weight bold))))
    `(font-lock-string-face ((,class (:foreground "#ffff87"))))
-   `(font-lock-type-face ((,class (:foreground "#5f87ff"))))
+   `(font-lock-type-face ((,class (:foreground "#5f87d7"))))
    `(font-lock-variable-name-face ((,class (:foreground "#d7005f" :weight bold))))
    `(font-lock-warning-face ((,class (:foreground "#d7005f" :weight bold))))
    `(c-annotation-face ((,class (:inherit font-lock-constant-face))))
