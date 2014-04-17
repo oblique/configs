@@ -14,7 +14,7 @@
 :set smartindent
 ":set cindent
 :set encoding=utf-8
-:set statusline=%<%f\ %h%m%r%=%-15.(%l[%p%%],%c%)\ %y[len=%L]
+:set statusline=%<%f\ %h%m%r%=%-15.(%l[%p%%],%c%)\ %y[%{&fileformat}][len=%L]
 :set laststatus=2
 :set wildmenu
 ":setlocal spell spelllang=el
