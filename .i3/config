@@ -194,12 +194,8 @@ bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 105x30 -e zsh 
 bindsym $mod+shift+x    exec ~/.i3/bin/i3lock_wrapper.sh
 bindsym $mod+u          [urgent=oldest] focus
 bindsym XF86Sleep       exec xautolock -locknow; exec systemctl hibernate -i
-bindsym $mod+t          exec --no-startup-id ~/.i3/bin/redshift.sh
 bindsym --release Print           exec --no-startup-id scrot -e "mv \$f /tmp"
 bindsym --release $mod+Print      exec --no-startup-id scrot -s -e "mv \$f /tmp"
-
-# grid 2x2
-bindsym $mod+g     exec ~/.i3/bin/grid_2x2.sh
 
 # floating size boundaries
 floating_minimum_size 0 x 0
@@ -213,11 +209,10 @@ for_window [class="^Xephyr$"] border normal
 for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="^Wine$"] floating enable
-for_window [class="^Skype$" title="^Skype. [^ ]* for Linux$"] floating enable
 for_window [instance="^urxvt_floating$"] floating enable
 
 # color class           border  backgr. text    indicator
-client.focused          #5f87d7 #5f87d7 #101010 #799de4
+client.focused          #5d97fa #5d97fa #101010 #4b86eb
 client.focused_inactive #151515 #151515 #787878 #303030
 client.unfocused        #101010 #101010 #787878 #202020
 client.urgent           #f00060 #f00060 #101010 #f5468d
