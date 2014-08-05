@@ -1,13 +1,14 @@
 [default]
-idx = yes
-joystick = no
-
 sub-text-font = 'Bitstream Vera Sans'
 sub-text-font-size = 50
-subcp = UTF-8:ISO-8859-7
+sub-codepage = UTF-8:ISO-8859-7
 
 ao = pulse,alsa,
 vo = vdpau,opengl-hq,xv,
+
+softvol = yes
+softvol-max = 300
+volume = 100
 
 # Pretend to be Window Media Player.
 # Fixes playback when playlist and media file use the same URL.
