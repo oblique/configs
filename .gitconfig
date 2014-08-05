@@ -46,4 +46,5 @@
 	help = magenta
 	prompt = blue bold
 [remote-hg]
+	track-branches = true
 	hg-git-compat = true
