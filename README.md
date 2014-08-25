@@ -56,6 +56,7 @@
     pure-python-otr (https://github.com/afflux/pure-python-otr) (needed by weechat's otr.py script)
     NetworkManager + Network-Manager-Applet (nm-applet)
     GNU Global + ctags + idutils (needed by .emacs.d/ggtags.el)
+    the_silver_searcher (ag)
 
 
 ## notes for emacs
