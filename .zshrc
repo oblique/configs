@@ -127,7 +127,7 @@ fi
 alias sudo='sudo ' # enable aliases in sudo
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-alias ag="ag --color-match '1;31' --color-path '35' --color-line-number '34' -s"
+alias ag="ag --color-match '1;31' --color-path '35' --color-line-number '34' --pager='less -FRX' -s"
 alias emacs='emacs -nw'
 alias kismet='TERM=rxvt-unicode kismet'
 alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
