@@ -45,10 +45,10 @@ for x in sys.argv[1:]:
         exit(1)
 
     # some terminals will not responce to our request, so we add a common request
-    # at the end to maximize the change to get an immediate responce.
+    # at the end to maximize the chances to get an immediate responce.
     seq += "\033[6n"
 
-    # if the user the the program inside tmux, make it to forward our request
+    # if the user use the program inside tmux, make it to forward our request
     # to the actual terminal
     if (os.getenv("TMUX")):
         seq = "\033Ptmux;" + seq.replace("\033", "\033\033") + "\0\033\\"
