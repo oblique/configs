@@ -42,7 +42,7 @@
 				     :underline nil :weight normal :slant normal))))
    `(mode-line-inactive ((,class (:foreground "#585858" :background "#1c1c1c" :box nil))))
    `(mode-line-highlight ((,class (:box nil :underline t))))
-   `(linum ((,class (:background nil :foreground "#5f87af"
+   `(linum ((,class (:background "#101010" :foreground "#5f87af"
 				 :underline nil :slant normal :weight normal))))
    `(menu ((,class (:foreground "#5f5faf" :background "#1c1c1c" :inverse-video nil))))
    `(minibuffer-prompt ((,class (:foreground "#5f87d7" :weight bold))))
