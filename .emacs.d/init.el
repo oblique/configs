@@ -41,28 +41,6 @@
 (setq temporary-file-directory (format "/tmp/emacs-tmp-%s/" (user-real-login-name)))
 (make-directory temporary-file-directory t)
 
-;; irony-mode
-; Note: hit `C-c C-b' to open build menu
-(when (and (require 'auto-complete nil t)
-	   (require 'yasnippet nil t)
-	   (require 'irony nil t))
-  ;; the ac plugin will be activated in each buffer using irony-mode
-  (irony-enable 'ac) ; hit C-RET to trigger completion
-
-  (defun c-hook-enable-irony ()
-    "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
-    ;; be cautious, if yas is not enabled before (auto-complete-mode 1), overlays
-    ;; *may* persist after an expansion.
-    (yas/minor-mode-on)
-    (auto-complete-mode 1)
-
-    ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
-    (when (member major-mode irony-known-modes)
-      (irony-mode 1)))
-
-  (add-hook 'c++-mode-hook 'c-hook-enable-irony)
-  (add-hook 'c-mode-hook 'c-hook-enable-irony))
-
 ;; linum mode
 (global-linum-mode 1)
 (setq linum-disabled-modes-list
@@ -494,8 +472,6 @@ or just one char if that's not possible"
   )
 
 ; key bindings
-(when (require 'auto-complete nil t)
-  (global-set-key (kbd "M-/") 'auto-complete))
 (global-set-key (kbd "C-k") 'kill-whole-line)
 (global-set-key (kbd "M->") 'shifttext-tab-right)
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
