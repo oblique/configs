@@ -3,14 +3,6 @@
 (when (require 'el-get nil t)
   (el-get 'sync))
 
-; load my-rxvt.el
-(unless (or noninteractive window-system)
-    (if (string-match "^rxvt.*" (getenv "TERM"))
-        (progn
-            (setq term-file-prefix nil)
-            (require 'my-rxvt)
-            (terminal-init-rxvt))))
-
 ; various
 (defvar my-minor-mode-map (make-keymap) "my-minor-mode keymap.")
 (menu-bar-mode -1)
