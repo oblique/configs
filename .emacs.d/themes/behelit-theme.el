@@ -110,6 +110,17 @@
    `(ac-irony-candidate-face ((,class (:foreground "#ff5f5f" :background "#1c1c1c" :weight normal))))
    `(ac-irony-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
 
+   ;; company-mode
+   `(company-scrollbar-bg ((,class (:background "#1c1c1c"))))
+   `(company-scrollbar-fg ((,class (:background "#5f87d7"))))
+   `(company-tooltip ((,class (:foreground "#5f87d7" :background "#1c1c1c"))))
+   `(company-tooltip-annotation ((,class (:inherit company-tooltip :foreground "#5f87d7"))))
+   `(company-tooltip-common ((,class (:inherit company-tooltip :foreground "#af87ff"))))
+   `(company-tooltip-selection ((,class (:inherit company-tooltip :foreground "#000000" :background "#00ff87"))))
+   `(company-tooltip-common-selection ((,class (:inherit company-tooltip-selection))))
+   `(company-tooltip-search ((,class (:inherit company-tooltip-selection))))
+   `(company-template-field ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+
    ;;; highlight
    `(isearch ((,class (:foreground "#000000" :background "#ff875f" :weight normal))))
    `(isearch-fail ((,class (:foreground "#d7005f" :background nil :weight bold))))

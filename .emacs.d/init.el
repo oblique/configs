@@ -41,6 +41,31 @@
 (setq temporary-file-directory (format "/tmp/emacs-tmp-%s/" (user-real-login-name)))
 (make-directory temporary-file-directory t)
 
+;; enable autocomplete with company-mode and ycmd
+(when (require 'company nil t)
+  (add-hook 'after-init-hook 'global-company-mode)
+  (global-set-key (kbd "M-/") 'company-complete)
+  ;; if ycmd is not installed, at least set some default flags for company-clang
+  (add-hook 'c-mode-hook '(lambda () (setq-local company-clang-arguments '("-std=c11"))))
+  (add-hook 'c++-mode-hook '(lambda () (setq-local company-clang-arguments '("-std=c++11")))))
+
+(when (and (require 'ycmd nil t)
+	   (require 'company-ycmd nil t))
+  (ycmd-setup)
+  (company-ycmd-setup)
+  ;; clang creates cached files in /tmp directory. to avoid all the mess
+  ;; we put them in a special directory called /tmp/clang-tmp-<user>.
+  ;; to do this, we have to set the TMPDIR enviroment variable when we call ycmd.
+  (setq clang-tmp-dir (format "/tmp/clang-tmp-%s/" (user-real-login-name)))
+  (make-directory clang-tmp-dir t)
+  (setq ycmd-server-command (list "/usr/bin/env"
+				  (concat "TMPDIR=" clang-tmp-dir)
+				  "python2"
+				  (expand-file-name "~/.emacs.d/ycmd/ycmd")))
+  (setq ycmd-global-config (expand-file-name "~/.emacs.d/global_ycmd_config.py"))
+  ;; disable some annoying error messages from emacs-request
+  (setq ycmd-request-message-level -1))
+
 ;; linum mode
 (global-linum-mode 1)
 (setq linum-disabled-modes-list
@@ -99,8 +124,8 @@
 
 ; add repositories in emacs' package manager
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 ; RFC
