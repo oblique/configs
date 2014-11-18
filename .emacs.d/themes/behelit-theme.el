@@ -1,7 +1,9 @@
 ;;; behelit theme
-;;; version: 2.4
 
 ;; Copyright (C) 2012-2014 oblique
+
+;; Author: oblique <psyberbits@gmail.com>
+;; Version: 2.5
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -90,25 +92,25 @@
    `(popup-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
    `(popup-isearch-match ((,class (:foreground "#000000" :background "#af87ff" :weight normal))))
    `(popup-menu-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
-   `(popup-menu-mouse-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
-   `(popup-menu-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(popup-menu-mouse-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
+   `(popup-menu-selection-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
    `(popup-menu-summary-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
    `(popup-scroll-bar-background-face ((,class (:background "#1c1c1c"))))
-   `(popup-scroll-bar-foreground-face ((,class (:background "#af87d7"))))
+   `(popup-scroll-bar-foreground-face ((,class (:background "#5f87d7"))))
    `(popup-summary-face ((,class (:foreground "#585858" :background "#1c1c1c" :weight normal))))
-   `(popup-tip-face ((,class (:foreground "#ff5faf" :background "#1c1c1c" :weight normal))))
+   `(popup-tip-face ((,class (:foreground "#d7005f" :background "#1c1c1c" :weight normal))))
 
    ;;; auto-complete.el
-   `(ac-candidate-mouse-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(ac-candidate-mouse-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
    `(ac-completion-face ((,class (:foreground "#af87d7" :weight normal :underline t))))
-   `(ac-candidate-face ((,class (:foreground "#5c5c5c" :background "#1c1c1c" :weight normal))))
-   `(ac-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
-   `(ac-gtags-candidate-face ((,class (:foreground "#af87d7" :background "#1c1c1c" :weight normal))))
-   `(ac-gtags-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
-   `(ac-yasnippet-candidate-face ((,class (:foreground "#ff5f5f" :background "#1c1c1c" :weight normal))))
-   `(ac-yasnippet-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
-   `(ac-irony-candidate-face ((,class (:foreground "#ff5f5f" :background "#1c1c1c" :weight normal))))
-   `(ac-irony-selection-face ((,class (:foreground "#000000" :background "#ff5f5f" :weight normal))))
+   `(ac-candidate-face ((,class (:foreground "#5f87d7" :background "#1c1c1c" :weight normal))))
+   `(ac-selection-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
+   `(ac-gtags-candidate-face ((,class (:foreground "#5f87d7" :background "#1c1c1c" :weight normal))))
+   `(ac-gtags-selection-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
+   `(ac-yasnippet-candidate-face ((,class (:foreground "#00ff87" :background "#1c1c1c" :weight normal))))
+   `(ac-yasnippet-selection-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
+   `(ac-irony-candidate-face ((,class (:foreground "#af87ff" :background "#1c1c1c" :weight normal))))
+   `(ac-irony-selection-face ((,class (:foreground "#000000" :background "#00ff87" :weight normal))))
 
    ;; company-mode
    `(company-scrollbar-bg ((,class (:background "#1c1c1c"))))
