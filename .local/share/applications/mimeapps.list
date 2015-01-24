@@ -1,5 +1,5 @@
 [Default Applications]
-application/pdf=zathura.desktop
+application/pdf=evince.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 text/x-c=emacs.desktop
