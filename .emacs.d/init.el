@@ -502,7 +502,7 @@ or just one char if that's not possible"
 (global-set-key (kbd "M-<") 'shifttext-tab-left)
 (global-set-key (kbd "C-c p") 'show-file-path)
 (global-set-key (kbd "C-x p") 'other-window-backward)
-(global-set-key (kbd "C-c b") 'browse-url-firefox)
+(global-set-key (kbd "C-c b") 'browse-url-chromium)
 (define-key my-minor-mode-map (kbd "DEL") 'backward-delete-whitespace-to-column)
 (define-key my-minor-mode-map (kbd "<clearline>") (key-binding (kbd "<C-end>"))) ; <clearline> (in terminal) == <C-end>
 (define-key my-minor-mode-map (kbd "M-l") 'tabbar-forward)
