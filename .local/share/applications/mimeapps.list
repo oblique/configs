@@ -1,1 +1,11 @@
-../../../.config/mimeapps.list
+[Default Applications]
+application/pdf=zathura.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+text/x-c=emacs.desktop
+text/x-diff=emacs.desktop
+text/x-chdr=emacs.desktop
+text/x-asm=emacs.desktop
+image/png=eog.desktop
+image/jpeg=eog.desktop
+inode/directory=pcmanfm.desktop
