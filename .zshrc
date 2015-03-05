@@ -131,8 +131,6 @@ alias ag="ag --color-match '1;31' --color-path '35' --color-line-number '34' --p
 alias emacs='emacs -nw'
 alias kismet='TERM=rxvt-unicode kismet'
 alias mendeleydesktop='mendeleydesktop --force-bundled-qt'
-alias arm-none-linux-gnueabi-gdb='arm-none-linux-gnueabi-gdb -nx -x ${HOME}/.gdbinit.arm'
-alias arm-none-eabi-gdb='arm-none-eabi-gdb -nx -x ${HOME}/.gdbinit.arm'
 alias openocd-panda='openocd -f /usr/share/openocd/scripts/interface/flyswatter2.cfg -f /usr/share/openocd/scripts/board/ti_pandaboard.cfg'
 alias shred='shred -n 10 -u -v -z --random-source /dev/urandom'
 alias mpc='mpc -h ~/.mpd/socket'
