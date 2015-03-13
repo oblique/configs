@@ -1,6 +1,6 @@
-From f1e63b2d6b03bfcbd084f05b3fc4d45d0c4506c3 Mon Sep 17 00:00:00 2001
+From 03b49c3ddeaa8d8df963004d38a65479b9676e9b Mon Sep 17 00:00:00 2001
 From: oblique <psyberbits@gmail.com>
-Date: Mon, 25 Feb 2013 14:01:35 +0200
+Date: Fri, 13 Mar 2015 22:56:46 +0200
 Subject: [PATCH] change i3locks colors to my taste
 
 ---
@@ -9,23 +9,23 @@ Subject: [PATCH] change i3locks colors to my taste
  2 files changed, 10 insertions(+), 21 deletions(-)
 
 diff --git a/i3lock.c b/i3lock.c
-index c555ee8..363bb43 100644
+index 7f8218e..8c93222 100644
 --- a/i3lock.c
 +++ b/i3lock.c
-@@ -36,7 +36,7 @@
+@@ -46,7 +46,7 @@
+ typedef void (*ev_callback_t)(EV_P_ ev_timer *w, int revents);
  
  /* We need this for libxkbfile */
- static Display *display;
 -char color[7] = "ffffff";
 +char color[7] = "101010";
+ int inactivity_timeout = 30;
  uint32_t last_resolution[2];
  xcb_window_t win;
- static xcb_cursor_t cursor;
 diff --git a/unlock_indicator.c b/unlock_indicator.c
-index ab4d56e..730e86d 100644
+index e543f96..1e15257 100644
 --- a/unlock_indicator.c
 +++ b/unlock_indicator.c
-@@ -121,30 +121,18 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -147,30 +147,18 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                    0 /* start */,
                    2 * M_PI /* end */);
  
@@ -60,13 +60,12 @@ index ab4d56e..730e86d 100644
                  break;
          }
          cairo_stroke(ctx);
-@@ -162,14 +150,16 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -193,14 +181,15 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+         /* We don't want to show more than a 3-digit number. */
+         char buf[4];
  
-         cairo_set_line_width(ctx, 10.0);
- 
--        /* Display a (centered) text of the current PAM state. */
-+        /* Display a (centered and colored) text of the current PAM state. */
-         char *text = NULL;
+-        cairo_set_source_rgb(ctx, 0, 0, 0);
+         cairo_set_font_size(ctx, 28.0);
          switch (pam_state) {
              case STATE_PAM_VERIFY:
                  text = "verifying…";
@@ -77,16 +76,17 @@ index ab4d56e..730e86d 100644
 +                cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
                  break;
              default:
+                 if (show_failed_attempts && failed_attempts > 0){
+@@ -210,7 +199,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+                         snprintf(buf, sizeof(buf), "%d", failed_attempts);
+                         text = buf;
+                     }
+-                    cairo_set_source_rgb(ctx, 1, 0, 0);
++                    cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
+                     cairo_set_font_size(ctx, 32.0);
+                 }
                  break;
-@@ -179,7 +169,6 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
-             cairo_text_extents_t extents;
-             double x, y;
- 
--            cairo_set_source_rgb(ctx, 0, 0, 0);
-             cairo_set_font_size(ctx, 28.0);
- 
-             cairo_text_extents(ctx, text, &extents);
-@@ -206,10 +195,10 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -244,10 +233,10 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                        highlight_start + (M_PI / 3.0));
              if (unlock_state == STATE_KEY_ACTIVE) {
                  /* For normal keys, we use a lighter green. */
@@ -100,5 +100,5 @@ index ab4d56e..730e86d 100644
              cairo_stroke(ctx);
  
 -- 
-1.8.1.5
+2.3.0
 
