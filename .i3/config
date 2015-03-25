@@ -201,8 +201,8 @@ bindsym --release $mod+Print      exec --no-startup-id scrot -s -e "mv \$f /tmp"
 floating_minimum_size 0 x 0
 floating_maximum_size -1 x -1
 
-# make borders 3 pixels
-new_window pixel 3
+# make borders 2 pixels
+new_window pixel 2
 
 # window commands
 for_window [class="^Xephyr$"] border normal
