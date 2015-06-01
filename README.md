@@ -22,7 +22,6 @@
     libao (configured to use PulseAudio)
     xsettingsd (http://code.google.com/p/xsettingsd/)
     gpg
-    zathura
     radare2
     weechat
     redshift
@@ -50,8 +49,6 @@
     gtk-engine-unico (needed by xsettingsd)
     gtk-engine-murrine (needed by xsettingsd)
     AwOken icons (http://alecive.deviantart.com/art/AwOken-163570862) (needed by xsettingsd)
-    zathura-pdf-poppler (needed by zathura)
-    zathura-cb (needed by zathura)
     perl-text-charwidth (needed by weechat's coords.pl script)
     pure-python-otr (https://github.com/afflux/pure-python-otr) (needed by weechat's otr.py script)
     NetworkManager + Network-Manager-Applet (nm-applet)
