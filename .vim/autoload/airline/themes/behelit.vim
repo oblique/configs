@@ -11,7 +11,9 @@ let g:airline#themes#behelit#palette.normal_modified = {
 
 " Insert mode
 let s:I1 = [ '#121212', '#00ff87', 233, 48  ]
-let g:airline#themes#behelit#palette.insert = airline#themes#generate_color_map(s:I1, s:N2, s:N3)
+let s:I2 = s:N2
+let s:I3 = s:N3
+let g:airline#themes#behelit#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
 let g:airline#themes#behelit#palette.insert_modified = g:airline#themes#behelit#palette.normal_modified
 let g:airline#themes#behelit#palette.insert_paste = {
       \ 'airline_a': [ "#101010", "#5f5faf", 233, 61, '' ],
@@ -24,7 +26,9 @@ let g:airline#themes#behelit#palette.replace_modified = g:airline#themes#behelit
 
 " Visual mode
 let s:V1 = [ '#121212', '#5fff5f', 233, 83 ]
-let g:airline#themes#behelit#palette.visual = airline#themes#generate_color_map(s:V1, s:N2, s:N3)
+let s:V2 = s:N2
+let s:V3 = s:N3
+let g:airline#themes#behelit#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
 let g:airline#themes#behelit#palette.visual_modified = g:airline#themes#behelit#palette.normal_modified
 
 " Inactive window
