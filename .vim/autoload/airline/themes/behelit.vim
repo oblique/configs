@@ -3,7 +3,7 @@ let g:airline#themes#behelit#palette = {}
 " Normal mode
 let s:N1 = [ '#121212', '#5f87ff', 233, 69  ]
 let s:N2 = [ '#5f87ff', '#262626', 69 , 235 ]
-let s:N3 = [ '#5f87ff', '#1c1c1c', 69 , 234 ]
+let s:N3 = [ '#5f87ff', '#1c1c1c', 69 , 234, 'bold' ]
 let g:airline#themes#behelit#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 let g:airline#themes#behelit#palette.normal_modified = {
       \ 'airline_c': [ '#d7005f', '#1c1c1c', 161, 234, 'bold' ],
@@ -30,7 +30,7 @@ let g:airline#themes#behelit#palette.visual_modified = g:airline#themes#behelit#
 " Inactive window
 let s:IA1 = [ '#4e4e4e', '#1c1c1c', 239, 234, '' ]
 let s:IA2 = [ '#4e4e4e', '#262626', 239, 235, '' ]
-let s:IA3 = [ '#4e4e4e', '#1c1c1c', 239, 234, '' ]
+let s:IA3 = [ '#4e4e4e', '#1c1c1c', 239, 234, 'bold' ]
 let g:airline#themes#behelit#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
 let g:airline#themes#behelit#palette.inactive_modified = g:airline#themes#behelit#palette.normal_modified
 
