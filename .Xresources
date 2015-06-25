@@ -53,8 +53,7 @@ URxvt.reverseVideo:         false
 !URxvt.font:                 xft:Source Code Pro:pixelsize=14
 !URxvt.letterSpace:          -1
 !!! these two go together !!!
-URxvt.font:                 xft:Hermit:style=medium:pixelsize=13
-URxvt.letterSpace:          1
+URxvt.font:                 xft:Hermit:pixelsize=14
 URxvt.scrollBar:            true
 URxvt.scrollBar_floating:   true
 URxvt.scrollBar_right:      false
