@@ -38,8 +38,12 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc', { 'do' : 'make' }
 Plug 'Shougo/neomru.vim'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --clang-completer --system-libclang --system-boost' }
 Plug 'tpope/vim-fugitive'
+
+" Install YouCompleteMe only if we have the dependencies installed
+if executable('cmake') && isdirectory('/usr/include/clang-c') && isdirectory('/usr/include/boost')
+	Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --clang-completer --system-libclang --system-boost' }
+endif
 call plug#end()
 " }}}
 
