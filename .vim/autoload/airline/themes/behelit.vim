@@ -16,7 +16,7 @@ let s:I3 = s:N3
 let g:airline#themes#behelit#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
 let g:airline#themes#behelit#palette.insert_modified = g:airline#themes#behelit#palette.normal_modified
 let g:airline#themes#behelit#palette.insert_paste = {
-      \ 'airline_a': [ "#101010", "#5f5faf", 233, 61, '' ],
+      \ 'airline_a': [ "#121212", "#5f5faf", 233, 61, '' ],
       \ }
 
 " Replace mode
