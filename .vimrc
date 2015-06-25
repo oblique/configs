@@ -14,9 +14,6 @@ set wildmenu
 set mouse+=a
 colorscheme behelit
 
-" Reset search highlight
-noremap <leader>h :nohl<cr>
-
 " Neovim {{{
 if has("nvim")
 	" yank uses X clipboard
@@ -89,6 +86,25 @@ nnoremap <leader>t :<C-u>Unite -buffer-name=files_rec -start-insert file_rec/neo
 nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert file<cr>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru -start-insert file_mru<cr>
 nnoremap <leader>e :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
+" }}}
+
+" Misc {{{
+" Reset search highlight
+noremap <leader>h :nohl<cr>
+
+" move between windows
+nnoremap <m-down>  <c-w>j
+nnoremap <m-up>    <c-w>k
+nnoremap <m-left>  <c-w>h
+nnoremap <m-right> <c-w>l
+
+" move between buffers
+nnoremap <m-l> :bnext<cr>
+nnoremap <m-j> :bprevious<cr>
+
+" split window
+nnoremap <leader>- :split<cr>
+nnoremap <leader>\ :vsplit<cr>
 " }}}
 
 " vim: nowrap fdm=marker foldcolumn=2
