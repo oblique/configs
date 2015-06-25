@@ -48,6 +48,7 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc', { 'do' : 'make' }
 Plug 'Shougo/neomru.vim'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --clang-completer --system-libclang --system-boost' }
+Plug 'tpope/vim-fugitive'
 call plug#end()
 " }}}
 
