@@ -53,7 +53,7 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 " }}}
 
 " NERDTree {{{
-noremap <leader>n :NERDTreeToggle<cr>
+noremap <silent><leader>n :NERDTreeToggle<cr>
 " }}}
 
 " vim-airline {{{
@@ -87,10 +87,10 @@ if executable('ag')
 endif
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>t :<C-u>Unite -buffer-name=files_rec -start-insert file_rec/neovim:!<cr>
-nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert file<cr>
-nnoremap <leader>r :<C-u>Unite -buffer-name=mru -start-insert file_mru<cr>
-nnoremap <leader>e :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
+nnoremap <silent><leader>t :<C-u>Unite -buffer-name=files_rec -start-insert file_rec/neovim:!<cr>
+nnoremap <silent><leader>f :<C-u>Unite -buffer-name=files -start-insert file<cr>
+nnoremap <silent><leader>r :<C-u>Unite -buffer-name=mru -start-insert file_mru<cr>
+nnoremap <silent><leader>e :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
 " }}}
 
 " Misc {{{
@@ -104,14 +104,14 @@ nnoremap <m-left>  <c-w>h
 nnoremap <m-right> <c-w>l
 
 " move between buffers
-nnoremap <m-l> :bnext<cr>
-nnoremap <m-j> :bprevious<cr>
+nnoremap <silent><m-l> :bnext<cr>
+nnoremap <silent><m-j> :bprevious<cr>
 
 " split window
-nnoremap <leader>- :split<cr>
-nnoremap <leader>\ :vsplit<cr>
-nnoremap <leader>q :quit<cr>
-nnoremap <leader>o :only<cr>
+nnoremap <silent><leader>- :split<cr>
+nnoremap <silent><leader>\ <c-g>:vsplit<cr>
+nnoremap <silent><leader>q :quit<cr>
+nnoremap <silent><leader>o :only<cr>
 " }}}
 
 " vim: nowrap fdm=marker foldcolumn=2
