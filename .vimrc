@@ -39,6 +39,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'klen/python-mode'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
@@ -67,6 +68,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
 " we don't need mode since airline show it
 set noshowmode
+" }}}
+
+" python-mode {{{
+let g:pymode_run_bind = '<leader>pr'
+let g:pymode_breakpoint_bind = '<leader>pb'
+let g:pymode_python = 'python3'
 " }}}
 
 " Unite.vim {{{
