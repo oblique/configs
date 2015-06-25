@@ -1,10 +1,9 @@
 syntax on
-set nocompatible
-set number
-
 filetype plugin on
 filetype indent on
 
+set nocompatible
+set number
 set autoindent
 set cindent
 set hlsearch
@@ -12,13 +11,8 @@ set incsearch
 set encoding=utf-8
 set backspace=indent,eol,start
 set wildmenu
-colorscheme behelit
-
 set mouse+=a
-if &term =~ '^screen'
-    " tmux knows the extended mouse mode
-    set ttymouse=xterm2
-endif
+colorscheme behelit
 
 " Reset search highlight
 noremap <leader>h :nohl<cr>
