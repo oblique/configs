@@ -105,6 +105,8 @@ nnoremap <m-j> :bprevious<cr>
 " split window
 nnoremap <leader>- :split<cr>
 nnoremap <leader>\ :vsplit<cr>
+nnoremap <leader>q :quit<cr>
+nnoremap <leader>o :only<cr>
 " }}}
 
 " vim: nowrap fdm=marker foldcolumn=2
