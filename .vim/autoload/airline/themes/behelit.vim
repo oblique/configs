@@ -36,7 +36,9 @@ let s:IA1 = [ '#4e4e4e', '#1c1c1c', 239, 234, '' ]
 let s:IA2 = [ '#4e4e4e', '#262626', 239, 235, '' ]
 let s:IA3 = [ '#4e4e4e', '#1c1c1c', 239, 234, 'bold' ]
 let g:airline#themes#behelit#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
-let g:airline#themes#behelit#palette.inactive_modified = g:airline#themes#behelit#palette.normal_modified
+let g:airline#themes#behelit#palette.inactive_modified = {
+      \ 'airline_c': [ '#5f5f87', '#1c1c1c', 60, 234, 'bold' ],
+      \ }
 
 " Accents
 let g:airline#themes#behelit#palette.accents = {
