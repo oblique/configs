@@ -112,6 +112,9 @@ nnoremap <silent><leader>- :split<cr>
 nnoremap <silent><leader>\ <c-g>:vsplit<cr>
 nnoremap <silent><leader>q :quit<cr>
 nnoremap <silent><leader>o :only<cr>
+
+command! EnableSpaces set expandtab softtabstop=4 shiftwidth=4
+command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8
 " }}}
 
 " vim: nowrap fdm=marker foldcolumn=2
