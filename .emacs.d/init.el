@@ -62,7 +62,7 @@
 				  (concat "TMPDIR=" clang-tmp-dir)
 				  "python2"
 				  (expand-file-name "~/.emacs.d/ycmd/ycmd")))
-  (setq ycmd-global-config (expand-file-name "~/.emacs.d/global_ycmd_config.py"))
+  (setq ycmd-global-config (expand-file-name "~/.ycm_extra_conf.py"))
   ;; disable some annoying error messages from emacs-request
   (setq ycmd-request-message-level -1))
 
