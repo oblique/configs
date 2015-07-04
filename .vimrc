@@ -115,6 +115,9 @@ nnoremap <silent><leader>o :only<cr>
 
 command! EnableSpaces set expandtab softtabstop=4 shiftwidth=4
 command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8
+
+" reindent whole file
+nnoremap <silent><leader>i mzgg=G`z
 " }}}
 
 " vim: nowrap fdm=marker foldcolumn=2
