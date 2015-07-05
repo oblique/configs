@@ -121,4 +121,8 @@ command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8
 nnoremap <silent><leader>i mzgg=G`z
 " }}}
 
+if !empty(glob("~/.vim/custom.vim"))
+	source ~/.vim/custom.vim
+endif
+
 " vim: nowrap fdm=marker foldcolumn=2
