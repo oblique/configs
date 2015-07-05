@@ -6,6 +6,7 @@ set nocompatible
 set number
 set autoindent
 set cindent
+set cinoptions=:0,l1,g0,t0,(0
 set hlsearch
 set incsearch
 set encoding=utf-8
