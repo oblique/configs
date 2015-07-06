@@ -125,6 +125,8 @@ command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8 tabstop=8
 
 " reindent whole file
 nnoremap <silent><leader>i mzgg=G`z
+
+command SyntaxAttr call SyntaxAttr()
 " }}}
 
 if !empty(glob("~/.vim/custom.vim"))
