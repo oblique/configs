@@ -31,6 +31,7 @@ if empty(glob("~/.vim/autoload/plug.vim"))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'SyntaxAttr.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'klen/python-mode'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -118,8 +119,8 @@ nnoremap <silent><leader>\ <c-g>:vsplit<cr>
 nnoremap <silent><leader>q :quit<cr>
 nnoremap <silent><leader>o :only<cr>
 
-command! EnableSpaces set expandtab softtabstop=4 shiftwidth=4
-command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8
+command! EnableSpaces set expandtab softtabstop=4 shiftwidth=4 tabstop=4
+command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8 tabstop=8
 
 " reindent whole file
 nnoremap <silent><leader>i mzgg=G`z
