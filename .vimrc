@@ -53,6 +53,10 @@ call plug#end()
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 " }}}
 
+" vim-cpp-enhanced-highlight {{{
+let g:cpp_class_scope_highlight = 1
+" }}}
+
 " NERDTree {{{
 noremap <silent><leader>n :NERDTreeToggle<cr>
 " }}}
