@@ -78,6 +78,7 @@ set noshowmode
 let g:pymode_run_bind = '<leader>pr'
 let g:pymode_breakpoint_bind = '<leader>pb'
 let g:pymode_python = 'python3'
+let g:pymode_folding = 0
 " }}}
 
 " Unite.vim {{{
