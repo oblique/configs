@@ -43,6 +43,7 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc', { 'do' : 'make' }
 Plug 'Shougo/neomru.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'danro/rename.vim', { 'on' : 'Rename' }
 
 " Install YouCompleteMe only if we have the dependencies installed
 if executable('cmake') && isdirectory('/usr/include/clang-c') && isdirectory('/usr/include/boost')
