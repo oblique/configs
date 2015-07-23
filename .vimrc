@@ -44,6 +44,8 @@ Plug 'Shougo/vimproc', { 'do' : 'make' }
 Plug 'Shougo/neomru.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'danro/rename.vim', { 'on' : 'Rename' }
+Plug 'gtags.vim'
+Plug 'hewes/unite-gtags'
 
 " Install YouCompleteMe only if we have the dependencies installed
 if executable('cmake') && isdirectory('/usr/include/clang-c') && isdirectory('/usr/include/boost')
@@ -100,6 +102,13 @@ nnoremap <silent><leader>t :<C-u>Unite -buffer-name=files_rec -start-insert file
 nnoremap <silent><leader>f :<C-u>Unite -buffer-name=files -start-insert file<cr>
 nnoremap <silent><leader>r :<C-u>Unite -buffer-name=mru -start-insert file_mru<cr>
 nnoremap <silent><leader>e :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
+" }}}
+
+" unite-gtags {{{
+nnoremap <silent><leader>gd :Unite gtags/def<cr>
+nnoremap <silent><leader>gr :Unite gtags/ref<cr>
+nnoremap <silent><leader>gc :Unite gtags/context<cr>
+nnoremap <silent><leader>gg :Unite gtags/grep<cr>
 " }}}
 
 " Misc {{{
