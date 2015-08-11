@@ -33,7 +33,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'SyntaxAttr.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'klen/python-mode'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
@@ -56,10 +55,6 @@ call plug#end()
 
 " YouCompleteMe {{{
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-" }}}
-
-" vim-cpp-enhanced-highlight {{{
-let g:cpp_class_scope_highlight = 1
 " }}}
 
 " NERDTree {{{
