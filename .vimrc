@@ -98,10 +98,13 @@ if executable('ag')
 endif
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <silent><leader>t :<C-u>Unite -buffer-name=files_rec -start-insert file_rec/neovim:!<cr>
-nnoremap <silent><leader>f :<C-u>Unite -buffer-name=files -start-insert file<cr>
-nnoremap <silent><leader>r :<C-u>Unite -buffer-name=mru -start-insert file_mru<cr>
-nnoremap <silent><leader>e :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
+nnoremap <silent><leader>t :Unite -buffer-name=files_rec -start-insert file_rec/neovim:!<cr>
+nnoremap <silent><leader>f :Unite -buffer-name=files -start-insert file<cr>
+nnoremap <silent><leader>r :Unite -buffer-name=mru -start-insert file_mru<cr>
+nnoremap <silent><leader>e :Unite -buffer-name=buffer -start-insert buffer<cr>
+nnoremap <silent><leader>z] :UniteNext<cr>
+nnoremap <silent><leader>z[ :UnitePrevious<cr>
+nnoremap <silent><leader>zr :UniteResume<cr>
 " }}}
 
 " unite-gtags {{{
