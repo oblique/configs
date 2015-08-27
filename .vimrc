@@ -57,6 +57,16 @@ call plug#end()
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 " }}}
 
+" Eclim {{{
+let g:EclimDefaultFileOpenAction = 'edit'
+let g:EclimCompletionMethod = 'omnifunc'
+nnoremap <silent><leader>es :CSearchContext<cr>
+nnoremap <silent><leader>eh :CCallHierarchy<cr>
+nnoremap <silent><leader>et :ProjectTreeToggle<cr>
+nnoremap <silent><leader>ep :ProjectProblems<cr>
+nnoremap <silent><leader>ef :LocateFile<cr>
+" }}}
+
 " NERDTree {{{
 noremap <silent><leader>n :NERDTreeToggle<cr>
 " }}}
@@ -96,7 +106,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <silent><leader>t :Unite -buffer-name=files_rec -start-insert file_rec/neovim:!<cr>
 nnoremap <silent><leader>f :Unite -buffer-name=files -start-insert file<cr>
 nnoremap <silent><leader>r :Unite -buffer-name=mru -start-insert file_mru<cr>
-nnoremap <silent><leader>e :Unite -buffer-name=buffer -start-insert buffer<cr>
+nnoremap <silent><leader>b :Unite -buffer-name=buffer -start-insert buffer<cr>
 nnoremap <silent><leader>z] :UniteNext<cr>
 nnoremap <silent><leader>z[ :UnitePrevious<cr>
 nnoremap <silent><leader>zr :UniteResume<cr>
