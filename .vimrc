@@ -110,6 +110,10 @@ nnoremap <silent><leader>gg :Unite gtags/grep<cr>
 " }}}
 
 " Misc {{{
+if &term =~ "rxvt.*"
+	execute "set <m-j>=\ej"
+	execute "set <m-l>=\el"
+endif
 " Reset search highlight
 noremap <leader>h :nohl<cr>
 
