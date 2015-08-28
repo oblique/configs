@@ -65,6 +65,15 @@ nnoremap <silent><leader>eh :CCallHierarchy<cr>
 nnoremap <silent><leader>et :ProjectTreeToggle<cr>
 nnoremap <silent><leader>ep :ProjectProblems<cr>
 nnoremap <silent><leader>ef :LocateFile<cr>
+
+" Same as the default, but here we have Edit action as first action.
+" The first action is used when we press enter on a file in ProjectTree.
+let g:EclimProjectTreeActions = [
+    \ {'pattern': '.*', 'name': 'Edit', 'action': 'edit'},
+    \ {'pattern': '.*', 'name': 'Split', 'action': 'split'},
+    \ {'pattern': '.*', 'name': 'VSplit', 'action': 'vsplit'},
+    \ {'pattern': '.*', 'name': 'Tab', 'action': 'tablast | tabnew'},
+  \ ]
 " }}}
 
 " NERDTree {{{
