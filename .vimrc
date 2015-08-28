@@ -14,6 +14,7 @@ set encoding=utf-8
 set backspace=indent,eol,start
 set wildmenu
 set mouse+=a
+set splitbelow
 colorscheme behelit
 
 " Neovim {{{
