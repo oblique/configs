@@ -160,6 +160,10 @@ command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8 tabstop=8
 nnoremap <silent><leader>i mzgg=G`z
 
 command SyntaxAttr call SyntaxAttr()
+
+vnoremap <silent><m-c> :!xclip -f -sel clip<cr>
+inoremap <silent><m-v> <esc>:set paste<cr>:r!xclip -o -sel clip<cr>:set nopaste<cr>i
+nnoremap <silent><m-v> :set paste<cr>:r!xclip -o -sel clip<cr>:set nopaste<cr>
 " }}}
 
 if !empty(glob("~/.vim/custom.vim"))
