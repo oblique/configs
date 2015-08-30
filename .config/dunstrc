@@ -121,7 +121,7 @@
     dmenu = dmenu -nb #151515 -nf #787878 -sb #151515 -sf #a78edb -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-* -p URL:
 
     # browser for opening urls in context menu
-    browser = chromium
+    browser = firefox
 
 [frame]
     width = 4

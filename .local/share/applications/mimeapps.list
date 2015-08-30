@@ -1,9 +1,9 @@
 [Default Applications]
 application/pdf=evince.desktop
-x-scheme-handler/http=chromium.desktop
-x-scheme-handler/https=chromium.desktop
-x-scheme-handler/ftp=chromium.desktop
-text/html=chromium.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/ftp=firefox.desktop
+text/html=firefox.desktop
 text/x-c=emacs.desktop
 text/x-diff=emacs.desktop
 text/x-chdr=emacs.desktop
