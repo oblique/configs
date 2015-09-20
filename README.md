@@ -54,6 +54,7 @@
     NetworkManager + Network-Manager-Applet (nm-applet)
     GNU Global + ctags + idutils (needed by .emacs.d/ggtags.el)
     the_silver_searcher (ag)
+    keychain
 
 
 ## notes for emacs
