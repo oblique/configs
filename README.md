@@ -24,7 +24,6 @@
     gpg
     radare2
     weechat
-    redshift
 
 
 ## dependencies and other useful programs
