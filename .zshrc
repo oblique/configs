@@ -52,3 +52,5 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh.custom
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+unsetopt share_history
