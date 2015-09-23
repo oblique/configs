@@ -6,11 +6,24 @@ export LC_COLLATE=C
 export LC_MESSAGES=C
 export GOPATH="${HOME}/go"
 
-PYTHON_LOCAL_BIN="$(python -m site --user-base)/bin"
-RUBY_LOCAL_BIN="$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
-JS_LOCAL_BIN="$(npm bin)"
-export PATH="${PATH}:${HOME}/bin:${RUBY_LOCAL_BIN}:${PYTHON_LOCAL_BIN}:${JS_LOCAL_BIN}"
-unset PYTHON_LOCAL_BIN RUBY_LOCAL_BIN JS_LOCAL_BIN
+# path
+if [[ $(id -u) -ne 0 ]]; then
+    PATH="${PATH}:${HOME}/bin"
+
+    if command -v python > /dev/null 2>&1; then
+        PATH="${PATH}:$(python -m site --user-base)/bin"
+    fi
+
+    if command -v ruby > /dev/null 2>&1; then
+        PATH="${PATH}:$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+    fi
+
+    if command -v npm > /dev/null 2>&1; then
+        PATH="${PATH}:$(npm bin)"
+    fi
+
+    export PATH
+fi
 
 # init console colors
 if [[ $TERM = linux* ]]; then
