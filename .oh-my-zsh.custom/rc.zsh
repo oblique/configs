@@ -5,4 +5,6 @@ export LS_COLORS='no=01;32:fi=00:di=00;34:ln=01;36:pi=04;33:so=01;35:bd=33;04:cd
 export GREP_COLOR='1;31'
 
 # start keychain
-which keychain > /dev/null 2>&1 && eval $(keychain --eval -Q --quiet)
+if command -v which keychain > /dev/null 2>&1; then
+    eval $(keychain --eval -Q --quiet --timeout 30)
+fi
