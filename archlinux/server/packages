@@ -17,7 +17,7 @@ stunnel
 traceroute
 bind-tools
 whois
-speedtest
+speedtest-cli
 nmap
 socat
 rsync
@@ -27,3 +27,4 @@ docker
 lxc
 git
 wipe
+ufw
