@@ -13,7 +13,7 @@
     gdb
     mutt (trash folder, purge message patches)
     urlview (needed by mutt)
-    mpd
+    mopidy
     ncmpcpp
     rtorrent
     mpv
@@ -70,9 +70,7 @@ if you use .fonts.conf or .fonts do the following:
 you have to replace `/home/oblique` with your home path in the
 following files because you can not use `~`
 
-    .mpdconf
     .mplayer/config
-    .ncmpcpp/config
 
 ----------------------------------------------------------------
 

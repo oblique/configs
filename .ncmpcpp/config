@@ -1,8 +1,7 @@
 ## ncmpcpp config
 
 # mpd
-mpd_host = "/home/oblique/.mpd/socket"
-mpd_music_dir = "~/music"
+mpd_music_dir = "~/Music"
 mpd_connection_timeout = "5"
 
 # playlist

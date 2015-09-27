@@ -168,12 +168,11 @@ bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q sset Master 5%+
 bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q sset Master 5%-
 bindsym XF86AudioMute           exec --no-startup-id amixer -q sset Master toggle
 
-# mpd keys
-set $mpd_socket         ~/.mpd/socket
-bindsym XF86AudioStop   exec --no-startup-id mpc -h $mpd_socket stop
-bindsym XF86AudioPlay   exec --no-startup-id mpc -h $mpd_socket toggle
-bindsym XF86AudioNext   exec --no-startup-id mpc -h $mpd_socket next
-bindsym XF86AudioPrev   exec --no-startup-id mpc -h $mpd_socket prev
+# player keys
+bindsym XF86AudioStop   exec --no-startup-id mpc stop
+bindsym XF86AudioPlay   exec --no-startup-id mpc toggle
+bindsym XF86AudioNext   exec --no-startup-id mpc next
+bindsym XF86AudioPrev   exec --no-startup-id mpc prev
 
 # switch to previous or next workspace
 bindsym $mod+j      workspace prev
@@ -222,6 +221,6 @@ exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
 exec --no-startup-id dunst
 exec --no-startup-id xsettingsd
 exec --no-startup-id syndaemon -i 1.0 -k -R
-exec --no-startup-id ~/.i3/bin/runonce.sh mpd
+exec --no-startup-id ~/.i3/bin/runonce.sh mopidy -q
 exec --no-startup-id ~/.i3/bin/runonce.sh perl ~/.i3/bin/bat_warning.pl 0
 exec --no-startup-id nm-applet
