@@ -67,13 +67,6 @@ if you use .fonts.conf or .fonts do the following:
 
 ----------------------------------------------------------------
 
-you have to replace `/home/oblique` with your home path in the
-following files because you can not use `~`
-
-    .mplayer/config
-
-----------------------------------------------------------------
-
 if you want to use my ncmpcpp theme, you must also add the ncmpcpp()
 function that i have in my .zshrc to your .bashrc/.zshrc
 
