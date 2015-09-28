@@ -118,7 +118,7 @@
     startup_notification = false
 
     # dmenu path
-    dmenu = dmenu -nb #151515 -nf #787878 -sb #151515 -sf #a78edb -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-* -p URL:
+    dmenu = rofi -dmenu -p URL:
 
     # browser for opening urls in context menu
     browser = firefox
