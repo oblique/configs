@@ -37,7 +37,7 @@
     autocutsel
     pcmanfm
     feh
-    dmenu
+    rofi (dmenu replacement)
     xf86-input-synaptics (syndaemon, synclient)
     rfkill (enable/disable bluetooth)
     scrot
