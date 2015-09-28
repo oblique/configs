@@ -118,7 +118,7 @@
     startup_notification = false
 
     # dmenu path
-    dmenu = rofi -dmenu -p URL:
+    dmenu = rofi -dmenu -p url:
 
     # browser for opening urls in context menu
     browser = firefox
