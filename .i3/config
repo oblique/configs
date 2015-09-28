@@ -30,12 +30,15 @@ bindsym $mod+KP_Enter       exec urxvt
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb '#151515' -nf '#787878' -sb '#151515' -sf '#a78edb' -fn '-*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
+# start rofi (a program launcher)
+bindsym $mod+d exec rofi -show run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# window selector
+bindsym $mod+k exec rofi -show window
 
 # change focus
 bindsym $mod+Left   focus left

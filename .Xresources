@@ -138,3 +138,15 @@ URxvt.keysym.M-C-S-Left       : \033[1;8D
 !URxvt.keysym.M-C-S-Page_Down : seen as Rxvt.keysym.S-Page_Down
 URxvt.keysym.M-C-S-Home       : \033[1;8H
 URxvt.keysym.M-C-S-End        : \033[1;8F
+
+!! rofi
+rofi.columns:                        2
+rofi.bw:                             2
+rofi.terminal:                       urxvt
+rofi.font:                           hermit 7
+rofi.color-enabled:                  true
+!                                      bg      fg     bgalt    hlbg    hlbg
+rofi.color-normal:                   #101010,#00546a,#131313,#d10047,#101010
+rofi.color-urgent:                   #101010,#f00060,#131313,#d10047,#101010
+rofi.color-active:                   #101010,#00ff77,#131313,#d10047,#101010
+rofi.color-window:                   #101010,#5d97fa
