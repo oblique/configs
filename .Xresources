@@ -146,7 +146,7 @@ rofi.terminal:                       urxvt
 rofi.font:                           hermit bold 7
 rofi.color-enabled:                  true
 !                                       bg      fg    bgalt    hlbg    hlbg
-rofi.color-normal:                   #101010,#0072ae,#131313,#d10047,#101010
+rofi.color-normal:                   #101010,#3a81fa,#131313,#d10047,#101010
 rofi.color-urgent:                   #101010,#f00060,#131313,#d10047,#101010
 rofi.color-active:                   #101010,#00ff77,#131313,#d10047,#101010
 !                                       bg    border
