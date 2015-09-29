@@ -59,7 +59,7 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-30+20"
+    geometry = "300x5-30+30"
 
     # The transparency of the window. range: [0; 100]
     # This option will only work if a compositing windowmanager is present (e.g. xcompmgr, compiz, etc..)
@@ -124,8 +124,8 @@
     browser = firefox
 
 [frame]
-    width = 4
-    color = "#202020"
+    width = 2
+    color = "#252525"
 
 [shortcuts]
     # shortcuts are specified as [modifier+][modifier+]...key
@@ -149,18 +149,18 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the '#' and following  would be interpreted as a comment.
-    background = "#a78edb"
-    foreground = "#000000"
+    background = "#101010"
+    foreground = "#00ff77"
     timeout = 10
 
 [urgency_normal]
-    background = "#5f87d7"
-    foreground = "#000000"
+    background = "#101010"
+    foreground = "#3a81fa"
     timeout = 10
 
 [urgency_critical]
-    background = "#f00060"
-    foreground = "#000000"
+    background = "#101010"
+    foreground = "#f00060"
     timeout = 0
 
 
