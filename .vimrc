@@ -164,6 +164,23 @@ command SyntaxAttr call SyntaxAttr()
 vnoremap <silent><m-c> :!xclip -f -sel clip<cr>
 inoremap <silent><m-v> <esc>:set paste<cr>:r!xclip -o -sel clip<cr>:set nopaste<cr>i
 nnoremap <silent><m-v> :set paste<cr>:r!xclip -o -sel clip<cr>:set nopaste<cr>
+
+" use ]s and [s to move to mispelled word
+" use z= to get suggestion list
+" use zg to add a word to dictionary
+" use zw to mark a word as incorrect
+set spelllang=en_us
+
+function! ToggleSpell()
+	if &spell
+		set nospell
+	else
+		set spell
+	endif
+endfunction
+
+command ToggleSpell call ToggleSpell()
+nnoremap <silent><leader>s :ToggleSpell<cr>
 " }}}
 
 if !empty(glob("~/.vim/custom.vim"))
