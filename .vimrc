@@ -51,6 +51,8 @@ Plug 'hewes/unite-gtags'
 if executable('cmake') && isdirectory('/usr/include/clang-c') && isdirectory('/usr/include/boost')
 	Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --clang-completer --system-libclang --system-boost' }
 endif
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 " }}}
 
@@ -97,6 +99,10 @@ let g:pymode_run_bind = '<leader>pr'
 let g:pymode_breakpoint_bind = '<leader>pb'
 let g:pymode_python = 'python3'
 let g:pymode_folding = 0
+" }}}
+
+" vim-markdown {{{
+let g:vim_markdown_folding_disabled = 1
 " }}}
 
 " Unite.vim {{{

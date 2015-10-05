@@ -96,6 +96,27 @@ highlight diffRemoved     guifg=#d7005f    guibg=NONE       gui=NONE
 highlight diffAdded       guifg=#5f87ff    guibg=NONE       gui=NONE
 highlight diffFile        guifg=#af87ff    guibg=NONE       gui=NONE
 
+" vim-markdown
+highlight mkdRule         guifg=#af87ff    guibg=NONE     gui=NONE
+highlight htmlH1          guifg=#5f87ff    guibg=NONE     gui=NONE
+highlight htmlH2          guifg=#d7005f    guibg=NONE     gui=NONE
+highlight htmlH3          guifg=#af87ff    guibg=NONE     gui=NONE
+highlight htmlH4          guifg=#00ff87    guibg=NONE     gui=NONE
+highlight htmlH5          guifg=#ffd787    guibg=NONE     gui=NONE
+highlight htmlH6          guifg=#ff5f87    guibg=NONE     gui=NONE
+
+highlight mkdCode         guifg=#5f87ff    guibg=NONE     gui=bold
+highlight mkdIndentCode   guifg=#5f87ff    guibg=NONE     gui=bold
+highlight mkdListItem     guifg=#5f87ff    guibg=NONE     gui=bold
+
+highlight htmlLink        guifg=#5f87ff    guibg=NONE     gui=underline
+highlight mkdLink         guifg=#af87ff    guibg=NONE     gui=NONE
+highlight mkdURL          guifg=#5f87ff    guibg=NONE     gui=underline
+highlight mkdID           guifg=#d7005f    guibg=NONE     gui=bold
+highlight mkdLinkDef      guifg=#d7005f    guibg=NONE     gui=bold
+highlight mkdLinkDefTarget guifg=#5f87ff   guibg=NONE     gui=underline
+highlight mkdLinkTitle    guifg=#af87ff    guibg=NONE     gui=NONE
+
 if &t_Co > 255
   highlight Normal          ctermfg=83      ctermbg=233     cterm=NONE
   highlight SpecialKey      ctermfg=68      ctermbg=NONE    cterm=NONE
@@ -159,4 +180,25 @@ if &t_Co > 255
   highlight diffRemoved     ctermfg=161     ctermbg=NONE    cterm=NONE
   highlight diffAdded       ctermfg=69      ctermbg=NONE    cterm=NONE
   highlight diffFile        ctermfg=141     ctermbg=NONE    cterm=NONE
+
+" vim-markdown
+  highlight mkdRule        ctermfg=141     ctermbg=NONE    cterm=NONE
+  highlight htmlH1         ctermfg=69      ctermbg=NONE    cterm=NONE
+  highlight htmlH2         ctermfg=161     ctermbg=NONE    cterm=NONE
+  highlight htmlH3         ctermfg=141     ctermbg=NONE    cterm=NONE
+  highlight htmlH4         ctermfg=48      ctermbg=NONE    cterm=NONE
+  highlight htmlH5         ctermfg=222     ctermbg=NONE    cterm=NONE
+  highlight htmlH6         ctermfg=204     ctermbg=NONE    cterm=NONE
+
+  highlight mkdCode        ctermfg=69      ctermbg=NONE    cterm=bold
+  highlight mkdIndentCode  ctermfg=69      ctermbg=NONE    cterm=bold
+  highlight mkdListItem    ctermfg=69      ctermbg=NONE    cterm=bold
+
+  highlight htmlLink       ctermfg=69      ctermbg=NONE    cterm=underline
+  highlight mkdLink        ctermfg=141     ctermbg=NONE    cterm=NONE
+  highlight mkdURL         ctermfg=69      ctermbg=NONE    cterm=underline
+  highlight mkdID          ctermfg=161     ctermbg=NONE    cterm=bold
+  highlight mkdLinkDef     ctermfg=161     ctermbg=NONE    cterm=bold
+  highlight mkdLinkDefTarget ctermfg=69    ctermbg=NONE    cterm=underline
+  highlight mkdLinkTitle   ctermfg=141     ctermbg=NONE    cterm=NONE
 end
