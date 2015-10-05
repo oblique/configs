@@ -139,6 +139,8 @@ nnoremap <silent><leader>gg :Unite gtags/grep<cr>
 if &term =~ "rxvt.*"
 	execute "set <m-j>=\ej"
 	execute "set <m-l>=\el"
+	execute "set <m-c>=\ec"
+	execute "set <m-v>=\ev"
 endif
 " Reset search highlight
 noremap <leader>h :nohl<cr>
