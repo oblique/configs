@@ -36,7 +36,7 @@ let g:colors_name="behelit"
 highlight Normal          guifg=#5fff5f    guibg=#101010    gui=NONE
 highlight SpecialKey      guifg=#5f87d7    guibg=NONE       gui=NONE
 highlight NonText         guifg=#444444    guibg=#101010    gui=NONE
-highlight Directory       guifg=#af87ff    guibg=NONE       gui=NONE
+highlight Directory       guifg=#5f87d7    guibg=NONE       gui=NONE
 highlight IncSearch       guifg=#101010    guibg=#ff875f    gui=NONE
 highlight LineNr          guifg=#5f87af    guibg=#101010    gui=NONE
 highlight StatusLine      guifg=#5f5faf    guibg=#1c1c1c    gui=NONE
@@ -121,7 +121,7 @@ if &t_Co > 255
   highlight Normal          ctermfg=83      ctermbg=233     cterm=NONE
   highlight SpecialKey      ctermfg=68      ctermbg=NONE    cterm=NONE
   highlight NonText         ctermfg=237     ctermbg=233     cterm=NONE
-  highlight Directory       ctermfg=141     ctermbg=NONE    cterm=NONE
+  highlight Directory       ctermfg=68      ctermbg=NONE    cterm=NONE
   highlight IncSearch       ctermfg=0       ctermbg=209     cterm=NONE
   highlight LineNr          ctermfg=67      ctermbg=233     cterm=NONE
   highlight StatusLine      ctermfg=61      ctermbg=234     cterm=NONE
