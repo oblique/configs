@@ -8,6 +8,8 @@ export GOPATH="${HOME}/go"
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 # path
+export PATH="${PATH}:${GOPATH}/bin"
+
 if [[ $(id -u) -ne 0 ]]; then
     PATH="${PATH}:${HOME}/bin"
 
