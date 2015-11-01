@@ -28,6 +28,12 @@ if [[ $(id -u) -ne 0 ]]; then
     export PATH
 fi
 
+for x in "${HOME}/x-tools/"*; do
+    [[ -d "${x}/bin" ]] && PATH="${PATH}:${x}/bin"
+done
+unset x
+export PATH
+
 # init console colors
 if [[ $TERM = linux* ]]; then
     python $HOME/.init_linux_console_colors.py
