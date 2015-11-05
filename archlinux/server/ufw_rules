@@ -1,0 +1,3 @@
+ufw default deny
+ufw limit ssh/tcp
+ufw allow 443/tcp

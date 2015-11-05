@@ -2,6 +2,7 @@ linux-lts
 linux-lts-headers
 rxvt-unicode-terminfo
 zsh
+keychain
 vim
 tmux
 iftop
@@ -24,7 +25,15 @@ rsync
 wget
 aria2
 docker
+vagrant
 lxc
 git
 wipe
 ufw
+gitolite
+the_silver_searcher
+net-tools
+iperf
+dig
+pkgfile
+bind-tools
