@@ -28,11 +28,13 @@ if [[ $(id -u) -ne 0 ]]; then
     export PATH
 fi
 
-for x in "${HOME}/x-tools/"*; do
-    [[ -d "${x}/bin" ]] && PATH="${PATH}:${x}/bin"
-done
-unset x
-export PATH
+if [[ -d "${HOME}/x-tools" ]]; then
+    for x in $(find "${HOME}/x-tools" -mindepth 1 -maxdepth 1 -type d); do
+        [[ -d "${x}/bin" ]] && PATH="${PATH}:${x}/bin"
+    done
+    unset x
+    export PATH
+fi
 
 # init console colors
 if [[ $TERM = linux* ]]; then
