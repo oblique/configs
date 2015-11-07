@@ -197,6 +197,8 @@ endfunction
 
 command ToggleSpell call ToggleSpell()
 nnoremap <silent><leader>s :ToggleSpell<cr>
+
+command ShowPath echo expand('%:p')
 " }}}
 
 if !empty(glob("~/.vim/custom.vim"))
