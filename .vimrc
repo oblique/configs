@@ -19,17 +19,17 @@ colorscheme behelit
 
 " Neovim {{{
 if has("nvim")
-	" yank uses X clipboard
-	set clipboard+=unnamedplus
+    " yank uses X clipboard
+    set clipboard+=unnamedplus
 endif
 " }}}
 
 " vim-plug {{{
 " Load vim-plug
 if empty(glob("~/.vim/autoload/plug.vim"))
-	execute '!mkdir -p ~/.vim/autoload'
-	execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-	autocmd VimEnter * PlugInstall
+    execute '!mkdir -p ~/.vim/autoload'
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -51,11 +51,11 @@ Plug 'plasticboy/vim-markdown'
 Plug 'jreybert/vimagit'
 
 if has("python")
-	Plug 'tpope/vim-speeddating'
-	Plug 'jceb/vim-orgmode'
-	if executable('cmake') && isdirectory('/usr/include/boost')
-		Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --system-boost' }
-	endif
+    Plug 'tpope/vim-speeddating'
+    Plug 'jceb/vim-orgmode'
+    if executable('cmake') && isdirectory('/usr/include/boost')
+        Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --system-boost' }
+    endif
 endif
 call plug#end()
 " }}}
@@ -80,7 +80,7 @@ let g:EclimProjectTreeActions = [
     \ {'pattern': '.*', 'name': 'Split', 'action': 'split'},
     \ {'pattern': '.*', 'name': 'VSplit', 'action': 'vsplit'},
     \ {'pattern': '.*', 'name': 'Tab', 'action': 'tablast | tabnew'},
-  \ ]
+    \ ]
 " }}}
 
 " NERDTree {{{
@@ -104,7 +104,7 @@ let g:pymode_breakpoint_bind = '<leader>pb'
 let g:pymode_folding = 0
 
 if has("python3")
-	let g:pymode_python = 'python3'
+    let g:pymode_python = 'python3'
 endif
 " }}}
 
@@ -119,10 +119,10 @@ let g:unite_source_grep_max_candidates = 200
 set hidden
 
 if executable('ag')
-	" Use ag in unite grep source.
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts = '-i --line-numbers --nocolor --nogroup --hidden'
-	let g:unite_source_grep_recursive_opt = ''
+    " Use ag in unite grep source.
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '-i --line-numbers --nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt = ''
 endif
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -144,10 +144,10 @@ nnoremap <silent><leader>gg :Unite gtags/grep<cr>
 
 " Misc {{{
 if &term =~ "rxvt.*"
-	execute "set <m-j>=\ej"
-	execute "set <m-l>=\el"
-	execute "set <m-c>=\ec"
-	execute "set <m-v>=\ev"
+    execute "set <m-j>=\ej"
+    execute "set <m-l>=\el"
+    execute "set <m-c>=\ec"
+    execute "set <m-v>=\ev"
 endif
 " Reset search highlight
 noremap <leader>h :nohl<cr>
@@ -170,6 +170,7 @@ nnoremap <silent><leader>o :only<cr>
 
 command! EnableSpaces set expandtab softtabstop=4 shiftwidth=4 tabstop=4
 command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8 tabstop=8
+EnableSpaces
 
 " reindent whole file
 nnoremap <silent><leader>i mzgg=G`z
@@ -187,11 +188,11 @@ nnoremap <silent><m-v> :set paste<cr>:r!xclip -o -sel clip<cr>:set nopaste<cr>
 set spelllang=en_us
 
 function! ToggleSpell()
-	if &spell
-		set nospell
-	else
-		set spell
-	endif
+    if &spell
+        set nospell
+    else
+        set spell
+    endif
 endfunction
 
 command ToggleSpell call ToggleSpell()
@@ -199,7 +200,7 @@ nnoremap <silent><leader>s :ToggleSpell<cr>
 " }}}
 
 if !empty(glob("~/.vim/custom.vim"))
-	source ~/.vim/custom.vim
+    source ~/.vim/custom.vim
 endif
 
 " vim: nowrap fdm=marker foldcolumn=2
