@@ -46,13 +46,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'danro/rename.vim', { 'on' : 'Rename' }
 Plug 'gtags.vim'
 Plug 'hewes/unite-gtags'
-
-" Install YouCompleteMe only if we have the dependencies installed
-if executable('cmake') && isdirectory('/usr/include/clang-c') && isdirectory('/usr/include/boost')
-	Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --clang-completer --system-libclang --system-boost' }
-endif
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'jreybert/vimagit'
+
+if has("python")
+	Plug 'tpope/vim-speeddating'
+	Plug 'jceb/vim-orgmode'
+	if executable('cmake') && isdirectory('/usr/include/boost')
+		Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --system-boost' }
+	endif
+endif
 call plug#end()
 " }}}
 
@@ -97,8 +101,11 @@ set noshowmode
 " python-mode {{{
 let g:pymode_run_bind = '<leader>pr'
 let g:pymode_breakpoint_bind = '<leader>pb'
-let g:pymode_python = 'python3'
 let g:pymode_folding = 0
+
+if has("python3")
+	let g:pymode_python = 'python3'
+endif
 " }}}
 
 " vim-markdown {{{
