@@ -24,26 +24,8 @@ setxkbmap -option compose:menu
 # remap Menu key
 xmodmap -e "keycode 135 = Menu"
 
-# Thinkpad's TrackPoint settings
-xinput list | sed -ne 's/^[^ ][^V].*id=\([0-9]*\).*/\1/p' | while read id
-do
-        case `xinput list-props $id` in
-        *"Middle Button Emulation"*)
-                xinput set-int-prop $id "Evdev Wheel Emulation" 8 1
-                xinput set-int-prop $id "Evdev Wheel Emulation Button" 8 2
-                xinput set-int-prop $id "Evdev Wheel Emulation Timeout" 8 200
-                xinput set-int-prop $id "Evdev Wheel Emulation Axes" 8 6 7 4 5
-                xinput set-int-prop $id "Evdev Middle Button Emulation" 8 0
-                ;;
-        esac
-done
-
 # set primary screen
 xrandr --output LVDS-0 --primary
-
-# synaptics settings
-synclient VertTwoFingerScroll=1
-synclient TapButton1=0 TapButton2=0 TapButton3=0
 
 # clipboard synchronizer
 autocutsel -fork
