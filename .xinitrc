@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# to pass arguments with startx do:
+# % startx ~/.xinitrc args...
 
 DEFAULT_SESSION="i3"
 
