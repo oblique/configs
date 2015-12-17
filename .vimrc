@@ -50,6 +50,9 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jreybert/vimagit'
 
+" Run ':GoUpdateBinaries'
+Plug 'fatih/vim-go'
+
 if has("python")
     Plug 'tpope/vim-speeddating'
     Plug 'jceb/vim-orgmode'
