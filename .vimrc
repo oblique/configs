@@ -57,7 +57,7 @@ if has("python")
     Plug 'tpope/vim-speeddating'
     Plug 'jceb/vim-orgmode'
     if executable('cmake') && isdirectory('/usr/include/boost')
-        Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --system-boost' }
+        Plug 'Valloric/YouCompleteMe', { 'do' : 'python2 ./install.py --system-boost' }
     endif
 endif
 call plug#end()
