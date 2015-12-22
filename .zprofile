@@ -5,6 +5,7 @@ export LANG=en_US.UTF-8
 export LC_COLLATE=C
 export LC_MESSAGES=C
 export GOPATH="${HOME}/go"
+export GO15VENDOREXPERIMENT=1
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 # path
