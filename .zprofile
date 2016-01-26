@@ -12,7 +12,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH="${PATH}:${GOPATH}/bin"
 
 if [[ $(id -u) -ne 0 ]]; then
-    PATH="${PATH}:${HOME}/bin"
+    PATH="${PATH}:${HOME}/bin:${HOME}/.cargo/bin"
 
     if command -v python > /dev/null 2>&1; then
         PATH="${PATH}:$(python -m site --user-base)/bin"
