@@ -37,7 +37,8 @@ Plug 'SyntaxAttr.vim'
 Plug 'klen/python-mode'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc', { 'do' : 'make' }
