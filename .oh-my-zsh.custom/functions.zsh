@@ -31,3 +31,7 @@ mkmagnettorrent() {
 
     echo "d10:magnet-uri${#1}:${1}e" > "meta-${_torfile}.torrent"
 }
+
+weather() {
+    curl "wttr.in/$1"
+}
