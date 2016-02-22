@@ -52,7 +52,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'jreybert/vimagit'
 Plug 'rust-lang/rust.vim'
 
-" Run ':GoUpdateBinaries'
+" Run: :GoUpdateBinaries
 Plug 'fatih/vim-go'
 
 if has("python")
