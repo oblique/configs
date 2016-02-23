@@ -8,6 +8,9 @@ export GOPATH="${HOME}/go"
 export GO15VENDOREXPERIMENT=1
 export QT_QPA_PLATFORMTHEME=qt5ct
 
+# download rustc source from: https://www.rust-lang.org/downloads.html
+export RUST_SRC_PATH="${HOME}/src/rustc/src"
+
 # path
 export PATH="${PATH}:${GOPATH}/bin"
 
