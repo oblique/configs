@@ -50,6 +50,7 @@ Plug 'hewes/unite-gtags'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jreybert/vimagit'
+Plug 'cstrahan/vim-capnp'
 
 " Run: cargo install rustfmt
 Plug 'rust-lang/rust.vim'
