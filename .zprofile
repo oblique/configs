@@ -12,10 +12,10 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export RUST_SRC_PATH="${HOME}/src/rustc/src"
 
 # path
-export PATH="${PATH}:${GOPATH}/bin:${HOME}/.config/radare2/bin"
+export PATH="${PATH}:${GOPATH}/bin"
 
 if [[ $(id -u) -ne 0 ]]; then
-    PATH="${PATH}:${HOME}/bin:${HOME}/.cargo/bin"
+    PATH="${PATH}:${HOME}/bin:${HOME}/.cargo/bin:${HOME}/.config/radare2/bin"
 
     if command -v python > /dev/null 2>&1; then
         PATH="${PATH}:$(python -m site --user-base)/bin"
