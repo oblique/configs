@@ -1,1 +1,4 @@
-e asm.syntax=att
+# uncomment to enable AT&T syntax
+# e asm.syntax=att
+
+eco behelit
