@@ -45,7 +45,6 @@
     gnome-themes-standard (needed by xsettingsd)
     gtk-engine-unico (needed by xsettingsd)
     gtk-engine-murrine (needed by xsettingsd)
-    AwOken icons (http://alecive.deviantart.com/art/AwOken-163570862) (needed by xsettingsd)
     perl-text-charwidth (needed by weechat's coords.pl script)
     pure-python-otr (https://github.com/afflux/pure-python-otr) (needed by weechat's otr.py script)
     NetworkManager + Network-Manager-Applet (nm-applet)
@@ -72,10 +71,7 @@ function that i have in my .zshrc to your .bashrc/.zshrc
 
 ----------------------------------------------------------------
 
-Steps to install AwOken icons:
-1) download them from http://alecive.deviantart.com/art/AwOken-163570862
-2) extract them to `~/.icons`
-3) `.AwOken` to `~/`
-4) `~/.icons/AwOken/awoken-icon-theme-customization`
-5) choose `Customize Clear version` 
-6) choose `Recover configuration options from previous installations`
+Steps to install FlatWoken icons:
+* git clone https://github.com/alecive/FlatWoken.git
+* mkdir -p ~/.icons
+* ln -s $PWD/FlatWoken/FlatWoken ~/.icons
