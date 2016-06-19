@@ -1,1 +1,20 @@
-../.local/share/applications/mimeapps.list
+[Default Applications]
+application/pdf=evince.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/ftp=firefox.desktop
+x-scheme-handler/dav=Thunar.desktop
+x-scheme-handler/magnet=deluge.desktop
+x-scheme-handler/tg=telegramdesktop.desktop
+text/html=firefox.desktop
+text/plain=vim.desktop
+text/x-diff=vim.desktop
+text/x-csrc=vim.desktop
+text/x-chdr=vim.desktop
+text/x-c++src=vim.desktop
+text/x-c++hdr=vim.desktop
+text/x-asm=vim.desktop
+text/x-python=vim.desktop
+image/png=eog.desktop
+image/jpeg=eog.desktop
+inode/directory=Thunar.desktop

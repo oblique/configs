@@ -75,3 +75,13 @@ Steps to install FlatWoken icons:
 * git clone https://github.com/alecive/FlatWoken.git
 * mkdir -p ~/.icons
 * ln -s $PWD/FlatWoken/FlatWoken ~/.icons
+
+----------------------------------------------------------------
+
+Initialize Mimes:
+* mkdir -p ~/.local/share
+* ln -s $PWD/.local/share/applications ~/.local/share
+* ln $PWD/.config/mimeapps.list ~/.config
+* ln $PWD/.config/mimeapps.list ~/.local/share/applications
+* update-desktop-database ~/.local/share/applications
+* update-mime-database ~/.local/share/mime
