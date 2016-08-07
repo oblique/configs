@@ -226,4 +226,5 @@ exec --no-startup-id xsettingsd
 exec --no-startup-id syndaemon -i 1.0 -k -R
 exec --no-startup-id ~/.i3/bin/runonce.sh mopidy -q
 exec --no-startup-id ~/.i3/bin/runonce.sh perl ~/.i3/bin/bat_warning.pl 0
+exec --no-startup-id ~/.i3/bin/chrome_tabs_outliner.py
 exec --no-startup-id Thunar --daemon
