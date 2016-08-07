@@ -9,15 +9,20 @@ def on_window(i3, e):
         e.container.name != 'Tabs Outliner'):
         return
 
-    # remove border
-    # move Tabs Outliner to the left of Chromium
-    # shrink it
+    # grow it to what we want
     cmds = ''
+    # remove border
     cmds += 'border pixel 0;'
+    # move Tabs Outliner to the left of Chromium
     cmds += 'move left;'
-    for x in range(0, 20):
-        cmds += 'resize shrink right;'
-    cmds += 'resize grow right;'
+    # shrink it to the minimum
+    # NOTE: we can not use '1000 ppt' because i3 will ignore it.
+    #       to be able to reach the smallest width we need to shrink
+    #       with '1 ppt' per time
+    for x in range(0, 1000):
+        cmds += 'resize shrink width 0 px or 1 ppt;'
+    # grow it the size we want
+    cmds += 'resize grow width 0 px or 9 ppt;'
 
     e.container.command(cmds)
 
