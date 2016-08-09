@@ -13,8 +13,8 @@ def on_window(i3, e):
     cmds = ''
     # remove border
     cmds += 'border pixel 0;'
-    # move Tabs Outliner to the left of Chromium
-    cmds += 'move left;'
+    # move Tabs Outliner to the right of Chromium
+    cmds += 'move right;'
     # shrink it to the minimum
     # NOTE: we can not use '1000 ppt' because i3 will ignore it.
     #       to be able to reach the smallest width we need to shrink
