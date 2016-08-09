@@ -1,12 +1,12 @@
 [Default Applications]
 application/pdf=evince.desktop
-x-scheme-handler/http=firefox.desktop
-x-scheme-handler/https=firefox.desktop
-x-scheme-handler/ftp=firefox.desktop
+x-scheme-handler/http=chromium.desktop
+x-scheme-handler/https=chromium.desktop
+x-scheme-handler/ftp=chromium.desktop
 x-scheme-handler/dav=Thunar.desktop
 x-scheme-handler/magnet=deluge.desktop
 x-scheme-handler/tg=telegramdesktop.desktop
-text/html=firefox.desktop
+text/html=chromium.desktop
 text/plain=vim.desktop
 text/x-diff=vim.desktop
 text/x-csrc=vim.desktop

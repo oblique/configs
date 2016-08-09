@@ -138,7 +138,7 @@
     dmenu = rofi -dmenu -p dunst:
 
     # Browser for opening urls in context menu.
-    browser = firefox -new-tab
+    browser = chromium
 
     # Align icons left/right/off
     icon_position = off
