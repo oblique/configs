@@ -4,13 +4,9 @@ import time
 
 
 def on_window(i3, e):
-    if ((e.container.window_class != 'chromium' and
-         e.container.window_class != 'chrome') or
-        e.container.window_role != 'pop-up' or
-        e.container.name != 'Tabs Outliner'):
+    if e.container.window_instance != 'crx_eggkanocgddhmamlbiijnphhppkpkmkl':
         return
 
-    # grow it to what we want
     cmds = ''
     # remove border
     cmds += 'border pixel 0;'
