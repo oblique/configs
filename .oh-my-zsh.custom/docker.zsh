@@ -14,3 +14,11 @@ nginx() {
         -e NGINX_GID=$GID \
         oblique/nginx-autoindex
 }
+
+docker-gc() {
+    docker run --rm \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        spotify/docker-gc
+}
+
+# vim: ft=sh
