@@ -7,11 +7,10 @@ nginx() {
     local port=$1
     local dir="$(readlink -f "$2")"
 
-    docker run -it --rm \
-        -p $port:80 \
+    docker run -it --rm -p $port:80 \
+        -e PUID=$(id -u) \
+        -e PGID=$(id -g) \
         -v "$dir":/usr/share/nginx/html:ro \
-        -e NGINX_UID=$UID \
-        -e NGINX_GID=$GID \
         oblique/nginx-autoindex
 }
 
