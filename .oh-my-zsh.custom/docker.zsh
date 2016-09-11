@@ -1,3 +1,9 @@
+docker-gc() {
+    docker ps -qa | xargs -r docker rm
+    docker volume ls -q | xargs -r docker volume rm
+    docker images -f dangling=true -q | xargs -r docker rmi
+}
+
 nginx() {
     if [[ $# -ne 2 ]]; then
         echo "usage: nginx <port> <dir>"
@@ -12,12 +18,6 @@ nginx() {
         -e PGID=$(id -g) \
         -v "$dir":/usr/share/nginx/html:ro \
         oblique/nginx-autoindex
-}
-
-docker-gc() {
-    docker run --rm \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        spotify/docker-gc
 }
 
 certbot() {
