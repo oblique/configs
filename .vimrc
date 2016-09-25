@@ -51,6 +51,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jreybert/vimagit'
 Plug 'cstrahan/vim-capnp'
+Plug 'matze/vim-move'
 Plug 'vim-ruby/vim-ruby'
 
 " Run: cargo install rustfmt
@@ -171,6 +172,14 @@ if executable('rustfmt')
 endif
 
 let g:racer_cmd = "racer"
+" }}}
+
+" vim-move {{{
+let g:move_map_keys = 0
+vmap <c-down> <Plug>MoveBlockDown
+vmap <c-up> <Plug>MoveBlockUp
+nmap <c-down> <Plug>MoveLineDown
+nmap <c-up> <Plug>MoveLineUp
 " }}}
 
 " Misc {{{
