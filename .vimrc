@@ -51,6 +51,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jreybert/vimagit'
 Plug 'cstrahan/vim-capnp'
+Plug 'vim-ruby/vim-ruby'
 
 " Run: cargo install rustfmt
 Plug 'rust-lang/rust.vim'
@@ -201,6 +202,9 @@ nnoremap <silent><leader>o :only<cr>
 command! EnableSpaces set expandtab softtabstop=4 shiftwidth=4 tabstop=4
 command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8 tabstop=8
 EnableSpaces
+
+" ruby
+autocmd FileType ruby setlocal expandtab softtabstop=2 shiftwidth=2 tabstop=2
 
 " reindent whole file
 nnoremap <silent><leader>i mzgg=G`z
