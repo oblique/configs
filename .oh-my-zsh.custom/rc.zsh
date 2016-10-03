@@ -6,5 +6,5 @@ export GREP_COLOR='1;31'
 
 # start keychain
 if command -v which keychain > /dev/null 2>&1; then
-    eval $(keychain --eval -Q --quiet --timeout 30)
+    eval $(keychain --eval -Q --quiet --timeout 120)
 fi
