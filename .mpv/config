@@ -1,16 +1,12 @@
 [default]
-sub-text-font = 'Bitstream Vera Sans'
-sub-text-font-size = 50
-sub-text-margin-y = 45
+sub-font = 'Bitstream Vera Sans'
+sub-font-size = 50
+sub-margin-y = 45
 sub-codepage = UTF-8:ISO-8859-7
 sub-auto = fuzzy
 
 ao = pulse,alsa,
 vo = vdpau,opengl-hq,xv,
-
-softvol = yes
-softvol-max = 200
-volume = 100
 
 # Pretend to be Window Media Player.
 # Fixes playback when playlist and media file use the same URL.
@@ -27,7 +23,3 @@ volume = 100
 # Pretend to be Winamp
 # Fixes playback of some NSV streams
 #user-agent="Winamp NSV Player/5.12 (ultravox/2.0)"
-
-[vo.vdpau]
-hwdec = vdpau
-vf-clr
