@@ -11,7 +11,7 @@
 [alias]
 	tree = log --graph --decorate
 [merge]
-	tool = meld
+	tool = bc
 [color]
 	ui = true
 [color "diff"]
