@@ -15,7 +15,6 @@
     urlview (needed by mutt)
     mopidy
     ncmpcpp
-    rtorrent
     mpv
     fontconfig
     alsa (configured to use PulseAudio)
