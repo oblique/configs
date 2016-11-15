@@ -34,7 +34,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'SyntaxAttr.vim'
-Plug 'klen/python-mode'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
@@ -50,20 +49,8 @@ Plug 'hewes/unite-gtags'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jreybert/vimagit'
-Plug 'cstrahan/vim-capnp'
 Plug 'matze/vim-move'
 Plug 'vim-ruby/vim-ruby'
-
-" Run: cargo install rustfmt
-Plug 'rust-lang/rust.vim'
-
-if isdirectory($RUST_SRC_PATH) && executable('racer')
-    " Run: cargo install racer
-    Plug 'racer-rust/vim-racer'
-endif
-
-" Run: :GoUpdateBinaries
-Plug 'fatih/vim-go'
 
 if has("python")
     Plug 'tpope/vim-speeddating'
@@ -113,16 +100,6 @@ set laststatus=2
 set noshowmode
 " }}}
 
-" python-mode {{{
-let g:pymode_run_bind = '<leader>pr'
-let g:pymode_breakpoint_bind = '<leader>pb'
-let g:pymode_folding = 0
-
-if has("python3")
-    let g:pymode_python = 'python3'
-endif
-" }}}
-
 " vim-markdown {{{
 let g:vim_markdown_folding_disabled = 1
 " }}}
@@ -164,14 +141,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-" }}}
-
-" rust {{{
-if executable('rustfmt')
-    let g:rustfmt_autosave = 1
-endif
-
-let g:racer_cmd = "racer"
 " }}}
 
 " vim-move {{{
