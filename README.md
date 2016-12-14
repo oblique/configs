@@ -1,6 +1,7 @@
 ## configs
     Xdefaults/Xresources
     xinitrc
+    termite
     urxvt (256 colors)
     emacs
     vim

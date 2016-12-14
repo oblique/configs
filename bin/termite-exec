@@ -1,0 +1,3 @@
+#!/bin/sh
+cmd="$@"
+exec termite -e "$cmd"

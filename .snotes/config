@@ -1,5 +1,9 @@
+termite_vim() {
+    termite -r floating_term --geometry 85x40 -e "vim $@"
+}
+
 DMENU_ARGS='-p note:'
-SNOTES_EDITOR="urxvt -name urxvt_floating -geometry 85x40 -e vim"
+SNOTES_EDITOR='termite_vim'
 SNOTES_DB="${HOME}/.snotes/notes"
 
 # clean trailing whitespace from file automatically

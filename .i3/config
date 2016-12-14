@@ -24,8 +24,8 @@ set $mod Mod4
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return         exec urxvt
-bindsym $mod+KP_Enter       exec urxvt
+bindsym $mod+Return         exec termite
+bindsym $mod+KP_Enter       exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -192,7 +192,7 @@ bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor --dmenu
 bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 # other keybindings
-bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 105x30 -e zsh -i -c ncmpcpp
+bindsym $mod+m          exec termite -r floating_term --geometry 105x30 -e "zsh -i -c ncmpcpp"
 bindsym $mod+shift+x    exec ~/.i3/bin/i3lock_wrapper.sh
 bindsym $mod+u          [urgent=oldest] focus
 bindsym XF86Sleep       exec xautolock -locknow; exec systemctl hibernate -i
@@ -211,7 +211,7 @@ for_window [class="^Xephyr$"] border normal
 for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="^Wine$"] floating enable
-for_window [instance="^urxvt_floating$"] floating enable
+for_window [window_role="^floating_term$"] floating enable
 
 # color class           border  backgr. text    indicator
 client.focused          #5d97fa #5d97fa #101010 #4b86eb
