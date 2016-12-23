@@ -8,42 +8,40 @@ Xft.lcdfilter:  lcddefault
 Xft.dpi:        120
 Xft.rgba:       rgb
 
-! behelit color theme
-URxvt.background:    #101010
-URxvt.foreground:    #60ff60
-URxvt.cursorColor:   #60ff60
+! urxvt behelit color theme
+URxvt.background:           #101010
+URxvt.foreground:           #60ff60
+URxvt.cursorColor:          #60ff60
+URxvt.scrollColor:          #0a0a0a
+URxvt.colorUL:              #5f87d7
+URxvt.colorIT:              #d81860
+URxvt.highlightColor:       #2368bb
+URxvt.highlightTextColor:   #101010
 
 ! black
-URxvt.color0:        #1c1c1c
-URxvt.color8:        #4d4d4d
-
+URxvt.color0:   #1c1c1c
+URxvt.color8:   #4d4d4d
 ! red
-URxvt.color1:        #d81860
-URxvt.color9:        #f00060
-
+URxvt.color1:   #d81860
+URxvt.color9:   #f00060
 ! green
-URxvt.color2:        #60ff60
-URxvt.color10:       #70ff70
-
+URxvt.color2:   #60ff60
+URxvt.color10:  #70ff70
 ! yellow
-URxvt.color3:        #f9fd75
-URxvt.color11:       #f9fd80
-
+URxvt.color3:   #f9fd75
+URxvt.color11:  #f9fd80
 ! blue
-URxvt.color4:        #5d97fa
-URxvt.color12:       #679dfa
-
+URxvt.color4:   #5d97fa
+URxvt.color12:  #679dfa
 ! magenta
-URxvt.color5:        #a78edb
-URxvt.color13:       #ad97db
-
+URxvt.color5:   #a78edb
+URxvt.color13:  #ad97db
 ! cyan
-URxvt.color6:        #4695c8
-URxvt.color14:       #5a9dc8
-
+URxvt.color6:   #4695c8
+URxvt.color14:  #5a9dc8
 ! white
-URxvt.color7:        #f3ebe2
-URxvt.color15:       #eeeeee
+URxvt.color7:   #f3ebe2
+URxvt.color15:  #eeeeee
 
 ! urxvt
 URxvt.termName:             rxvt-unicode-256color
@@ -53,25 +51,30 @@ URxvt.reverseVideo:         false
 !URxvt.font:                 xft:Source Code Pro:pixelsize=14
 !URxvt.letterSpace:          -1
 !!! these two go together !!!
-URxvt.font:                 xft:Hermit:pixelsize=14
+URxvt.font:                 xft:Hermit:style=medium:pixelsize=14
 URxvt.scrollBar:            true
 URxvt.scrollBar_floating:   true
 URxvt.scrollBar_right:      false
-URxvt.scrollColor:          #0c0c0c
-URxvt.saveLines:            5500
-URxvt.perl-ext-common:      default,matcher,-searchable-scrollback,clipboard,keyboard-select
+URxvt.saveLines:            10000
+URxvt.perl-ext-common:      default,matcher,-searchable-scrollback,keyboard-select,resize-font
+URxvt.cursorBlink:          true
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
+URxvt.urgentOnBell:         true
+! disable ctrl+shift binding
+URxvt.iso14755:             false
+URxvt.iso14755_52:          false
+! clickable urls
 URxvt.url-launcher:         chromium
 URxvt.matcher.button:       1
-URxvt.colorUL:              #5f87d7
-URxvt.colorIT:              #d81860
-URxvt.cursorBlink:          true
-URxvt.keysym.Mod4-Meta-c:   perl:clipboard:copy
-URxvt.keysym.Mod4-Meta-v:   perl:clipboard:paste
-URxvt.keysym.Mod4-C-v:      perl:clipboard:paste_escaped
-URxvt.copyCommand:          xclip -i -selection clipboard
-URxvt.pasteCommand:         xclip -o -selection clipboard
-URxvt.keysym.M-Escape:      perl:keyboard-select:activate
-URxvt.urgentOnBell:         true
+! do not scroll with output
+URxvt.scrollTtyOutput:      false
+URxvt.scrollWithBuffer:     true
+URxvt.scrollTtyKeypress:    true
+! resize font on the fly
+URxvt.keysym.C-minus:       resize-font:smaller
+URxvt.keysym.C-plus:        resize-font:bigger
+URxvt.keysym.C-equal:       resize-font:reset
 
 ! emulate XTerm for proper recognition of key combinations in Vim
 !URxvt.keysym.Up              : \033[A  !breaks arrow keys in Vim
