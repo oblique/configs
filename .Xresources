@@ -143,7 +143,7 @@ URxvt.keysym.M-C-S-End        : \033[1;8F
 rofi.columns:                        2
 rofi.bw:                             2
 rofi.terminal:                       urxvt
-rofi.font:                           hermit bold 10
+rofi.font:                           hermit bold 14px
 rofi.color-enabled:                  true
 !                                       bg      fg    bgalt    hlbg    hlfg
 rofi.color-normal:                   #101010,#404040,#101010,#101010,#5f87ff
