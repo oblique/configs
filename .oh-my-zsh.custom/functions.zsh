@@ -5,6 +5,13 @@ beep() {
     echo -en '\a'
 }
 
+# command for resizing fonts
+chpixelsize() {
+    stty -echo
+    printf '\33]50;%s\007' "xft:Hermit:pixelsize=${1}"
+    stty echo
+}
+
 mkmagnettorrent() {
     local _torhash
     local _torfile
