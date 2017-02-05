@@ -45,3 +45,7 @@
 	header = red
 	help = magenta
 	prompt = blue bold
+[diff]
+	tool = bc
+[mergetool "bc"]
+	trustExitCode = true
