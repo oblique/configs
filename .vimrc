@@ -158,6 +158,10 @@ if &term =~ "rxvt.*"
     execute "set <m-c>=\ec"
     execute "set <m-v>=\ev"
 endif
+
+" Disable ex mode
+nnoremap Q <Nop>
+
 " Reset search highlight
 noremap <leader>h :nohl<cr>
 
