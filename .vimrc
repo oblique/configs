@@ -152,6 +152,8 @@ nmap <c-up> <Plug>MoveLineUp
 " }}}
 
 " Misc {{{
+set guicursor=
+
 if &term =~ "rxvt.*"
     execute "set <m-j>=\ej"
     execute "set <m-l>=\el"
