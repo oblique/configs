@@ -33,7 +33,7 @@ if empty(glob("~/.vim/autoload/plug.vim"))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'SyntaxAttr.vim'
+Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
@@ -44,7 +44,7 @@ Plug 'Shougo/vimproc', { 'do' : 'make' }
 Plug 'Shougo/neomru.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'danro/rename.vim', { 'on' : 'Rename' }
-Plug 'gtags.vim'
+Plug 'vim-scripts/gtags.vim'
 Plug 'hewes/unite-gtags'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
