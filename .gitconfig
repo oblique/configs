@@ -9,7 +9,8 @@
 [push]
 	default = simple
 [alias]
-	tree = log --graph --decorate
+	tree = log --graph
+	log-full = log --format=fuller
 [merge]
 	tool = bc
 [color]
