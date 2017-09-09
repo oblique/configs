@@ -14,7 +14,7 @@ makepkg -si
 ```bash
 pacman -S openssh sudo terminus-font git tk i3 dunst rofi xorg xorg-init xorg-apps \
           zsh xterm xinput dmidecode xf86-video-intel asp chromium firefox ffmpeg \
-          networkmanager network-manager-applet modemmanager dhclient bluez dnsmasq \
+          lsof htop networkmanager network-manager-applet dhclient bluez dnsmasq \
           dhcpcd docker gnome-keyring python python-pip networkmanager-openconnect \
           networkmanager-openvpn networkmanager-pptp networkmanager-vpnc \
           networkmanager-strongswan evince pavucontrol alsa-utils wget aria2 feh \
@@ -23,9 +23,10 @@ pacman -S openssh sudo terminus-font git tk i3 dunst rofi xorg xorg-init xorg-ap
           keychain the_silver_searcher bind-tools shellcheck aspell aspell-en \
           libva-intel-driver neovim python-neovim python2-neovim wireshark-qt \
           tcpdump gdb strace ltrace valgrind sysdig tree rsync hdparm rfkill \
-          python2 python2-pip ruby ruby-docs
+          python2 python2-pip ruby ruby-docs eog ebtables
 pacaur -S rxvt-unicode-cvs-patched-wideglyphs xsettingsd skypeforlinux-bin insync \
-          insync-thunar pulseaudio-ctl neovim-symlinks xxd-vim rofi-dmenu
+          insync-thunar pulseaudio-ctl neovim-symlinks xxd-vim rofi-dmenu \
+          brightnessctl xss-lock
 ```
 
 ### Kernel
@@ -43,6 +44,36 @@ vim /etc/pacman.conf # add `linux linux-headers linux-docs` in `IgnorePkg`
 
 ```bash
 usermod -a -G wheel,wireshark,video oblique
+```
+
+### Secure boot
+
+Enable secure boot in UEFI firmware, clear all secure boot keys and enter secure
+boot setup mode. Make sure that you also set a UEFI firmware supervisor password.
+
+After the above boot your machine and use [cryptboot] to set your own keys:
+
+```bash
+pacaur -S cryptboot
+cryptboot mout
+cryptboot-efikeys create
+cryptboot-efikeys enroll
+cryptboot update-grub
+```
+
+Now you can boot with your own signed bootloader. Every time you upgrade grub
+package you need to sign it again:
+
+```bash
+cryptboot update-grub
+```
+
+### Mobile internet
+
+```bash
+pacman -S modemmanager
+systemctl enable modemmanager
+systemctl start modemmanager
 ```
 
 ### Fonts
@@ -78,27 +109,5 @@ pacaur -S adwaita-qt4 adwaita-qt5
 
 Select Qt5 theme with `qt5ct`, select Qt4 theme with `qtconfig-qt4`.
 
-### i3lock on suspend
 
-Create `/etc/systemd/system/i3lock-suspend.service`
-
-```
-[Unit]
-Description=i3lock on suspend
-Before=sleep.target
-
-[Service]
-User=oblique
-Type=forking
-Environment=DISPLAY=:0
-ExecStart=/usr/bin/i3lock
-
-[Install]
-WantedBy=sleep.target
-```
-
-Enable it
-
-```bash
-systemctl enable i3lock-suspend.service
-```
+[cryptboot]: https://github.com/xmikos/cryptboot
