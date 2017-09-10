@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # to pass arguments with startx do:
 # % startx ~/.xinitrc args...
@@ -14,7 +14,11 @@ if [[ -d /etc/X11/xinit/xinitrc.d ]]; then
     unset f
 fi
 
-[[ -f ~/.Xresources ]] && xrdb -load ~/.Xresources
+if [[ -f ~/.Xresources ]]; then
+    xrdb -load ~/.Xresources
+    dpi=$(xrdb -query | grep '^Xft.dpi:' | awk '{print $NF}')
+    [[ -n "$dpi" ]] && xrandr --dpi "$dpi"
+fi
 
 # keyboard settings
 setxkbmap -layout us,el
@@ -23,12 +27,6 @@ setxkbmap -option
 setxkbmap -option grp:rctrl_rshift_toggle
 setxkbmap -option terminate:ctrl_alt_bksp
 setxkbmap -option compose:menu
-
-# remap Menu key
-xmodmap -e "keycode 135 = Menu"
-
-# set primary screen
-xrandr --output LVDS-0 --primary
 
 # clipboard synchronizer
 autocutsel -fork

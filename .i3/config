@@ -9,16 +9,13 @@
 # layout, use the i3-config-wizard
 #
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
-
 set $mod Mod4
+set $main_monitor eDP1
+set $font -*-terminus-*-*-*--17-*-*-*-*-*-iso10646-1
+set $bar_font -*-terminus-*-*-*--20-*-*-*-*-*-iso10646-1
+
+# window title font
+font $font
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -31,11 +28,8 @@ bindsym $mod+KP_Enter       exec urxvt
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec rofi -show run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d          exec rofi -show run
+bindsym $mod+Shift+d    exec rofi -show drun
 
 # window selector
 bindsym $mod+k exec rofi -show window
@@ -149,7 +143,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font -misc-fixed-bold-r-normal--14-*-*-*-C-*-iso10646-1
+    font $bar_font
     position top
     status_command i3status
     tray_output primary
@@ -167,15 +161,20 @@ bar {
 }
 
 # volume keys
-bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q sset Master 5%+
-bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q sset Master 5%-
-bindsym XF86AudioMute           exec --no-startup-id amixer -q sset Master toggle
+bindsym XF86AudioRaiseVolume    exec --no-startup-id pulseaudio-ctl up
+bindsym XF86AudioLowerVolume    exec --no-startup-id pulseaudio-ctl down
+bindsym XF86AudioMute           exec --no-startup-id pulseaudio-ctl mute
+bindsym XF86AudioMicMute        exec --no-startup-id pulseaudio-ctl mute-input
 
 # player keys
 bindsym XF86AudioStop   exec --no-startup-id mpc stop
 bindsym XF86AudioPlay   exec --no-startup-id mpc toggle
 bindsym XF86AudioNext   exec --no-startup-id mpc next
 bindsym XF86AudioPrev   exec --no-startup-id mpc prev
+
+# brightness keys
+bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown   exec --no-startup-id brightnessctl set 5%-
 
 # switch to previous or next workspace
 bindsym $mod+j      workspace prev
@@ -187,17 +186,16 @@ bindsym $mod+n          exec --no-startup-id snotes
 bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
 # multimedia switch
-bindsym $mod+shift+l    exec --no-startup-id ~/bin/mmswitch-monitor LVDS-0
+bindsym $mod+shift+l    exec --no-startup-id ~/bin/mmswitch-monitor $main_monitor
 bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor --dmenu
 bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 # other keybindings
 bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 105x30 -e zsh -i -c ncmpcpp
-bindsym $mod+shift+x    exec ~/.i3/bin/i3lock_wrapper.sh
+bindsym $mod+shift+x    exec i3lock
 bindsym $mod+u          [urgent=oldest] focus
-bindsym XF86Sleep       exec xautolock -locknow; exec systemctl hibernate -i
-bindsym --release Print           exec --no-startup-id scrot -e "mv \$f /tmp"
-bindsym --release $mod+Print      exec --no-startup-id scrot -s -e "mv \$f /tmp"
+bindsym --release Print         exec --no-startup-id scrot '/tmp/%Y-%m-%d-%H%M%S_$wx$h_scrot.png'
+bindsym --release $mod+Print    exec --no-startup-id scrot -s '/tmp/%Y-%m-%d-%H%M%S_$wx$h_scrot.png'
 
 # floating size boundaries
 floating_minimum_size 0 x 0
@@ -207,11 +205,11 @@ floating_maximum_size -1 x -1
 new_window pixel 2
 
 # window commands
-for_window [class="^Xephyr$"] border normal
 for_window [class="Firefox" title="^Downloads$"] floating enable
-for_window [class="Wicd-client.py"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [instance="^urxvt_floating$"] floating enable
+for_window [class="^Wine$"] floating enable
+for_window [instance="^pinentry$"] floating enable
 
 # color class           border  backgr. text    indicator
 client.focused          #5d97fa #5d97fa #101010 #4b86eb
@@ -220,12 +218,11 @@ client.unfocused        #101010 #101010 #787878 #202020
 client.urgent           #f00060 #f00060 #101010 #f5468d
 
 # startup applications
-exec --no-startup-id feh --bg-scale ~/.i3/wallpaper.png
+exec --no-startup-id feh --bg-fill ~/.i3/wallpaper.png
 exec --no-startup-id dunst
 exec --no-startup-id xsettingsd
-exec --no-startup-id syndaemon -i 1.0 -k -R
-exec --no-startup-id ~/.i3/bin/runonce.sh mopidy -q
+exec --no-startup-id nm-applet
+exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
 exec --no-startup-id ~/.i3/bin/runonce.sh perl ~/.i3/bin/bat_warning.pl 0
-exec --no-startup-id ~/.i3/bin/chrome_tabs_outliner.py
 exec --no-startup-id Thunar --daemon
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

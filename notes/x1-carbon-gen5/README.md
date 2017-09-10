@@ -26,7 +26,7 @@ pacman -S openssh sudo terminus-font git tk i3 dunst rofi xorg xorg-init xorg-ap
           python2 python2-pip ruby ruby-docs eog ebtables
 pacaur -S rxvt-unicode-cvs-patched-wideglyphs xsettingsd skypeforlinux-bin insync \
           insync-thunar pulseaudio-ctl neovim-symlinks xxd-vim rofi-dmenu \
-          brightnessctl xss-lock
+          brightnessctl xss-lock neomutt bcompare
 ```
 
 ### Kernel
@@ -79,8 +79,9 @@ systemctl start modemmanager
 ### Fonts
 
 ```bash
-pacman -S noto-fonts ttf-dejavu texlive-fontsextra
+pacman -S noto-fonts ttf-dejavu texlive-fontsextra terminus-font
 pacaur -S otf-hermit ttf-google-fonts-git
+echo 'FONT=ter-132b' > /etc/vconsole.conf
 ```
 
 ### Icons

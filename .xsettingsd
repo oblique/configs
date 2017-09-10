@@ -18,8 +18,13 @@ Net/DoubleClickTime 400
 Net/FallbackIconTheme "gnome"
 Net/IconThemeName "FlatWoken"
 Net/ThemeName "Adwaita"
-Xft/Antialias 1
-Xft/Hinting 1
-Xft/HintStyle "hintmedium"
-Xft/DPI 122880  # 120dpi * 1024
-Xft/RGBA "rgb"
+
+# FHD
+#Xft/Antialias 1
+#Xft/Hinting 1
+#Xft/HintStyle "hintmedium"
+#Xft/DPI 122880 # 120 * 1024
+#Xft/RGBA "rgb"
+
+# QHD
+Xft/DPI 163840 # 160 * 1024

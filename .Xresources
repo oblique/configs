@@ -1,5 +1,8 @@
-Xcursor.theme:  Vanilla-DMZ-AA
+#define FHD 1
+#define QHD 2
+#define HD_TYPE QHD
 
+#if HD_TYPE == FHD
 Xft.antialias:  1
 Xft.hinting:    1
 Xft.autohint:   0
@@ -7,6 +10,13 @@ Xft.hintstyle:  hintmedium
 Xft.lcdfilter:  lcddefault
 Xft.dpi:        120
 Xft.rgba:       rgb
+#define URXVT_FONT  xft:Hermit:style=medium:pixelsize=14
+#define ROFI_FONT   hermit bold 14px
+#elif HD_TYPE == QHD
+Xft.dpi:        160
+#define URXVT_FONT  xft:Hermit:style=medium:pixelsize=20
+#define ROFI_FONT   hermit bold 18px
+#endif
 
 ! urxvt behelit color theme
 URxvt.background:           #101010
@@ -47,11 +57,7 @@ URxvt.color15:  #eeeeee
 URxvt.termName:             rxvt-unicode-256color
 URxvt.geometry:             90x25
 URxvt.reverseVideo:         false
-!!! these two go together !!!
-!URxvt.font:                 xft:Source Code Pro:pixelsize=14
-!URxvt.letterSpace:          -1
-!!! these two go together !!!
-URxvt.font:                 xft:Hermit:style=medium:pixelsize=14
+URxvt.font:                 URXVT_FONT
 URxvt.scrollBar:            true
 URxvt.scrollBar_floating:   true
 URxvt.scrollBar_right:      false
@@ -146,7 +152,7 @@ URxvt.keysym.M-C-S-End        : \033[1;8F
 rofi.columns:                        2
 rofi.bw:                             2
 rofi.terminal:                       urxvt
-rofi.font:                           hermit bold 14px
+rofi.font:                           ROFI_FONT
 rofi.color-enabled:                  true
 !                                       bg      fg    bgalt    hlbg    hlfg
 rofi.color-normal:                   #101010,#404040,#101010,#101010,#5f87ff
