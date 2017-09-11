@@ -11,8 +11,8 @@
 
 set $mod Mod4
 set $main_monitor eDP1
-set $font -*-terminus-*-*-*--17-*-*-*-*-*-iso10646-1
-set $bar_font -*-terminus-*-*-*--20-*-*-*-*-*-iso10646-1
+set_from_resource $font i3wm.font
+set_from_resource $bar_font i3wm.bar_font
 
 # window title font
 font $font

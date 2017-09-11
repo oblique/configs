@@ -10,10 +10,14 @@ Xft.hintstyle:  hintmedium
 Xft.lcdfilter:  lcddefault
 Xft.dpi:        120
 Xft.rgba:       rgb
+i3wm.font:      -*-terminus-*-*-*--13-*-*-*-*-*-iso10646-1
+i3wm.bar_font:  -*-terminus-*-*-*--14-*-*-*-*-*-iso10646-1
 #define URXVT_FONT  xft:Hermit:style=medium:pixelsize=14
 #define ROFI_FONT   hermit bold 14px
 #elif HD_TYPE == QHD
 Xft.dpi:        160
+i3wm.font:      -*-terminus-*-*-*--17-*-*-*-*-*-iso10646-1
+i3wm.bar_font:  -*-terminus-*-*-*--20-*-*-*-*-*-iso10646-1
 #define URXVT_FONT  xft:Hermit:style=medium:pixelsize=20
 #define ROFI_FONT   hermit bold 18px
 #endif
