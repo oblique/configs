@@ -40,6 +40,33 @@ makepkg -si
 vim /etc/pacman.conf # add `linux linux-headers linux-docs` in `IgnorePkg`
 ```
 
+### Disable swap unless is really needed
+
+```bash
+echo 'vm.swappiness=0' > /etc/sysctl.d/99-sysctl.conf
+```
+
+### Hibernate
+
+Edit `/etc/mkinitcpio.conf` and add `resume`
+
+```bash
+HOOKS="... encrypt lvm2 resume filesystems ..."
+```
+
+Add the following in `/etc/default/grub`
+
+```bash
+GRUB_CMDLINE_LINUX="... resume=/dev/vg0/swap"
+```
+
+Run
+
+```bash
+mkinitcpio -P
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
 ### Groups
 
 ```bash
