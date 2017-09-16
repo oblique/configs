@@ -23,10 +23,10 @@ pacman -S openssh sudo terminus-font git tk i3 dunst rofi xorg xorg-init xorg-ap
           keychain the_silver_searcher bind-tools shellcheck aspell aspell-en \
           libva-intel-driver neovim python-neovim python2-neovim wireshark-qt \
           tcpdump gdb strace ltrace valgrind sysdig tree rsync hdparm rfkill \
-          python2 python2-pip ruby ruby-docs eog ebtables scrot
+          python2 python2-pip ruby ruby-docs eog ebtables scrot cscope ctags
 pacaur -S rxvt-unicode-cvs-patched-wideglyphs xsettingsd skypeforlinux-bin insync \
           insync-thunar pulseaudio-ctl neovim-symlinks xxd-vim rofi-dmenu \
-          brightnessctl xss-lock neomutt bcompare
+          brightnessctl xss-lock neomutt bcompare global idutils
 ```
 
 ### Kernel
