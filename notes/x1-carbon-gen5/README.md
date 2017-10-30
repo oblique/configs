@@ -29,15 +29,21 @@ pacaur -S rxvt-unicode-cvs-patched-wideglyphs xsettingsd skypeforlinux-bin insyn
           brightnessctl xss-lock neomutt bcompare global idutils
 ```
 
-### Kernel
+### Automatically patch synaptics driver on kernel installation
+
+We need to patch `drivers/input/mouse/synaptics.c` and `drivers/input/rmi4/rmi_smbus.c`
+each time the kernel gets installed. To achive this I wrote a small script that
+patch, compiles and install `drivers/input/rmi4`, `drivers/input/mouse` in-tree
+kernel directories. This script is triggered via a Pacman hook.
+
+To apply my solution to your system do the following:
 
 ```bash
-pacman -S xmlto docbook-xsl bc
-asp export linux
-cd linux
-vim PKGBUILD # add `patch -p1 -i ../len0073.patch` in `prepare()`
-makepkg -si
-vim /etc/pacman.conf # add `linux linux-headers linux-docs` in `IgnorePkg`
+pacman -S gnupg base-devel linux-headers
+gpg --recv-keys 647F28654894E3BD457199BE38DBBDC86092693E
+cp -r x1-gen5-patch-synaptics /usr/src
+ln -sf /usr/src/x1-gen5-patch-synaptics/01-x1-gen5-patch-synaptics.hook /usr/share/libalpm/hooks/01-x1-gen5-patch-synaptics.hook
+pacman -S linux # trigger hook by reinstalling the kernel
 ```
 
 ### Disable swap unless is really needed

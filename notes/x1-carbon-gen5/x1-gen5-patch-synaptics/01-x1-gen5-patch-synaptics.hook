@@ -1,0 +1,10 @@
+[Trigger]
+Type = File
+Operation = Install
+Operation = Upgrade
+Target = usr/lib/modules/*/
+
+[Action]
+Description = Patch X1 Carbon Gen5 synaptics driver
+When = PostTransaction
+Exec = /usr/src/x1-gen5-patch-synaptics/build_and_install.sh
