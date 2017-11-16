@@ -29,22 +29,10 @@ pacaur -S rxvt-unicode-cvs-patched-wideglyphs xsettingsd skypeforlinux-bin insyn
           brightnessctl xss-lock neomutt bcompare global idutils
 ```
 
-### Automatically patch synaptics driver on kernel installation
+### Touchpad
 
-We need to patch `drivers/input/mouse/synaptics.c` and `drivers/input/rmi4/rmi_smbus.c`
-each time the kernel gets installed. To achive this I wrote a small script that
-patch, compiles and install `drivers/input/rmi4`, `drivers/input/mouse` in-tree
-kernel directories. This script is triggered via a Pacman hook.
-
-To apply my solution to your system do the following:
-
-```bash
-pacman -S gnupg base-devel linux-headers
-gpg --recv-keys 647F28654894E3BD457199BE38DBBDC86092693E
-cp -r x1-gen5-patch-synaptics /usr/src
-ln -sf /usr/src/x1-gen5-patch-synaptics/01-x1-gen5-patch-synaptics.hook /usr/share/libalpm/hooks/01-x1-gen5-patch-synaptics.hook
-pacman -S linux # trigger hook by reinstalling the kernel
-```
+To make touchpad work properly you need to add `psmouse.synaptics_intertouch=1`
+in your [kernel parameters].
 
 ### Disable swap unless is really needed
 
@@ -145,3 +133,4 @@ Select Qt5 theme with `qt5ct`, select Qt4 theme with `qtconfig-qt4`.
 
 
 [cryptboot]: https://github.com/xmikos/cryptboot
+[kernel parameters]: https://wiki.archlinux.org/index.php/kernel_parameters
