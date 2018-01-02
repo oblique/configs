@@ -1,7 +1,8 @@
 docker-gc() {
-    docker ps -qa | xargs -r docker rm
-    docker volume ls -q | xargs -r docker volume rm
-    docker images -f dangling=true -q | xargs -r docker rmi
+    docker ps -f status=dead -q --no-trunc | xargs -r docker rm
+    docker ps -f status=exited -q --no-trunc | xargs -r docker rm
+    docker volume ls -f dangling=true -q | xargs -r docker volume rm
+    docker images -f dangling=true -q --no-trunc | xargs -r docker rmi
 }
 
 nginx() {
