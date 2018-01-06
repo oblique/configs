@@ -22,7 +22,7 @@ if [[ $(id -u) -ne 0 ]]; then
     fi
 
     if command -v ruby > /dev/null 2>&1; then
-        PATH="${PATH}:$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+        PATH="${PATH}:$(ruby -e 'puts Gem.user_dir')/bin"
     fi
 
     if command -v npm > /dev/null 2>&1; then
