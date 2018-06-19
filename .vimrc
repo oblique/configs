@@ -36,53 +36,41 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
+Plug 'danro/rename.vim', { 'on' : 'Rename' }
+
+" neovim compatibility for vim
+if !has('nvim')
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc', { 'do' : 'make' }
-Plug 'Shougo/neomru.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'danro/rename.vim', { 'on' : 'Rename' }
-Plug 'vim-scripts/gtags.vim'
-Plug 'hewes/unite-gtags'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'jreybert/vimagit'
+
+" denite
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ozelentok/denite-gtags'
+
+" moves block of code
 Plug 'matze/vim-move'
-Plug 'vim-ruby/vim-ruby'
 
-if has("python")
-    Plug 'tpope/vim-speeddating'
-    Plug 'jceb/vim-orgmode'
-    if executable('cmake') && isdirectory('/usr/include/boost')
-        Plug 'Valloric/YouCompleteMe', { 'do' : 'python2 ./install.py --system-boost' }
-    endif
-endif
+" quick video tutorial: http://vimcasts.org/e/29
+Plug 'godlygeek/tabular'
+
+" syntax
+Plug 'plasticboy/vim-markdown'
+Plug 'jceb/vim-orgmode'
+Plug 'ntpeters/vim-better-whitespace'
+
+" You need to run these commands:
+"   cargo install racer
+"   rustup component add rust-src
+"   rustup component add rustfmt-preview
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+
 call plug#end()
-" }}}
-
-" YouCompleteMe {{{
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-" }}}
-
-" Eclim {{{
-let g:EclimDefaultFileOpenAction = 'edit'
-let g:EclimCompletionMethod = 'omnifunc'
-nnoremap <silent><leader>es :CSearchContext<cr>
-nnoremap <silent><leader>eh :CCallHierarchy<cr>
-nnoremap <silent><leader>et :ProjectTreeToggle<cr>
-nnoremap <silent><leader>ep :ProjectProblems<cr>
-nnoremap <silent><leader>ef :LocateFile<cr>
-
-" Same as the default, but here we have Edit action as first action.
-" The first action is used when we press enter on a file in ProjectTree.
-let g:EclimProjectTreeActions = [
-    \ {'pattern': '.*', 'name': 'Edit', 'action': 'edit'},
-    \ {'pattern': '.*', 'name': 'Split', 'action': 'split'},
-    \ {'pattern': '.*', 'name': 'VSplit', 'action': 'vsplit'},
-    \ {'pattern': '.*', 'name': 'Tab', 'action': 'tablast | tabnew'},
-    \ ]
 " }}}
 
 " NERDTree {{{
@@ -104,43 +92,52 @@ set noshowmode
 let g:vim_markdown_folding_disabled = 1
 " }}}
 
-" Unite.vim {{{
-let g:unite_source_grep_max_candidates = 200
-
-" This allows buffers to be hidden if you've modified a buffer.
-set hidden
-
+" denite.vim {{{
 if executable('ag')
-    " Use ag in unite grep source.
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '-i --line-numbers --nocolor --nogroup --hidden'
-    let g:unite_source_grep_recursive_opt = ''
+    " The Silver Searcher
+    call denite#custom#var('file_rec', 'command',
+                \ ['ag', '-U', '--hidden', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+    " Setup ignore patterns in your .agignore file!
+    " https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
+
+    call denite#custom#var('grep', 'command', ['ag'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opt', [])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'final_opts', [])
+    call denite#custom#var('grep', 'default_opts',
+                \ [ '--skip-vcs-ignores', '--vimgrep', '--smart-case', '--hidden' ])
 endif
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <silent><leader>t :Unite -buffer-name=files_rec -start-insert file_rec/neovim:!<cr>
-nnoremap <silent><leader>f :Unite -buffer-name=files -start-insert file<cr>
-nnoremap <silent><leader>r :Unite -buffer-name=mru -start-insert file_mru<cr>
-nnoremap <silent><leader>b :Unite -buffer-name=buffer -start-insert buffer<cr>
-nnoremap <silent><leader>z] :UniteNext<cr>
-nnoremap <silent><leader>z[ :UnitePrevious<cr>
-nnoremap <silent><leader>zr :UniteResume<cr>
-" }}}
+call denite#custom#option('_', {
+            \ 'mode': 'normal',
+            \ 'winheight': 10,
+            \ 'highlight_cursor': 'Cursor',
+            \ 'highlight_matched_range': 'Statement',
+            \ 'highlight_matched_char': 'Statement',
+            \ 'highlight_mode_normal': 'Type',
+            \ 'highlight_mode_insert': 'Type',
+            \ 'highlight_preview_line': 'Underlined',
+            \ })
 
-" unite-gtags {{{
-nnoremap <silent><leader>gd :Unite gtags/def<cr>
-nnoremap <silent><leader>gr :Unite gtags/ref<cr>
-nnoremap <silent><leader>gc :Unite gtags/context<cr>
-nnoremap <silent><leader>gg :Unite gtags/grep<cr>
-" }}}
+call denite#custom#source('tag', 'matchers', ['matcher_substring'])
+call denite#custom#source('gtags_ref', 'matchers', ['matcher_substring'])
+call denite#custom#source('gtags_def', 'matchers', ['matcher_substring'])
 
-" vim-go {{{
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
+" use cursor to move
+call denite#custom#map('normal', '<Down>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('normal', '<Up>', '<denite:move_to_previous_line>', 'noremap')
+
+nnoremap <silent><leader>fn :Denite -resume -cursor-pos=+1 -immediately<cr>
+nnoremap <silent><leader>fp :Denite -resume -cursor-pos=+1 -immediately<cr>
+nnoremap <silent><leader>fr :Denite -resume<cr>
+nnoremap <silent><leader>ft :DeniteCursorWord tag<cr>
+nnoremap <silent><leader>fg :DeniteCursorWord grep<cr>
+nnoremap <silent><leader>gd :DeniteCursorWord gtags_def<cr>
+nnoremap <silent><leader>gr :DeniteCursorWord gtags_ref<cr>
+nnoremap <silent><leader>gc :DeniteCursorWord gtags_context<cr>
+nnoremap <silent><leader>gg :DeniteCursorWord gtags_grep<cr>
 " }}}
 
 " vim-move {{{
@@ -149,6 +146,11 @@ vmap <c-down> <Plug>MoveBlockDown
 vmap <c-up> <Plug>MoveBlockUp
 nmap <c-down> <Plug>MoveLineDown
 nmap <c-up> <Plug>MoveLineUp
+" }}}
+
+" rust {{{
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 " }}}
 
 " Misc {{{
@@ -186,9 +188,6 @@ nnoremap <silent><leader>o :only<cr>
 command! EnableSpaces set expandtab softtabstop=4 shiftwidth=4 tabstop=4
 command! EnableTabs   set noexpandtab softtabstop=0 shiftwidth=8 tabstop=8
 EnableSpaces
-
-" ruby
-autocmd FileType ruby setlocal expandtab softtabstop=2 shiftwidth=2 tabstop=2
 
 " reindent whole file
 nnoremap <silent><leader>i mzgg=G`z
