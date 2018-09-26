@@ -164,3 +164,9 @@ rofi.color-urgent:                   #101010,#f00060,#101010,#101010,#5f87ff
 rofi.color-active:                   #101010,#00ff77,#101010,#101010,#5f87ff
 !                                       bg    border
 rofi.color-window:                   #101010,#202020
+
+! xmessage
+xmessage*background:    #101010
+xmessage*foreground:    #d7005f
+xmessage*borderColor:   #d7005f
+xmessage*font:          -*-terminus-*-*-*--24-*-*-*-*-*-iso10646-1
