@@ -86,7 +86,7 @@ highlight Type            guifg=#5f87d7    guibg=NONE       gui=NONE
 highlight Error           guifg=#d7005f    guibg=NONE       gui=bold
 highlight Todo            guifg=#af87ff    guibg=NONE       gui=bold
 highlight Title           guifg=#af87ff    guibg=NONE       gui=NONE
-highlight MatchParen      guifg=#101010    guibg=#ff875f    gui=NONE
+highlight MatchParen      guifg=#ff875f    guibg=NONE       gui=NONE
 highlight Comment         guifg=#585858    guibg=NONE       gui=NONE
 highlight Constant        guifg=#af87ff    guibg=NONE       gui=NONE
 highlight String          guifg=#ffff87    guibg=NONE       gui=NONE
@@ -175,7 +175,7 @@ if &t_Co > 255
   highlight Error           ctermfg=161     ctermbg=NONE    cterm=bold
   highlight Todo            ctermfg=141     ctermbg=NONE    cterm=bold
   highlight Title           ctermfg=141     ctermbg=NONE    cterm=NONE
-  highlight MatchParen      ctermfg=0       ctermbg=209     cterm=NONE
+  highlight MatchParen      ctermfg=209     ctermbg=NONE     cterm=NONE
   highlight Underlined      ctermfg=NONE    ctermbg=NONE    cterm=underline
   highlight diffRemoved     ctermfg=161     ctermbg=NONE    cterm=NONE
   highlight diffAdded       ctermfg=69      ctermbg=NONE    cterm=NONE
