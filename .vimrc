@@ -70,6 +70,11 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 
+" auto-completion
+if executable('cmake')
+    Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --rust-completer' }
+endif
+
 call plug#end()
 " }}}
 
@@ -151,6 +156,10 @@ nmap <c-up> <Plug>MoveLineUp
 " rust {{{
 autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+
+let g:racer_experimental_completer = 1
+autocmd FileType rust nmap <silent><leader>gd <Plug>(rust-def)
+autocmd FileType rust nmap <silent><leader>gm <Plug>(rust-doc)
 " }}}
 
 " Misc {{{
