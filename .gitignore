@@ -10,10 +10,6 @@
 /.emacs.d/el-get
 /.vim/.netrwhist
 /.vim/autoload/plug.vim
-/.vim/eclim/
+/.vim/autoload/plug.vim.old
 /.vim/plugged/
-/.vim/plugin/eclim.vim
-/.vim/shada/
-/.vim/opt/dl/
-/.vim/opt/eclipse/
 /.local/share/applications/mimeapps.list
