@@ -130,8 +130,8 @@ if &t_Co > 255
   highlight Visual          ctermfg=NONE    ctermbg=234     cterm=NONE
   highlight VisualNOS       ctermfg=NONE    ctermbg=234     cterm=underline
   highlight WildMenu        ctermfg=161     ctermbg=234     cterm=bold
-  highlight Folded          ctermfg=141     ctermbg=234     cterm=NONE
-  highlight FoldColumn      ctermfg=141     ctermbg=234     cterm=NONE
+  highlight Folded          ctermfg=141     ctermbg=233     cterm=NONE
+  highlight FoldColumn      ctermfg=141     ctermbg=233     cterm=NONE
   highlight DiffAdd         ctermfg=0       ctermbg=68      cterm=NONE
   highlight DiffChange      ctermfg=0       ctermbg=141     cterm=NONE
   highlight DiffDelete      ctermfg=0       ctermbg=161     cterm=NONE
