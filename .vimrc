@@ -15,6 +15,7 @@ set backspace=indent,eol,start
 set wildmenu
 set mouse+=a
 set splitbelow
+set hidden
 colorscheme behelit
 
 " Neovim {{{
