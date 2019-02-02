@@ -34,13 +34,16 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'danro/rename.vim', { 'on' : 'Rename' }
+Plug 'junegunn/fzf'
+
+if has('python3')
+    Plug 'roxma/nvim-yarp'
+endif
 
 " neovim compatibility for vim
 if !has('nvim')
-    Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
@@ -64,18 +67,28 @@ Plug 'jceb/vim-orgmode'
 Plug 'ntpeters/vim-better-whitespace'
 
 " You need to run these commands:
-"   cargo install racer
 "   rustup component add rust-src
-"   rustup component add rustfmt-preview
+"   rustup component add rustfmt
+"   rustup component add clippy
+"   rustup component add rls
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
 
 " auto-completion
-if executable('cmake')
-    Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --rust-completer' }
+if has('nvim')
+    Plug 'ncm2/ncm2'
+    Plug 'ncm2/ncm2-path'
+    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh', }
 endif
 
 call plug#end()
+" }}}
+
+" ncm2 {{{
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANT: `:help Ncm2PopupOpen` and `:help completeopt` for more information
+set completeopt=noinsert,menuone,noselect
 " }}}
 
 " NERDTree {{{
@@ -154,12 +167,27 @@ nmap <c-up> <Plug>MoveLineUp
 " }}}
 
 " rust {{{
-autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
-autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+let g:rustfmt_autosave = 1
+" }}}
 
-let g:racer_experimental_completer = 1
-autocmd FileType rust nmap <silent><leader>gd <Plug>(rust-def)
-autocmd FileType rust nmap <silent><leader>gm <Plug>(rust-doc)
+" LanguageClient {{{
+set signcolumn=yes
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust':   ['rustup', 'run', 'stable', 'rls'],
+    \ }
+
+let g:LanguageClient_diagnosticsDisplay = {
+    \ 1: { "signTexthl": "LC_ErrorSign", "virtualTexthl": "LC_Error" },
+    \ 2: { "signTexthl": "LC_WarnSign", "virtualTexthl": "LC_Warn" },
+    \ 3: { "signTexthl": "LC_InfoSign", "virtualTexthl": "LC_Info" },
+    \ 4: { "signTexthl": "LC_HintSign", "virtualTexthl": "LC_Hint" },
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent>;d :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent>;r :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent>;m :call LanguageClient#textDocument_hover()<CR>
 " }}}
 
 " Misc {{{

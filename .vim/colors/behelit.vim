@@ -1,5 +1,5 @@
 " Theme: behelit
-" Version: 0.3
+" Version: 0.4
 " Maintainer: oblique <psyberbits@gmail.com>
 "
 " Copyright (c) 2014, oblique
@@ -201,4 +201,14 @@ if &t_Co > 255
   highlight mkdLinkDef     ctermfg=161     ctermbg=NONE    cterm=bold
   highlight mkdLinkDefTarget ctermfg=69    ctermbg=NONE    cterm=underline
   highlight mkdLinkTitle   ctermfg=141     ctermbg=NONE    cterm=NONE
+
+" LanguageClient
+  highlight LC_Error        ctermfg=238     ctermbg=NONE    cterm=NONE
+  highlight LC_ErrorSign    ctermfg=161     ctermbg=NONE    cterm=bold
+  highlight LC_Warn         ctermfg=238     ctermbg=NONE    cterm=NONE
+  highlight LC_WarnSign     ctermfg=228     ctermbg=NONE    cterm=bold
+  highlight LC_Info         ctermfg=238     ctermbg=NONE    cterm=NONE
+  highlight LC_InfoSign     ctermfg=68      ctermbg=NONE    cterm=bold
+  highlight LC_Hint         ctermfg=238     ctermbg=NONE    cterm=NONE
+  highlight LC_HintSign     ctermfg=203     ctermbg=NONE    cterm=bold
 end
