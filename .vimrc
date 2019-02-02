@@ -97,7 +97,7 @@ noremap <silent><leader>n :NERDTreeToggle<cr>
 " }}}
 
 " vim-airline {{{
-let g:airline_theme='behelit'
+let g:airline_theme='darkness'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
