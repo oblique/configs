@@ -6,7 +6,7 @@ sub-codepage = UTF-8:ISO-8859-7
 sub-auto = fuzzy
 
 ao = pulse,alsa,
-vo = vaapi,vdpau,opengl
+vo = gpu
 
 # Pretend to be Window Media Player.
 # Fixes playback when playlist and media file use the same URL.
