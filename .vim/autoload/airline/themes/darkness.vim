@@ -3,7 +3,6 @@ let s:red_bg        = [ '#121212', '#d7005f', 233, 161, '' ]
 
 let s:blue_fg       = [ '#5f87ff', '#121212', 69,  233, '' ]
 let s:gray_fg       = [ '#3a3a3a', '#121212', 237, 233, '' ]
-let s:green_fg      = [ '#005f5f', '#121212', 23,  233, '' ]
 let s:magenta_fg    = [ '#af87ff', '#121212', 141, 233, '' ]
 let s:red_fg        = [ '#d70057', '#121212', 161, 233, '' ]
 let s:orange_fg     = [ '#ff5f5f', '#121212', 203, 233, '' ]
@@ -16,10 +15,12 @@ let g:airline#themes#darkness#palette.normal =
     \                                   s:gray_fg, s:gray_fg, s:gray_fg)
 let g:airline#themes#darkness#palette.normal.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.normal.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.normal.airline_term = s:red_fg
 
 let g:airline#themes#darkness#palette.normal_modified = { 'airline_c': s:red_fg }
 let g:airline#themes#darkness#palette.normal_modified.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.normal_modified.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.normal_modified.airline_term = s:red_fg
 
 " Insert mode
 let g:airline#themes#darkness#palette.insert =
@@ -27,10 +28,12 @@ let g:airline#themes#darkness#palette.insert =
     \                                   s:gray_fg, s:gray_fg, s:gray_fg)
 let g:airline#themes#darkness#palette.insert.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.insert.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.insert.airline_term = s:red_fg
 
 let g:airline#themes#darkness#palette.insert_modified = { 'airline_c': s:red_fg }
 let g:airline#themes#darkness#palette.insert_modified.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.insert_modified.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.insert_modified.airline_term = s:red_fg
 
 " Replace mode
 let g:airline#themes#darkness#palette.replace =
@@ -38,10 +41,12 @@ let g:airline#themes#darkness#palette.replace =
     \                                   s:gray_fg, s:gray_fg, s:gray_fg)
 let g:airline#themes#darkness#palette.replace.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.replace.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.replace.airline_term = s:red_fg
 
 let g:airline#themes#darkness#palette.replace_modified = { 'airline_c': s:red_fg }
 let g:airline#themes#darkness#palette.replace_modified.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.replace_modified.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.replace_modified.airline_term = s:red_fg
 
 " Visual mode
 let g:airline#themes#darkness#palette.visual =
@@ -49,10 +54,12 @@ let g:airline#themes#darkness#palette.visual =
     \                                   s:gray_fg, s:gray_fg, s:gray_fg)
 let g:airline#themes#darkness#palette.visual.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.visual.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.visual.airline_term = s:red_fg
 
 let g:airline#themes#darkness#palette.visual_modified = { 'airline_c': s:red_fg }
 let g:airline#themes#darkness#palette.visual_modified.airline_error = s:red_bg
 let g:airline#themes#darkness#palette.visual_modified.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.visual_modified.airline_term = s:red_fg
 
 " Inactive window
 let g:airline#themes#darkness#palette.inactive =
@@ -60,10 +67,12 @@ let g:airline#themes#darkness#palette.inactive =
     \                                   s:gray_fg, s:gray_fg, s:gray_fg)
 let g:airline#themes#darkness#palette.inactive.airline_error = s:gray_fg
 let g:airline#themes#darkness#palette.inactive.airline_warning = s:gray_fg
+let g:airline#themes#darkness#palette.inactive.airline_term = s:gray_fg
 
 let g:airline#themes#darkness#palette.inactive_modified = { 'airline_c': s:red_fg }
-let g:airline#themes#darkness#palette.inactive_modified.airline_error = s:red_bg
-let g:airline#themes#darkness#palette.inactive_modified.airline_warning = s:orange_bg
+let g:airline#themes#darkness#palette.inactive_modified.airline_error = s:gray_fg
+let g:airline#themes#darkness#palette.inactive_modified.airline_warning = s:gray_fg
+let g:airline#themes#darkness#palette.inactive_modified.airline_term = s:gray_fg
 
 " Tabline
 let g:airline#themes#darkness#palette.tabline = {
