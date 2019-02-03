@@ -117,10 +117,10 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 nnoremap <silent><c-b> :Buffers<cr>
-nnoremap <silent><leader>fb <c-b> :Buffers<cr>
-nnoremap <silent><leader>ff <c-b> :Files<cr>
-nnoremap <silent><leader>fg <c-b> :Ag<cr>
-nnoremap <silent><leader>ft <c-b> :Tags<cr>
+nnoremap <silent><leader>fb :Buffers<cr>
+nnoremap <silent><leader>ff :Files<cr>
+nnoremap <silent><leader>fg :Ag<cr>
+nnoremap <silent><leader>ft :Tags<cr>
 " }}}
 
 " vim-move {{{
