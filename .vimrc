@@ -149,11 +149,11 @@ let g:LanguageClient_diagnosticsDisplay = {
     \ 4: { "signTexthl": "LC_HintSign", "virtualTexthl": "LC_Hint" },
     \ }
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent>;d :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent>;r :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent>;m :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent>;i :call LanguageClient#explainErrorAtPoint()<CR>
+nnoremap <F5> :call LanguageClient_contextMenu()<cr>
+nnoremap <silent><leader>ld :call LanguageClient#textDocument_definition()<cr>
+nnoremap <silent><leader>lr :call LanguageClient#textDocument_references()<cr>
+nnoremap <silent><leader>lm :call LanguageClient#textDocument_hover()<cr>
+nnoremap <silent><leader>li :call LanguageClient#explainErrorAtPoint()<cr>
 " }}}
 
 " Misc {{{
