@@ -37,7 +37,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'junegunn/fzf'
 
 if has('python3')
     Plug 'roxma/nvim-yarp'
@@ -52,9 +51,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 
-" denite
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ozelentok/denite-gtags'
+" fzf
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " moves block of code
 Plug 'matze/vim-move'
@@ -111,52 +110,17 @@ set noshowmode
 let g:vim_markdown_folding_disabled = 1
 " }}}
 
-" denite.vim {{{
-if executable('ag')
-    " The Silver Searcher
-    call denite#custom#var('file_rec', 'command',
-                \ ['ag', '-U', '--hidden', '--follow', '--nocolor', '--nogroup', '-g', ''])
+" fzf {{{
+" hide status line
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-    " Setup ignore patterns in your .agignore file!
-    " https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
-
-    call denite#custom#var('grep', 'command', ['ag'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', [])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-    call denite#custom#var('grep', 'default_opts',
-                \ [ '--skip-vcs-ignores', '--vimgrep', '--smart-case', '--hidden' ])
-endif
-
-call denite#custom#option('_', {
-            \ 'mode': 'normal',
-            \ 'winheight': 10,
-            \ 'highlight_cursor': 'Cursor',
-            \ 'highlight_matched_range': 'Statement',
-            \ 'highlight_matched_char': 'Statement',
-            \ 'highlight_mode_normal': 'Type',
-            \ 'highlight_mode_insert': 'Type',
-            \ 'highlight_preview_line': 'Underlined',
-            \ })
-
-call denite#custom#source('tag', 'matchers', ['matcher_substring'])
-call denite#custom#source('gtags_ref', 'matchers', ['matcher_substring'])
-call denite#custom#source('gtags_def', 'matchers', ['matcher_substring'])
-
-" use cursor to move
-call denite#custom#map('normal', '<Down>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('normal', '<Up>', '<denite:move_to_previous_line>', 'noremap')
-
-nnoremap <silent><leader>fn :Denite -resume -cursor-pos=+1 -immediately<cr>
-nnoremap <silent><leader>fp :Denite -resume -cursor-pos=+1 -immediately<cr>
-nnoremap <silent><leader>fr :Denite -resume<cr>
-nnoremap <silent><leader>ft :DeniteCursorWord tag<cr>
-nnoremap <silent><leader>fg :DeniteCursorWord grep<cr>
-nnoremap <silent><leader>gd :DeniteCursorWord gtags_def<cr>
-nnoremap <silent><leader>gr :DeniteCursorWord gtags_ref<cr>
-nnoremap <silent><leader>gc :DeniteCursorWord gtags_context<cr>
-nnoremap <silent><leader>gg :DeniteCursorWord gtags_grep<cr>
+nnoremap <silent><c-b> :Buffers<cr>
+nnoremap <silent><leader>fb <c-b> :Buffers<cr>
+nnoremap <silent><leader>ff <c-b> :Files<cr>
+nnoremap <silent><leader>fg <c-b> :Ag<cr>
+nnoremap <silent><leader>ft <c-b> :Tags<cr>
 " }}}
 
 " vim-move {{{
