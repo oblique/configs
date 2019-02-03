@@ -1,5 +1,0 @@
-To automatically install el-get and the missing packages you must run:
-   emacs -q --script ~/.emacs.d/install_el-get.el
-
-To install ycmd, run:
-   ./install_ycmd.sh
