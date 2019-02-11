@@ -133,6 +133,7 @@ nmap <c-up> <Plug>MoveLineUp
 
 " rust {{{
 let g:rustfmt_autosave = 1
+autocmd FileType rust nnoremap <buffer><silent><leader>i :RustFmt<cr>
 " }}}
 
 " LanguageClient {{{
