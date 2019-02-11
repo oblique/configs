@@ -78,6 +78,6 @@ let g:airline#themes#darkness#palette.inactive_modified.airline_term = s:gray_fg
 let g:airline#themes#darkness#palette.tabline = {
     \   'airline_tab': s:gray_fg,
     \   'airline_tabsel': s:blue_fg,
-    \   'airline_tabmod': s:orange_fg,
+    \   'airline_tabmod': s:magenta_fg,
     \   'airline_tabmod_unsel': s:red_fg,
     \ }
