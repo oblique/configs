@@ -9,6 +9,7 @@ export FZF_DEFAULT_OPTS='
     --color=info:61,border:161,prompt:69,pointer:161
     --color=marker:61,spinner:161,header:69
 '
+bindkey '^E' fzf-cd-widget
 
 # start keychain
 if command -v which keychain > /dev/null 2>&1; then
