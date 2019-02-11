@@ -191,7 +191,6 @@ bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor --dmenu
 bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 # other keybindings
-bindsym $mod+m          exec urxvt -name urxvt_floating -geometry 105x30 -e zsh -i -c ncmpcpp
 bindsym $mod+shift+x    exec i3lock
 bindsym $mod+u          [urgent=oldest] focus
 bindsym --release Print         exec --no-startup-id scrot '/tmp/%Y-%m-%d-%H%M%S_$wx$h_scrot.png'
@@ -206,8 +205,6 @@ new_window pixel 2
 
 # window commands
 for_window [class="Firefox" title="^Downloads$"] floating enable
-for_window [class="^Wine$"] floating enable
-for_window [instance="^urxvt_floating$"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [instance="^pinentry$"] floating enable
 for_window [title="^xmessage$"] floating enable border pixel 0

@@ -159,13 +159,6 @@ nnoremap <silent><leader>li :call LanguageClient#explainErrorAtPoint()<cr>
 " Misc {{{
 set guicursor=
 
-if &term =~ "rxvt.*"
-    execute "set <m-j>=\ej"
-    execute "set <m-l>=\el"
-    execute "set <m-c>=\ec"
-    execute "set <m-v>=\ev"
-endif
-
 " Disable ex mode
 nnoremap Q <Nop>
 
