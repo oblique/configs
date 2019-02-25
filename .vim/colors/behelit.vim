@@ -211,4 +211,8 @@ if &t_Co > 255
   highlight LC_InfoSign     ctermfg=68      ctermbg=NONE    cterm=bold
   highlight LC_Hint         ctermfg=238     ctermbg=NONE    cterm=NONE
   highlight LC_HintSign     ctermfg=203     ctermbg=NONE    cterm=bold
+
+" rust
+  highlight rustAttribute   ctermfg=69     ctermbg=NONE    cterm=NONE
+  highlight rustDerive      ctermfg=69     ctermbg=NONE    cterm=NONE
 end
