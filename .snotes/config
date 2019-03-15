@@ -1,3 +1,10 @@
+BEMENU_ARGS=(-i --fn 'Hermit 16'
+            --tb '#101010' --tf '#00ff87'
+            --fb '#101010' --ff '#5f87ff'
+            --nb '#101010' --nf '#3a3a3a'
+            --hb '#101010' --hf '#f00060'
+            --sb '#101010' --sf '#af87ff'
+            --scb '#101010' --scf '#af87ff')
 SNOTES_EDITOR="alacritty -e vim"
 SNOTES_DB="${HOME}/.snotes/notes"
 

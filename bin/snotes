@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # snotes-1.0 by v4hn / 2009-2013
 # See LICENSE file for copyright and license details.
 
@@ -34,7 +34,7 @@ if [ ! -f "$HOME/.snotes/config" ]; then
 SNOTES_EDITOR="xterm -e ${VISUAL:-${EDITOR:-vi}}"
 SNOTES_DB="$HOME/.snotes/notes"
 
-#DMENU_ARGS="-p Open: -sb darkgreen"
+#BEMENU_ARGS="-p Open:"
 
 # clean trailing whitespace from file automatically
 SNOTES_CLEANUP="yes"
@@ -54,8 +54,8 @@ fi
 . "$HOME/.snotes/config" ||
     die "config ~/.snotes/config messed up"
 
-type dmenu >/dev/null 2>&1 ||
-    die "dmenu not available"
+type bemenu >/dev/null 2>&1 ||
+    die "bemenu not available"
 
 type git >/dev/null 2>&1 ||
     die "git not in PATH"
@@ -75,7 +75,7 @@ If you don't like it, just remove all content from the note and
 save. snotes automatically removes empty notes.
 
 As you've already found out, running `snotes` allows you to type
-or select the name of a note using dmenu. It then opens the note
+or select the name of a note using bemenu. It then opens the note
 and you can write/edit/rewrite it to your heart's content.
 When you're done, save the note, close the editor and go on working.
 
@@ -86,7 +86,7 @@ It's simply about 250 lines of shell code.
 
 So you can create, edit and remove notes already. What else do you
 need to know? You can invoke snotes with the '-s/--search' flag.
-This way an empty dmenu pops up and you can enter any string/regular
+This way an empty bemenu pops up and you can enter any string/regular
 expression you like. snotes then looks through all your notes and
 presents you with all notes that match your query. If you're as
 forgetful as I am, you will quickly appreciate this. This mechanism
@@ -104,7 +104,7 @@ repository also makes it quite easy to synchronize your notes from different
 platforms.
 
 You can also use the command line interface of snotes directly, if you
-prefer this to dmenu. Simply invoke `snotes-open` with some parameter.
+prefer this to bemenu. Simply invoke `snotes-open` with some parameter.
 Possible parameters are "note:foo", which opens/creates the note foo,
 "changed:foo", which presents you with recent changes of foo,
 "blame:foo", which gives you a full blame of the note, and "commit:hash"
@@ -134,11 +134,11 @@ fi
 cd "$SNOTES_DB"
 
 if [ "${SNOTES_SEARCH}" = "yes" ]; then
-    regex="$(echo | dmenu ${DMENU_ARGS})"
+    regex="$(echo | bemenu "${BEMENU_ARGS[@]}")"
     [ -n "$regex" ] || exit 0 # no regex means we don't need to search
-    select="$( (grep -risl $regex *; find . \( -path ./.git -prune -o -regex ".*$regex.*" \) -a -type f | sed -e 's:^\./::' ) | sort -u | dmenu ${DMENU_ARGS})"
+    select="$( (grep -risl $regex *; find . \( -path ./.git -prune -o -regex ".*$regex.*" \) -a -type f | sed -e 's:^\./::' ) | sort -u | bemenu "${BEMENU_ARGS[@]}")"
 else
-    select="$(find . \( -path ./.git -prune -o -true \) -a -type f | sed -e 's:^\./::' | sort | dmenu ${DMENU_ARGS})"
+    select="$(find . \( -path ./.git -prune -o -true \) -a -type f | sed -e 's:^\./::' | sort | bemenu "${BEMENU_ARGS[@]}")"
 fi
 
 if [ -z "$select" ]; then
