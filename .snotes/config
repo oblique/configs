@@ -1,4 +1,3 @@
-DMENU_ARGS='-p note:'
 SNOTES_EDITOR="alacritty -e vim"
 SNOTES_DB="${HOME}/.snotes/notes"
 

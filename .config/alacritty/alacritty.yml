@@ -4,8 +4,7 @@
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 env:
-  # Use `1.0` for FHD and `1.3' for QHD
-  WINIT_HIDPI_FACTOR: 1.3
+  WINIT_HIDPI_FACTOR: 1.0
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
@@ -41,8 +40,8 @@ window:
   #     - none: Neither borders nor title bar
   #
   # Values for `decorations` (macOS only):
-  #     - buttonless: Title bar, transparent background and title bar buttons
-  #     - transparent: Title bar, transparent background, but no title bar buttons
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background, but no title bar buttons
   decorations: full
 
   # When true, alacritty starts maximized.
@@ -116,7 +115,8 @@ font:
     #style: Italic
 
   # Point size
-  size: 12.5
+  # For FHD use 12.5, for QHD use 16
+  size: 16
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -292,6 +292,8 @@ mouse:
     #
     # This program is executed when clicking on a text which is recognized as a URL.
     # The URL is always added to the command as the last parameter.
+    #
+    # When set to `None`, URL launching will be disabled completely.
     #
     # Default:
     #   - (macOS) open

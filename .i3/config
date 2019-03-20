@@ -10,9 +10,16 @@
 #
 
 set $mod Mod4
-set $main_monitor eDP1
-set_from_resource $font i3wm.font
-set_from_resource $bar_font i3wm.bar_font
+set $dmenu_args $(echo $DMENU_ARGS)
+
+# FHD
+#set $font -*-terminus-*-*-*--13-*-*-*-*-*-iso10646-1
+#set $bar_font -*-terminus-*-*-*--14-*-*-*-*-*-iso10646-1
+
+# QHD
+set $font xft:Hermit 12
+set $bar_font xft:Hermit 13
+set $nag_font xft:Hermit 14
 
 # window title font
 font $font
@@ -21,18 +28,15 @@ font $font
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return         exec alacritty
-bindsym $mod+KP_Enter       exec alacritty
+bindsym $mod+Return     exec alacritty
+bindsym $mod+KP_Enter   exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (a program launcher)
-bindsym $mod+d          exec rofi -show run
-bindsym $mod+Shift+d    exec rofi -show drun
-
-# window selector
-bindsym $mod+k exec rofi -show window
+# start dmenu (a program launcher)
+bindsym $mod+d          exec dmenu_run $dmenu_args
+bindsym $mod+Shift+d    exec j4-dmenu-desktop --dmenu "dmenu $dmenu_args" --no-generic --term=alacritty
 
 # change focus
 bindsym $mod+Left   focus left
@@ -47,10 +51,10 @@ bindsym $mod+Shift+Up       move up
 bindsym $mod+Shift+Right    move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+h splith
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+v splitv
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -68,9 +72,6 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
-# focus the child container
-# bindsym $mod+d focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -114,24 +115,14 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec ~/.i3/bin/exit_menu.sh
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit' -f '$nag_font'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
-
-    # They resize the border in the direction you pressed, e.g.
-    # when pressing left, the window is resized so that it has
-    # more space on its left
-
-    bindsym Left        resize shrink left 30 px or 10 ppt
-    bindsym Shift+Left  resize grow left 30 px or 10 ppt
-    bindsym Down        resize shrink down 30 px or 10 ppt
-    bindsym Shift+Down  resize grow down 30 px or 10 ppt
-    bindsym Up          resize shrink up 30 px or 10 ppt
-    bindsym Shift+Up    resize grow up 30 px or 10 ppt
-    bindsym Right       resize shrink right 30 px or 10 ppt
-    bindsym Shift+Right resize grow right 30 px or 10 ppt
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -166,15 +157,9 @@ bindsym XF86AudioLowerVolume    exec --no-startup-id pulseaudio-ctl down
 bindsym XF86AudioMute           exec --no-startup-id pulseaudio-ctl mute
 bindsym XF86AudioMicMute        exec --no-startup-id pulseaudio-ctl mute-input
 
-# player keys
-bindsym XF86AudioStop   exec --no-startup-id mpc stop
-bindsym XF86AudioPlay   exec --no-startup-id mpc toggle
-bindsym XF86AudioNext   exec --no-startup-id mpc next
-bindsym XF86AudioPrev   exec --no-startup-id mpc prev
-
 # brightness keys
-bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl set +5%
-bindsym XF86MonBrightnessDown   exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 5
 
 # switch to previous or next workspace
 bindsym $mod+j      workspace prev
@@ -186,40 +171,28 @@ bindsym $mod+n          exec --no-startup-id snotes
 bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
 # multimedia switch
-bindsym $mod+shift+l    exec --no-startup-id ~/bin/mmswitch-monitor $main_monitor
 bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor --dmenu
 bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 # other keybindings
 bindsym $mod+shift+x    exec i3lock
 bindsym $mod+u          [urgent=oldest] focus
-bindsym --release Print         exec --no-startup-id scrot '/tmp/%Y-%m-%d-%H%M%S_$wx$h_scrot.png'
-bindsym --release $mod+Print    exec --no-startup-id scrot -s '/tmp/%Y-%m-%d-%H%M%S_$wx$h_scrot.png'
-
-# floating size boundaries
-floating_minimum_size 0 x 0
-floating_maximum_size -1 x -1
-
-# make borders 2 pixels
-new_window pixel 2
+bindsym --release Print         exec --no-startup-id scrot "$(date +/tmp/screenshot_%Y-%m-%d_%T.%N.png)"
+bindsym --release $mod+Print    exec --no-startup-id scrot -s "$(date +/tmp/screenshot_%Y-%m-%d_%T.%N.png)"
 
 # window commands
-for_window [class="Firefox" title="^Downloads$"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [instance="^pinentry$"] floating enable
-for_window [title="^xmessage$"] floating enable border pixel 0
 
-# color class           border  backgr. text    indicator
-client.focused          #5d97fa #5d97fa #101010 #4b86eb
-client.focused_inactive #151515 #151515 #787878 #303030
-client.unfocused        #101010 #101010 #787878 #202020
-client.urgent           #f00060 #f00060 #101010 #f5468d
+# color class           border  backgr. text    indicator  child border
+client.focused          #5d97fa #5d97fa #101010 #4b86eb     #151515
+client.focused_inactive #151515 #151515 #787878 #303030     #151515
+client.unfocused        #101010 #101010 #787878 #202020     #151515
+client.urgent           #f00060 #f00060 #101010 #f5468d     #f00060
 
 # startup applications
-exec --no-startup-id feh --bg-fill ~/.i3/wallpaper.png
-exec --no-startup-id dunst
 exec --no-startup-id xsettingsd
 exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
+exec --no-startup-id dunst
 exec --no-startup-id ~/.i3/bin/runonce.sh perl ~/.i3/bin/bat_warning.pl 0
-exec --no-startup-id Thunar --daemon
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

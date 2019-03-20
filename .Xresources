@@ -1,41 +1,4 @@
-#define FHD 1
-#define QHD 2
-#define HD_TYPE QHD
-
-#if HD_TYPE == FHD
-Xft.antialias:  1
-Xft.hinting:    1
-Xft.autohint:   0
-Xft.hintstyle:  hintmedium
-Xft.lcdfilter:  lcddefault
-Xft.dpi:        120
-Xft.rgba:       rgb
-i3wm.font:      -*-terminus-*-*-*--13-*-*-*-*-*-iso10646-1
-i3wm.bar_font:  -*-terminus-*-*-*--14-*-*-*-*-*-iso10646-1
-#define ROFI_FONT   hermit bold 14px
-#elif HD_TYPE == QHD
-Xft.dpi:        160
-i3wm.font:      -*-terminus-*-*-*--17-*-*-*-*-*-iso10646-1
-i3wm.bar_font:  -*-terminus-*-*-*--20-*-*-*-*-*-iso10646-1
-#define URXVT_FONT  xft:Hermit:style=medium:pixelsize=20
-#define ROFI_FONT   hermit bold 18px
-#endif
-
-!! rofi
-rofi.columns:                        2
-rofi.bw:                             2
-rofi.terminal:                       alacritty
-rofi.font:                           ROFI_FONT
-rofi.color-enabled:                  true
-!                                       bg      fg    bgalt    hlbg    hlfg
-rofi.color-normal:                   #101010,#404040,#101010,#101010,#5f87ff
-rofi.color-urgent:                   #101010,#f00060,#101010,#101010,#5f87ff
-rofi.color-active:                   #101010,#00ff77,#101010,#101010,#5f87ff
-!                                       bg    border
-rofi.color-window:                   #101010,#202020
-
-! xmessage
 xmessage*background:    #101010
-xmessage*foreground:    #d7005f
-xmessage*borderColor:   #d7005f
+xmessage*foreground:    #505050
+xmessage*borderColor:   #505050
 xmessage*font:          -*-terminus-*-*-*--24-*-*-*-*-*-iso10646-1

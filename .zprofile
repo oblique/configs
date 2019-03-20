@@ -1,42 +1,17 @@
 # env
 export EDITOR=vim
-export PAGER=less
-export LANG=en_US.UTF-8
 export LC_COLLATE=C
 export LC_MESSAGES=C
-export GOPATH="${HOME}/go"
-export GO15VENDOREXPERIMENT=1
-export QT_QPA_PLATFORMTHEME=qt5ct
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export PATH="$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin"
 
-# path
-export PATH="${PATH}:${GOPATH}/bin"
+# FHD
+#export QT_FONT_DPI=120
+#export GDK_DPI_SCALE=1
 
-if [[ $(id -u) -ne 0 ]]; then
-    PATH="${PATH}:${HOME}/bin:${HOME}/.cargo/bin:${HOME}/.config/radare2/bin"
-
-    if command -v python > /dev/null 2>&1; then
-        PATH="${PATH}:$(python -m site --user-base)/bin"
-    fi
-
-    if command -v ruby > /dev/null 2>&1; then
-        PATH="${PATH}:$(ruby -e 'puts Gem.user_dir')/bin"
-    fi
-
-    if command -v npm > /dev/null 2>&1; then
-        PATH="${PATH}:$(npm bin)"
-    fi
-
-    export PATH
-fi
-
-if [[ -d "${HOME}/x-tools" ]]; then
-    for x in $(find "${HOME}/x-tools" -mindepth 1 -maxdepth 1 -type d); do
-        [[ -d "${x}/bin" ]] && PATH="${PATH}:${x}/bin"
-    done
-    unset x
-    export PATH
-fi
+# UHD
+export QT_FONT_DPI=160
+export GDK_DPI_SCALE=1.33
+export DMENU_ARGS='-i -fn Hermit-15 -nb #101010 -nf #3a3a3a -sb #a78edb -sf #101010'
 
 # init console colors
 if [[ $TERM = linux* ]]; then

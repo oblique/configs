@@ -1,7 +1,5 @@
 #!/bin/sh
 
-DMENU_ARGS='-nb #151515 -nf #787878 -sb #151515 -sf #a78edb -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
-
 usage() {
     echo "Usage $(basename $0) [options] [MONITOR ..]"
     echo
@@ -108,7 +106,7 @@ while :; do
 		    echo Extend monitors
 		    echo Duplicate monitors
 		    list_monitors
-		} | dmenu -i -p 'Choose monitor:' $DMENU_ARGS)
+		} | dmenu $DMENU_ARGS)
 
 	    [ -z "$SELECT" ] && exit 0
 
@@ -143,8 +141,6 @@ if [ -z "$ARGS" ]; then
     usage
     exit 1
 fi
-
-ARGS=$(echo $ARGS | tr '[a-z]' '[A-Z]')
 
 for x in $ARGS; do
     for y in $(echo $x | tr '=' ' '); do
