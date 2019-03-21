@@ -1,15 +1,7 @@
 *~
-*.elc
-/.vifm/vifminfo
-/.emacs.d/autosave
-/.emacs.d/backup
-/.emacs.d/sessions
-/.emacs.d/server
-/.emacs.d/ac-comphist.dat
-/.emacs.d/auto-save-list
-/.emacs.d/el-get
 /.vim/.netrwhist
 /.vim/autoload/plug.vim
 /.vim/autoload/plug.vim.old
 /.vim/plugged/
+/.oh-my-zsh.custom/local.zsh
 /.local/share/applications/mimeapps.list
