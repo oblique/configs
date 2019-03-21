@@ -20,8 +20,22 @@ colorscheme behelit
 
 " Neovim {{{
 if has("nvim")
-    " yank uses X clipboard
-    set clipboard+=unnamedplus
+    " use both primary and secondary X clipboards
+    set clipboard=unnamed,unnamedplus
+
+    " force xsel as clipboard backend
+    let g:clipboard = {
+          \   'name': 'xsel',
+          \   'copy': {
+          \      '+': 'xsel --nodetach -i -b',
+          \      '*': 'xsel --nodetach -i -p',
+          \    },
+          \   'paste': {
+          \      '+': 'xsel -o -b',
+          \      '*': 'xsel -o -p',
+          \   },
+          \   'cache_enabled': 1,
+          \ }
 endif
 " }}}
 
