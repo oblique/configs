@@ -29,14 +29,14 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "0x5-30+30"
+    geometry = "1000x5-30+30"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
-    shrink = no
+    shrink = yes
 
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
@@ -46,7 +46,7 @@
     # The height of the entire notification.  If the height is smaller
     # than the font height and padding combined, it will be raised
     # to the font height and padding.
-    notification_height = 0
+    notification_height = 10
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
