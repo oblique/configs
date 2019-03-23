@@ -83,6 +83,8 @@
     idle_threshold = 120
 
     ### Text ###
+    # FHD
+    #font = Hermit 11
     # QHD
     font = Hermit 14
 

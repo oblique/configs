@@ -13,8 +13,9 @@ set $mod Mod4
 set $dmenu_args $(echo $DMENU_ARGS)
 
 # FHD
-#set $font -*-terminus-*-*-*--13-*-*-*-*-*-iso10646-1
-#set $bar_font -*-terminus-*-*-*--14-*-*-*-*-*-iso10646-1
+#set $font xft:Hermit 10
+#set $bar_font xft:Hermit 11
+#set $nag_font xft:Hermit 12
 
 # QHD
 set $font xft:Hermit 12

@@ -115,7 +115,9 @@ font:
     #style: Italic
 
   # Point size
-  # For FHD use 12.5, for QHD use 16
+  # FHD
+  #size: 13.5
+  # QHD
   size: 16
 
   # Offset is the extra space around each character. `offset.y` can be thought of

@@ -7,6 +7,7 @@ export PATH="$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin"
 # FHD
 #export QT_FONT_DPI=120
 #export GDK_DPI_SCALE=1
+#export DMENU_ARGS='-i -fn Hermit-13 -nb #101010 -nf #3a3a3a -sb #a78edb -sf #101010'
 
 # UHD
 export QT_FONT_DPI=160
