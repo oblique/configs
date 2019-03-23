@@ -191,8 +191,8 @@ client.unfocused        #101010 #101010 #787878 #202020     #151515
 client.urgent           #f00060 #f00060 #101010 #f5468d     #f00060
 
 # startup applications
-exec --no-startup-id xsettingsd
 exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
 exec --no-startup-id dunst
 exec --no-startup-id ~/.i3/bin/runonce.sh perl ~/.i3/bin/bat_warning.pl 0
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nextcloud
