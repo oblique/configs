@@ -1,18 +1,18 @@
-From 0e4b799a478ef4a810e799ed51272220c17708d0 Mon Sep 17 00:00:00 2001
+From 7ebd4ddc2facf6c6b7acb754c11b63e0720f92eb Mon Sep 17 00:00:00 2001
 From: oblique <psyberbits@gmail.com>
-Date: Thu, 24 Aug 2017 09:06:48 +0300
+Date: Sat, 24 Aug 2019 15:13:17 +0300
 Subject: [PATCH] change i3locks colors to my taste
 
 ---
  i3lock.c           |  2 +-
- unlock_indicator.c | 37 +++++++++++++------------------------
- 2 files changed, 14 insertions(+), 25 deletions(-)
+ unlock_indicator.c | 43 ++++++++++++++-----------------------------
+ 2 files changed, 15 insertions(+), 30 deletions(-)
 
 diff --git a/i3lock.c b/i3lock.c
-index 87a77b1..8d73597 100644
+index 5da052b..1ba2212 100644
 --- a/i3lock.c
 +++ b/i3lock.c
-@@ -52,7 +52,7 @@
+@@ -58,7 +58,7 @@
  typedef void (*ev_callback_t)(EV_P_ ev_timer *w, int revents);
  static void input_done(void);
  
@@ -22,10 +22,10 @@ index 87a77b1..8d73597 100644
  xcb_window_t win;
  static xcb_cursor_t cursor;
 diff --git a/unlock_indicator.c b/unlock_indicator.c
-index 4c7d0e9..cf0c827 100644
+index 8ff8173..e92e973 100644
 --- a/unlock_indicator.c
 +++ b/unlock_indicator.c
-@@ -152,40 +152,26 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -143,49 +143,31 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                    0 /* start */,
                    2 * M_PI /* end */);
  
@@ -41,6 +41,10 @@ index 4c7d0e9..cf0c827 100644
 -                cairo_set_source_rgba(ctx, 250.0 / 255, 0, 0, 0.75);
 -                break;
 -            default:
+-                if (unlock_state == STATE_NOTHING_TO_DELETE) {
+-                    cairo_set_source_rgba(ctx, 250.0 / 255, 0, 0, 0.75);
+-                    break;
+-                }
 -                cairo_set_source_rgba(ctx, 0, 0, 0, 0.75);
 -                break;
 -        }
@@ -59,6 +63,12 @@ index 4c7d0e9..cf0c827 100644
 +                cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
                  break;
              case STATE_AUTH_IDLE:
+                 if (unlock_state == STATE_NOTHING_TO_DELETE) {
+-                    cairo_set_source_rgb(ctx, 125.0 / 255, 51.0 / 255, 0);
++                    cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
+                     break;
+                 }
+ 
 -                cairo_set_source_rgb(ctx, 51.0 / 255, 125.0 / 255, 0);
 +                cairo_set_source_rgb(ctx, 0x66/255.0, 0xff/255.0, 0x66/255.0);
                  break;
@@ -71,7 +81,7 @@ index 4c7d0e9..cf0c827 100644
          cairo_set_line_width(ctx, 2.0);
          cairo_arc(ctx,
                    BUTTON_CENTER /* x */,
-@@ -202,18 +188,21 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -202,18 +184,21 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
          /* We don't want to show more than a 3-digit number. */
          char buf[4];
  
@@ -81,20 +91,20 @@ index 4c7d0e9..cf0c827 100644
          cairo_set_font_size(ctx, 28.0);
          switch (auth_state) {
              case STATE_AUTH_VERIFY:
-                 text = "verifying…";
+                 text = "Verifying…";
 +                cairo_set_source_rgb(ctx, 0x5f/255.0, 0x87/255.0, 0xd7/255.0);
                  break;
              case STATE_AUTH_LOCK:
-                 text = "locking…";
+                 text = "Locking…";
 +                cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
                  break;
              case STATE_AUTH_WRONG:
-                 text = "wrong!";
+                 text = "Wrong!";
 +                cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
                  break;
              case STATE_I3LOCK_LOCK_FAILED:
-                 text = "lock failed!";
-@@ -226,7 +215,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+                 text = "Lock failed!";
+@@ -229,7 +214,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                          snprintf(buf, sizeof(buf), "%d", failed_attempts);
                          text = buf;
                      }
@@ -103,7 +113,7 @@ index 4c7d0e9..cf0c827 100644
                      cairo_set_font_size(ctx, 32.0);
                  }
                  break;
-@@ -275,16 +264,16 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -278,16 +263,16 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                        highlight_start + (M_PI / 3.0));
              if (unlock_state == STATE_KEY_ACTIVE) {
                  /* For normal keys, we use a lighter green. */
@@ -124,5 +134,5 @@ index 4c7d0e9..cf0c827 100644
                        BUTTON_CENTER /* x */,
                        BUTTON_CENTER /* y */,
 -- 
-2.13.4
+2.23.0
 
