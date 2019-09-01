@@ -45,8 +45,8 @@ highlight VertSplit       guifg=#1c1c1c    guibg=#1c1c1c    gui=NONE
 highlight Visual          guifg=NONE       guibg=#1c1c1c    gui=NONE
 highlight VisualNOS       guifg=NONE       guibg=#1c1c1c    gui=underline
 highlight WildMenu        guifg=#d7005f    guibg=#1c1c1c    gui=bold
-highlight Folded          guifg=#af87ff    guibg=#1c1c1c    gui=NONE
-highlight FoldColumn      guifg=#af87ff    guibg=#1c1c1c    gui=NONE
+highlight Folded          guifg=#5f87af    guibg=#1c1c1c    gui=NONE
+highlight FoldColumn      guifg=#5f87af    guibg=#1c1c1c    gui=NONE
 highlight DiffAdd         guifg=#101010    guibg=#5f87d7    gui=NONE
 highlight DiffChange      guifg=#101010    guibg=#af87ff    gui=NONE
 highlight DiffDelete      guifg=#101010    guibg=#d7005f    gui=NONE
@@ -130,8 +130,8 @@ if &t_Co > 255
   highlight Visual          ctermfg=NONE    ctermbg=234     cterm=NONE
   highlight VisualNOS       ctermfg=NONE    ctermbg=234     cterm=underline
   highlight WildMenu        ctermfg=161     ctermbg=234     cterm=bold
-  highlight Folded          ctermfg=141     ctermbg=233     cterm=NONE
-  highlight FoldColumn      ctermfg=141     ctermbg=233     cterm=NONE
+  highlight Folded          ctermfg=67     ctermbg=233     cterm=NONE
+  highlight FoldColumn      ctermfg=67     ctermbg=233     cterm=NONE
   highlight DiffAdd         ctermfg=0       ctermbg=68      cterm=NONE
   highlight DiffChange      ctermfg=0       ctermbg=141     cterm=NONE
   highlight DiffDelete      ctermfg=0       ctermbg=161     cterm=NONE
