@@ -87,6 +87,10 @@ Plug 'ntpeters/vim-better-whitespace'
 "   rustup component add rls
 Plug 'rust-lang/rust.vim'
 
+" gtags
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ozelentok/denite-gtags'
+
 " auto-completion
 if has('nvim')
     Plug 'ncm2/ncm2'
@@ -170,6 +174,34 @@ nnoremap <silent><leader>ld :call LanguageClient#textDocument_definition()<cr>
 nnoremap <silent><leader>lr :call LanguageClient#textDocument_references()<cr>
 nnoremap <silent><leader>lm :call LanguageClient#textDocument_hover()<cr>
 nnoremap <silent><leader>li :call LanguageClient#explainErrorAtPoint()<cr>
+" }}}
+
+" denite-gtags {{{
+call denite#custom#option('_', {
+            \ 'mode': 'normal',
+            \ 'winheight': 10,
+            \ 'highlight_cursor': 'Cursor',
+            \ 'highlight_matched_range': 'Statement',
+            \ 'highlight_matched_char': 'Statement',
+            \ 'highlight_mode_normal': 'Type',
+            \ 'highlight_mode_insert': 'Type',
+            \ 'highlight_preview_line': 'Underlined',
+            \ })
+
+call denite#custom#source('tag', 'matchers', ['matcher_substring'])
+call denite#custom#source('gtags_ref', 'matchers', ['matcher_substring'])
+call denite#custom#source('gtags_def', 'matchers', ['matcher_substring'])
+
+" use cursor to move
+call denite#custom#map('normal', '<Down>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('normal', '<Up>', '<denite:move_to_previous_line>', 'noremap')
+
+nnoremap <silent><leader>gd :DeniteCursorWord gtags_def<cr>
+nnoremap <silent><leader>gr :DeniteCursorWord gtags_ref<cr>
+nnoremap <silent><leader>gc :DeniteCursorWord gtags_context<cr>
+nnoremap <silent><leader>gn :Denite -resume -cursor-pos=+1 -immediately<cr>
+nnoremap <silent><leader>gp :Denite -resume -cursor-pos=+1 -immediately<cr>
+nnoremap <silent><leader>gg :Denite -resume<cr>
 " }}}
 
 " Misc {{{
