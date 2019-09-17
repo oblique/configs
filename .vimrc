@@ -192,16 +192,26 @@ call denite#custom#source('tag', 'matchers', ['matcher_substring'])
 call denite#custom#source('gtags_ref', 'matchers', ['matcher_substring'])
 call denite#custom#source('gtags_def', 'matchers', ['matcher_substring'])
 
-" use cursor to move
-call denite#custom#map('normal', '<Down>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('normal', '<Up>', '<denite:move_to_previous_line>', 'noremap')
+function! s:denite_maps() abort
+    nnoremap <buffer><silent><expr><CR> denite#do_map('do_action')
+    nnoremap <buffer><silent><expr>d denite#do_map('do_action', 'delete')
+    nnoremap <buffer><silent><expr>p denite#do_map('do_action', 'preview')
+    nnoremap <buffer><silent><expr>q denite#do_map('quit')
+    nnoremap <buffer><silent><expr>i denite#do_map('open_filter_buffer')
+    nnoremap <buffer><silent><expr><Space> denite#do_map('toggle_select').'j'
+endfunction
 
-nnoremap <silent><leader>gd :DeniteCursorWord gtags_def<cr>
-nnoremap <silent><leader>gr :DeniteCursorWord gtags_ref<cr>
-nnoremap <silent><leader>gc :DeniteCursorWord gtags_context<cr>
-nnoremap <silent><leader>gn :Denite -resume -cursor-pos=+1 -immediately<cr>
-nnoremap <silent><leader>gp :Denite -resume -cursor-pos=+1 -immediately<cr>
-nnoremap <silent><leader>gg :Denite -resume<cr>
+function! s:c_cpp_maps() abort
+    nnoremap <buffer><silent><leader>gd :DeniteCursorWord gtags_def<cr>
+    nnoremap <buffer><silent><leader>gr :DeniteCursorWord gtags_ref<cr>
+    nnoremap <buffer><silent><leader>gc :DeniteCursorWord gtags_context<cr>
+    nnoremap <buffer><silent><leader>gn :Denite -resume -cursor-pos=+1 -immediately<cr>
+    nnoremap <buffer><silent><leader>gp :Denite -resume -cursor-pos=+1 -immediately<cr>
+    nnoremap <buffer><silent><leader>gg :Denite -resume<cr>
+endfunction
+
+autocmd FileType denite call s:denite_maps()
+autocmd FileType c,cpp call s:c_cpp_maps()
 " }}}
 
 " Misc {{{
