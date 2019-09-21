@@ -25,17 +25,17 @@ if has("nvim")
 
     " force xsel as clipboard backend
     let g:clipboard = {
-          \   'name': 'xsel',
-          \   'copy': {
-          \      '+': 'xsel --nodetach -i -b',
-          \      '*': 'xsel --nodetach -i -p',
-          \    },
-          \   'paste': {
-          \      '+': 'xsel -o -b',
-          \      '*': 'xsel -o -p',
-          \   },
-          \   'cache_enabled': 1,
-          \ }
+                \   'name': 'xsel',
+                \   'copy': {
+                \      '+': 'xsel --nodetach -i -b',
+                \      '*': 'xsel --nodetach -i -p',
+                \    },
+                \   'paste': {
+                \      '+': 'xsel -o -b',
+                \      '*': 'xsel -o -p',
+                \   },
+                \   'cache_enabled': 1,
+                \ }
 endif
 " }}}
 
@@ -52,15 +52,12 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 
-if has('python3')
-    Plug 'roxma/nvim-yarp'
-endif
-
 " neovim compatibility for vim
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+" airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
@@ -84,29 +81,25 @@ Plug 'ntpeters/vim-better-whitespace'
 "   rustup component add rust-src
 "   rustup component add rustfmt
 "   rustup component add clippy
-"   rustup component add rls
+"
+" Install rust-analyzer:
+"   git clone https://github.com/rust-analyzer/rust-analyzer
+"   cd rust-analyzer
+"   cargo install-ra --server
 Plug 'rust-lang/rust.vim'
 
-" gtags
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ozelentok/denite-gtags'
+" langserver
+"
+" After installation of coc.nvim run:
+"   :CocInstall coc-rust-analyzer
+"   :CocInstall coc-lists
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
-" auto-completion
-if has('nvim')
-    Plug 'ncm2/ncm2'
-    Plug 'ncm2/ncm2-path'
-    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh', }
-endif
+" tags
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
 
 call plug#end()
-" }}}
-
-" ncm2 {{{
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" IMPORTANT: `:help Ncm2PopupOpen` and `:help completeopt` for more information
-set completeopt=noinsert,menuone,noselect
 " }}}
 
 " NERDTree {{{
@@ -132,7 +125,7 @@ let g:vim_markdown_folding_disabled = 1
 " hide status line
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+            \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><leader>fb :Buffers<cr>
@@ -153,65 +146,97 @@ nmap <c-up> <Plug>MoveLineUp
 let g:rustfmt_autosave = 1
 let g:rust_fold = 1
 autocmd FileType rust nnoremap <buffer><silent><leader>i :RustFmt<cr>
+
+command EnableRustfmt let g:rustfmt_autosave = 1
+command DisableRustfmt let g:rustfmt_autosave = 0
 " }}}
 
-" LanguageClient {{{
+" coc {{{
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 set signcolumn=yes
+let g:airline#extensions#coc#enabled = 1
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust':   ['rustup', 'run', 'stable', 'rls'],
-    \ }
+" completion menu settings {{{
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-let g:LanguageClient_diagnosticsDisplay = {
-    \ 1: { "signTexthl": "LC_ErrorSign", "virtualTexthl": "LC_Error" },
-    \ 2: { "signTexthl": "LC_WarnSign", "virtualTexthl": "LC_Warn" },
-    \ 3: { "signTexthl": "LC_InfoSign", "virtualTexthl": "LC_Info" },
-    \ 4: { "signTexthl": "LC_HintSign", "virtualTexthl": "LC_Hint" },
-    \ }
+" Use <tab> to complete
+inoremap <silent><expr><TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 
-nnoremap <F5> :call LanguageClient_contextMenu()<cr>
-nnoremap <silent><leader>ld :call LanguageClient#textDocument_definition()<cr>
-nnoremap <silent><leader>lr :call LanguageClient#textDocument_references()<cr>
-nnoremap <silent><leader>lm :call LanguageClient#textDocument_hover()<cr>
-nnoremap <silent><leader>li :call LanguageClient#explainErrorAtPoint()<cr>
+" Use <s-tab> to complete with previous
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <enter> to confirm
+inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " }}}
 
-" denite-gtags {{{
-call denite#custom#option('_', {
-            \ 'mode': 'normal',
-            \ 'winheight': 10,
-            \ 'highlight_cursor': 'Cursor',
-            \ 'highlight_matched_range': 'Statement',
-            \ 'highlight_matched_char': 'Statement',
-            \ 'highlight_mode_normal': 'Type',
-            \ 'highlight_mode_insert': 'Type',
-            \ 'highlight_preview_line': 'Underlined',
-            \ })
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent>[g <Plug>(coc-diagnostic-prev)
+nmap <silent>]g <Plug>(coc-diagnostic-next)
 
-call denite#custom#source('tag', 'matchers', ['matcher_substring'])
-call denite#custom#source('gtags_ref', 'matchers', ['matcher_substring'])
-call denite#custom#source('gtags_def', 'matchers', ['matcher_substring'])
+" Gotos
+nmap <silent>gd <Plug>(coc-definition)
+nmap <silent>gy <Plug>(coc-type-definition)
+nmap <silent>gi <Plug>(coc-implementation)
+nmap <silent>gr <Plug>(coc-references)
 
-function! s:denite_maps() abort
-    nnoremap <buffer><silent><expr><CR> denite#do_map('do_action')
-    nnoremap <buffer><silent><expr>d denite#do_map('do_action', 'delete')
-    nnoremap <buffer><silent><expr>p denite#do_map('do_action', 'preview')
-    nnoremap <buffer><silent><expr>q denite#do_map('quit')
-    nnoremap <buffer><silent><expr>i denite#do_map('open_filter_buffer')
-    nnoremap <buffer><silent><expr><Space> denite#do_map('toggle_select').'j'
+" Use `K` to show doc
+nnoremap <silent>K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
-function! s:c_cpp_maps() abort
-    nnoremap <buffer><silent><leader>gd :DeniteCursorWord gtags_def<cr>
-    nnoremap <buffer><silent><leader>gr :DeniteCursorWord gtags_ref<cr>
-    nnoremap <buffer><silent><leader>gc :DeniteCursorWord gtags_context<cr>
-    nnoremap <buffer><silent><leader>gn :Denite -resume -cursor-pos=+1 -immediately<cr>
-    nnoremap <buffer><silent><leader>gp :Denite -resume -cursor-pos=+1 -immediately<cr>
-    nnoremap <buffer><silent><leader>gg :Denite -resume<cr>
-endfunction
+" Rename
+nmap <leader>rn <Plug>(coc-rename)
+" Menu
+nnoremap <silent><F5> :<C-u>CocList<cr>
+" Show all diagnostics
+nnoremap <silent><space>a  :<C-u>CocList diagnostics<cr>
+" Show commands
+nnoremap <silent><space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent><space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent><space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent><space>p  :<C-u>CocListResume<CR>
 
-autocmd FileType denite call s:denite_maps()
-autocmd FileType c,cpp call s:c_cpp_maps()
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+" }}}
+
+" tags {{{
+" You can regenerate tags with `:GutentagsUpdate`
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_plus_switch = 1
+let g:gutentags_plus_nomap = 1
+
+" Find the root directory of a project. If is not under revision system, just
+" create `.root` empty file.
+let g:gutentags_project_root = ['.git', '.svn', '.hg', '.root']
+
+autocmd FileType c,cpp nnoremap <buffer><silent>gd :GscopeFind g <C-R><C-W><cr>
+autocmd FileType c,cpp nnoremap <buffer><silent>gr :GscopeFind s <C-R><C-W><cr>
 " }}}
 
 " Misc {{{
