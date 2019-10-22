@@ -158,6 +158,9 @@ set shortmess+=c
 set signcolumn=yes
 let g:airline#extensions#coc#enabled = 1
 
+" Disable underlining
+autocmd FileType * highlight CocUnderline cterm=NONE gui=NONE
+
 " completion menu settings {{{
 function! s:check_back_space() abort
     let col = col('.') - 1
