@@ -234,6 +234,9 @@ let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_plus_switch = 1
 let g:gutentags_plus_nomap = 1
 
+" Disable auto-generation
+let g:gutentags_enabled = 0
+
 " Find the root directory of a project. If is not under revision system, just
 " create `.root` empty file.
 let g:gutentags_project_root = ['.git', '.svn', '.hg', '.root']
