@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ -f ~/.zprofile ] && source ~/.zprofile
+
+setxkbmap -layout us,el
+setxkbmap -variant ,extended
+setxkbmap -option
+setxkbmap -option grp:rctrl_rshift_toggle
+
+xsetroot -solid "#101010"
