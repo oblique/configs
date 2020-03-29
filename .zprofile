@@ -3,7 +3,13 @@ export EDITOR=vim
 export LC_COLLATE=C
 export LC_MESSAGES=C
 export PATH="$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin"
+
+# Use intel-media-driver
+export LIBVA_DRIVER_NAME=iHD
+
+# Qt
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_STYLE_OVERRIDE=Adwaita
 
 # FHD
 #export QT_SCALE_FACTOR=1

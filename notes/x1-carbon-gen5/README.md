@@ -1,43 +1,86 @@
-### pacaur
+### yay
 
 ```bash
-git clone https://aur.archlinux.org/pacaur.git
-git clone https://aur.archlinux.org/cower.git
-cd cower
-makepkg -si
-cd ../pacaur
+git clone https://aur.archlinux.org/yay.git
+cd yay
 makepkg -si
 ```
 
-### Packages
+### Non GUI packages
 
 ```bash
-pacman -S openssh sudo terminus-font git tk i3 dunst rofi xorg xorg-init xorg-apps \
-          zsh xterm xinput dmidecode xf86-video-intel asp chromium firefox ffmpeg \
-          lsof htop networkmanager network-manager-applet dhclient bluez dnsmasq \
-          dhcpcd docker gnome-keyring python python-pip networkmanager-openconnect \
-          networkmanager-openvpn networkmanager-pptp networkmanager-vpnc \
-          networkmanager-strongswan evince pavucontrol alsa-utils wget aria2 feh \
-          mpv youtube-dl virt-manager qemu radvd polkit-gnome net-tools ws p7zip \
-          thunar tumbler udisks2 imagemagick gimp speedtest-cli autocutsel \
-          keychain the_silver_searcher bind-tools shellcheck aspell aspell-en \
-          libva-intel-driver neovim python-neovim python2-neovim wireshark-qt \
-          tcpdump gdb strace ltrace valgrind sysdig tree rsync hdparm rfkill \
-          python2 python2-pip ruby ruby-docs eog ebtables scrot cscope ctags
-pacaur -S rxvt-unicode-cvs-patched-wideglyphs xsettingsd skypeforlinux-bin insync \
-          insync-thunar pulseaudio-ctl neovim-symlinks xxd-vim rofi-dmenu \
-          brightnessctl xss-lock neomutt bcompare global idutils
+pacman -S zsh openssh git lsof htop tree asp dmidecode wget rsync   \
+          net-tools bind-tools connman wpa_supplicant bluez tcpdump \
+          dhclient dnsmasq dhcpcd rfkill speedtest-cli aria2        \
+          gdb strace ltrace valgrind sysdig cscope ctags            \
+          neovim python python-pip python-neovim                    \
+          keychain the_silver_searcher shellcheck aspell aspell-en  \
+          docker p7zip udisks2 youtube-dl ffmpeg imagemagick tmux   \
+          pulseaudio
+
+yay -S pulseaudio-ctl neovim-symlinks xxd-standalone global idutils
 ```
 
-### Touchpad
-
-To make touchpad work properly you need to add `psmouse.synaptics_intertouch=1`
-in your [kernel parameters].
-
-### Disable swap unless is really needed
+### GUI Packages
 
 ```bash
-echo 'vm.swappiness=0' > /etc/sysctl.d/99-sysctl.conf
+pacman -S i3 alacritty dmenu dunst xclip xsel acpilight scrot   \
+          xorg xf86-input-libinput xorg-xinit xorg-apps xterm   \
+          gnome-keyring polkit-gnome tk blueberry pavucontrol   \
+          chromium firefox thunar tumbler gvfs mpv gimp eog     \
+          wireshark-qt code lightdm lightdm-gtk-greeter
+
+yay -S skypeforlinux-bin xss-lock j4-demu-desktop
+```
+
+### Graphics
+
+Install:
+
+```bash
+pacman -S mesa vulkan-intel intel-media-driver linux-firmware
+```
+
+Add in `.profile` or `.zprofile`:
+
+```
+export LIBVA_DRIVER_NAME=iHD
+```
+
+Edit `/etc/mkinitcpio.conf`:
+
+```
+MODULES=(... intel_agp i915 ...)
+```
+
+Create `/etc/modprobe.d/i915.conf`:
+
+```
+options i915 enable_guc=2
+```
+
+Update initramfs
+
+```bash
+mkinitcpio -P
+```
+
+### TrackPoint
+
+Sometimes TrackPoint is not detected on wakeup.
+You can fix this by reloading `rmi_smbus` module.
+
+```bash
+sudo rmmod rmi_smbus; sudo modprobe rmi_smbus
+```
+
+### sysctl
+
+/etc/sysctl.d/99-sysctl.conf:
+
+```
+vm.swappiness = 0
+kernel.sysrq = 1
 ```
 
 ### Hibernate
@@ -89,47 +132,26 @@ package you need to sign it again:
 cryptboot update-grub
 ```
 
-### Mobile internet
-
-```bash
-pacman -S modemmanager
-systemctl enable modemmanager
-systemctl start modemmanager
-```
-
 ### Fonts
 
 ```bash
-pacman -S noto-fonts ttf-dejavu texlive-fontsextra terminus-font
-pacaur -S otf-hermit ttf-google-fonts-git
+pacman -S noto-fonts noto-fonts-emoji ttf-roboto ttf-dejavu \
+          texlive-fontsextra terminus-font
+yay -S otf-hermit ttf-google-fonts-git
 echo 'FONT=ter-132b' > /etc/vconsole.conf
-```
-
-### Icons
-
-```bash
-git clone https://github.com/alecive/FlatWoken.git
-mkdir -p ~/.icons
-ln -s $PWD/FlatWoken/FlatWoken ~/.icons
 ```
 
 ### GTK+
 
 ```bash
-pacman -S gnome-themes-standard
-pacaur -S xsettingsd
+pacman -S gnome-themes-extra deepin-icon-theme
 ```
-
-Copy `.xsettingsd` from this repo and run `xsettingsd` on startup.
 
 ### Qt
 
 ```bash
-pacman -S qt5ct
-pacaur -S adwaita-qt4 adwaita-qt5
+yay -S adwaita-qt
 ```
-
-Select Qt5 theme with `qt5ct`, select Qt4 theme with `qtconfig-qt4`.
 
 
 [cryptboot]: https://github.com/xmikos/cryptboot
