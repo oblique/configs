@@ -85,7 +85,7 @@ scrolling:
   # to allow mouse scrolling for applications like `man`.
   #
   # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
+  multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
@@ -204,7 +204,7 @@ colors:
   # If only text is unset the cell text color will remain the same.
   selection:
   #  text: '0xeaeaea'
-    background: '0x202020'
+    background: '0x2368bb'
 
   # Normal colors
   normal:
