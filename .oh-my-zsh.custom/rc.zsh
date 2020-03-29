@@ -5,7 +5,7 @@ export LS_COLORS='no=01;32:fi=00:di=00;34:ln=01;36:pi=04;33:so=01;35:bd=33;04:cd
 export GREP_COLOR='1;31'
 
 export FZF_DEFAULT_OPTS='
-    --color=fg:238,bg:233,hl:161,fg+:61,bg+:233,hl+:161
+    --color=fg:238,bg:-1,hl:161,fg+:61,bg+:-1,hl+:161
     --color=info:61,border:161,prompt:69,pointer:161
     --color=marker:61,spinner:161,header:69
     --no-bold
