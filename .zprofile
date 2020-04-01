@@ -9,7 +9,7 @@ export LIBVA_DRIVER_NAME=iHD
 
 # Qt
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export QT_STYLE_OVERRIDE=Adwaita
+export QT_STYLE_OVERRIDE=Adwaita-Dark
 
 # FHD
 #export QT_SCALE_FACTOR=1
