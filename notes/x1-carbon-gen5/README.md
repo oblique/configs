@@ -28,7 +28,8 @@ pacman -S i3 alacritty dmenu dunst xclip xsel acpilight scrot   \
           xorg xf86-input-libinput xorg-xinit xorg-apps xterm   \
           gnome-keyring polkit-gnome tk blueberry pavucontrol   \
           chromium firefox thunar tumbler gvfs mpv gimp eog     \
-          wireshark-qt code lightdm lightdm-gtk-greeter
+          wireshark-qt code lightdm lightdm-gtk-greeter         \
+          autorandr
 
 yay -S skypeforlinux-bin xss-lock j4-demu-desktop
 ```

@@ -172,7 +172,8 @@ bindsym $mod+n          exec --no-startup-id snotes
 bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
 # multimedia switch
-bindsym $mod+shift+m    exec --no-startup-id ~/bin/mmswitch-monitor --dmenu
+bindsym $mod+shift+m    exec --no-startup-id autorandr --change
+bindsym $mod+shift+l    exec --no-startup-id autorandr -l local
 bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 # other keybindings
