@@ -51,6 +51,7 @@ usage() {
     echo "  -l, --list-cards      List sound cards"
     echo "  -d, --default-card    Show current default card"
     echo "  --dmenu               Use dmenu"
+    echo "  --bemenu              Use bemenu"
     echo
     echo "Examples:"
     echo "  $(basename $0) index:0"
@@ -58,7 +59,7 @@ usage() {
     echo "  $(basename $0) desc:\"$(get_desc_from_index 0)\""
 }
 
-ARGS=$(getopt -o ldh -l "list-cards,default-card,dmenu,help" -n $(basename $0) -- "$@")
+ARGS=$(getopt -o ldh -l "list-cards,default-card,dmenu,bemenu,help" -n $(basename $0) -- "$@")
 [ $? -ne 0 ] && exit 1
 eval set -- "$ARGS"
 
@@ -84,6 +85,15 @@ while :; do
             ARG=desc:"$SELECT"
             break
             ;;
+        --bemenu)
+            SELECT=$(list_sinks_with_default | sed 's/\(\*\?\).* description: \"\(.*\)\"$/\1\2/' | \
+                bemenu -i -p '')
+            [ -n "$SELECT" ] && SELECT=$(echo $SELECT | sed 's/^\*//')
+            [ -z "$SELECT" ] && exit 0
+            ARG=desc:"$SELECT"
+            break
+            ;;
+
         --)
             shift
             ARG="$@"

@@ -16,7 +16,7 @@ pacman -S zsh openssh git lsof htop tree asp dmidecode wget rsync   \
           neovim python python-pip python-neovim                    \
           keychain the_silver_searcher shellcheck aspell aspell-en  \
           docker p7zip udisks2 youtube-dl ffmpeg imagemagick tmux   \
-          pulseaudio
+          pulseaudio jq mlocate
 
 yay -S pulseaudio-ctl neovim-symlinks xxd-standalone global idutils
 ```
@@ -24,14 +24,26 @@ yay -S pulseaudio-ctl neovim-symlinks xxd-standalone global idutils
 ### GUI Packages
 
 ```bash
-pacman -S i3 alacritty dmenu dunst xclip xsel acpilight scrot   \
-          xorg xf86-input-libinput xorg-xinit xorg-apps xterm   \
-          gnome-keyring polkit-gnome tk blueberry pavucontrol   \
-          chromium firefox thunar tumbler gvfs mpv gimp eog     \
-          wireshark-qt code lightdm lightdm-gtk-greeter         \
-          autorandr
+# i3wm
+pacman -S i3 dmenu dunst xclip xsel scrot xorg xorg-apps        \
+          xorg-init xf86-input-libinput autorandr arandr
 
-yay -S skypeforlinux-bin xss-lock j4-demu-desktop
+yay -S xss-lock
+
+# sway
+pacman -S sway waybar bemenu-wlroots xorg-server-xwayland       \
+          mako wl-clipboard grim slurp swayidle swaylock        \
+          libappindicator-gtk3 kanshi
+
+yay -S wdisplays wayvnc 
+
+# common
+pacman -S alacritty acpilight gnome-keyring polkit-gnome tk     \
+          blueberry pavucontrol chromium firefox thunar tumbler \
+          gvfs mpv gimp eog wireshark-qt code lightdm           \
+          lightdm-gtk-greeter
+
+yay -S skypeforlinux-bin j4-demu-desktop
 ```
 
 ### Graphics
@@ -137,7 +149,7 @@ cryptboot update-grub
 
 ```bash
 pacman -S noto-fonts noto-fonts-emoji ttf-roboto ttf-dejavu \
-          texlive-fontsextra terminus-font
+          texlive-fontsextra terminus-font awesome-terminal-fonts
 yay -S otf-hermit ttf-google-fonts-git
 echo 'FONT=ter-132b' > /etc/vconsole.conf
 ```

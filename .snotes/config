@@ -1,3 +1,4 @@
+BEMENU_ARGS=(-i -p '')
 SNOTES_EDITOR="alacritty -e vim"
 SNOTES_DB="${HOME}/.snotes/notes"
 

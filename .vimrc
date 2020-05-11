@@ -20,22 +20,24 @@ colorscheme behelit
 
 " Neovim {{{
 if has("nvim")
-    " use both primary and secondary X clipboards
+    " use both primary and secondary clipboards
     set clipboard=unnamed,unnamedplus
 
-    " force xsel as clipboard backend
-    let g:clipboard = {
-                \   'name': 'xsel',
-                \   'copy': {
-                \      '+': 'xsel --nodetach -i -b',
-                \      '*': 'xsel --nodetach -i -p',
-                \    },
-                \   'paste': {
-                \      '+': 'xsel -o -b',
-                \      '*': 'xsel -o -p',
-                \   },
-                \   'cache_enabled': 1,
-                \ }
+    " in X11 force xsel as clipboard backend
+    if !empty($DISPLAY) && empty($WAYLAND_DISPLAY)
+        let g:clipboard = {
+                    \   'name': 'xsel',
+                    \   'copy': {
+                    \      '+': 'xsel --nodetach -i -b',
+                    \      '*': 'xsel --nodetach -i -p',
+                    \    },
+                    \   'paste': {
+                    \      '+': 'xsel -o -b',
+                    \      '*': 'xsel -o -p',
+                    \   },
+                    \   'cache_enabled': 1,
+                    \ }
+    endif
 endif
 " }}}
 

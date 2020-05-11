@@ -1,0 +1,12 @@
+profile laptop {
+    output eDP-1 enable scale 1 mode 2560x1440 position 0,0
+
+    exec ~/.config/kanshi/bin/setup-laptop.sh
+}
+
+profile docked-home {
+    output "Unknown HP Z27 CN49500CXB" enable scale 1 mode 3840x2160 position 0,0
+    output eDP-1 enable scale 1 mode 2560x1440 position 3840,720
+
+    exec ~/.config/kanshi/bin/setup-docked-home.sh
+}

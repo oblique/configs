@@ -11,15 +11,7 @@ export LIBVA_DRIVER_NAME=iHD
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_STYLE_OVERRIDE=Adwaita-Dark
 
-# FHD
-#export QT_SCALE_FACTOR=1
-#export GDK_DPI_SCALE=1
-#export DMENU_ARGS='-i -fn Hermit-13 -nb #101010 -nf #3a3a3a -sb #a78edb -sf #101010'
-
-# UHD
-export QT_SCALE_FACTOR=1.33
-export GDK_DPI_SCALE=1.33
-export DMENU_ARGS='-i -fn Hermit-15 -nb #101010 -nf #3a3a3a -sb #a78edb -sf #101010'
+export BEMENU_OPTS='-m all -n --fn "Hermit 16" --tb #a78edb --tf #101010 --fb #101010 --ff #3a3a3a --nb #101010 --nf #3a3a3a --hb #a78edb --hf #101010 --sb #101010 --sf #a78edb --scb #101010 --scf #505050'
 
 # init console colors
 if [[ $TERM = linux* ]]; then
