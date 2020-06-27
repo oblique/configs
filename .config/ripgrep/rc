@@ -3,4 +3,3 @@
 --colors=column:fg:blue
 --colors=match:fg:red
 --colors=match:style:bold
---line-number
