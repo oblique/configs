@@ -2,31 +2,28 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
+
+### Variables
 
 set $mod Mod4
 set $dmenu_args $(echo $DMENU_ARGS)
 
+
 # FHD
 #set $font xft:Hermit 10
 #set $bar_font xft:Hermit 11
-#set $nag_font xft:Hermit 12
 
 # QHD
 set $font xft:Hermit 12
 set $bar_font xft:Hermit 13
-set $nag_font xft:Hermit 14
 
 # window title font
 font $font
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+### Key bindings
+#
+# Basics:
+#
 
 # start a terminal
 bindsym $mod+Return     exec alacritty
@@ -35,51 +32,68 @@ bindsym $mod+KP_Enter   exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
+# start your launcher
 bindsym $mod+d          exec dmenu_run $dmenu_args
 bindsym $mod+Shift+d    exec j4-dmenu-desktop --dmenu "dmenu $dmenu_args" --no-generic --term=alacritty
 
-# change focus
+# switch to previous or next workspace
+bindsym $mod+j      workspace prev
+bindsym $mod+l      workspace next
+bindsym $mod+grave  workspace back_and_forth
+
+# volume keys
+bindsym XF86AudioRaiseVolume    exec --no-startup-id pulseaudio-ctl up
+bindsym XF86AudioLowerVolume    exec --no-startup-id pulseaudio-ctl down
+bindsym XF86AudioMute           exec --no-startup-id pulseaudio-ctl mute
+bindsym XF86AudioMicMute        exec --no-startup-id pulseaudio-ctl mute-input
+
+# brightness keys
+bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 5
+
+# other keybindings
+bindsym $mod+u          [urgent=oldest] focus
+bindsym $mod+Shift+x    exec i3lock
+bindsym $mod+n          exec --no-startup-id snotes
+bindsym $mod+Shift+n    exec --no-startup-id snotes -s
+
+bindsym $mod+shift+m    exec --no-startup-id autorandr --change
+bindsym $mod+shift+l    exec --no-startup-id autorandr -l local
+bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
+
+bindsym --release Print         exec --no-startup-id scrot "$(date +/tmp/screenshot_%Y-%m-%d_%H-%M-%S.%N.png)"
+bindsym --release $mod+Print    exec --no-startup-id scrot -s "$(date +/tmp/screenshot_%Y-%m-%d_%H-%M-%S.%N.png)"
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'
+
+#
+# Moving around:
+#
+
+# Move your focus around
 bindsym $mod+Left   focus left
 bindsym $mod+Down   focus down
 bindsym $mod+Up     focus up
 bindsym $mod+Right  focus right
 
-# move focused window
+# _move_ the focused window with the same, but add Shift
 bindsym $mod+Shift+Left     move left
 bindsym $mod+Shift+Down     move down
 bindsym $mod+Shift+Up       move up
 bindsym $mod+Shift+Right    move right
 
-# split in horizontal orientation
-bindsym $mod+h splith
-
-# split in vertical orientation
-bindsym $mod+v splitv
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+#
+# Workspaces:
+#
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -111,26 +125,72 @@ bindsym $mod+Ctrl+Down  move workspace to output down
 bindsym $mod+Ctrl+Up    move workspace to output up
 bindsym $mod+Ctrl+Right move workspace to output right
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit' -f '$nag_font'"
+#
+# Layout stuff:
+#
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+h splith
+bindsym $mod+v splitv
 
-# resize window (you can also use the mouse for that)
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# move focus to the parent container
+bindsym $mod+a focus parent
+
+#
+# Scratchpad:
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+#
+# Resizing containers:
+#
+
 mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
 
-    # back to normal: Enter or Escape
+    # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
+
+# Passthrough
+mode passthrough {
+	bindsym $mod+p mode default
+}
+
+bindsym $mod+p mode passthrough
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -152,49 +212,25 @@ bar {
     }
 }
 
-# volume keys
-bindsym XF86AudioRaiseVolume    exec --no-startup-id pulseaudio-ctl up
-bindsym XF86AudioLowerVolume    exec --no-startup-id pulseaudio-ctl down
-bindsym XF86AudioMute           exec --no-startup-id pulseaudio-ctl mute
-bindsym XF86AudioMicMute        exec --no-startup-id pulseaudio-ctl mute-input
-
-# brightness keys
-bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 5
-
-# switch to previous or next workspace
-bindsym $mod+j      workspace prev
-bindsym $mod+l      workspace next
-bindsym $mod+grave  workspace back_and_forth
-
-# bind snotes
-bindsym $mod+n          exec --no-startup-id snotes
-bindsym $mod+Shift+n    exec --no-startup-id snotes -s
-
-# multimedia switch
-bindsym $mod+shift+m    exec --no-startup-id autorandr --change
-bindsym $mod+shift+l    exec --no-startup-id autorandr -l local
-bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
-
-# other keybindings
-bindsym $mod+shift+x    exec i3lock
-bindsym $mod+u          [urgent=oldest] focus
-bindsym --release Print         exec --no-startup-id scrot "$(date +/tmp/screenshot_%Y-%m-%d_%T.%N.png)"
-bindsym --release $mod+Print    exec --no-startup-id scrot -s "$(date +/tmp/screenshot_%Y-%m-%d_%T.%N.png)"
-
-# window commands
-for_window [class="^Wine$"] floating enable
-for_window [instance="^pinentry$"] floating enable
-
 # color class           border  backgr. text    indicator  child border
 client.focused          #5d97fa #5d97fa #101010 #4b86eb     #151515
 client.focused_inactive #151515 #151515 #787878 #303030     #151515
 client.unfocused        #101010 #101010 #787878 #202020     #151515
 client.urgent           #f00060 #f00060 #101010 #f5468d     #f00060
 
+# window commands
+for_window [class="^Wine$"] floating enable
+for_window [instance="^pinentry$"] floating enable
+
+# gtk settings
+exec --no-startup-id /usr/lib/gsd-xsettings
+exec_always --no-startup-id gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+exec_always --no-startup-id gsettings set org.gnome.desktop.interface icon-theme 'deepin-dark'
+exec_always --no-startup-id gsettings set org.gnome.desktop.interface font-name 'Roboto Medium 11'
+
 # startup applications
 exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
 exec --no-startup-id dunst
-exec --no-startup-id ~/.i3/bin/runonce.sh perl ~/.i3/bin/bat_warning.pl 0
+exec --no-startup-id perl ~/.i3/bin/bat_warning.pl 0
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nextcloud
