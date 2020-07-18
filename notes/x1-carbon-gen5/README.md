@@ -41,9 +41,9 @@ yay -S wdisplays wayvnc
 pacman -S alacritty acpilight gnome-keyring polkit-gnome tk     \
           blueberry pavucontrol chromium firefox thunar tumbler \
           gvfs mpv gimp eog wireshark-qt code lightdm           \
-          lightdm-gtk-greeter
+          lightdm-gtk-greeter gnome-settings-daemon
 
-yay -S skypeforlinux-bin j4-demu-desktop
+yay -S skypeforlinux-stable-bin j4-dmemu-desktop
 ```
 
 ### Graphics
