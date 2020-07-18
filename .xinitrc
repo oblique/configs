@@ -16,6 +16,8 @@ setxkbmap -variant ,extended
 setxkbmap -option
 setxkbmap -option grp:rctrl_rshift_toggle
 
+autorandr --change
 picom -b
 hsetroot -solid "#101010"
+
 exec i3
