@@ -14,7 +14,7 @@ pacman -S zsh openssh git lsof htop tree asp dmidecode wget rsync   \
           dhclient dnsmasq dhcpcd rfkill speedtest-cli aria2        \
           gdb strace ltrace valgrind sysdig cscope ctags            \
           neovim python python-pip python-neovim                    \
-          keychain the_silver_searcher shellcheck aspell aspell-en  \
+          keychain ripgrep fd shellcheck aspell aspell-en           \
           docker p7zip udisks2 youtube-dl ffmpeg imagemagick tmux   \
           pulseaudio jq mlocate
 
