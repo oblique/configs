@@ -26,7 +26,8 @@ yay -S pulseaudio-ctl neovim-symlinks xxd-standalone global idutils
 ```bash
 # i3wm
 pacman -S i3 dmenu dunst xclip xsel scrot xorg xorg-apps        \
-          xorg-init xf86-input-libinput autorandr arandr
+          xorg-init xf86-input-libinput autorandr arandr        \
+          hsetroot picom
 
 yay -S xss-lock
 
