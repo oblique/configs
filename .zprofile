@@ -10,8 +10,6 @@ export LIBVA_DRIVER_NAME=iHD
 # Qt
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_STYLE_OVERRIDE=Adwaita-Dark
-# Force Qt applications to use gsettings
-export XDG_CURRENT_DESKTOP=GNOME
 
 export DMENU_OPTS='-i -fn Hermit-12 -nb #101010 -nf #3a3a3a -sb #a78edb -sf #101010'
 
