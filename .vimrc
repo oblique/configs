@@ -81,13 +81,6 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " You need to run these commands:
 "   rustup component add rust-src
-"   rustup component add rustfmt
-"   rustup component add clippy
-"
-" Install rust-analyzer:
-"   git clone https://github.com/rust-analyzer/rust-analyzer
-"   cd rust-analyzer
-"   cargo install-ra --server
 Plug 'rust-lang/rust.vim'
 
 " langserver
