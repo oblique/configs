@@ -50,3 +50,5 @@
 	tool = bc
 [mergetool "bc"]
 	trustExitCode = true
+[pull]
+	ff = only
