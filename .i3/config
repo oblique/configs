@@ -57,8 +57,8 @@ bindsym $mod+Shift+x    exec i3lock
 bindsym $mod+n          exec --no-startup-id snotes
 bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
-bindsym $mod+shift+m    exec --no-startup-id autorandr --change
-bindsym $mod+shift+l    exec --no-startup-id autorandr -l local
+bindsym $mod+shift+m    exec --no-startup-id autorandr --change --force
+bindsym $mod+shift+l    exec --no-startup-id autorandr -l local --force
 bindsym $mod+shift+s    exec --no-startup-id ~/bin/mmswitch-sound --dmenu
 
 bindsym --release Print         exec --no-startup-id scrot "$(date +/tmp/screenshot_%Y-%m-%d_%H-%M-%S.%N.png)"
