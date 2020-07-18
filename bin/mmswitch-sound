@@ -79,7 +79,7 @@ while :; do
             ;;
         --dmenu)
             SELECT=$(list_sinks_with_default | sed 's/\(\*\?\).* description: \"\(.*\)\"$/\1\2/' | \
-                dmenu $DMENU_ARGS)
+                dmenu $DMENU_OPTS)
             [ -n "$SELECT" ] && SELECT=$(echo $SELECT | sed 's/^\*//')
             [ -z "$SELECT" ] && exit 0
             ARG=desc:"$SELECT"

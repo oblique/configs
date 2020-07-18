@@ -6,7 +6,7 @@
 ### Variables
 
 set $mod Mod4
-set $dmenu_args $(echo $DMENU_ARGS)
+set $dmenu_opts $(echo $DMENU_OPTS)
 
 
 # FHD
@@ -33,8 +33,8 @@ bindsym $mod+KP_Enter   exec alacritty
 bindsym $mod+Shift+q kill
 
 # start your launcher
-bindsym $mod+d          exec dmenu_run $dmenu_args
-bindsym $mod+Shift+d    exec j4-dmenu-desktop --dmenu "dmenu $dmenu_args" --no-generic --term=alacritty
+bindsym $mod+d          exec dmenu_run $dmenu_opts
+bindsym $mod+Shift+d    exec j4-dmenu-desktop --dmenu "dmenu $dmenu_opts" --no-generic --term=alacritty
 
 # switch to previous or next workspace
 bindsym $mod+j      workspace prev
