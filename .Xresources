@@ -1,3 +1,6 @@
+Xcursor.theme: Adwaita
+Xcursor.size: 16
+
 xmessage*background:    #101010
 xmessage*foreground:    #505050
 xmessage*borderColor:   #505050
