@@ -1,7 +1,5 @@
 profile laptop {
     output eDP-1 enable scale 1 mode 2560x1440 position 0,0
-
-    exec ~/.config/kanshi/bin/setup-laptop.sh
 }
 
 profile docked-home {

@@ -1,12 +1,6 @@
 #!/bin/bash
 set -e
 
-source ~/.config/kanshi/bin/common.sh
-
-# adjust font size
-gsettings set org.gnome.desktop.interface text-scaling-factor 1.33
-set_alacritty_font_size 16
-
 # move workspace 1-9 to primary monitor
 for x in $(seq 1 9); do
     swaymsg workspace $x
