@@ -200,10 +200,6 @@ exec_always --no-startup-id gsettings set org.gnome.desktop.interface font-name 
 
 # start polybar
 exec_always --no-startup-id "pkill polybar; polybar -r top"
-# FHD
-# exec_always --no-startup-id gsettings set org.gnome.desktop.interface text-scaling-factor 1
-# QHD
-exec_always --no-startup-id gsettings set org.gnome.desktop.interface text-scaling-factor 1.33
 
 # startup applications
 exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"

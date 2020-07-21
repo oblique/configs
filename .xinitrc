@@ -19,7 +19,7 @@ setxkbmap -option grp:rctrl_rshift_toggle
 /usr/lib/gsd-xsettings &
 sleep 0.2
 
-autorandr --change
+autorandr --change --force
 picom -b
 hsetroot -solid "#101010"
 
