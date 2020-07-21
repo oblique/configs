@@ -8,17 +8,8 @@
 set $mod Mod4
 set $dmenu_opts $(echo $DMENU_OPTS)
 
-
-# FHD
-#set $font xft:Hermit 10
-#set $bar_font xft:Hermit 11
-
-# QHD
-set $font xft:Hermit 12
-set $bar_font xft:Hermit 13
-
 # window title font
-font $font
+font pango:Hermit 9
 
 ### Key bindings
 #
@@ -223,7 +214,6 @@ for_window [class="^Wine$"] floating enable
 for_window [instance="^pinentry$"] floating enable
 
 # gtk settings
-exec --no-startup-id /usr/lib/gsd-xsettings
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface icon-theme 'deepin-dark'
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface font-name 'Roboto Medium 11'
