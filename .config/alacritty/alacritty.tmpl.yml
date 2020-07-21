@@ -125,10 +125,7 @@ font:
     #style: Italic
 
   # Point size
-  # FHD
-  # size: 13.5
-  # QHD
-  size: 16
+  size: $FONT_SIZE
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
