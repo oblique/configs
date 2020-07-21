@@ -183,26 +183,6 @@ mode passthrough {
 
 bindsym $mod+p mode passthrough
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    font $bar_font
-    position top
-    status_command i3status
-    tray_output primary
-
-    colors {
-        background #101010
-        statusline #5f87d7
-        separator  #404040
-
-        focused_workspace   #a78edb #a78edb #000000
-        active_workspace    #101010 #101010 #a78edb
-        inactive_workspace  #101010 #101010 #606060
-        urgent_workspace    #101010 #101010 #d81860
-    }
-}
-
 # color class           border  backgr. text    indicator  child border
 client.focused          #5d97fa #5d97fa #101010 #4b86eb     #151515
 client.focused_inactive #151515 #151515 #787878 #303030     #151515
@@ -217,6 +197,9 @@ for_window [instance="^pinentry$"] floating enable
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface icon-theme 'deepin-dark'
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface font-name 'Roboto Medium 11'
+
+# start polybar
+exec_always --no-startup-id "pkill polybar; polybar -r top"
 # FHD
 # exec_always --no-startup-id gsettings set org.gnome.desktop.interface text-scaling-factor 1
 # QHD
@@ -225,6 +208,5 @@ exec_always --no-startup-id gsettings set org.gnome.desktop.interface text-scali
 # startup applications
 exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
 exec --no-startup-id dunst
-exec --no-startup-id perl ~/.i3/bin/bat_warning.pl 0
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nextcloud
