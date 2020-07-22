@@ -18,18 +18,18 @@ pacman -S zsh openssh git lsof htop tree asp dmidecode wget rsync   \
           docker p7zip udisks2 youtube-dl ffmpeg imagemagick tmux   \
           pulseaudio jq mlocate
 
-yay -S pulseaudio-ctl neovim-symlinks xxd-standalone global idutils
+yay -S pulseaudio-ctl neovim-symlinks xxd-standalone global
 ```
 
 ### GUI Packages
 
 ```bash
 # i3wm
-pacman -S i3 dmenu dunst xclip xsel scrot xorg xorg-apps        \
-          xorg-init xf86-input-libinput autorandr arandr        \
-          hsetroot picom
+pacman -S i3-wm i3lock dmenu dunst xclip xsel scrot xorg        \
+          xorg-apps xorg-init xf86-input-libinput arandr        \
+          autorandr hsetroot picom
 
-yay -S xss-lock
+yay -S xss-lock polybar
 
 # sway
 pacman -S sway waybar bemenu-wlroots xorg-server-xwayland       \
@@ -55,6 +55,15 @@ Install:
 pacman -S mesa vulkan-intel intel-media-driver linux-firmware
 ```
 
+Create `/etc/X11/xorg.conf.d/20-intel.conf`:
+
+```
+Section "Device"
+  Identifier "Intel Graphics"
+  Driver "modesetting"
+EndSection
+```
+
 Add in `.profile` or `.zprofile`:
 
 ```
@@ -65,12 +74,6 @@ Edit `/etc/mkinitcpio.conf`:
 
 ```
 MODULES=(... intel_agp i915 ...)
-```
-
-Create `/etc/modprobe.d/i915.conf`:
-
-```
-options i915 enable_guc=2
 ```
 
 Update initramfs
@@ -150,7 +153,7 @@ cryptboot update-grub
 
 ```bash
 pacman -S noto-fonts noto-fonts-emoji ttf-roboto ttf-dejavu \
-          texlive-fontsextra terminus-font awesome-terminal-fonts
+          texlive-fontsextra terminus-font otf-font-awesome
 yay -S otf-hermit ttf-google-fonts-git
 echo 'FONT=ter-132b' > /etc/vconsole.conf
 ```
