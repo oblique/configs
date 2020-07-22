@@ -44,6 +44,7 @@ modules-right = pulseaudio wlan eth cpu memory temperature backlight battery dat
 
 tray-position = ${env:TRAY_POSITION:right}
 tray-maxsize = ${env:TRAY_MAXSIZE:100%}
+tray-padding = 3
 
 [module/i3]
 type = internal/i3
