@@ -192,6 +192,7 @@ client.urgent           #f00060 #f00060 #101010 #f5468d     #f00060
 # window commands
 for_window [class="^Wine$"] floating enable
 for_window [instance="^pinentry$"] floating enable
+for_window [title="Microsoft Teams Notification"] floating enable
 
 # gtk settings
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
