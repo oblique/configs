@@ -1,3 +1,11 @@
+## Alacritty
+
+The first time you need to run:
+
+```
+~/.config/alacritty/gen-config.sh qhd
+```
+
 ## Polybar
 
 Install my custom modules with:
