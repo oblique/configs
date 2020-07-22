@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Force rescaling
+gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.33
+
+# Apply new DPI to xrandr
+dpi="$(xrdb -query | grep Xft.dpi: | cut -f2)"
+[[ -n "$dpi" ]] && xrandr --dpi "$dpi"
+
+# Adjust alacritty font size
+~/.config/alacritty/gen-config.sh qhd
+
+# Apply changes to i3
+i3-msg restart
