@@ -28,8 +28,8 @@ bindsym $mod+d          exec dmenu_run $dmenu_opts
 bindsym $mod+Shift+d    exec j4-dmenu-desktop --dmenu "dmenu $dmenu_opts" --no-generic --term=alacritty
 
 # switch to previous or next workspace
-bindsym $mod+j      workspace prev
-bindsym $mod+l      workspace next
+bindsym $mod+j      workspace prev_on_output
+bindsym $mod+l      workspace next_on_output
 bindsym $mod+grave  workspace back_and_forth
 
 # volume keys
