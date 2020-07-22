@@ -200,7 +200,7 @@ exec_always --no-startup-id gsettings set org.gnome.desktop.interface icon-theme
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface font-name 'Roboto Medium 11'
 
 # start polybar
-exec_always --no-startup-id "pkill polybar; polybar -r top"
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # startup applications
 exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
