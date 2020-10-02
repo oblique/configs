@@ -302,3 +302,7 @@ bind _ split-window -v
 # set back the original binds
 bind -r p previous-window # select previous window
 bind -r n next-window     # select next window
+
+# sets the window size to smallest so that tmux window is sized to the smallest participant
+# With tmux 3.1 they changed the default, so we need to set it here
+set-window-option -g window-size smallest
