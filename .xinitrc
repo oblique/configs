@@ -20,7 +20,6 @@ setxkbmap -option grp:rctrl_rshift_toggle
 sleep 0.2
 
 autorandr --change --force
-picom -b
 hsetroot -solid "#101010"
 
 exec i3
