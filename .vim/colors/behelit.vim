@@ -124,8 +124,8 @@ if &t_Co > 255
   highlight Directory       ctermfg=68      ctermbg=NONE    cterm=NONE
   highlight IncSearch       ctermfg=0       ctermbg=209     cterm=NONE
   highlight LineNr          ctermfg=67      ctermbg=233     cterm=NONE
-  highlight StatusLine      ctermfg=61      ctermbg=234     cterm=NONE
-  highlight StatusLineNC    ctermfg=240     ctermbg=234     cterm=NONE
+  highlight StatusLine      ctermfg=61      ctermbg=233     cterm=NONE
+  highlight StatusLineNC    ctermfg=240     ctermbg=233     cterm=NONE
   highlight VertSplit       ctermfg=234     ctermbg=234     cterm=NONE
   highlight Visual          ctermfg=NONE    ctermbg=234     cterm=NONE
   highlight VisualNOS       ctermfg=NONE    ctermbg=234     cterm=underline
@@ -215,4 +215,7 @@ if &t_Co > 255
 " rust
   highlight rustAttribute   ctermfg=69     ctermbg=NONE    cterm=NONE
   highlight rustDerive      ctermfg=69     ctermbg=NONE    cterm=NONE
+
+" coc
+  highlight CocRustChainingHint ctermfg=237 ctermbg=NONE    cterm=NONE
 end
