@@ -218,4 +218,5 @@ if &t_Co > 255
 
 " coc
   highlight CocRustChainingHint ctermfg=237 ctermbg=NONE    cterm=NONE
+  highlight CocRustTypeHint     ctermfg=237 ctermbg=NONE    cterm=NONE
 end

@@ -84,10 +84,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rust-lang/rust.vim'
 
 " langserver
-"
-" After installation of coc.nvim run:
-"   :CocInstall coc-rust-analyzer
-"   :CocInstall coc-lists
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " tags
@@ -125,7 +121,7 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><leader>fb :Buffers<cr>
 nnoremap <silent><leader>ff :Files<cr>
-nnoremap <silent><leader>fg :Ag<cr>
+nnoremap <silent><leader>fg :Rg <c-r><c-w><cr>
 nnoremap <silent><leader>ft :Tags<cr>
 " }}}
 
@@ -147,6 +143,11 @@ command DisableRustfmt let g:rustfmt_autosave = 0
 " }}}
 
 " coc {{{
+let g:coc_global_extensions = [
+    \ "coc-rust-analyzer",
+    \ "coc-lists",
+    \ ]
+
 set cmdheight=2
 set updatetime=300
 set shortmess+=c
@@ -156,33 +157,32 @@ let g:airline#extensions#coc#enabled = 1
 " Disable underlining
 autocmd FileType * highlight CocUnderline cterm=NONE gui=NONE
 
-" completion menu settings {{{
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <tab> to complete
-inoremap <silent><expr><TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-
-" Use <s-tab> to complete with previous
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <enter> to confirm
-inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" }}}
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent>[g <Plug>(coc-diagnostic-prev)
 nmap <silent>]g <Plug>(coc-diagnostic-next)
 
-" Gotos
+" GoTo code navigation.
 nmap <silent>gd <Plug>(coc-definition)
 nmap <silent>gy <Plug>(coc-type-definition)
 nmap <silent>gi <Plug>(coc-implementation)
@@ -192,34 +192,46 @@ nmap <silent>gr <Plug>(coc-references)
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
 endfunction
 
 " Rename
 nmap <leader>rn <Plug>(coc-rename)
-" Menu
-nnoremap <silent><F5> :<C-u>CocList<cr>
-" Show all diagnostics
-nnoremap <silent><space>a  :<C-u>CocList diagnostics<cr>
-" Show commands
-nnoremap <silent><space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent><space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent><space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent><space>p  :<C-u>CocListResume<CR>
 
-" Use `:Format` to format current buffer
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
+" Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" Menu
+nnoremap <silent><nowait> <F5>      :<C-u>CocList<cr>
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " }}}
 
 " tags {{{
@@ -273,10 +285,6 @@ EnableSpaces
 nnoremap <silent><leader>i mzgg=G`z
 
 command SyntaxAttr call SyntaxAttr()
-
-vnoremap <silent><m-c> :!xclip -f -sel clip<cr>
-inoremap <silent><m-v> <esc>:set paste<cr>:r!xclip -o -sel clip<cr>:set nopaste<cr>i
-nnoremap <silent><m-v> :set paste<cr>:r!xclip -o -sel clip<cr>:set nopaste<cr>
 
 " use ]s and [s to move to mispelled word
 " use z= to get suggestion list
