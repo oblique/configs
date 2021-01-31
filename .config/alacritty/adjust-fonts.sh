@@ -14,5 +14,13 @@ else
     exit 1
 fi
 
-cd "$(dirname "${BASH_SOURCE[0]}")"
-envsubst '$FONT_SIZE' < alacritty.tmpl.yml > alacritty.yml
+# Create font config
+cat > ~/.config/alacritty/fonts.yml <<EOF
+font:
+    normal:
+        family: Hermit
+    size: $FONT_SIZE
+EOF
+
+# Trigger config reload
+touch ~/.config/alacritty/alacritty.yml

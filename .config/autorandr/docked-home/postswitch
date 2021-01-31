@@ -9,7 +9,7 @@ dpi="$(xrdb -query | grep Xft.dpi: | cut -f2)"
 [[ -n "$dpi" ]] && xrandr --dpi "$dpi"
 
 # Adjust alacritty font size
-~/.config/alacritty/gen-config.sh qhd
+~/.config/alacritty/adjust-fonts.sh qhd
 
 # Apply changes to i3
 i3-msg restart
