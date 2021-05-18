@@ -202,6 +202,10 @@ exec_always --no-startup-id gsettings set org.gnome.desktop.interface font-name 
 # start polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
+# dunst keybindings
+bindsym Ctrl+space  exec --no-startup-id dunstctl close
+bindsym Ctrl+grave  exec --no-startup-id dunstctl history-pop
+
 # startup applications
 exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
 exec --no-startup-id dunst
