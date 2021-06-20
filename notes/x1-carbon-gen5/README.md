@@ -127,28 +127,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 usermod -a -G wheel,wireshark,video oblique
 ```
 
-### Secure boot
-
-Enable secure boot in UEFI firmware, clear all secure boot keys and enter secure
-boot setup mode. Make sure that you also set a UEFI firmware supervisor password.
-
-After the above boot your machine and use [cryptboot] to set your own keys:
-
-```bash
-pacaur -S cryptboot
-cryptboot mout
-cryptboot-efikeys create
-cryptboot-efikeys enroll
-cryptboot update-grub
-```
-
-Now you can boot with your own signed bootloader. Every time you upgrade grub
-package you need to sign it again:
-
-```bash
-cryptboot update-grub
-```
-
 ### Fonts
 
 ```bash
@@ -169,7 +147,3 @@ pacman -S gnome-themes-extra deepin-icon-theme
 ```bash
 yay -S adwaita-qt
 ```
-
-
-[cryptboot]: https://github.com/xmikos/cryptboot
-[kernel parameters]: https://wiki.archlinux.org/index.php/kernel_parameters
