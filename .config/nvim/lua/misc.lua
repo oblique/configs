@@ -5,6 +5,8 @@ vim.opt.textwidth = 80
 vim.opt.mouse:append('a')
 vim.opt.splitbelow = true
 vim.opt.hidden = true
+vim.opt.list = true
+vim.opt.listchars = { trail = '~', tab = '> ', nbsp = '␣' }
 -- Use cursor provided by terminal
 vim.opt.guicursor = ''
 

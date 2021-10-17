@@ -120,7 +120,7 @@ highlight mkdLinkTitle    guifg=#af87ff    guibg=NONE     gui=NONE
 if &t_Co > 255
   highlight Normal          ctermfg=83      ctermbg=233     cterm=NONE
   highlight SpecialKey      ctermfg=68      ctermbg=NONE    cterm=NONE
-  highlight NonText         ctermfg=237     ctermbg=233     cterm=NONE
+  highlight NonText         ctermfg=235     ctermbg=233     cterm=NONE
   highlight Directory       ctermfg=68      ctermbg=NONE    cterm=NONE
   highlight IncSearch       ctermfg=0       ctermbg=209     cterm=NONE
   highlight LineNr          ctermfg=67      ctermbg=233     cterm=NONE

@@ -35,6 +35,7 @@ packer.startup(function()
     use 'LionC/nest.nvim'
     use 'kyazdani42/nvim-tree.lua'
     use 'nvim-telescope/telescope.nvim'
+    use 'cappyzawa/trim.nvim'
 
     -- lsp
     use 'neovim/nvim-lspconfig'
@@ -50,7 +51,6 @@ packer.startup(function()
     use 'cespare/vim-toml'
     use 'plasticboy/vim-markdown'
     use 'jceb/vim-orgmode'
-    use 'ntpeters/vim-better-whitespace'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     -- rust
@@ -83,3 +83,4 @@ require('plugins.nvim-cmp')
 require('plugins.lspsaga')
 require('plugins.gutentags')
 require('plugins.nvim-treesitter')
+require('plugins.trim')
