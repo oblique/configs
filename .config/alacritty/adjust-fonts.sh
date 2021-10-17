@@ -18,8 +18,14 @@ fi
 cat > ~/.config/alacritty/fonts.yml <<EOF
 font:
     normal:
-        family: Hermit
+        family: Hurmit Nerd Font
+        style: medium
+
     size: $FONT_SIZE
+
+    offset:
+        x: 0
+        y: 5
 EOF
 
 # Trigger config reload

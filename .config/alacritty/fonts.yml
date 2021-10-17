@@ -1,4 +1,10 @@
 font:
     normal:
-        family: Hermit
+        family: Hurmit Nerd Font
+        style: medium
+
     size: 16
+
+    offset:
+        x: 0
+        y: 5
