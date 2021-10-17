@@ -217,6 +217,25 @@ if &t_Co > 255
   highlight rustDerive      ctermfg=69     ctermbg=NONE    cterm=NONE
 
 " coc
-  highlight CocRustChainingHint ctermfg=237 ctermbg=NONE    cterm=NONE
-  highlight CocRustTypeHint     ctermfg=237 ctermbg=NONE    cterm=NONE
+  highlight CocRustChainingHint ctermfg=235 ctermbg=NONE    cterm=NONE
+  highlight CocRustTypeHint     ctermfg=235 ctermbg=NONE    cterm=NONE
+
+" telescope
+  highlight TelescopeNormal     ctermfg=240 ctermbg=NONE cterm=NONE
+
+" nvim-lsp
+  highlight LspDiagnosticsDefaultHint       ctermfg=235 ctermbg=NONE cterm=NONE
+  highlight LspDiagnosticsDefaultError      ctermfg=235 ctermbg=NONE cterm=NONE
+  highlight LspDiagnosticsSignError         ctermfg=161 ctermbg=NONE cterm=NONE
+
+" lspsaga
+  highlight LspFloatWinBorder           ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaDiagnosticBorder     ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaRenameBorder         ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaHoverBorder          ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaSignatureHelpBorder  ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaLspFinderBorder      ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaCodeActionBorder     ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaAutoPreview          ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaDefPreviewBorder     ctermfg=240 ctermbg=NONE cterm=NONE
 end
