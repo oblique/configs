@@ -11,6 +11,11 @@ if ok then
     end
 
     rust_tools.setup {
+        tools = {
+            inlay_hints = {
+                highlight = 'RustToolsInlayHint',
+            },
+        },
         server = {
             cmd = { rust_analyzer.root_dir .. '/rust-analyzer' },
             capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -21,7 +26,7 @@ if ok then
                     },
                 }
             }
-        }
+        },
     }
 end
 

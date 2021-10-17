@@ -213,8 +213,9 @@ if &t_Co > 255
   highlight LC_HintSign     ctermfg=203     ctermbg=NONE    cterm=bold
 
 " rust
-  highlight rustAttribute   ctermfg=69     ctermbg=NONE    cterm=NONE
-  highlight rustDerive      ctermfg=69     ctermbg=NONE    cterm=NONE
+  highlight rustAttribute       ctermfg=69      ctermbg=NONE    cterm=NONE
+  highlight rustDerive          ctermfg=69      ctermbg=NONE    cterm=NONE
+  highlight RustToolsInlayHint  ctermfg=235     ctermbg=NONE    cterm=NONE
 
 " coc
   highlight CocRustChainingHint ctermfg=235 ctermbg=NONE    cterm=NONE
