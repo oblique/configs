@@ -32,10 +32,12 @@ packer.startup(function()
     }
 
     use 'nvim-lua/plenary.nvim'
+    use 'kyazdani42/nvim-web-devicons'
     use 'LionC/nest.nvim'
     use 'kyazdani42/nvim-tree.lua'
     use 'nvim-telescope/telescope.nvim'
     use 'cappyzawa/trim.nvim'
+    use 'famiu/bufdelete.nvim'
 
     -- lsp
     use 'neovim/nvim-lspconfig'
