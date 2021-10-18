@@ -1,7 +1,6 @@
 *~
-/.vim/.netrwhist
-/.vim/autoload/plug.vim
-/.vim/autoload/plug.vim.old
-/.vim/plugged/
+/.config/nvim/.netrwhist
+/.config/nvim/plugin/packer_compiled.lua
+/.config/nvim/lua/local.lua
 /.oh-my-zsh.custom/local.zsh
 /.local/share/applications/mimeapps.list
