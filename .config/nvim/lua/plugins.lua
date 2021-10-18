@@ -48,6 +48,7 @@ packer.startup(function()
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
 
     -- syntax
     use 'cespare/vim-toml'
