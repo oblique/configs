@@ -23,5 +23,4 @@ nest.applyKeymaps {
             { 'r', telescope_builtin.lsp_references },
         }
     },
-
 }
