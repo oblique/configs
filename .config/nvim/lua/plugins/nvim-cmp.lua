@@ -3,6 +3,12 @@ local cmp = require('cmp')
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 cmp.setup {
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
+
     mapping = {
         ['<C-Up>'] = cmp.mapping.scroll_docs(-4),
         ['<C-Down>'] = cmp.mapping.scroll_docs(4),
@@ -29,7 +35,8 @@ cmp.setup {
     },
     sources = {
         { name = 'nvim_lsp' },
-        { name = 'buffer' },
+        { name = 'vsnip' },
         { name = 'path' },
+        { name = 'buffer' },
     }
 }
