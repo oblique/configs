@@ -16,11 +16,6 @@ packer.startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    use 'vim-scripts/SyntaxAttr.vim'
-
-    -- TODO: https://github.com/numToStr/Comment.nvim
-    use 'scrooloose/nerdcommenter'
-
     -- TODO: https://github.com/hoob3rt/lualine.nvim
     -- TODO: https://github.com/Famiu/feline.nvim
     use {
@@ -31,13 +26,17 @@ packer.startup(function()
         }
     }
 
+    -- common dependencies
     use 'nvim-lua/plenary.nvim'
     use 'kyazdani42/nvim-web-devicons'
+
+    -- utilities
     use 'LionC/nest.nvim'
     use 'kyazdani42/nvim-tree.lua'
     use 'nvim-telescope/telescope.nvim'
     use 'cappyzawa/trim.nvim'
     use 'famiu/bufdelete.nvim'
+    use 'numToStr/Comment.nvim'
 
     -- lsp
     use 'neovim/nvim-lspconfig'
@@ -53,6 +52,7 @@ packer.startup(function()
     use 'hrsh7th/vim-vsnip'
 
     -- syntax
+    use 'vim-scripts/SyntaxAttr.vim'
     use 'cespare/vim-toml'
     use 'plasticboy/vim-markdown'
     use 'jceb/vim-orgmode'
@@ -84,3 +84,4 @@ require('plugins.nvim-cmp')
 require('plugins.lspsaga')
 require('plugins.nvim-treesitter')
 require('plugins.trim')
+require('plugins.comment')

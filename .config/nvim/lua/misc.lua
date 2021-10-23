@@ -37,3 +37,9 @@ _G.enable_spaces()
 vim.cmd('command EnableSpaces call v:lua.enable_spaces()')
 vim.cmd('command EnableTabs call v:lua.enable_tabs()')
 vim.cmd('command ShowPath echo expand(\'%:p\')')
+
+-- Disable underline in diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = false
+    })

@@ -239,4 +239,9 @@ if &t_Co > 255
   highlight LspSagaCodeActionBorder     ctermfg=240 ctermbg=NONE cterm=NONE
   highlight LspSagaAutoPreview          ctermfg=240 ctermbg=NONE cterm=NONE
   highlight LspSagaDefPreviewBorder     ctermfg=240 ctermbg=NONE cterm=NONE
+
+" treesitter
+  highlight TSPunctBracket           ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight TSPunctDelimiter         ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight TSPunctSpecial           ctermfg=83 ctermbg=NONE cterm=NONE
 end
