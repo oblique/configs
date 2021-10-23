@@ -62,10 +62,6 @@ packer.startup(function()
     --   rustup component add rust-src
     use 'rust-lang/rust.vim'
     use 'simrat39/rust-tools.nvim'
-
-    -- tags
-    use 'ludovicchabant/vim-gutentags'
-    use 'skywind3000/gutentags_plus'
 end)
 
 if fresh_install then
@@ -84,6 +80,5 @@ require('plugins.syntaxattr')
 require('plugins.telescope')
 require('plugins.nvim-cmp')
 require('plugins.lspsaga')
-require('plugins.gutentags')
 require('plugins.nvim-treesitter')
 require('plugins.trim')
