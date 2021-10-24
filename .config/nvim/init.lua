@@ -5,6 +5,7 @@ require('clipboard')
 require('plugins')
 require('keybindings')
 require('spellcheck')
+require('lsp')
 require('rust')
 require('cxx')
 
