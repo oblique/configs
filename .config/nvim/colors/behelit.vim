@@ -222,7 +222,8 @@ if &t_Co > 255
   highlight CocRustTypeHint     ctermfg=235 ctermbg=NONE    cterm=NONE
 
 " telescope
-  highlight TelescopeNormal     ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight TelescopeNormal         ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight TelescopePromptPrefix   ctermfg=69  ctermbg=NONE cterm=NONE
 
 " nvim-lsp
   highlight LspDiagnosticsDefaultHint       ctermfg=235 ctermbg=NONE cterm=NONE
@@ -239,6 +240,7 @@ if &t_Co > 255
   highlight LspSagaCodeActionBorder     ctermfg=240 ctermbg=NONE cterm=NONE
   highlight LspSagaAutoPreview          ctermfg=240 ctermbg=NONE cterm=NONE
   highlight LspSagaDefPreviewBorder     ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight LspSagaRenamePromptPrefix   ctermfg=69  ctermbg=NONE cterm=NONE
 
 " treesitter
   highlight TSPunctBracket           ctermfg=83 ctermbg=NONE cterm=NONE

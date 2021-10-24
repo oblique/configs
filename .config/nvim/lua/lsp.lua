@@ -1,6 +1,6 @@
 local nest = require('nest')
 
-function is_lsp_diagnostics_enabled(bufnr, client_id)
+local function is_lsp_diagnostics_enabled(bufnr, client_id)
     local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'lsp_diagnostics_enabled')
 
     if not ok then
@@ -12,7 +12,7 @@ end
 
 -- TODO: Use something similar when 0.6.0 is released:
 -- https://github.com/BachirC/dotfiles/blob/master/nvim/lua/cstm/lsp/diagnostic/toggle.lua
-function toggle_lsp_diagnostics()
+local function toggle_lsp_diagnostics()
     if vim.b.lsp_diagnostics_enabled == nil or vim.b.lsp_diagnostics_enabled == true then
         vim.b.lsp_diagnostics_enabled = false
     else
