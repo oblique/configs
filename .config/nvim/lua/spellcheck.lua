@@ -1,11 +1,10 @@
-local nest = require('nest')
-
 -- use ]s and [s to move to mispelled word
 -- use z= to get suggestion list
 -- use zg to add a word to dictionary
 -- use zw to mark a word as incorrect
---
--- TODO: Check telescope.builtin.spell_suggest
+
+local nest = require('nest')
+
 vim.opt.spelllang = 'en_us'
 
 local function toggle_spellcheck()

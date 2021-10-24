@@ -37,4 +37,5 @@ nest.applyKeymaps {
             { 'r', telescope_builtin.lsp_references },
         }
     },
+    { 'z=', telescope_builtin.spell_suggest },
 }
