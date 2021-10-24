@@ -5,7 +5,7 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 cmp.setup {
     snippet = {
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            vim.fn['vsnip#anonymous'](args.body)
         end,
     },
 
