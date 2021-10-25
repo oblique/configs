@@ -8,3 +8,5 @@ treesitter_config.setup {
         additional_vim_regex_highlighting = false,
     },
 }
+
+vim.cmd('command SyntaxAttr TSHighlightCapturesUnderCursor')

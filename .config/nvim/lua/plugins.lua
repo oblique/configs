@@ -52,11 +52,11 @@ packer.startup(function()
     use 'hrsh7th/vim-vsnip'
 
     -- syntax
-    use 'vim-scripts/SyntaxAttr.vim'
     use 'cespare/vim-toml'
     use 'plasticboy/vim-markdown'
     use 'jceb/vim-orgmode'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use 'nvim-treesitter/playground'
 
     -- rust
     --
@@ -78,7 +78,6 @@ end
 require('plugins.vim-airline')
 require('plugins.nvim-tree')
 require('plugins.vim-markdown')
-require('plugins.syntaxattr')
 require('plugins.telescope')
 require('plugins.nvim-cmp')
 require('plugins.lspsaga')
