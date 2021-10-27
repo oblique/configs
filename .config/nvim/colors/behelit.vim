@@ -224,6 +224,7 @@ if &t_Co > 255
 " telescope
   highlight TelescopeNormal         ctermfg=240 ctermbg=NONE cterm=NONE
   highlight TelescopePromptPrefix   ctermfg=69  ctermbg=NONE cterm=NONE
+  highlight TelescopeResultsLineNr  ctermfg=69  ctermbg=NONE cterm=NONE
 
 " nvim-lsp
   highlight LspDiagnosticsDefaultHint       ctermfg=235 ctermbg=NONE cterm=NONE
@@ -243,7 +244,17 @@ if &t_Co > 255
   highlight LspSagaRenamePromptPrefix   ctermfg=69  ctermbg=NONE cterm=NONE
 
 " treesitter
-  highlight TSPunctBracket           ctermfg=83 ctermbg=NONE cterm=NONE
-  highlight TSPunctDelimiter         ctermfg=83 ctermbg=NONE cterm=NONE
-  highlight TSPunctSpecial           ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight cTSPunctBracket         ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight cTSPunctDelimiter       ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight cTSPunctSpecial         ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight cTSParameter            ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight cTSProperty             ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight cTSConstBuiltin         ctermfg=141 ctermbg=NONE cterm=NONE
+
+  highlight link cppTSPunctBracket      cTSPunctBracket
+  highlight link cppTSPunctDelimiter    cTSPunctDelimiter
+  highlight link cppTSPunctSpecial      cTSPunctSpecial
+  highlight link cppTSParameter         cTSParameter
+  highlight link cppTSProperty          cTSProperty
+  highlight link cppTSConstBuiltin      cTSConstBuiltin
 end
