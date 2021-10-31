@@ -7,6 +7,8 @@ vim.opt.splitbelow = true
 vim.opt.hidden = true
 vim.opt.list = true
 vim.opt.listchars = { trail = '~', tab = '> ', nbsp = '␣' }
+-- Give room for two-line messages instead of asking to press enter
+vim.opt.cmdheight = 2
 -- Use cursor provided by terminal
 vim.opt.guicursor = ''
 
