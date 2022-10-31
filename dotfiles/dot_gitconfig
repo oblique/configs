@@ -1,0 +1,53 @@
+[sendemail]
+	#from = Fist-name Last-name <username@gmail.com>
+	#smtpserver = "/usr/bin/msmtp"
+[log]
+	decorate = short
+[push]
+	default = simple
+[alias]
+	tree = log --graph
+	log-full = log --format=fuller
+[merge]
+	tool = bc
+[color]
+	ui = true
+[color "diff"]
+	old = red
+	new = blue
+	frag = magenta
+	whitespace = black bold
+	meta = magenta
+	commit = magenta
+[color "branch"]
+	current = magenta
+	local = blue
+	remote = red
+[color "decorate"]
+	HEAD = green
+	branch = blue
+	remoteBranch = red
+	tag = cyan
+[color "grep"]
+	filename = magenta
+	separator = cyan
+	linenumber = magenta bold
+	match = red bold
+[color "status"]
+	untracked = red
+	changed = red
+	added = blue
+	updated = blue
+[color "interactive"]
+	error = red
+	header = red
+	help = magenta
+	prompt = blue bold
+[diff]
+	tool = bc
+[mergetool "bc"]
+	trustExitCode = true
+[pull]
+	ff = only
+[init]
+	defaultBranch = main

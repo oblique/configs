@@ -1,0 +1,28 @@
+.config/nvim/plugin/packer_compiled.lua
+
+# If machine is not a desktop/laptop
+{{ if not (eq .chezmoi.hostname "dystopia") }}
+.init_linux_console_colors.py
+{{ end }}
+
+# If machine is not a desktop/laptop OR if user is root
+{{ if or (not (eq .chezmoi.hostname "dystopia")) (eq .chezmoi.username "root") }}
+bin
+.Xresources
+.config/alacritty
+.config/autorandr
+.config/dunst
+.config/i3
+.config/kanshi
+.config/mako
+.config/picom
+.config/polybar
+.config/sway
+.config/waybar
+.fonts
+.mpv
+.snotes
+.swaylock
+.xinitrc
+.xprofile
+{{ end }}
