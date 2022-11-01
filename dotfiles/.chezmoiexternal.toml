@@ -1,3 +1,11 @@
 [".local/share/nvim/site/pack/packer/start/packer.nvim"]
     type = "git-repo"
     url = "https://github.com/wbthomason/packer.nvim"
+[".oh-my-zsh"]
+    type = "git-repo"
+    url = "https://github.com/ohmyzsh/ohmyzsh"
+    refreshPeriod = "168h"
+[".tmux"]
+    type = "git-repo"
+    url = "https://github.com/gpakosz/.tmux"
+    refreshPeriod = "168h"
