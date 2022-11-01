@@ -2,9 +2,8 @@
 
 ```sh
 mkdir -p ~/git
-git clone https://github.com/oblique/configs ~/git/configs
+git clone --recursive https://github.com/oblique/configs ~/git/configs
 chezmoi apply -S ~/git/configs
-fc-cache
 ```
 
 ## Polybar
