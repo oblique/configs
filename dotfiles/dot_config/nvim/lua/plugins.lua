@@ -1,15 +1,4 @@
 local utils = require('utils')
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
-if not utils.path_exists(install_path) then
-    vim.fn.system({
-        'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-        install_path
-    })
-
-    fresh_install = true
-end
-
 local packer = require('packer')
 
 packer.startup(function()
@@ -67,15 +56,6 @@ packer.startup(function()
     use 'rust-lang/rust.vim'
     use 'simrat39/rust-tools.nvim'
 end)
-
-if fresh_install then
-    -- Install plugins
-    --
-    -- TODO: Currently this is async, find a wait to block on it because we get
-    -- an error on loading.
-    -- Check: https://github.com/wbthomason/packer.nvim/issues/198
-    packer.install()
-end
 
 require('plugins.vim-airline')
 require('plugins.nvim-tree')
