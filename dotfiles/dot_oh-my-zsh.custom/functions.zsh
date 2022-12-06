@@ -21,3 +21,14 @@ extip() {
     curl https://ifconfig.me
     echo
 }
+
+clean-all-cargo() {
+    fd -I -s '^Cargo.toml$' | while read -r x; do
+        dir="$(dirname "$x")"
+
+        if [[ -d "$dir/target" ]]; then
+            echo "Removing $dir/target"
+            rm -rf "$dir/target"
+        fi
+    done
+}
