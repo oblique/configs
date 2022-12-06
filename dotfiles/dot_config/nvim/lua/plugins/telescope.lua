@@ -20,7 +20,7 @@ telescope.setup {
 
 nest.applyKeymaps {
     {
-        '<leader>t', {
+        '<leader>f', {
             { 'm', telescope_builtin.builtin },
             { 'r', telescope_builtin.resume },
             { 'b', telescope_builtin.buffers },

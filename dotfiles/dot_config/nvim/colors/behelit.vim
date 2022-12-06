@@ -223,6 +223,8 @@ if &t_Co > 255
 
 " telescope
   highlight TelescopeNormal         ctermfg=240 ctermbg=NONE cterm=NONE
+  highlight TelescopePreviewNormal  ctermfg=83 ctermbg=NONE cterm=NONE
+  highlight TelescopeBorder         ctermfg=240 ctermbg=NONE cterm=NONE
   highlight TelescopePromptPrefix   ctermfg=69  ctermbg=NONE cterm=NONE
   highlight TelescopeResultsLineNr  ctermfg=69  ctermbg=NONE cterm=NONE
 

@@ -18,6 +18,13 @@ vim.cmd('filetype plugin on')
 vim.cmd('filetype indent on')
 vim.cmd('colorscheme behelit')
 
+-- Copy path to clipboard
+function _G.copy_path()
+    local path = vim.fn.expand('%:p')
+    vim.fn.setreg('+', path)
+    vim.fn.setreg('*', path)
+end
+
 -- Space helpers
 function _G.enable_spaces()
     vim.opt.expandtab = true
@@ -40,3 +47,4 @@ _G.enable_spaces()
 vim.cmd('command EnableSpaces call v:lua.enable_spaces()')
 vim.cmd('command EnableTabs call v:lua.enable_tabs()')
 vim.cmd('command ShowPath echo expand(\'%:p\')')
+vim.cmd('command CopyPath call v:lua.copy_path()')
