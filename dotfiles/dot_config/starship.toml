@@ -1,0 +1,55 @@
+command_timeout = 100
+add_newline = false
+right_format = '$cmd_duration$status'
+
+[character]
+success_symbol = '[%](blue)'
+error_symbol = '[%](blue)'
+
+[status]
+disabled = false
+
+[username]
+show_always = true
+format = '[$user]($style)@'
+style_user = 'bold green'
+style_root = 'bold red'
+
+[hostname]
+ssh_only = false
+format = '[$hostname]($style)[$ssh_symbol](bold blue) '
+style = 'bold green'
+ssh_symbol = ' 🌐'
+
+[directory]
+truncation_length = 10
+truncate_to_repo = false
+style = 'purple'
+read_only = ' 🔒'
+read_only_style = 'bold red'
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+style = 'bold red'
+
+[git_state]
+style = 'bold red'
+
+[package]
+format = '[$symbol$version]($style) '
+
+[cmd_duration]
+format = '[$duration]($style) '
+style = 'bold blue'
+
+[rust]
+disabled = true
+
+[c]
+disabled = true
+
+[python]
+disabled = true
+
+[golang]
+disabled = true
