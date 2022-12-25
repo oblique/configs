@@ -11,15 +11,21 @@ disabled = false
 
 [username]
 show_always = true
-format = '[$user]($style)@'
+format = '[$user@]($style)'
 style_user = 'bold green'
-style_root = 'bold red'
+{{- if eq .chezmoi.username "root" }}
+disable = true
+{{- end }}
 
 [hostname]
 ssh_only = false
 format = '[$hostname]($style)[$ssh_symbol](bold blue) '
-style = 'bold green'
 ssh_symbol = ' 🌐'
+{{- if eq .chezmoi.username "root" }}
+style = 'bold red'
+{{- else }}
+style = 'bold green'
+{{- end }}
 
 [directory]
 truncation_length = 10
