@@ -4,8 +4,10 @@
     flock -e 200
 
     # Kill current polybars and wait for them to exit
-    killall -q polybar
-    while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
+    while pgrep -u $UID -x polybar > /dev/null; do
+        killall -q polybar
+        sleep 0.5
+    done
 
     # Find wlan interface
     for wlan in /sys/class/net/wl* /sys/class/net/wlan*; do
