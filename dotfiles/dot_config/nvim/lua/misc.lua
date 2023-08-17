@@ -33,6 +33,13 @@ function _G.enable_spaces()
     vim.opt.tabstop = 4
 end
 
+function _G.enable_spaces2()
+    vim.opt.expandtab = true
+    vim.opt.softtabstop = 2
+    vim.opt.shiftwidth = 2
+    vim.opt.tabstop = 2
+end
+
 function _G.enable_tabs()
     vim.opt.expandtab = false
     vim.opt.softtabstop = 0
@@ -45,6 +52,7 @@ _G.enable_spaces()
 
 -- Commands
 vim.cmd('command EnableSpaces call v:lua.enable_spaces()')
+vim.cmd('command EnableSpaces2 call v:lua.enable_spaces2()')
 vim.cmd('command EnableTabs call v:lua.enable_tabs()')
 vim.cmd('command ShowPath echo expand(\'%:p\')')
 vim.cmd('command CopyPath call v:lua.copy_path()')

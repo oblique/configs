@@ -2,16 +2,16 @@
 -- Use `o` to open a file from lsp_finder
 
 local lspsaga = require('lspsaga')
-local lspsaga_rename = require('lspsaga.rename').rename
 local nest = require('nest')
 
-lspsaga.init_lsp_saga {
-    diagnostic_header = nil,
-    code_action_lightbulb = {
-        enable = false,
-        sign = true,
-        virtual_text = false,
+lspsaga.setup {
+    diagnostic = {
+        show_code_action = false,
     },
+    lightbulb = {
+        enable = false,
+        virtual_text = false,
+    }
 }
 
 nest.applyKeymaps {

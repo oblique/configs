@@ -29,7 +29,6 @@ packer.startup(function()
 
     -- lsp
     use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
     use  { 'glepnir/lspsaga.nvim', branch = 'main' }
 
     -- completion
@@ -53,6 +52,7 @@ packer.startup(function()
     --
     -- You need to run these commands:
     --   rustup component add rust-src
+    --   rustup component add rust-analyzer
     use 'rust-lang/rust.vim'
     use 'simrat39/rust-tools.nvim'
 end)
