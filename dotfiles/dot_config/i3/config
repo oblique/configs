@@ -211,3 +211,5 @@ exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
 exec --no-startup-id dunst
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nextcloud
+exec --no-startup-id maestral_qt
+exec --no-startup-id flameshot
