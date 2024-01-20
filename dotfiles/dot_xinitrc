@@ -11,10 +11,7 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -load ~/.Xresources
 
-setxkbmap -layout us,el
-setxkbmap -variant ,extended
-setxkbmap -option
-setxkbmap -option grp:rctrl_rshift_toggle
+~/.config/setxkbmap/setup.sh
 
 /usr/lib/gsd-xsettings &
 sleep 0.2

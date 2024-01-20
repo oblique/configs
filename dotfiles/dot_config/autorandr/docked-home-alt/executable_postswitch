@@ -11,5 +11,8 @@ dpi="$(xrdb -query | grep Xft.dpi: | cut -f2)"
 # Adjust alacritty font size
 ~/.config/alacritty/adjust-fonts.sh qhd
 
+# Set keyboard settings
+~/.config/setxkbmap/setup.sh
+
 # Apply changes to i3
 i3-msg restart
