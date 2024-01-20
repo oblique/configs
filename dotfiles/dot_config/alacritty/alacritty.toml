@@ -1,0 +1,33 @@
+# For more info: man 5 alacritty
+
+import = ["~/.config/alacritty/fonts.toml"]
+
+[colors]
+primary = { background = "#101010", foreground = "#60ff60" }
+selection = { background = "#5fa0ff", text = "#101010" }
+line_indicator = { background = "#101010", foreground = "#5f87ff" }
+footer_bar = { background = "#5f87ff", foreground = "#101010" }
+search.matches = { background = "#101010", foreground = "#5fa0ff" }
+
+[colors.normal]
+black = "#1c1c1c"
+blue = "#5d97fa"
+cyan = "#4695c8"
+green = "#60ff60"
+magenta = "#a78edb"
+red = "#d81860"
+white = "#f3ebe2"
+yellow = "#f9fd75"
+
+[colors.bright]
+black = "#4d4d4d"
+blue = "#679dfa"
+cyan = "#5a9dc8"
+green = "#70ff70"
+magenta = "#ad97db"
+red = "#f00060"
+white = "#eeeeee"
+yellow = "#f9fd80"
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1.0"
