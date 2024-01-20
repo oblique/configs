@@ -1,5 +1,5 @@
 [sendemail]
-	#from = Fist-name Last-name <username@gmail.com>
+	#from = Fistname Lastname <username@example.com>
 	#smtpserver = "/usr/bin/msmtp"
 [log]
 	decorate = short
@@ -47,7 +47,21 @@
 	tool = bc
 [mergetool "bc"]
 	trustExitCode = true
+#[user]
+#	name = Firstname Lastname
+#	email = username@example.com
+#	signingkey = yourkeyid
 [pull]
 	ff = only
 [init]
 	defaultBranch = main
+[advice]
+	skippedCherryPicks = false
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+#[includeIf "gitdir:~/work/"]
+#	path = ~/.gitconfig-work
+
+# vim: ts=8:sw=8:noet:sts=0
