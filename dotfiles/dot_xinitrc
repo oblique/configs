@@ -11,8 +11,6 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -load ~/.Xresources
 
-~/.config/setxkbmap/setup.sh
-
 /usr/lib/gsd-xsettings &
 sleep 0.2
 

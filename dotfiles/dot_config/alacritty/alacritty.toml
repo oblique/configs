@@ -1,6 +1,9 @@
 # For more info: man 5 alacritty
 
-import = ["~/.config/alacritty/fonts.toml"]
+[font]
+normal = { family = "Hurmit Nerd Font", style = "Regular" }
+size = 16
+offset = { x = 0, y = -4 }
 
 [colors]
 primary = { background = "#101010", foreground = "#60ff60" }

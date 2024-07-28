@@ -12,6 +12,8 @@ vim.opt.listchars = { trail = '~', tab = '> ', nbsp = '␣' }
 vim.opt.cmdheight = 2
 -- Use cursor provided by terminal
 vim.opt.guicursor = ''
+-- Behelit's gui colors are out of data
+vim.opt.termguicolors = false
 
 vim.cmd('syntax on')
 vim.cmd('filetype plugin on')
@@ -56,3 +58,6 @@ vim.cmd('command EnableSpaces2 call v:lua.enable_spaces2()')
 vim.cmd('command EnableTabs call v:lua.enable_tabs()')
 vim.cmd('command ShowPath echo expand(\'%:p\')')
 vim.cmd('command CopyPath call v:lua.copy_path()')
+
+-- Special configs for filetypes
+vim.cmd('autocmd FileType nix call v:lua.enable_spaces2()')

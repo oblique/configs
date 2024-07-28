@@ -2,8 +2,6 @@
 
 [ -f ~/.zprofile ] && source ~/.zprofile
 
-~/.config/setxkbmap/setup.sh
-
 /usr/lib/gsd-xsettings &
 sleep 0.2
 

@@ -1,7 +1,7 @@
 local treesitter_config = require('nvim-treesitter.configs')
 
 treesitter_config.setup {
-    ensure_installed = { 'c', 'cpp', 'yaml' },
+    ensure_installed = { 'c', 'cpp', 'yaml', 'nix' },
     highlight = {
         enable = true,
         disable = { 'rust', 'toml' },

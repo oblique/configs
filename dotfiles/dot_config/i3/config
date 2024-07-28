@@ -9,7 +9,7 @@ set $mod Mod4
 set $dmenu_opts $(echo $DMENU_OPTS)
 
 # window title font
-font pango:Hermit 9
+font pango:Hurmit Nerd Font 9
 
 ### Key bindings
 #
@@ -194,10 +194,10 @@ for_window [class="^Wine$"] floating enable
 for_window [instance="^pinentry$"] floating enable
 for_window [title="Microsoft Teams Notification"] floating enable
 
-# gtk settings
-exec_always --no-startup-id gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-exec_always --no-startup-id gsettings set org.gnome.desktop.interface icon-theme 'deepin-dark'
-exec_always --no-startup-id gsettings set org.gnome.desktop.interface font-name 'Roboto Medium 11'
+# Apply external settings
+exec_always --no-startup-id ~/.config/i3/setup-gtk-theme.sh
+exec_always --no-startup-id ~/.config/i3/setup-dpi.sh
+exec_always --no-startup-id ~/.config/i3/setup-keyboard.sh
 
 # start polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh

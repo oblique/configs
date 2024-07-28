@@ -59,5 +59,5 @@ git-prune-gone() {
 # Ref: https://github.com/killercup/cargo-edit/issues/869
 cargo-upgrade() {
     CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git cargo fetch
-    CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git cargo upgrade
+    CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git cargo upgrade "$@"
 }

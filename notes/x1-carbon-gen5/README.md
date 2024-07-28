@@ -16,9 +16,9 @@ pacman -S zsh openssh git lsof htop tree asp dmidecode wget rsync   \
           neovim python python-pip python-neovim                    \
           keychain ripgrep fd shellcheck aspell aspell-en           \
           docker p7zip udisks2 youtube-dl ffmpeg imagemagick tmux   \
-          pulseaudio jq mlocate
+          pulseaudio jq mlocate tinyxxd
 
-yay -S pulseaudio-ctl neovim-symlinks xxd-standalone global
+yay -S pulseaudio-ctl neovim-symlinks global
 ```
 
 ### GUI Packages
@@ -132,7 +132,7 @@ usermod -a -G wheel,wireshark,video oblique
 ```bash
 pacman -S noto-fonts noto-fonts-emoji ttf-roboto ttf-dejavu \
           texlive-fontsextra terminus-font otf-font-awesome
-yay -S otf-hermit ttf-google-fonts-git
+paru -S ttf-google-fonts-git
 echo 'FONT=ter-132b' > /etc/vconsole.conf
 ```
 
