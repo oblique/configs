@@ -1,7 +1,7 @@
 # UEFI Secure Boot
 
 There are many ways to achieve secure boot, but here I'm going to describe
-the EFI stub way.
+the [UKI] way.
 
 # Preparing the EFI system partition (a.k.a ESP)
 
@@ -14,9 +14,9 @@ Create a partition with `fdisk` and set it as partition type `EFI System`:
 Command (m for help): n
 Partition number (1,4-128, default 1): 1
 First sector (34-526335, default 2048): 2048
-Last sector, +/-sectors or +/-size{K,M,G,T,P}: +256M
+Last sector, +/-sectors or +/-size{K,M,G,T,P}: +1G
 
-Created a new partition 1 of type 'Linux filesystem' and of size 256 MiB.
+Created a new partition 1 of type 'Linux filesystem' and of size 1 GiB.
 
 Command (m for help): t
 Partition number (1-3, default 3): 1
@@ -56,7 +56,11 @@ sbctl create-keys
 sbctl enroll-keys
 ```
 
-# Create, sign, and register EFI stub
+# Create, sign, and register UKI
+
+```bash
+pacman -S systemd-ukify
+```
 
 First create the `/etc/kernel/cmdline` which contains the [kernel parameters]:
 
@@ -66,21 +70,23 @@ cryptdevice=/dev/nvme0n1p2:lvm root=/dev/mapper/vg0-root rw resume=/dev/vg0/swap
 
 > NOTE: In my case I use an encrypted LVM partition
 
-Now you can create and sign the EFI stub using [sbctl]:
+Edit `/etc/mkinitcpio.d/linux.preset` (and `linux-lts.preset`):
+
+* Comment `default_image` and `fallback_image`.
+* Uncomment `default_uki` and `fallback_uki`.
+
+Create UKI:
 
 ```bash
-mkdir -p /efi/EFI/arch
-
-sbctl bundle -s \
-    -i /boot/intel-ucode.img \
-    -k /boot/vmlinuz-linux-lts \
-    -f /boot/initramfs-linux-lts.img \
-    /efi/EFI/arch/linux.efi
-
-sbctl sign -s /efi/EFI/arch/linux.efi
+mkdir -p /efi/EFI/Linux
+mkinitcpio -p linux
+mkinitcpio -p linux-lts
 ```
 
-After that we need to register EFI stub to EFI boot manager:
+[sbctl] has a hook already in-place and binaries will be automatically be
+signed.
+
+After that we need to register UKI to EFI boot manager:
 
 ```bash
 pacman -S efibootmgr
@@ -89,18 +95,41 @@ efibootmgr --create \
     --disk /dev/nvme0n1 \
     --part 1 \
     --label "ArchLinux" \
-    --loader "EFI\arch\linux.efi" \
-    --verbose
+    --loader "EFI\Linux\arch-linux.efi" \
+    --index 0 # Boot order
+
+efibootmgr --create \
+    --disk /dev/nvme0n1 \
+    --part 1 \
+    --label "ArchLinux (LTS)" \
+    --loader "EFI\Linux\arch-linux-lts.efi" \
+    --index 1 # Boot order
 ```
 
-After this you can reboot your machine and it will boot from the EFI stub.
+After this you can reboot your machine and it will boot from the UKI.
 
-# Regenerating the EFI stub
+# Backup signed UKI
 
-You can always regenerate and sign the EFI stub with:
+If everything works and system booted, it is a good idea to have a backup UKI
+and EFI entry just in case signing has failed during a system update.
 
 ```bash
-sbctl sign-all -g
+cp /efi/EFI/Linux/arch-linux.efi /efi/EFI/Linux/arch-linux-backup.efi
+
+efibootmgr --create \
+    --disk /dev/nvme0n1 \
+    --part 1 \
+    --label "ArchLinux (backup)" \
+    --loader "EFI\Linux\arch-linux-backup.efi" \
+    --index 2 # Boot order
+```
+
+# Regenerating the UKI
+
+You can always regenerate and sign the UKI with:
+
+```bash
+mkinitcpio -p linux
 ```
 
 This is usually needed when you manually do a change in the kernel, the
@@ -110,3 +139,4 @@ if a kernel update is done.
 
 [sbctl]: https://github.com/Foxboron/sbctl
 [kernel parameters]: https://wiki.archlinux.org/index.php/kernel_parameters
+[UKI]: https://wiki.archlinux.org/title/Unified_kernel_image
