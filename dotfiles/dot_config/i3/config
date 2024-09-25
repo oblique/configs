@@ -44,7 +44,7 @@ bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 5
 
 # other keybindings
 bindsym $mod+u          [urgent=oldest] focus
-bindsym $mod+Shift+x    exec i3lock
+bindsym $mod+Shift+x    exec i3lock -k
 bindsym $mod+n          exec --no-startup-id snotes
 bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
@@ -207,7 +207,7 @@ bindsym Ctrl+space  exec --no-startup-id dunstctl close
 bindsym Ctrl+grave  exec --no-startup-id dunstctl history-pop
 
 # startup applications
-exec --no-startup-id "xset s 180; xss-lock -l -- i3lock"
+exec --no-startup-id "xset s 180; xss-lock -l -- i3lock -k"
 exec --no-startup-id dunst
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nextcloud

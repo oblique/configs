@@ -1,34 +1,34 @@
-From 7ebd4ddc2facf6c6b7acb754c11b63e0720f92eb Mon Sep 17 00:00:00 2001
-From: oblique <psyberbits@gmail.com>
-Date: Sat, 24 Aug 2019 15:13:17 +0300
-Subject: [PATCH] change i3locks colors to my taste
-
----
- i3lock.c           |  2 +-
- unlock_indicator.c | 43 ++++++++++++++-----------------------------
- 2 files changed, 15 insertions(+), 30 deletions(-)
-
-diff --git a/i3lock.c b/i3lock.c
-index 5da052b..1ba2212 100644
---- a/i3lock.c
-+++ b/i3lock.c
-@@ -58,7 +58,7 @@
+diff --color -u i3lock-2.15.orig/i3lock.c i3lock-2.15/i3lock.c
+--- i3lock-2.15.orig/i3lock.c	2024-03-16 11:37:48.000000000 +0200
++++ i3lock-2.15/i3lock.c	2024-09-25 23:11:08.725878624 +0300
+@@ -57,7 +57,7 @@
  typedef void (*ev_callback_t)(EV_P_ ev_timer *w, int revents);
  static void input_done(void);
- 
--char color[7] = "ffffff";
+
+-char color[7] = "a3a3a3";
 +char color[7] = "101010";
  uint32_t last_resolution[2];
  xcb_window_t win;
  static xcb_cursor_t cursor;
-diff --git a/unlock_indicator.c b/unlock_indicator.c
-index 8ff8173..e92e973 100644
---- a/unlock_indicator.c
-+++ b/unlock_indicator.c
-@@ -143,49 +143,31 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+diff --color -u i3lock-2.15.orig/unlock_indicator.c i3lock-2.15/unlock_indicator.c
+--- i3lock-2.15.orig/unlock_indicator.c	2024-03-16 11:37:48.000000000 +0200
++++ i3lock-2.15/unlock_indicator.c	2024-09-25 23:22:58.858447893 +0300
+@@ -111,11 +111,6 @@
+     y = BUTTON_CENTER - ((extents.height / 2) + extents.y_bearing) + y_offset;
+
+     cairo_move_to(ctx, x, y);
+-    if (use_dark_text) {
+-        cairo_set_source_rgb(ctx, 0., 0., 0.);
+-    } else {
+-        cairo_set_source_rgb(ctx, 1., 1., 1.);
+-    }
+     cairo_show_text(ctx, text);
+     cairo_close_path(ctx);
+ }
+@@ -230,25 +225,7 @@
                    0 /* start */,
                    2 * M_PI /* end */);
- 
+
 -        /* Use the appropriate color for the different PAM states
 -         * (currently verifying, wrong password, or default) */
 -        switch (auth_state) {
@@ -50,7 +50,9 @@ index 8ff8173..e92e973 100644
 -        }
 +        cairo_set_source_rgb(ctx, 0x10/255.0, 0x10/255.0, 0x10/255.0);
          cairo_fill_preserve(ctx);
- 
+
+         bool use_dark_text = true;
+@@ -256,26 +233,26 @@
          switch (auth_state) {
              case STATE_AUTH_VERIFY:
              case STATE_AUTH_LOCK:
@@ -68,23 +70,24 @@ index 8ff8173..e92e973 100644
 +                    cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
                      break;
                  }
- 
+
 -                cairo_set_source_rgb(ctx, 51.0 / 255, 125.0 / 255, 0);
 +                cairo_set_source_rgb(ctx, 0x66/255.0, 0xff/255.0, 0x66/255.0);
+                 use_dark_text = false;
                  break;
          }
          cairo_stroke(ctx);
- 
+
          /* Draw an inner seperator line. */
 -        cairo_set_source_rgb(ctx, 0, 0, 0);
 +        cairo_set_source_rgb(ctx, 0x10/255.0, 0x10/255.0, 0x10/255.0);
          cairo_set_line_width(ctx, 2.0);
          cairo_arc(ctx,
                    BUTTON_CENTER /* x */,
-@@ -202,18 +184,21 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -292,18 +269,21 @@
          /* We don't want to show more than a 3-digit number. */
          char buf[4];
- 
+
 -        cairo_set_source_rgb(ctx, 0, 0, 0);
 +        cairo_set_source_rgb(ctx, 0x10/255.0, 0x10/255.0, 0x10/255.0);
          cairo_select_font_face(ctx, "sans-serif", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
@@ -104,7 +107,7 @@ index 8ff8173..e92e973 100644
                  break;
              case STATE_I3LOCK_LOCK_FAILED:
                  text = "Lock failed!";
-@@ -229,7 +214,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -319,7 +299,7 @@
                          snprintf(buf, sizeof(buf), "%d", failed_attempts);
                          text = buf;
                      }
@@ -113,7 +116,7 @@ index 8ff8173..e92e973 100644
                      cairo_set_font_size(ctx, 32.0);
                  }
                  break;
-@@ -278,16 +263,16 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
+@@ -353,16 +333,16 @@
                        highlight_start + (M_PI / 3.0));
              if (unlock_state == STATE_KEY_ACTIVE) {
                  /* For normal keys, we use a lighter green. */
@@ -125,7 +128,7 @@ index 8ff8173..e92e973 100644
 +                cairo_set_source_rgb(ctx, 0xcb/255.0, 0x00/255.0, 0x52/255.0);
              }
              cairo_stroke(ctx);
- 
+
              /* Draw two little separators for the highlighted part of the
               * unlock indicator. */
 -            cairo_set_source_rgb(ctx, 0, 0, 0);
@@ -133,6 +136,3 @@ index 8ff8173..e92e973 100644
              cairo_arc(ctx,
                        BUTTON_CENTER /* x */,
                        BUTTON_CENTER /* y */,
--- 
-2.23.0
-
