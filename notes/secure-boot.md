@@ -40,7 +40,7 @@ mount /dev/nvme0n1p1 /efi
 Add it in `/etc/fstab`:
 
 ```
-/dev/nvme0n1p1   /efi  vfat  defaults 0 2
+/dev/nvme0n1p1   /efi  vfat  defaults,umask=0077 0 2
 ```
 
 # Enroll EFI keys
@@ -86,24 +86,16 @@ mkinitcpio -p linux-lts
 [sbctl] has a hook already in-place and binaries will be automatically be
 signed.
 
-After that we need to register UKI to EFI boot manager:
+After that we need to register UKI to EFI:
 
 ```bash
-pacman -S efibootmgr
+bootctl install
 
-efibootmgr --create \
-    --disk /dev/nvme0n1 \
-    --part 1 \
-    --label "ArchLinux" \
-    --loader "EFI\Linux\arch-linux.efi" \
-    --index 0 # Boot order
+# Check the `id:` of each entry
+bootctl list
 
-efibootmgr --create \
-    --disk /dev/nvme0n1 \
-    --part 1 \
-    --label "ArchLinux (LTS)" \
-    --loader "EFI\Linux\arch-linux-lts.efi" \
-    --index 1 # Boot order
+# Replace `arch-linux.efi` with the entry's ID.
+bootctl set-default arch-linux.efi
 ```
 
 After this you can reboot your machine and it will boot from the UKI.
