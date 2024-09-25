@@ -127,6 +127,7 @@ if &t_Co > 255
   highlight StatusLine      ctermfg=61      ctermbg=233     cterm=NONE
   highlight StatusLineNC    ctermfg=240     ctermbg=233     cterm=NONE
   highlight VertSplit       ctermfg=234     ctermbg=234     cterm=NONE
+  highlight WinSeparator    ctermfg=234     ctermbg=234     cterm=NONE
   highlight Visual          ctermfg=NONE    ctermbg=234     cterm=NONE
   highlight VisualNOS       ctermfg=NONE    ctermbg=234     cterm=underline
   highlight WildMenu        ctermfg=161     ctermbg=234     cterm=bold
