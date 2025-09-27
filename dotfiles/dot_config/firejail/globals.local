@@ -1,0 +1,2 @@
+disable-mnt
+blacklist ${HOME}/.priv

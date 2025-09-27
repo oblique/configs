@@ -1,0 +1,11 @@
+ignore private-tmp
+noblacklist /tmp
+
+# rust dirs
+whitelist ${HOME}/.cargo
+whitelist ${HOME}/.rustup
+
+# dev dirs
+whitelist ${HOME}/work
+whitelist ${HOME}/git
+whitelist ${HOME}/scratchpad
