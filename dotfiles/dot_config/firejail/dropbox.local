@@ -1,2 +1,11 @@
 include allow-notifications.inc
 include allow-tray.inc
+
+whitelist /opt/dropbox
+
+# Use an empty, read-only `~/.dropbox-dist`.
+# This will force the system to run dropbox distributed
+# by AUR package.
+nowhitelist ${HOME}/.dropbox-dist
+mkdir ${HOME}/.dropbox-dist
+read-only ${HOME}/.dropbox-dist

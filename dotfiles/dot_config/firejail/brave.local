@@ -2,4 +2,13 @@ ignore private-tmp
 noblacklist /tmp
 noexec /tmp
 
+whitelist ${HOME}/Dropbox
+whitelist ${HOME}/Nextcloud
+whitelist ${HOME}/Sync
+
+# Allow DRM
+ignore noexec ${HOME}
+
+# Allow webcam
 ignore novideo
+ignore nogroups
