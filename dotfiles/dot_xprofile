@@ -1,9 +1,0 @@
-#!/bin/sh
-
-[ -f ~/.zprofile ] && source ~/.zprofile
-
-/usr/lib/gsd-xsettings &
-sleep 0.2
-
-autorandr --change --force
-hsetroot -solid "#101010"
