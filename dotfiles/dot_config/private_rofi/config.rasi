@@ -1,0 +1,6 @@
+configuration {
+    show-icons: true;
+    run-command: "uwsm app -- {cmd}";
+}
+
+@theme "theme.rasi"
