@@ -1,0 +1,24 @@
+export GDK_BACKEND=wayland,x11,*
+export GDK_SCALE=1
+export GDK_DPI_SCALE=1.5
+
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_QPA_PLATFORM=wayland;xcb
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_QPA_PLATFORMTHEME=qt6ct
+
+export MOZ_ENABLE_WAYLAND=1
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+export SDL_VIDEODRIVER=wayland
+export CLUTTER_BACKEND=wayland
+
+export XCURSOR_THEME=Adwaita
+export XCURSOR_SIZE=24
+
+# Some Qt applications have side effects if this is not defined
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/usr/local/share:/usr/share"
+
+# Use intel-media-driver
+export LIBVA_DRIVER_NAME=iHD
+
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
