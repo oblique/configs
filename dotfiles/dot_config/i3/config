@@ -33,20 +33,18 @@ bindsym $mod+l      workspace next_on_output
 bindsym $mod+grave  workspace back_and_forth
 
 # volume keys
-bindsym XF86AudioRaiseVolume    exec --no-startup-id pulseaudio-ctl up
-bindsym XF86AudioLowerVolume    exec --no-startup-id pulseaudio-ctl down
-bindsym XF86AudioMute           exec --no-startup-id pulseaudio-ctl mute
-bindsym XF86AudioMicMute        exec --no-startup-id pulseaudio-ctl mute-input
+bindsym XF86AudioRaiseVolume    exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume    exec --no-startup-id pamixer -d 5
+bindsym XF86AudioMute           exec --no-startup-id pamixer -t
+bindsym XF86AudioMicMute        exec --no-startup-id pamixer --default-source -t
 
 # brightness keys
-bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl s 5%+
+bindsym XF86MonBrightnessDown   exec --no-startup-id brightnessctl s 5%-
 
 # other keybindings
 bindsym $mod+u          [urgent=oldest] focus
 bindsym $mod+Shift+x    exec i3lock -k
-bindsym $mod+n          exec --no-startup-id snotes
-bindsym $mod+Shift+n    exec --no-startup-id snotes -s
 
 bindsym $mod+shift+m    exec --no-startup-id autorandr --change --force
 bindsym $mod+shift+l    exec --no-startup-id autorandr -l local --force
