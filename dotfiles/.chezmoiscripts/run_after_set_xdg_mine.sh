@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [[ -e /usr/bin/xdg-settings ]]; then
-    xdg-settings set default-web-browser google-chrome.desktop
+    xdg-settings set default-web-browser brave-browser.desktop
 fi

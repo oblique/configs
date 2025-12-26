@@ -54,6 +54,5 @@ plugins=(fzf)
 source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
 
 unsetopt share_history

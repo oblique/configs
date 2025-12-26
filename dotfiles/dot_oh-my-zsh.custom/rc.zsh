@@ -16,8 +16,3 @@ export FZF_DEFAULT_OPTS='
 bindkey '^E' fzf-cd-widget
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rc"
-
-# start keychain
-if command -v which keychain > /dev/null 2>&1; then
-    eval $(keychain --eval -Q --quiet --timeout 480 --agents gpg,ssh)
-fi
