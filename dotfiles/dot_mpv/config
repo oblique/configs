@@ -7,7 +7,7 @@ sub-auto = fuzzy
 
 ao = pulse,alsa,
 vo = gpu
-#gpu-context=wayland
+gpu-context=wayland
 
 # Pretend to be Window Media Player.
 # Fixes playback when playlist and media file use the same URL.
