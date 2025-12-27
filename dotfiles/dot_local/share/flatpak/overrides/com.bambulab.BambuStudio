@@ -1,0 +1,6 @@
+[Context]
+filesystems=!xdg-run/gvfs;!/run/media;!/media;~/Downloads/STLs;!home
+
+[Environment]
+GDK_SCALE=2
+GDK_DPI_SCALE=0.8

@@ -1,0 +1,9 @@
+[core]
+repo_version=1
+mode=bare-user-only
+min-free-space-size=500MB
+
+[remote "fedora"]
+url=oci+https://registry.fedoraproject.org
+xa.title=Fedora
+xa.title-is-set=true
