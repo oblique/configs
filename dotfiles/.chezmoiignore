@@ -1,4 +1,6 @@
 .config/nvim/plugin/packer_compiled.lua
+.config/mpv/cache
+.mpv/cache
 
 # Install the following only on my laptops
 {{ if not (eq .chezmoi.hostname "dystopia" "netsphere") }}
