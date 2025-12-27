@@ -1,5 +1,7 @@
+Xft.dpi: 128
+
 Xcursor.theme: Adwaita
-Xcursor.size: 16
+Xcursor.size: 24
 
 xmessage*background:    #101010
 xmessage*foreground:    #505050
