@@ -12,7 +12,10 @@ document-font-name='Cantarell 10'
 monospace-font-name='CaskaydiaCove Nerd Font Mono 9'
 font-antialiasing='rgba'
 font-hinting='full'
+font-rgba-order='rgb'
 text-scaling-factor=1.0
+toolbar-style='both-horiz'
+toolbar-icons-size='large'
 
 [org/gnome/desktop/privacy]
 remember-recent-files=false
