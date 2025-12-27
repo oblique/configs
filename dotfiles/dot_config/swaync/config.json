@@ -1,0 +1,38 @@
+{
+    "cssPriority": "user",
+    "notification-2fa-action": false,
+    "timeout": 10,
+    "timeout-low": 10,
+    "timeout-critical": 0,
+    "notification-window-width": 400,
+    "notification-window-preferred-output": "DP-1",
+    "image-visibility": "when-available",
+    "hide-on-action": false,
+    "control-center-width": 450,
+
+    "notification-visibility": {
+        "cc-google-calendar": {
+            "summary": "Calendar notification",
+            "state": "enabled"
+        },
+        "cc-proton-calendar": {
+            "summary": "Calendar alarm",
+            "state": "enabled"
+        },
+        "no-cc-for-low-urgency": {
+            "urgency": "Low",
+            "state": "transient"
+        },
+        "no-cc-for-normal-urgency": {
+            "urgency": "Normal",
+            "state": "transient"
+        }
+    },
+
+    "widgets": [
+        "inhibitors",
+        "title",
+        "dnd",
+        "notifications"
+    ]
+}
