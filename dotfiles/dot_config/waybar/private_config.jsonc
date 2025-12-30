@@ -9,6 +9,7 @@
     "exclusive": true,
     "passthrough": false,
     "reload_style_on_change": true,
+
     "include": [
         "./modules/backlight.jsonc",
         "./modules/battery.jsonc",
@@ -35,7 +36,8 @@
         "pulseaudio#microphone",
         "tray",
         "battery",
-        "hyprland/language"
+        "hyprland/language",
+        "privacy"
     ],
 
     "cpu": {
@@ -46,5 +48,9 @@
     "tray": {
         "icon-size": 16,
         "spacing": 5
+    },
+
+    "privacy": {
+        "icon-size": 10
     }
 }
