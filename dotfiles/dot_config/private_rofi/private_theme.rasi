@@ -21,7 +21,7 @@
     selected-active-background:  var(blue);
     active-background:           var(background);
     selected-normal-background:  rgba ( 60, 60, 60, 100 % );
-    alternate-normal-background: var(lightbg);
+    alternate-normal-background: var(background);
     foreground:                  rgba ( 100, 100, 100, 100 % );
     selected-urgent-foreground:  var(background);
     normal-foreground:           var(foreground);
@@ -166,7 +166,7 @@ entry {
 }
 prompt {
     spacing:    0;
-    text-color: var(normal-foreground);
+    text-color: rgba( 100, 100, 100, 100 % );
 }
 textbox-prompt-colon {
     margin:     0px 0.3000em 0.0000em 0.0000em ;
