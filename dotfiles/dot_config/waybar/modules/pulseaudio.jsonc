@@ -1,0 +1,33 @@
+{
+    "pulseaudio#sound": {
+        "format": "{icon} {volume}",
+        "format-muted": "婢",
+        "tooltip-format": "{icon} {desc} // {volume}%",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pamixer -t",
+        "on-click-right": "pavucontrol -t 3",
+        "scroll-step": 0,
+        "on-scroll-up": "pamixer -i 1 --allow-boost --set-limit 150",
+        "on-scroll-down": "pamixer -d 1"
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "\uf86b {volume}",
+        "format-source-muted": "\uf131",
+        "tooltip-format": "\uf86b {source_desc} // {source_volume}%",
+        "on-click": "pamixer --default-source -t",
+        "on-click-right": "pavucontrol -t 4",
+        "scroll-step": 0,
+        "on-scroll-up": "pamixer --default-source -i 1",
+        "on-scroll-down": "pamixer --default-source -d 1"
+    }
+}

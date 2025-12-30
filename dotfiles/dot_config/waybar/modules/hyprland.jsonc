@@ -1,0 +1,17 @@
+{
+    "hyprland/workspaces": {
+        "class": "no-margin-padding",
+        "all-outputs": false,
+        "active-only": false,
+        "disable-scroll": false,
+        "on-scroll-up": "hyprctl dispatch workspace -1",
+        "on-scroll-down": "hyprctl dispatch workspace +1",
+        "persistent-workspaces": {}
+    },
+
+    "hyprland/language": {
+        "format-en": "en",
+        "format-gr": "gr",
+        "on-click": "hyprctl switchxkblayout all next"
+    }
+}

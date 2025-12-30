@@ -1,0 +1,19 @@
+{
+    "battery": {
+        "states": {
+            "good": 90,
+            "warning": 30,
+            "critical": 20
+        },
+        "full-at": 98,
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "events": {
+            "on-discharging-warning": "notify-send -u normal 'Low battery'",
+            "on-discharging-critical": "notify-send -u critical 'Very low battery'"
+        }
+    }
+}

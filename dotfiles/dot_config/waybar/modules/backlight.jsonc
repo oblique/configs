@@ -1,0 +1,10 @@
+{
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "min-brightness": 1.0,
+        "min-length": 6,
+        "tooltip": true,
+        "tooltip-format": "Backlight level: {icon} {percent}%"
+    }
+}

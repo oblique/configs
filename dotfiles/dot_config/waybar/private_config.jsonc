@@ -1,0 +1,50 @@
+{
+    "layer": "top",
+    "output": [
+        "*"
+    ],
+    "position": "top",
+    "mode": "dock",
+    "height": 10,
+    "exclusive": true,
+    "passthrough": false,
+    "reload_style_on_change": true,
+    "include": [
+        "./modules/backlight.jsonc",
+        "./modules/battery.jsonc",
+        "./modules/clock.jsonc",
+        "./modules/hyprland.jsonc",
+        "./modules/idle-inhibitor.jsonc",
+        "./modules/memory.jsonc",
+        "./modules/pulseaudio.jsonc"
+    ],
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/submap"
+    ],
+    "modules-center": [
+        "idle_inhibitor",
+        "clock"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "backlight",
+        "pulseaudio#sound",
+        "pulseaudio#microphone",
+        "tray",
+        "battery",
+        "hyprland/language"
+    ],
+
+    "cpu": {
+        "interval": 10,
+        "format": "󰍛 {usage}%"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 5
+    }
+}

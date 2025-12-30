@@ -17,6 +17,3 @@
 .fonts
 .mpv
 {{ end }}
-
-# TODO: Remove this after we finish configuration
-.config/waybar
