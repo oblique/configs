@@ -12,7 +12,7 @@ focused_match = { background = "#5c5094", foreground = "#101010" }
 
 [colors.normal]
 black = "#1c1c1c"
-blue = "#5459ac"
+blue = "#5c62bc"
 cyan = "#3795bd"
 green = "#03c988"
 magenta = "#5c4194"
