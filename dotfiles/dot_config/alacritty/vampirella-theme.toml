@@ -1,0 +1,31 @@
+# Author: oblique
+
+[colors]
+primary = { background = "#101010", foreground = "#d0d0d0" }
+selection = { background = "#5c5094", text = "#101010" }
+line_indicator = { background = "#101010", foreground = "#5c5094" }
+footer_bar = { background = "#5c5094", foreground = "#101010" }
+
+[colors.search]
+matches = { background = "#101010", foreground = "#5c5094" }
+focused_match = { background = "#5c5094", foreground = "#101010" }
+
+[colors.normal]
+black = "#1c1c1c"
+blue = "#5459ac"
+cyan = "#3795bd"
+green = "#03c988"
+magenta = "#5c4194"
+red = "#8f0d5d"
+white = "#f3ebe2"
+yellow = "#ffc400"
+
+[colors.bright]
+black = "#4d4d4d"
+blue = "#6b71d7"
+cyan = "#4cc6fa"
+green = "#10ffae"
+magenta = "#875dd5"
+red = "#bb157b"
+white = "#eeeeee"
+yellow = "#ffd858"
