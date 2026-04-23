@@ -1,18 +1,18 @@
 # Author: oblique
 
 [colors]
-primary = { background = "#101010", foreground = "#60ff60" }
-selection = { background = "#5fa0ff", text = "#101010" }
-line_indicator = { background = "#101010", foreground = "#5f87ff" }
-footer_bar = { background = "#5f87ff", foreground = "#101010" }
+primary = { background = "#101010", foreground = "#a8a8a8" }
+selection = { background = "#5c5094", text = "#101010" }
+line_indicator = { background = "#101010", foreground = "#5c5094" }
+footer_bar = { background = "#5c5094", foreground = "#101010" }
 
 [colors.search]
-matches = { background = "#101010", foreground = "#5fa0ff" }
-focused_match = { background = "#5fa0ff", foreground = "#101010" }
+matches = { background = "#101010", foreground = "#5c5094" }
+focused_match = { background = "#5c5094", foreground = "#101010" }
 
 [colors.normal]
 black = "#1c1c1c"
-blue = "#5d97fa"
+blue = "#5f87ff"
 cyan = "#4695c8"
 green = "#60ff60"
 magenta = "#a78edb"
