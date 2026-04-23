@@ -1,2 +1,5 @@
+[Context]
+filesystems=~/Downloads/STLs;~/Documents/FreeCAD;/usr/share/fonts:ro;!home;!host
+
 [Environment]
 QT_SCALE_FACTOR=2
