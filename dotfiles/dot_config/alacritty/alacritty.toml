@@ -1,9 +1,7 @@
 # For more info: man 5 alacritty
 
 [general]
-import = [
-    "vampirella-theme.toml"
-]
+import = ["behelit-theme.toml"]
 
 [font]
 normal = { family = "Hurmit Nerd Font", style = "Regular" }
