@@ -1,5 +1,4 @@
-@define-color red           #8f0d5d;
-@define-color bright-red    #d81860;
+@define-color red           #d81860;
 @define-color purple        #4c1b9c;
 @define-color gray          #505050;
 
@@ -85,7 +84,7 @@ button {
 }
 
 #battery.critical:not(.charging) {
-    color: @bright-red;
+    color: @red;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(100);

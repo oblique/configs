@@ -83,6 +83,7 @@ element-icon {
     text-color:       inherit;
 }
 window {
+    width:            700px;
     padding:          5;
     background-color: var(background);
     border:           1;

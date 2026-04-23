@@ -6,4 +6,4 @@ alias HandBrakeCLI_HD="HandBrakeCLI -e x264 -2 -T -q 18.0 -a 1,1 -E faac,copy:ac
 alias youtube-dl-mp3='youtube-dl --extract-audio --audio-format mp3'
 alias mpv-cam='mpv av://v4l2:/dev/video0'
 alias qemu-bootcd='qemu-system-x86_64 -boot order=d -enable-kvm -cpu host -smp 2 -m 2048 -cdrom'
-alias starth='exec uwsm start hyprland.desktop'
+alias starth='exec uwsm start -e -D Hyprland hyprland.desktop'
