@@ -10,3 +10,9 @@ offset = { x = 0, y = -4 }
 
 [env]
 WINIT_X11_SCALE_FACTOR = "1.0"
+
+# Send new line with Shift+Enter
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b\r"
