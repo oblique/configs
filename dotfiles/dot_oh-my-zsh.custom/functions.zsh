@@ -61,3 +61,21 @@ cargo-upgrade() {
     CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git cargo fetch
     CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git cargo upgrade "$@"
 }
+
+# Workaround for persisting tmux sessions across `uwsm` sessions.
+#
+# Ref: https://github.com/hyprwm/Hyprland/discussions/8459#discussioncomment-11661684
+tmux-server() {
+    if ! loginctl show-user "$USER" | grep -q Linger=yes; then
+        echo "ERROR: You need to enable lingering on user, run:"
+        echo "  loginctl enable-linger $USER"
+        return 1
+    fi
+
+    if [[ "$(systemctl --user is-active tmux.service)" == "active" ]]; then
+        echo "tmux server is already running"
+        return 0
+    fi
+
+    systemd-run --user -u tmux.service -- tmux -D
+}

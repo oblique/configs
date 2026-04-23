@@ -54,5 +54,6 @@ plugins=(fzf)
 source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
 
 unsetopt share_history
