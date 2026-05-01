@@ -1,7 +1,7 @@
 {
     "pulseaudio#sound": {
         "format": "{icon} {volume}",
-        "format-muted": "婢",
+        "format-muted": "󰝟",
         "tooltip-format": "{icon} {desc} // {volume}%",
         "format-icons": {
             "headphone": "",
@@ -21,9 +21,9 @@
 
     "pulseaudio#microphone": {
         "format": "{format_source}",
-        "format-source": "\uf86b {volume}",
+        "format-source": "󰍬 {volume}",
         "format-source-muted": "\uf131",
-        "tooltip-format": "\uf86b {source_desc} // {source_volume}%",
+        "tooltip-format": "󰍬 {source_desc} // {source_volume}%",
         "on-click": "pamixer --default-source -t",
         "on-click-right": "pavucontrol -t 4",
         "scroll-step": 0,
