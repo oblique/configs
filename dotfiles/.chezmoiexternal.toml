@@ -1,6 +1,3 @@
-[".local/share/nvim/site/pack/packer/start/packer.nvim"]
-    type = "git-repo"
-    url = "https://github.com/wbthomason/packer.nvim"
 [".oh-my-zsh"]
     type = "git-repo"
     url = "https://github.com/ohmyzsh/ohmyzsh"
