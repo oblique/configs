@@ -5,8 +5,12 @@ import = ["behelit-theme.toml"]
 
 [font]
 normal = { family = "Hurmit Nerd Font", style = "Regular" }
-size = 11
 offset = { x = 0, y = -4 }
+{{- if eq .chezmoi.hostname "dystopia" }}
+size = 12
+{{- else }}
+size = 11
+{{- end }}
 
 [env]
 WINIT_X11_SCALE_FACTOR = "1.0"

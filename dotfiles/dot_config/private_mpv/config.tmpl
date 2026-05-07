@@ -9,8 +9,10 @@ ao = pulse,alsa,
 vo = gpu-next
 gpu-context=wayland
 
+{{- if eq .chezmoi.hostname "netsphere" }}
 # Remove this when hyprland adds icc support
 icc-profile = '~/.local/share/icc/Monitor_2_#2_2025-07-26_00-30_0.3127x 0.329y_sRGB_F-S_XYZLUT+MTX.icc'
+{{- end }}
 
 # Pretend to be Window Media Player.
 # Fixes playback when playlist and media file use the same URL.
