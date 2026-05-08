@@ -1,9 +1,0 @@
-Xft.dpi: 128
-
-Xcursor.theme: Adwaita
-Xcursor.size: 24
-
-xmessage*background:    #101010
-xmessage*foreground:    #505050
-xmessage*borderColor:   #505050
-xmessage*font:          -*-terminus-*-*-*--24-*-*-*-*-*-iso10646-1
