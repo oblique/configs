@@ -92,7 +92,6 @@ return {
     options = {
       -- vim.opt.<key>
       opt = {
-        foldenable = false,
         number = true,
         relativenumber = false,
         spell = false,
