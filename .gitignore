@@ -1,1 +1,5 @@
 *~
+*.local.json
+*.local.md
+*.local.sh
+superpowers/
