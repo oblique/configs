@@ -1,5 +1,7 @@
 [Context]
-filesystems=~/Downloads/STLs;~/Documents/FreeCAD;/usr/share/fonts:ro;!home;!host
+filesystems=~/Downloads/STLs;~/Documents/FreeCAD;!home;!host
 
 [Environment]
-QT_SCALE_FACTOR=2
+QT_SCALE_FACTOR=1.5
+GDK_DPI_SCALE=0.6
+GDK_SCALE=2
