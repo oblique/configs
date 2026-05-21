@@ -79,3 +79,21 @@ tmux-server() {
 
     systemd-run --user -u tmux.service -- tmux -D
 }
+
+urlencode() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: urlencode <string>"
+        return 1
+    fi
+
+    printf '%s' "$1" | jq -sRr @uri
+}
+
+urldecode() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: urldecode <encoded-string>"
+        return 1
+    fi
+
+    printf '%s' "$1" | jq -sRr @urid
+}
