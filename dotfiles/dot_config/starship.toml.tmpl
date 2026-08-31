@@ -59,3 +59,9 @@ disabled = true
 
 [golang]
 disabled = true
+
+[custom.sandbox]
+when = "test -d /run/sandbox"
+command = "echo ${SANDBOX_NAME:+sandbox:$SANDBOX_NAME}"
+format = "[\\($output\\)]($style) "
+style = "bold red"
