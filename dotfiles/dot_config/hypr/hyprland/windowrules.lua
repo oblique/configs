@@ -1,0 +1,25 @@
+hl.window_rule({ match = { class = "^(com.gabm.satty)$" }, float = true, size = { "70%", "70%" } })
+hl.window_rule({ match = { class = "^(org.kde.dolphin)$", title = "^(Progress Dialog — Dolphin)$" }, float = true })
+hl.window_rule({ match = { class = "^(org.kde.dolphin)$", title = "^(Copying — Dolphin)$" }, float = true })
+hl.window_rule({ match = { title = "^(About Mozilla Firefox)$" }, float = true })
+hl.window_rule({ match = { class = "^(firefox)$", title = "^(Picture-in-Picture)$" }, float = true })
+hl.window_rule({ match = { class = "^(firefox)$", title = "^(Library)$" }, float = true })
+hl.window_rule({ match = { class = "^(vlc)$" }, float = true })
+hl.window_rule({ match = { class = "^(kvantummanager)$" }, float = true })
+hl.window_rule({ match = { class = "^(qt5ct)$" }, float = true })
+hl.window_rule({ match = { class = "^(qt6ct)$" }, float = true })
+hl.window_rule({ match = { class = "^(nwg-look)$" }, float = true })
+hl.window_rule({ match = { class = "^(nwg-displays)$" }, float = true })
+hl.window_rule({ match = { class = "^(org.kde.ark)$" }, float = true })
+hl.window_rule({ match = { class = "^(org.pulseaudio.pavucontrol)$" }, float = true })
+hl.window_rule({ match = { class = "^(blueman-manager)$" }, float = true })
+hl.window_rule({ match = { class = "^(nm-applet)$" }, float = true })
+hl.window_rule({ match = { class = "^(nm-connection-editor)$" }, float = true })
+hl.window_rule({ match = { class = "^(org.kde.polkit-kde-authentication-agent-1)$" }, float = true })
+hl.window_rule({ match = { class = "^([Xx]dg-desktop-portal-gtk)$" }, float = true })
+
+-- Disable transparency
+hl.window_rule({ match = { class = "^(.*)$" }, opacity = "1 override 1 override 1" })
+
+-- Fix Nextcloud disappearing when mouse is moved
+hl.window_rule({ match = { class = "^(com.nextcloud.desktopclient.nextcloud)$" }, stay_focused = true })
