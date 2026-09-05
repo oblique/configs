@@ -9,13 +9,13 @@
 .mpv/cache
 
 # Install the following only on my laptops
-{{ if not (eq .chezmoi.hostname "dystopia" "netsphere") }}
+{{ if not (eq .chezmoi.hostname "dystopia" "netsphere" "void") }}
 .init_linux_console_colors.py
 {{ end }}
 
 # Install the following only on my laptops but not if user is root
 {{ if or
-    (not (eq .chezmoi.hostname "dystopia" "netsphere"))
+    (not (eq .chezmoi.hostname "dystopia" "netsphere" "void"))
     (eq .chezmoi.username "root")
 }}
 .config/alacritty
