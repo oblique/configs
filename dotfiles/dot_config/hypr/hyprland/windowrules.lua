@@ -18,6 +18,15 @@ hl.window_rule({ match = { class = "^(nm-connection-editor)$" }, float = true })
 hl.window_rule({ match = { class = "^(org.kde.polkit-kde-authentication-agent-1)$" }, float = true })
 hl.window_rule({ match = { class = "^([Xx]dg-desktop-portal-gtk)$" }, float = true })
 
+-- Google Meet picture-in-picture, bottom right corner
+hl.window_rule {
+  match = { class = "^(brave-browser)$", title = "^(Meet - .*)$" },
+  size = { "(monitor_w * 0.20)", "(monitor_h * 0.25)" },
+  move = { "(monitor_w - (monitor_w * 0.20)) - 15", "(monitor_h - (monitor_h * 0.25)) - 15" },
+  float = true,
+  pin = true,
+}
+
 -- Disable transparency
 hl.window_rule({ match = { class = "^(.*)$" }, opacity = "1 override 1 override 1" })
 
