@@ -1,4 +1,3 @@
-hl.window_rule({ match = { class = "^(com.gabm.satty)$" }, float = true, size = { "70%", "70%" } })
 hl.window_rule({ match = { class = "^(org.kde.dolphin)$", title = "^(Progress Dialog — Dolphin)$" }, float = true })
 hl.window_rule({ match = { class = "^(org.kde.dolphin)$", title = "^(Copying — Dolphin)$" }, float = true })
 hl.window_rule({ match = { title = "^(About Mozilla Firefox)$" }, float = true })
@@ -18,17 +17,45 @@ hl.window_rule({ match = { class = "^(nm-connection-editor)$" }, float = true })
 hl.window_rule({ match = { class = "^(org.kde.polkit-kde-authentication-agent-1)$" }, float = true })
 hl.window_rule({ match = { class = "^([Xx]dg-desktop-portal-gtk)$" }, float = true })
 
+-- satty (screenshot utility)
+hl.window_rule({
+  match = { class = "^(com.gabm.satty)$" },
+  size = { "(monitor_w * 0.60)", "(monitor_h * 0.70)" },
+  min_size = { "(monitor_w * 0.20)", "(monitor_h * 0.20)" },
+  max_size = { "(monitor_w * 0.75)", "(monitor_h * 0.75)" },
+  float = true,
+})
+
 -- Google Meet picture-in-picture, bottom right corner
-hl.window_rule {
+hl.window_rule({
   match = { class = "^(brave-browser)$", title = "^(Meet - .*)$" },
   size = { "(monitor_w * 0.20)", "(monitor_h * 0.25)" },
   move = { "(monitor_w - (monitor_w * 0.20)) - 15", "(monitor_h - (monitor_h * 0.25)) - 15" },
   float = true,
   pin = true,
-}
+})
 
 -- Disable transparency
 hl.window_rule({ match = { class = "^(.*)$" }, opacity = "1 override 1 override 1" })
 
 -- Fix Nextcloud disappearing when mouse is moved
 hl.window_rule({ match = { class = "^(com.nextcloud.desktopclient.nextcloud)$" }, stay_focused = true })
+
+-- KeePassXC keyring
+hl.window_rule({
+  match = { class = "^(KeePassXC)$", title = "^(Unlock Database - KeePassXC)$" },
+  size = { "(monitor_w * 0.38)", "(monitor_h * 0.38)" },
+  min_size = { "(monitor_w * 0.38)", "(monitor_h * 0.38)" },
+  max_size = { "(monitor_w * 0.40)", "(monitor_h * 0.40)" },
+  float = true,
+  center = true,
+})
+
+hl.window_rule({
+  match = { class = "^(KeePassXC)$", title = "^(KeePassXC -  ?Access Request)$" },
+  size = { "(monitor_w * 0.40)", "(monitor_h * 0.25)" },
+  min_size = { "(monitor_w * 0.40)", "(monitor_h * 0.25)" },
+  max_size = { "(monitor_w * 0.60)", "(monitor_h * 0.45)" },
+  float = true,
+  center = true,
+})
