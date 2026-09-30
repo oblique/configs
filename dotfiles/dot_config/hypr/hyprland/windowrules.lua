@@ -16,6 +16,7 @@ hl.window_rule({ match = { class = "^(nm-applet)$" }, float = true })
 hl.window_rule({ match = { class = "^(nm-connection-editor)$" }, float = true })
 hl.window_rule({ match = { class = "^(org.kde.polkit-kde-authentication-agent-1)$" }, float = true })
 hl.window_rule({ match = { class = "^([Xx]dg-desktop-portal-gtk)$" }, float = true })
+hl.window_rule({ match = { class = "^(DesktopEditors)$", float = true }, center = true })
 
 -- satty (screenshot utility)
 hl.window_rule({
