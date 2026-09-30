@@ -50,6 +50,7 @@ hl.window_rule({
   max_size = { "(monitor_w * 0.40)", "(monitor_h * 0.40)" },
   float = true,
   center = true,
+  no_screen_share = true,
 })
 
 hl.window_rule({
@@ -59,4 +60,10 @@ hl.window_rule({
   max_size = { "(monitor_w * 0.60)", "(monitor_h * 0.45)" },
   float = true,
   center = true,
+  no_screen_share = true,
+})
+
+hl.window_rule({
+  match = { class = "^(KeePassXC)$" },
+  no_screen_share = true,
 })
