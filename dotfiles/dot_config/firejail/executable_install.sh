@@ -16,11 +16,7 @@ fi
 [[ "$UID" == 0 ]] || die "Run this with sudo or root."
 
 apps=(
-    Telegram
-    brave
     cargo
-    dropbox
-    nextcloud
     rust-analyzer
     rustfmt
     rustup
