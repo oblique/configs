@@ -10,13 +10,20 @@ hl.window_rule({ match = { class = "^(qt6ct)$" }, float = true })
 hl.window_rule({ match = { class = "^(nwg-look)$" }, float = true })
 hl.window_rule({ match = { class = "^(nwg-displays)$" }, float = true })
 hl.window_rule({ match = { class = "^(org.kde.ark)$" }, float = true })
-hl.window_rule({ match = { class = "^(org.pulseaudio.pavucontrol)$" }, float = true })
 hl.window_rule({ match = { class = "^(blueman-manager)$" }, float = true })
 hl.window_rule({ match = { class = "^(nm-applet)$" }, float = true })
 hl.window_rule({ match = { class = "^(nm-connection-editor)$" }, float = true })
 hl.window_rule({ match = { class = "^(org.kde.polkit-kde-authentication-agent-1)$" }, float = true })
 hl.window_rule({ match = { class = "^([Xx]dg-desktop-portal-gtk)$" }, float = true })
 hl.window_rule({ match = { class = "^(DesktopEditors)$", float = true }, center = true })
+
+-- wiremix (PipeWire mixer) in a floating terminal
+hl.window_rule({
+  match = { class = "^(wiremix)$" },
+  size = { "(monitor_w * 0.50)", "(monitor_h * 0.60)" },
+  float = true,
+  center = true,
+})
 
 -- satty (screenshot utility)
 hl.window_rule({

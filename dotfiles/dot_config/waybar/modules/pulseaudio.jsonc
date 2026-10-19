@@ -12,11 +12,11 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pamixer -t",
-        "on-click-right": "pavucontrol -t 3",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "alacritty --class wiremix -e wiremix --tab output",
         "scroll-step": 0,
-        "on-scroll-up": "pamixer -i 1 --allow-boost --set-limit 150",
-        "on-scroll-down": "pamixer -d 1"
+        "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 1%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
     },
 
     "pulseaudio#microphone": {
@@ -24,10 +24,10 @@
         "format-source": "󰍬 {volume}",
         "format-source-muted": "\uf131",
         "tooltip-format": "󰍬 {source_desc} // {source_volume}%",
-        "on-click": "pamixer --default-source -t",
-        "on-click-right": "pavucontrol -t 4",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "alacritty --class wiremix -e wiremix --tab input",
         "scroll-step": 0,
-        "on-scroll-up": "pamixer --default-source -i 1",
-        "on-scroll-down": "pamixer --default-source -d 1"
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 1%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-"
     }
 }

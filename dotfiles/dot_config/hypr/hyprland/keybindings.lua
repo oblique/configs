@@ -66,20 +66,24 @@ hl.bind(
 )
 
 -- Media/Audio
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("pamixer -t"), { description = "Toggle mute output", locked = true })
+hl.bind(
+  "XF86AudioMute",
+  hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
+  { description = "Toggle mute output", locked = true }
+)
 hl.bind(
   "XF86AudioMicMute",
-  hl.dsp.exec_cmd("pamixer --default-source -t"),
+  hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
   { description = "Toggle mute microphone", locked = true }
 )
 hl.bind(
   "XF86AudioLowerVolume",
-  hl.dsp.exec_cmd("pamixer -d 5"),
+  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
   { description = "Decrease volume", repeating = true, locked = true }
 )
 hl.bind(
   "XF86AudioRaiseVolume",
-  hl.dsp.exec_cmd("pamixer -i 5 --allow-boost --set-limit 150"),
+  hl.dsp.exec_cmd("wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"),
   { description = "Increase volume", repeating = true, locked = true }
 )
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { description = "Play/pause media", locked = true })
