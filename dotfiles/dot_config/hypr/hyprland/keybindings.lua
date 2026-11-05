@@ -16,7 +16,11 @@ hl.bind(m .. " + Delete", hl.dsp.exec_cmd("uwsm stop"), { description = "Exit hy
 hl.bind(m .. " + SHIFT + Delete", hl.dsp.exit(), { description = "Exit hyprland session (dirty)" })
 hl.bind(m .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
 hl.bind(m .. " + G", hl.dsp.group.toggle(), { description = "Toggle group" })
-hl.bind(m .. " + SHIFT + G", hl.dsp.group.lock_active({ action = "toggle" }), { description = "Lock active group" })
+hl.bind(
+  m .. " + SHIFT + G",
+  hl.dsp.group.lock({ window = "activewindow", action = "toggle" }),
+  { description = "Lock active group" }
+)
 hl.bind(m .. " + SHIFT + X", hl.dsp.exec_cmd("uwsm app -- hyprlock"), { description = "Lock screen" })
 hl.bind(m .. " + R", hl.dsp.layout("togglesplit"), { description = "Toggle split" })
 hl.bind(m .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }), { description = "Toggle fullscreen" })
