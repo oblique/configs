@@ -21,7 +21,7 @@ hl.bind(
   hl.dsp.group.lock({ window = "activewindow", action = "toggle" }),
   { description = "Lock active group" }
 )
-hl.bind(m .. " + SHIFT + X", hl.dsp.exec_cmd("uwsm app -- hyprlock"), { description = "Lock screen" })
+hl.bind(m .. " + SHIFT + X", hl.dsp.exec_cmd("loginctl lock-session"), { description = "Lock screen" })
 hl.bind(m .. " + R", hl.dsp.layout("togglesplit"), { description = "Toggle split" })
 hl.bind(m .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }), { description = "Toggle fullscreen" })
 hl.bind(m .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }), { description = "Toggle fullscreen with bars" })
