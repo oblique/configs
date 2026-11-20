@@ -1,4 +1,5 @@
 local monitors = require("hyprland.monitors")
+local utils = require("hyprland.utils")
 local m = "SUPER" -- $mainMod
 
 -- Launcher
@@ -15,7 +16,8 @@ hl.bind(m .. " + ALT + Q", hl.dsp.window.kill(), { description = "Kill focused w
 hl.bind(m .. " + Delete", hl.dsp.exec_cmd("uwsm stop"), { description = "Exit hyprland session" })
 hl.bind(m .. " + SHIFT + Delete", hl.dsp.exit(), { description = "Exit hyprland session (dirty)" })
 hl.bind(m .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
-hl.bind(m .. " + G", hl.dsp.group.toggle(), { description = "Toggle group" })
+hl.bind(m .. " + G", utils.set_grouped(true), { description = "Create group" })
+hl.bind(m .. " + U", utils.set_grouped(false), { description = "Ungroup" })
 hl.bind(
   m .. " + SHIFT + G",
   hl.dsp.group.lock({ window = "activewindow", action = "toggle" }),
@@ -161,6 +163,18 @@ hl.bind(
   hl.dsp.workspace.move({ monitor = "r" }),
   { description = "Move workspace to right monitor" }
 )
+
+-- Move workspace to workspace
+hl.bind(m .. " + CTRL + 1", utils.move_workspace_to(1))
+hl.bind(m .. " + CTRL + 2", utils.move_workspace_to(2))
+hl.bind(m .. " + CTRL + 3", utils.move_workspace_to(3))
+hl.bind(m .. " + CTRL + 4", utils.move_workspace_to(4))
+hl.bind(m .. " + CTRL + 5", utils.move_workspace_to(5))
+hl.bind(m .. " + CTRL + 6", utils.move_workspace_to(6))
+hl.bind(m .. " + CTRL + 7", utils.move_workspace_to(7))
+hl.bind(m .. " + CTRL + 8", utils.move_workspace_to(8))
+hl.bind(m .. " + CTRL + 9", utils.move_workspace_to(9))
+hl.bind(m .. " + CTRL + 0", utils.move_workspace_to(10))
 
 -- Move window to workspace
 hl.bind(m .. " + SHIFT + 1", hl.dsp.window.move({ workspace = 1, follow = false }))
