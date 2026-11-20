@@ -134,12 +134,6 @@ return {
         -- Disable recording
         ["qq"] = false,
 
-        -- Move between windows
-        ["<M-Down>"] = { "<C-w>j" },
-        ["<M-Up>"] = { "<C-w>k" },
-        ["<M-Left>"] = { "<C-w>h" },
-        ["<M-Right>"] = { "<C-w>l" },
-
         -- Move between buffers
         ["<M-l>"] = { "<Cmd>bnext<CR>" },
         ["<M-j>"] = { "<Cmd>bprevious<CR>" },
@@ -149,16 +143,6 @@ return {
         ["|"] = false,
         ["<Leader>-"] = { "<Cmd>split<CR>", desc = "Horizontal Split" },
         ["<Leader>\\"] = { "<Cmd>vsplit<CR>", desc = "Vertical Split" },
-
-        -- Remap resizing
-        ["<C-Up>"] = false,
-        ["<C-Down>"] = false,
-        ["<C-Left>"] = false,
-        ["<C-Right>"] = false,
-        ["<C-S-Up>"] = { "<Cmd>resize -2<CR>", desc = "Resize split up" },
-        ["<C-S-Down>"] = { "<Cmd>resize +2<CR>", desc = "Resize split down" },
-        ["<C-S-Left>"] = { "<Cmd>vertical resize -2<CR>", desc = "Resize split left" },
-        ["<C-S-Right>"] = { "<Cmd>vertical resize +2<CR>", desc = "Resize split right" },
 
         -- Other stuff
         ["<Leader>bf"] = { "<Cmd>tab split<CR>", desc = "Fullscreen the current buffer" },
